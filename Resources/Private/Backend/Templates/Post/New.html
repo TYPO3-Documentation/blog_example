@@ -1,0 +1,19 @@
+<f:layout name="Default" />
+
+<f:section name="iconButtons">
+	<f:be.buttons.icon uri="{f:uri.action(action:'index', arguments:{blog: blog})}" icon="closedok" title="Cancel" />
+	<f:be.buttons.icon uri="javascript: document.newPost.submit();" icon="saveandclosedok" title="Save" />
+</f:section>
+
+<f:section name="content">
+	<h2>Create a new Post for Blog &quot;{blog.title}&quot;</h2>
+	<f:render partial="FormErrors" arguments="{for: 'newPost'}" />
+	<f:form method="post" controller="Post" action="create"  name="newPost" object="{newPost}" arguments="{blog : blog}">
+		<label for="author">Author <span class="required">(required)</span></label><br />
+		<f:form.select property="author" options="{authors}" optionLabelField="fullName"><select><option>dummy</option></select></f:form.select><br />
+		<label for="title">Title <span class="required">(required)</span></label><br />
+		<f:form.textbox property="title" /><br />
+		<label for="content">Content <span class="required">(required)</span></label><br />
+		<f:form.textarea property="content" rows="8" cols="46" /><br /><br />
+	</f:form>
+</f:section>

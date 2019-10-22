@@ -1,0 +1,17 @@
+<pre>
+Blog Example
+<f:if condition="{blog.posts}"><f:then>
+---------------------------------------------------------------<f:for each="{blog.posts}" as="post">
+{post.title}
+
+<f:format.crop maxCharacters="70">{post.content}</f:format.crop>
+
+Published on <f:format.date format='d.m.Y'>{post.date}</f:format.date> by {post.author.fullName}
+Tags: <f:for each="{post.tags}" as="tag">[{tag.name}] </f:for>
+---------------------------------------------------------------</f:for>
+	</f:then>
+	<f:else>
+		No Posts available.
+	</f:else>
+</f:if>
+</pre>

@@ -1,0 +1,48 @@
+{namespace blog=Tx_BlogExample_ViewHelpers}
+<f:layout name="Default" />
+
+<f:section name="iconButtons">
+	<f:be.buttons.icon uri="{f:uri.action(action:'index', arguments: {post : post, blog: post.blog})}" icon="closedok" title="Cancel" />
+	<f:be.buttons.icon uri="javascript: document.post.submit();" icon="saveandclosedok" title="Save" />
+	<f:be.buttons.icon uri="{f:uri.action(action: 'delete', arguments: {post : post, blog: post.blog})}" icon="deletedok" title="Delete this blog" />
+</f:section>
+
+<f:section name="content">
+	<h2>Edit post "{post.title}"</h2>
+	<f:render partial="FormErrors" arguments="{for: 'post'}" />
+	<f:form method="post" controller="Post" action="update" name="post" object="{post}" arguments="{blog : blog}" >
+		<label for="author">Author</label><br />
+		<f:form.select value="{post.author.uid}" name="author" options="{authors}" optionLabelField="fullName"><select><option>dummy</option></select></f:form.select><br />
+		<label for="title">Title</label><br />
+		<f:form.textbox property="title" /><br />
+		<label for="content">Content</label><br />
+		<f:form.textarea property="content" rows="8" cols="46" /><br /><br />
+	</f:form>
+	<div class="tx-blogexample-comment-list">
+		<h3>Comments</h3>
+		<f:if condition="{post.comments}">
+			<f:then>
+				<f:for each="{post.comments}" as="comment">
+					<div class="tx-blogexample-comment">
+						<div class="tx-blogexample-comment-info">
+							<span class="tx-blogexample-comment-author">
+								<a href="mailto:{comment.email}">{comment.author}</a> posted on
+								<span class="tx-blogexample-date"><f:format.date>{comment.date}</f:format.date></span>
+							</span>
+						</div>
+						<div class="tx-blogexample-comment-text">
+							<f:format.nl2br>{comment.content}</f:format.nl2br>
+							<f:be.buttons.icon uri="{f:uri.action(action:'delete', controller: 'Comment', arguments:{post: post, comment: comment})}" icon="deletedok" title="Delete Comment" />
+						</div>
+						<hr class="clear" />
+					</div>
+				</f:for>
+				<p>&nbsp;</p>
+				<p><f:link.action action="deleteAll" controller="Comment" arguments="{post: post}"><strong>Delete all Comments of this post</strong></f:link.action></p>
+			</f:then>
+			<f:else>
+				<p><em>There are no comments for this post.</em></p>
+			</f:else>
+		</f:if>
+	</div>
+</f:section>

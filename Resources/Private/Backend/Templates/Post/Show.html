@@ -1,0 +1,50 @@
+{namespace blog=Tx_BlogExample_ViewHelpers}
+<f:layout name="Default" />
+
+<f:section name="iconButtons">
+	<f:be.buttons.icon uri="{f:uri.action(action:'index', arguments:{blog: post.blog})}" icon="closedok" title="Cancel" />
+	<f:be.buttons.icon uri="{f:uri.action(action:'edit', arguments:{post: post, blog: post.blog})}" icon="edit2" title="Edit this Post" />
+</f:section>
+
+<f:section name="content">
+	<div class="tx-blogexample-single-item">
+		<span class="tx-blogexample-single-date"><f:format.date>{post.date}</f:format.date></span>
+		<h3>
+			{post.title}
+		</h3>
+		<p class="bodytext"><f:format.nl2br>{post.content}</f:format.nl2br></p>
+		<p class="bodytext">By: {post.author.fullName}</p>
+		<f:render partial="PostTags" arguments="{post: post}"/>
+		<f:if condition="{post.relatedPosts}">
+			<div>Related posts:</div>
+			<ul class="tx-blogexample-related">
+				<f:for each="{post.relatedPosts}" as="relatedPost">
+					<li>
+						<f:link.action action="show" controller="Post" arguments="{post: relatedPost, blog: post.blog}">{relatedPost.title}</f:link.action>
+					</li>
+				</f:for>
+			</ul>
+		</f:if>
+		<div class="tx-blogexample-single-backlink">
+			<f:link.action action="index" controller="Post" arguments="{blog: post.blog}">Back</f:link.action>
+		</div>
+	</div>
+	<div class="tx-blogexample-comment-list">
+		<h3>Comments</h3>
+		<f:for each="{post.comments}" as="comment">
+			<div class="tx-blogexample-comment">
+				<div class="tx-blogexample-comment-info">
+					<span class="tx-blogexample-comment-author">
+						<blog:gravatar emailAddress="{comment.email}" size="40" class="tx-blogexample-gravatar" />
+						<a href="mailto:{comment.email}">{comment.author}</a> posted on
+						<span class="tx-blogexample-date"><f:format.date>{comment.date}</f:format.date></span>
+					</span>
+				</div>
+				<div class="tx-blogexample-comment-text">
+					<f:format.nl2br>{comment.content}</f:format.nl2br>
+				</div>
+				<hr class="clear" />
+			</div>
+		</f:for>
+	</div>
+</f:section>

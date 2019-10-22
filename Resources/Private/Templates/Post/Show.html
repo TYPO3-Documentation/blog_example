@@ -1,0 +1,74 @@
+<html
+        xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+        xmlns:blog="http://typo3.org/ns/ExtbaseTeam/BlogExample/ViewHelpers"
+        data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+
+<f:section name="content">
+    <f:link.action action="index" class="textIcon cancel" arguments="{blog: post.blog}">
+        <f:translate key="back">[back]</f:translate>
+    </f:link.action>
+    <h1>{post.title}</h1>
+    <p>
+        <f:format.nl2br>{post.content}</f:format.nl2br>
+    </p>
+    <f:render partial="PostMetaData" arguments="{post: post}" />
+    <f:render partial="PostTags" arguments="{post: post}" />
+    <f:if condition="{post.relatedPosts}">
+        <div class="tx-blogexample-related">
+            <h2>
+                <f:translate key="post.related">[related posts]</f:translate>
+                :
+            </h2>
+            <ul class="tx-blogexample-related">
+                <f:for each="{post.relatedPosts}" as="relatedPost">
+                    <li>
+                        <f:link.action action="show" controller="Post" arguments="{post: relatedPost, blog: post.blog}">{relatedPost.title}</f:link.action>
+                    </li>
+                </f:for>
+            </ul>
+        </div>
+    </f:if>
+    <f:security.ifHasRole role="{settings.editorUsergroupUid}">
+        <div class="tx-blogexample-options">
+            <f:link.action action="edit" class="icon edit" arguments="{post: post, blog: post.blog}" title="{f:translate(key: 'post.edit')}">
+                <f:translate key="post.edit" />
+            </f:link.action>
+            <f:link.action action="delete" class="icon delete" arguments="{post: post, blog: post.blog}" title="{f:translate(key: 'post.delete')}">
+                <f:translate key="post.delete" />
+            </f:link.action>
+        </div>
+    </f:security.ifHasRole>
+    <div class="tx-blogexample-comments">
+        <h2>
+            <f:translate key="post.comments">[comments]</f:translate>
+            :
+        </h2>
+        <f:if condition="{post.comments}">
+            <ol>
+                <f:for each="{post.comments}" as="comment">
+                    <li>
+                        <blog:gravatar emailAddress="{comment.email}" defaultImageUri="{f:uri.resource(path: 'Icons/default_gravatar.gif', absolute: 1)}" size="40" class="tx-blogexample-gravatar" />
+                        <f:link.email email="{comment.author}">{comment.author}</f:link.email>
+                        <span class="tx-blogexample-metadata"><f:translate key="postedOn" default="[posted on]" /> {post.date -> f:format.date(format: '{f:translate(key: \'culture.date.formatLong\')}')}</span>
+                        <p>
+                            <f:format.nl2br>{comment.content}</f:format.nl2br>
+                        </p>
+                        <f:security.ifHasRole role="{settings.editorUsergroupUid}">
+                            <div class="tx-blogexample-options">
+                                <f:link.action action="delete" controller="Comment" class="icon delete" arguments="{comment: comment, post: post}" title="{f:translate(key: 'comment.delete')}">
+                                    <f:translate key="comment.delete" />
+                                </f:link.action>
+                            </div>
+                        </f:security.ifHasRole>
+                    </li>
+                </f:for>
+            </ol>
+        </f:if>
+        <h3>
+            <f:translate key="post.addComment">[add comment]</f:translate>
+        </h3>
+        <f:render partial="CommentForm" arguments="{object: newComment, objectName: 'newComment', post: post}" />
+    </div>
+</f:section>
+</html>

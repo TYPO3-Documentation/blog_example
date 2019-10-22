@@ -1,0 +1,30 @@
+<f:layout name="Default" />
+
+<f:section name="iconButtons">
+	<f:be.buttons.icon uri="{f:uri.action(action:'new')}" icon="new_el" title="Create new Blog" />
+</f:section>
+
+<f:section name="content">
+	<f:if condition="{blogs}">
+		<f:then>
+			<p class="bodytext">Here is a list of blogs:</p>
+			<ul>
+				<f:for each="{blogs}" as="blog">
+					<li>
+						<h3>
+							<f:link.action action="index" controller="Post" arguments="{blog: blog}" title="Edit this Blog">
+								{blog.title} (<f:count subject="{blog.posts}" />)
+							</f:link.action>
+							<f:be.buttons.icon uri="{f:uri.action(action:'edit', arguments:{blog: blog})}" icon="edit2" title="Edit this blog" />
+						</h3>
+						<p><f:format.nl2br>{blog.description}</f:format.nl2br></p>
+					</li>
+				</f:for>
+			</ul>
+			<p><f:link.action action="deleteAll">Delete all Blogs [!!!]</f:link.action></p>
+		</f:then>
+		<f:else>
+			<p><f:link.action action="populate">Create example data</f:link.action></p>
+		</f:else>
+	</f:if>
+</f:section>

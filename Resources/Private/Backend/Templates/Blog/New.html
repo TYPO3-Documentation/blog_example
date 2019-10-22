@@ -1,0 +1,20 @@
+<f:layout name="Default" />
+
+<f:section name="iconButtons">
+	<f:be.buttons.icon uri="{f:uri.action(action:'index')}" icon="closedok" title="Cancel" />
+	<f:be.buttons.icon uri="javascript: document.newBlog.submit();" icon="saveandclosedok" title="Save" />
+</f:section>
+
+<f:section name="content">
+	<h2>Create a new blog</h2>
+	<p class="bodytext">Enter information about your new blog below:</p>
+	<f:render partial="FormErrors" arguments="{for: 'newBlog'}" />
+	<f:form method="post" controller="Blog" action="create" name="newBlog" object="{newBlog}">
+		<label for="title">Title <span class="required">(required)</span></label><br />
+		<f:form.textbox property="title" /><br />
+		<label for="description">Description (max. 150 chars)</label><br />
+		<f:form.textarea property="description" rows="8" cols="46" /><br />
+		<label for="administrator">Administrator</label><br />
+		<f:form.select property="administrator" options="{administrators}" optionLabelField="name"><select><option>dummy</option></select></f:form.select><br />
+	</f:form>
+</f:section>

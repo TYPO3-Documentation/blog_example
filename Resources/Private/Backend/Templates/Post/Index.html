@@ -1,0 +1,35 @@
+<f:layout name="Default" />
+
+<f:section name="iconButtons">
+	<f:be.buttons.icon uri="{f:uri.action(action:'index', controller:'Blog')}" icon="closedok" title="Back" />
+	<f:be.buttons.icon uri="{f:uri.action(action:'new', arguments:{blog: blog})}" icon="new_el" title="Create new Post" />
+	<f:be.buttons.icon uri="{f:uri.action(action:'edit', controller:'Blog', arguments:{blog: blog})}" icon="edit2" title="Edit this blog" />
+</f:section>
+
+<f:section name="content">
+	<h2>Posts of Blog &quot;{blog.title}&quot;</h2>
+	<p class="bodytext">{blog.description}</p>
+	<div class="tx-blogexample-list-container">
+		<f:if condition="{blog.posts}">
+			<f:then>
+				<ul>
+					<f:for each="{blog.posts}" as="post">
+						<li>
+							<h3>
+								<f:link.action action="show" controller="Post" arguments="{post: post, blog: post.blog}">
+									{post.title}
+								</f:link.action>
+								<f:be.buttons.icon uri="{f:uri.action(action:'edit', arguments:{post: post, blog: blog})}" icon="edit2" title="Edit this Post" />
+							</h3>
+							<p class="bodytext"><f:format.crop maxCharacters="100">{post.content}</f:format.crop></p>
+						</li>
+					</f:for>
+				</ul>
+				<p><f:link.action arguments="{blog : blog}" format="txt" target="_blank"><strong>Show posts as text</strong> (experimental)</f:link.action></p>
+			</f:then>
+			<f:else>
+				<p>This blog currently doesn't contain any posts.</p>
+			</f:else>
+		</f:if>
+	</div>
+</f:section>

@@ -1,0 +1,28 @@
+<div id="tx-blogexample-comments-form">
+	<f:render partial="FormErrors" />
+	<f:form action="create" controller="Comment" section="tx-blogexample-comments-form" objectName="{objectName}" object="{object}" arguments="{post: post}" method="post">
+		<dl>
+			<dt>
+				<label for="tx-blogexample-author"><f:translate key="property.author">[author]</f:translate>:</label>
+			</dt>
+			<dd>
+				<f:form.textfield property="author" id="tx-blogexample-author"><input type="text" id="tx-blogexample-author" /></f:form.textfield>
+			</dd>
+			<dt>
+				<label for="tx-blogexample-email"><f:translate key="property.email">[email]</f:translate>:</label>
+			</dt>
+			<dd>
+				<f:form.textfield property="email" type="email" id="tx-blogexample-email"><input type="email" id="tx-blogexample-email" /></f:form.textfield>
+			</dd>
+			<dt>
+				<label for="tx-blogexample-content"><f:translate key="property.message">[message]</f:translate>:</label>
+			</dt>
+			<dd>
+				<f:form.textarea property="content" id="tx-blogexample-content" rows="8" cols="46"><textarea id="tx-blogexample-content" rows="8" cols="46" /></f:form.textarea>
+			</dd>
+			<dd>
+				<f:form.submit class="button" value="{f:translate(key: 'submit', default: '[submit]')}"><input class="button" type="submit" name="" value="Submit" /></f:form.submit>
+			</dd>
+		</dl>
+	</f:form>
+</div>

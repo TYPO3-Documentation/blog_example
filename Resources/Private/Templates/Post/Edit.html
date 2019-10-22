@@ -1,0 +1,7 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+	<f:link.action action="index" arguments="{post: post, blog: post.blog}" class="textIcon cancel" title="{f:translate(key: 'cancel')}"><f:translate key="cancel">[cancel]</f:translate></f:link.action>
+	<h1><f:translate key="post.editHeader" arguments="{0: post.title}">[edit post]</f:translate></h1>
+	<f:render partial="PostForm" arguments="{object: post, objectName: 'post', action: 'update', blog: post.blog, authors: authors, remainingPosts: remainingPosts}" />
+</f:section>

@@ -1,0 +1,34 @@
+<f:form.validationResults>
+	<f:if condition="{validationResults.flattenedErrors}">
+	<div class="errors">
+		<h2><f:translate key="error.errorsOccurred">[following errors occurred:]</f:translate></h2>
+		<ul>
+			<f:for each="{validationResults.flattenedErrors}" as="propertyErrors">
+				<f:if condition="{propertyErrors}">
+					<f:then>
+						<f:for each="{propertyErrors}" as="errorDetail">
+							<li>
+								<f:translate key="error.code.{errorDetail.code}" arguments="{0: '{f:translate(key: \'property.{propertyErrors.propertyName}\')}'}">[{errorDetail.message} ({errorDetail.code})]</f:translate>
+							</li>
+						</f:for>
+					</f:then>
+					<f:else>
+						<f:for each="{error.errors}" as="errorDetail">
+							<f:if condition="{errorDetail.errors}">
+								<f:then>
+
+								</f:then>
+								<f:else>
+									<li>
+										{errorDetail.message}
+									</li>
+								</f:else>
+							</f:if>
+						</f:for>
+					</f:else>
+				</f:if>
+			</f:for>
+		</ul>
+	</div>
+	</f:if>
+</f:form.validationResults>

@@ -1,0 +1,9 @@
+<f:if condition="{post.tags}">
+	<ul class="tx-blogexample-tags">
+		<f:for each="{post.tags}" as="tag">
+			<li>
+				<f:link.action action="index" controller="Post" class="tag" arguments="{blog : post.blog, tag : '{tag.name}'}">{tag.name}</f:link.action>
+			</li>
+		</f:for>
+	</ul>
+</f:if>
