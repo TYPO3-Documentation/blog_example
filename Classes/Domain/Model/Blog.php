@@ -15,11 +15,12 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Model;
  */
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * A blog
  */
-class Blog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Blog extends AbstractEntity
 {
     /**
      * The blog's title.

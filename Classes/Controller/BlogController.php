@@ -17,6 +17,7 @@ namespace FriendsOfTYPO3\BlogExample\Controller;
 
 use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\AdministratorRepository;
+use FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository;
 use FriendsOfTYPO3\BlogExample\Service\BlogFactory;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
@@ -38,17 +39,6 @@ class BlogController extends AbstractController
     protected $administratorRepository;
 
     /**
-     * Dependency injection of the Blog Repository
-     *
-     * @param \FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository $blogRepository
-     * @return void
-     */
-    public function injectBlogRepository(\FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository $blogRepository): void
-    {
-        $this->blogRepository = $blogRepository;
-    }
-
-    /**
      * Dependency injection of the Administrator Repository
      *
      * @param \FriendsOfTYPO3\BlogExample\Domain\Repository\AdministratorRepository $administratorRepository
@@ -60,13 +50,25 @@ class BlogController extends AbstractController
     }
 
     /**
+     * BlogController constructor.
+     *
+     * @param \FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository $blogRepository
+     */
+    public function __construct(BlogRepository $blogRepository)
+    {
+        parent::__construct();
+        $this->blogRepository = $blogRepository;
+    }
+
+    /**
      * Index action for this controller. Displays a list of blogs.
      *
      * @return void
      */
     public function indexAction()
     {
-        $this->view->assign('blogs', $this->blogRepository->findAll());
+        $allAvailableBlogs = $this->blogRepository->findAll();
+        $this->view->assign('blogs', $allAvailableBlogs);
     }
 
     /**
