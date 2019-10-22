@@ -1,8 +1,8 @@
 {
-  "name": "extbaseteam/blog-example",
+  "name": "friendsoftypo3/blog-example",
   "authors": [
     {
-      "name": "Extbase Team",
+      "name": "TYPO3 Core Team",
       "role": "Developer"
     }
   ],
@@ -11,10 +11,10 @@
   "license": "GPL-2.0-or-later",
   "autoload": {
     "psr-4": {
-      "ExtbaseTeam\\BlogExample\\": "Classes/"
+      "FriendsOfTYPO3\\BlogExample\\": "Classes/"
     }
   },
   "require": {
-    "typo3/cms-core": ">=9.0 <10.0.0"
+    "typo3/cms-core": ">=9.5 <10.0.0"
   }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace ExtbaseTeam\BlogExample\Domain\Model;
+namespace FriendsOfTYPO3\BlogExample\Domain\Model;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -22,7 +22,7 @@ use TYPO3\CMS\Extbase\Annotation as Extbase;
 class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
     /**
-     * @var \ExtbaseTeam\BlogExample\Domain\Model\Blog
+     * @var \FriendsOfTYPO3\BlogExample\Domain\Model\Blog
      */
     protected $blog;
 
@@ -38,17 +38,17 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $date;
 
     /**
-     * @var \ExtbaseTeam\BlogExample\Domain\Model\Person
+     * @var \FriendsOfTYPO3\BlogExample\Domain\Model\Person
      */
     protected $author;
 
     /**
-     * @var \ExtbaseTeam\BlogExample\Domain\Model\Person
+     * @var \FriendsOfTYPO3\BlogExample\Domain\Model\Person
      */
     protected $secondAuthor;
 
     /**
-     * @var \ExtbaseTeam\BlogExample\Domain\Model\Person
+     * @var \FriendsOfTYPO3\BlogExample\Domain\Model\Person
      */
     protected $reviewer;
 
@@ -59,7 +59,7 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $content = '';
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ExtbaseTeam\BlogExample\Domain\Model\Tag>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\BlogExample\Domain\Model\Tag>
      */
     protected $tags;
 
@@ -69,33 +69,33 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $categories;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ExtbaseTeam\BlogExample\Domain\Model\Comment>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\BlogExample\Domain\Model\Comment>
      * @Extbase\ORM\Lazy
      * @Extbase\ORM\Cascade("remove")
      */
     protected $comments;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ExtbaseTeam\BlogExample\Domain\Model\Post>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\BlogExample\Domain\Model\Post>
      * @Extbase\ORM\Lazy
      */
     protected $relatedPosts;
 
     /**
      * 1:1 relation stored as CSV value in this class
-     * @var \ExtbaseTeam\BlogExample\Domain\Model\Info
+     * @var \FriendsOfTYPO3\BlogExample\Domain\Model\Info
      */
     protected $additionalName;
 
     /**
      * 1:1 relation stored as foreign key in Info class
-     * @var \ExtbaseTeam\BlogExample\Domain\Model\Info
+     * @var \FriendsOfTYPO3\BlogExample\Domain\Model\Info
      */
     protected $additionalInfo;
 
     /**
      * 1:n relation stored as CSV value
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ExtbaseTeam\BlogExample\Domain\Model\Comment>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\BlogExample\Domain\Model\Comment>
      * @Extbase\ORM\Lazy
      */
     protected $additionalComments;
@@ -116,9 +116,9 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the blog this post is part of
      *
-     * @param \ExtbaseTeam\BlogExample\Domain\Model\Blog $blog The blog
+     * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Blog $blog The blog
      */
-    public function setBlog(\ExtbaseTeam\BlogExample\Domain\Model\Blog $blog)
+    public function setBlog(\FriendsOfTYPO3\BlogExample\Domain\Model\Blog $blog)
     {
         $this->blog = $blog;
     }
@@ -126,7 +126,7 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the blog this post is part of
      *
-     * @return \ExtbaseTeam\BlogExample\Domain\Model\Blog The blog this post is part of
+     * @return \FriendsOfTYPO3\BlogExample\Domain\Model\Blog The blog this post is part of
      */
     public function getBlog()
     {
@@ -266,9 +266,9 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the author for this post
      *
-     * @param \ExtbaseTeam\BlogExample\Domain\Model\Person $author
+     * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Person $author
      */
-    public function setAuthor(\ExtbaseTeam\BlogExample\Domain\Model\Person $author)
+    public function setAuthor(\FriendsOfTYPO3\BlogExample\Domain\Model\Person $author)
     {
         $this->author = $author;
     }
@@ -276,7 +276,7 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Getter for author
      *
-     * @return \ExtbaseTeam\BlogExample\Domain\Model\Person
+     * @return \FriendsOfTYPO3\BlogExample\Domain\Model\Person
      */
     public function getAuthor()
     {
@@ -284,23 +284,23 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @return \ExtbaseTeam\BlogExample\Domain\Model\Person
+     * @return \FriendsOfTYPO3\BlogExample\Domain\Model\Person
      */
-    public function getSecondAuthor(): ?\ExtbaseTeam\BlogExample\Domain\Model\Person
+    public function getSecondAuthor(): ?\FriendsOfTYPO3\BlogExample\Domain\Model\Person
     {
         return $this->secondAuthor;
     }
 
     /**
-     * @param \ExtbaseTeam\BlogExample\Domain\Model\Person $secondAuthor
+     * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Person $secondAuthor
      */
-    public function setSecondAuthor(\ExtbaseTeam\BlogExample\Domain\Model\Person $secondAuthor): void
+    public function setSecondAuthor(\FriendsOfTYPO3\BlogExample\Domain\Model\Person $secondAuthor): void
     {
         $this->secondAuthor = $secondAuthor;
     }
 
     /**
-     * @return \ExtbaseTeam\BlogExample\Domain\Model\Person
+     * @return \FriendsOfTYPO3\BlogExample\Domain\Model\Person
      */
     public function getReviewer()
     {
@@ -308,9 +308,9 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param \ExtbaseTeam\BlogExample\Domain\Model\Person $reviewer
+     * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Person $reviewer
      */
-    public function setReviewer(\ExtbaseTeam\BlogExample\Domain\Model\Person $reviewer)
+    public function setReviewer(\FriendsOfTYPO3\BlogExample\Domain\Model\Person $reviewer)
     {
         $this->reviewer = $reviewer;
     }

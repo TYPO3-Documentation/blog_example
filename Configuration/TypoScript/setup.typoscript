@@ -14,14 +14,14 @@ plugin.tx_blogexample {
 		classes {
 			TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 				subclasses {
-					\ExtbaseTeam\BlogExample\Domain\Model\Administrator = ExtbaseTeam\BlogExample\Domain\Model\Administrator
+					\FriendsOfTYPO3\BlogExample\Domain\Model\Administrator = FriendsOfTYPO3\BlogExample\Domain\Model\Administrator
 				}
 			}
 
-			ExtbaseTeam\BlogExample\Domain\Model\Administrator {
+			FriendsOfTYPO3\BlogExample\Domain\Model\Administrator {
 				mapping {
 					tableName = fe_users
-					recordType = ExtbaseTeam\BlogExample\Domain\Model\Administrator
+					recordType = FriendsOfTYPO3\BlogExample\Domain\Model\Administrator
 				}
 			}
 		}
@@ -63,7 +63,7 @@ tx_blogexample_plaintext {
 		userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
 		extensionName = BlogExample
 		pluginName = PostList
-		vendorName = ExtbaseTeam
+		vendorName = FriendsOfTYPO3
 		switchableControllerActions {
 			Post {
 				1 = index

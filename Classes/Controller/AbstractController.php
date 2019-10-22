@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace ExtbaseTeam\BlogExample\Controller;
+namespace FriendsOfTYPO3\BlogExample\Controller;
 
 /*
  * This file is part of the TYPO3 CMS project.

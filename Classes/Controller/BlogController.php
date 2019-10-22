@@ -1,6 +1,6 @@
 <?php
 
-namespace ExtbaseTeam\BlogExample\Controller;
+namespace FriendsOfTYPO3\BlogExample\Controller;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -15,9 +15,9 @@ namespace ExtbaseTeam\BlogExample\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
-use ExtbaseTeam\BlogExample\Domain\Model\Blog;
-use ExtbaseTeam\BlogExample\Domain\Repository\AdministratorRepository;
-use ExtbaseTeam\BlogExample\Service\BlogFactory;
+use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
+use FriendsOfTYPO3\BlogExample\Domain\Repository\AdministratorRepository;
+use FriendsOfTYPO3\BlogExample\Service\BlogFactory;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 
@@ -28,22 +28,22 @@ class BlogController extends AbstractController
 {
 
     /**
-     * @var \ExtbaseTeam\BlogExample\Domain\Repository\BlogRepository
+     * @var \FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository
      */
     protected $blogRepository;
 
     /**
-     * @var \ExtbaseTeam\BlogExample\Domain\Repository\AdministratorRepository
+     * @var \FriendsOfTYPO3\BlogExample\Domain\Repository\AdministratorRepository
      */
     protected $administratorRepository;
 
     /**
      * Dependency injection of the Blog Repository
      *
-     * @param \ExtbaseTeam\BlogExample\Domain\Repository\BlogRepository $blogRepository
+     * @param \FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository $blogRepository
      * @return void
      */
-    public function injectBlogRepository(\ExtbaseTeam\BlogExample\Domain\Repository\BlogRepository $blogRepository): void
+    public function injectBlogRepository(\FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository $blogRepository): void
     {
         $this->blogRepository = $blogRepository;
     }
@@ -51,7 +51,7 @@ class BlogController extends AbstractController
     /**
      * Dependency injection of the Administrator Repository
      *
-     * @param \ExtbaseTeam\BlogExample\Domain\Repository\AdministratorRepository $administratorRepository
+     * @param \FriendsOfTYPO3\BlogExample\Domain\Repository\AdministratorRepository $administratorRepository
      * @return void
      */
     public function injectAdministratorRepository(AdministratorRepository $administratorRepository): void

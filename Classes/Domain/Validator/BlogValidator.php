@@ -1,8 +1,8 @@
 <?php
 
-namespace ExtbaseTeam\BlogExample\Domain\Validator;
+namespace FriendsOfTYPO3\BlogExample\Domain\Validator;
 
-use ExtbaseTeam\BlogExample\Domain\Model\Blog;
+use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /*

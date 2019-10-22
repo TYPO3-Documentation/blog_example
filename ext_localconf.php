@@ -12,7 +12,7 @@ if (
     \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)->get('blog_example', 'registerSinglePlugin')
 ) {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'ExtbaseTeam.BlogExample',
+        'FriendsOfTYPO3.BlogExample',
         'Pi1',
         [
             'Blog' => 'index,new,create,delete,deleteAll,edit,update,populate',
@@ -29,19 +29,19 @@ if (
 
     // Blog plugins
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'ExtbaseTeam.BlogExample',
+        'FriendsOfTYPO3.BlogExample',
         'BlogList',
         ['Blog' => 'index']
     );
 
     // Post plugins
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'ExtbaseTeam.BlogExample',
+        'FriendsOfTYPO3.BlogExample',
         'PostList',
         ['Post' => 'index']
     );
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'ExtbaseTeam.BlogExample',
+        'FriendsOfTYPO3.BlogExample',
         'PostSingle',
         ['Post' => 'show', 'Comment' => 'create'],
         ['Comment' => 'create']
@@ -49,7 +49,7 @@ if (
 
     // admin plugins
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'ExtbaseTeam.BlogExample',
+        'FriendsOfTYPO3.BlogExample',
         'BlogAdmin',
         [
             'Blog' => 'new,create,delete,deleteAll,edit,update,populate',

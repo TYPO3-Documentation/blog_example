@@ -1,5 +1,5 @@
 <?php
-namespace ExtbaseTeam\BlogExample\Domain\Repository;
+namespace FriendsOfTYPO3\BlogExample\Domain\Repository;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -14,7 +14,7 @@ namespace ExtbaseTeam\BlogExample\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
-use ExtbaseTeam\BlogExample\Domain\Model\Post;
+use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
@@ -30,10 +30,10 @@ class PostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * Finds all posts by the specified blog
      *
-     * @param \ExtbaseTeam\BlogExample\Domain\Model\Blog $blog The blog the post must refer to
+     * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Blog $blog The blog the post must refer to
      * @return QueryResultInterface The posts
      */
-    public function findAllByBlog(\ExtbaseTeam\BlogExample\Domain\Model\Blog $blog)
+    public function findAllByBlog(\FriendsOfTYPO3\BlogExample\Domain\Model\Blog $blog)
     {
         $query = $this->createQuery();
         return $query
@@ -47,10 +47,10 @@ class PostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * Finds posts by the specified tag and blog
      *
      * @param string $tag
-     * @param \ExtbaseTeam\BlogExample\Domain\Model\Blog $blog The blog the post must refer to
+     * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Blog $blog The blog the post must refer to
      * @return QueryResultInterface The posts
      */
-    public function findByTagAndBlog($tag, \ExtbaseTeam\BlogExample\Domain\Model\Blog $blog)
+    public function findByTagAndBlog($tag, \FriendsOfTYPO3\BlogExample\Domain\Model\Blog $blog)
     {
         $query = $this->createQuery();
         return $query
@@ -122,11 +122,11 @@ class PostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * Finds most recent posts by the specified blog
      *
-     * @param \ExtbaseTeam\BlogExample\Domain\Model\Blog $blog The blog the post must refer to
+     * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Blog $blog The blog the post must refer to
      * @param int $limit The number of posts to return at max
      * @return QueryResultInterface The posts
      */
-    public function findRecentByBlog(\ExtbaseTeam\BlogExample\Domain\Model\Blog $blog, $limit = 5)
+    public function findRecentByBlog(\FriendsOfTYPO3\BlogExample\Domain\Model\Blog $blog, $limit = 5)
     {
         $query = $this->createQuery();
         return $query

@@ -1,11 +1,11 @@
 <?php
 declare(strict_types = 1);
 
-namespace ExtbaseTeam\BlogExample\Controller;
+namespace FriendsOfTYPO3\BlogExample\Controller;
 
-use ExtbaseTeam\BlogExample\Domain\Model\Comment;
-use ExtbaseTeam\BlogExample\Domain\Model\Post;
-use ExtbaseTeam\BlogExample\Domain\Repository\PostRepository;
+use FriendsOfTYPO3\BlogExample\Domain\Model\Comment;
+use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
+use FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 
 /*
@@ -27,13 +27,13 @@ use TYPO3\CMS\Core\Messaging\FlashMessage;
 class CommentController extends AbstractController
 {
     /**
-     * @var \ExtbaseTeam\BlogExample\Domain\Repository\PostRepository
+     * @var \FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository
      */
     private $postRepository;
 
 
     /**
-     * @param \ExtbaseTeam\BlogExample\Domain\Repository\PostRepository $postRepository
+     * @param \FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository $postRepository
      */
     public function injectPostRepository(PostRepository $postRepository): void
     {
@@ -74,7 +74,7 @@ class CommentController extends AbstractController
     /**
      * Deletes all comments of the given post
      *
-     * @param \ExtbaseTeam\BlogExample\Domain\Model\Post $post
+     * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Post $post
      */
     public function deleteAllAction(Post $post): void
     {

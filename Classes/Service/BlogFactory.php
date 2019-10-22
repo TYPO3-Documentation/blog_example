@@ -1,15 +1,15 @@
 <?php
 declare(strict_types = 1);
 
-namespace ExtbaseTeam\BlogExample\Service;
+namespace FriendsOfTYPO3\BlogExample\Service;
 
 use DateTime;
-use ExtbaseTeam\BlogExample\Domain\Model\Administrator;
-use ExtbaseTeam\BlogExample\Domain\Model\Blog;
-use ExtbaseTeam\BlogExample\Domain\Model\Comment;
-use ExtbaseTeam\BlogExample\Domain\Model\Person;
-use ExtbaseTeam\BlogExample\Domain\Model\Post;
-use ExtbaseTeam\BlogExample\Domain\Model\Tag;
+use FriendsOfTYPO3\BlogExample\Domain\Model\Administrator;
+use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
+use FriendsOfTYPO3\BlogExample\Domain\Model\Comment;
+use FriendsOfTYPO3\BlogExample\Domain\Model\Person;
+use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
+use FriendsOfTYPO3\BlogExample\Domain\Model\Tag;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 
@@ -53,7 +53,7 @@ class BlogFactory implements SingletonInterface
      * It is also an example how to handle objects and repositories in general
      *
      * @param integer $blogNumber
-     * @return \ExtbaseTeam\BlogExample\Domain\Model\Blog
+     * @return \FriendsOfTYPO3\BlogExample\Domain\Model\Blog
      */
     public function createBlog($blogNumber = 1)
     {

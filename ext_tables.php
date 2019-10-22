@@ -6,7 +6,7 @@ if (!defined('TYPO3_MODE')) {
  * Registers a Backend Module
  */
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-    'ExtbaseTeam.BlogExample',
+    'FriendsOfTYPO3.BlogExample',
     'web', // Make module a submodule of 'web'
     'tx_blogexample_m1', // Submodule key
     '', // Position
