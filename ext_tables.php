@@ -17,7 +17,7 @@ if (!defined('TYPO3_MODE')) {
     ],
     [
         'access' => 'user,group',
-        'icon' => 'EXT:blog_example/ext_icon.gif',
+        'icon' => 'EXT:blog_example/Resources/Public/Icons/module-blog.svg',
         'labels' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_mod.xml',
     ]
 );
