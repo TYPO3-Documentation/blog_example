@@ -1,87 +1,50 @@
 <f:layout name="Default" />
 
 <f:section name="content">
-    <h1>
-        <f:translate key="blog.header">[Blog header]</f:translate>
-    </h1>
-    <p>
-        <f:translate key="blog.introduction">[introduction]</f:translate>
-    </p>
-    <f:if condition="{blogs}">
-        <f:then>
-            <h2>
-                <f:translate key="blog.list" arguments="{numberOfBlogs: '{blogs -> f:count()}'}">[list of blogs]</f:translate>
-                :
-            </h2>
-            <f:widget.paginate objects="{blogs}" as="paginatedBlogs" configuration="{itemsPerPage: 3}">
-                <ol class="tx-blogexample-blog-list">
-                    <f:for each="{paginatedBlogs}" as="blog">
-                        <li>
-                            <h3>
-                                <f:link.action action="index" controller="Post" arguments="{blog : blog}">{blog.title} ({f:translate(key: 'blog.numberOfPosts', arguments: '{numberOfPosts: \'{blog.posts -> f:count()}\'}')})</f:link.action>
-                            </h3>
-                            <f:security.ifHasRole role="{settings.editorUsergroupUid}">
-                                <div class="tx-blogexample-options">
-                                    <f:link.action action="edit" class="icon edit" arguments="{blog : blog}" title="{f:translate(key: 'blog.edit')}">
-                                        <f:translate key="blog.edit" />
-                                    </f:link.action>
-                                    <f:link.action action="delete" class="icon delete" arguments="{blog : blog}" title="{f:translate(key: 'blog.delete')}">
-                                        <f:translate key="blog.delete" />
-                                    </f:link.action>
-                                </div>
-                            </f:security.ifHasRole>
-                            <p class="tx-blogexample-description">
-                                <f:format.nl2br>{blog.description}</f:format.nl2br>
-                            </p>
-                        </li>
-                    </f:for>
-                </ol>
-            </f:widget.paginate>
-            <f:security.ifHasRole role="{settings.editorUsergroupUid}">
-                <ul class="tx-blogexample-linksection">
-                    <li>
-                        <f:link.action action="new" class="icon new" title="{f:translate(key: 'blog.createAnother')}">
-                            <f:translate key="blog.createAnother">[create another blog]</f:translate>
-                        </f:link.action>
-                    </li>
-                    <li>
-                        <f:link.action action="populate" class="icon populate" title="{f:translate(key: 'blog.createExampleData')}">
-                            <f:translate key="blog.createExampleData">[create example data]</f:translate>
-                        </f:link.action>
-                    </li>
-                    <li>
-                        <f:link.action action="deleteAll" class="icon delete" title="{f:translate(key: 'blog.deleteAll')}" onclick="return confirm(\" {f:translate(key:
-                        'blog.deleteAllConfirmation')}\");">
-                        <f:translate key="blog.deleteAll">[delete all blogs]</f:translate>
-                        </f:link.action></li>
-                </ul>
-            </f:security.ifHasRole>
-        </f:then>
-        <f:else>
-            <h2>
-                <f:translate key="blog.noEntries">[no blogs]</f:translate>
-            </h2>
-            <f:security.ifHasRole role="{settings.editorUsergroupUid}">
-                <f:then>
-                    <ul class="tx-blogexample-linksection">
-                        <li>
-                            <f:link.action action="new" class="icon new" title="{f:translate(key: 'blog.createFirst')}">
-                                <f:translate key="blog.createFirst">[create first blog]</f:translate>
-                            </f:link.action>
-                        </li>
-                        <li>
-                            <f:link.action action="populate" class="icon populate" title="{f:translate(key: 'blog.createExampleData')}">
-                                <f:translate key="blog.createExampleData">[create example data]</f:translate>
-                            </f:link.action>
-                        </li>
-                    </ul>
-                </f:then>
-                <f:else>
-                    <p>
-                        <f:translate key="logInToCreateBlogs" arguments="{editorUserGroupUid: settings.editorUsergroupUid}">[log in to create your first blog]</f:translate>
-                    </p>
-                </f:else>
-            </f:security.ifHasRole>
-        </f:else>
-    </f:if>
+	<h1><f:translate key="blog.header">[Blog header]</f:translate></h1>
+	<p><f:translate key="blog.introduction">[introduction]</f:translate></p>
+	<f:if condition="{blogs}">
+		<f:then>
+			<h2><f:translate key="blog.list" arguments="{numberOfBlogs: '{blogs -> f:count()}'}">[list of blogs]</f:translate>:</h2>
+			<f:widget.paginate objects="{blogs}" as="paginatedBlogs" configuration="{itemsPerPage: 3}">
+				<ol class="tx-blogexample-blog-list">
+					<f:for each="{paginatedBlogs}" as="blog">
+						<li>
+							<h3>
+								<f:link.action action="index" controller="Post"	arguments="{blog : blog}">{blog.title} ({f:translate(key: 'blog.numberOfPosts', arguments: '{numberOfPosts: \'{blog.posts -> f:count()}\'}')})</f:link.action>
+							</h3>
+							<f:security.ifHasRole role="{settings.editorUsergroupUid}">
+								<div class="tx-blogexample-options">
+									<f:link.action action="edit" class="icon edit" arguments="{blog : blog}" title="{f:translate(key: 'blog.edit')}"><f:translate key="blog.edit" /></f:link.action>
+									<f:link.action action="delete" class="icon delete" arguments="{blog : blog}" title="{f:translate(key: 'blog.delete')}"><f:translate key="blog.delete" /></f:link.action>
+								</div>
+							</f:security.ifHasRole>
+							<p class="tx-blogexample-description"><f:format.nl2br>{blog.description}</f:format.nl2br></p>
+						</li>
+					</f:for>
+				</ol>
+			</f:widget.paginate>
+			<f:security.ifHasRole role="{settings.editorUsergroupUid}">
+				<ul class="tx-blogexample-linksection">
+					<li><f:link.action action="new" class="icon new" title="{f:translate(key: 'blog.createAnother')}"><f:translate key="blog.createAnother">[create another blog]</f:translate></f:link.action></li>
+					<li><f:link.action action="populate" class="icon populate" title="{f:translate(key: 'blog.createExampleData')}"><f:translate key="blog.createExampleData">[create example data]</f:translate></f:link.action></li>
+					<li><f:link.action action="deleteAll" class="icon delete" title="{f:translate(key: 'blog.deleteAll')}" onclick="return confirm(\"{f:translate(key: 'blog.deleteAllConfirmation')}\");"><f:translate key="blog.deleteAll">[delete all blogs]</f:translate></f:link.action></li>
+				</ul>
+			</f:security.ifHasRole>
+		</f:then>
+		<f:else>
+			<h2><f:translate key="blog.noEntries">[no blogs]</f:translate></h2>
+			<f:security.ifHasRole role="{settings.editorUsergroupUid}">
+				<f:then>
+					<ul class="tx-blogexample-linksection">
+						<li><f:link.action action="new" class="icon new" title="{f:translate(key: 'blog.createFirst')}"><f:translate key="blog.createFirst">[create first blog]</f:translate></f:link.action></li>
+						<li><f:link.action action="populate" class="icon populate" title="{f:translate(key: 'blog.createExampleData')}"><f:translate key="blog.createExampleData">[create example data]</f:translate></f:link.action></li>
+					</ul>
+				</f:then>
+				<f:else>
+					<p><f:translate key="logInToCreateBlogs" arguments="{editorUserGroupUid: settings.editorUsergroupUid}">[log in to create your first blog]</f:translate></p>
+				</f:else>
+			</f:security.ifHasRole>
+		</f:else>
+	</f:if>
 </f:section>

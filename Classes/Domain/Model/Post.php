@@ -1,512 +1,336 @@
 <?php
-namespace FriendsOfTYPO3\BlogExample\Domain\Model;
-
-/*
- * This file is part of the TYPO3 CMS project.
+/***************************************************************
+ *  Copyright notice
  *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ *  (c) 2009 Jochen Rau <jochen.rau@typoplanet.de>
+ *  (c) 2011 Bastian Waidelich <bastian@typo3.org>
+ *  All rights reserved
  *
- * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
+ *  This script is part of the TYPO3 project. The TYPO3 project is
+ *  free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- * The TYPO3 project - inspiring people to share!
- */
-
-use TYPO3\CMS\Extbase\Annotation as Extbase;
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ ***************************************************************/
 
 /**
  * A blog post
  */
-class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
-{
-    /**
-     * @var \FriendsOfTYPO3\BlogExample\Domain\Model\Blog
-     */
-    protected $blog;
+class Tx_BlogExample_Domain_Model_Post extends Tx_Extbase_DomainObject_AbstractEntity {
 
-    /**
-     * @var string
-     * @Extbase\Validate("StringLength", options={"minimum": 3, "maximum": 50})
-     */
-    protected $title = '';
+	/**
+	 * @var Tx_BlogExample_Domain_Model_Blog
+	 */
+	protected $blog;
 
-    /**
-     * @var \DateTime
-     */
-    protected $date;
+	/**
+	 * @var string
+	 * @validate StringLength(minimum = 3, maximum = 50)
+	 */
+	protected $title;
 
-    /**
-     * @var \FriendsOfTYPO3\BlogExample\Domain\Model\Person
-     */
-    protected $author;
+	/**
+	 * @var DateTime
+	 */
+	protected $date;
 
-    /**
-     * @var \FriendsOfTYPO3\BlogExample\Domain\Model\Person
-     */
-    protected $secondAuthor;
+	/**
+	 * @var Tx_BlogExample_Domain_Model_Person
+	 */
+	protected $author;
 
-    /**
-     * @var \FriendsOfTYPO3\BlogExample\Domain\Model\Person
-     */
-    protected $reviewer;
+	/**
+	 * @var string
+	 * @validate StringLength(minimum = 3)
+	 */
+	protected $content;
 
-    /**
-     * @var string
-     * @Extbase\Validate("StringLength", options={"minimum": 3})
-     */
-    protected $content = '';
+	/**
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Tag>
+	 */
+	protected $tags;
 
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\BlogExample\Domain\Model\Tag>
-     */
-    protected $tags;
+	/**
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Comment>
+	 * @lazy
+	 * @cascade remove
+	 */
+	protected $comments;
 
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
-     */
-    protected $categories;
+	/**
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Post>
+	 * @lazy
+	 */
+	protected $relatedPosts;
 
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\BlogExample\Domain\Model\Comment>
-     * @Extbase\ORM\Lazy
-     * @Extbase\ORM\Cascade("remove")
-     */
-    protected $comments;
+	/**
+	 * Constructs this post
+	 */
+	public function __construct() {
+		$this->tags = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->comments = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->relatedPosts = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->date = new DateTime();
+	}
 
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\BlogExample\Domain\Model\Post>
-     * @Extbase\ORM\Lazy
-     */
-    protected $relatedPosts;
+	/**
+	 * Sets the blog this post is part of
+	 *
+	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog
+	 * @return void
+	 */
+	public function setBlog(Tx_BlogExample_Domain_Model_Blog $blog) {
+		$this->blog = $blog;
+	}
 
-    /**
-     * 1:1 relation stored as CSV value in this class
-     * @var \FriendsOfTYPO3\BlogExample\Domain\Model\Info
-     */
-    protected $additionalName;
+	/**
+	 * Returns the blog this post is part of
+	 *
+	 * @return Tx_BlogExample_Domain_Model_Blog The blog this post is part of
+	 */
+	public function getBlog() {
+		return $this->blog;
+	}
 
-    /**
-     * 1:1 relation stored as foreign key in Info class
-     * @var \FriendsOfTYPO3\BlogExample\Domain\Model\Info
-     */
-    protected $additionalInfo;
+	/**
+	 * Setter for title
+	 *
+	 * @param string $title
+	 * @return void
+	 */
+	public function setTitle($title) {
+		$this->title = $title;
+	}
 
-    /**
-     * 1:n relation stored as CSV value
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\BlogExample\Domain\Model\Comment>
-     * @Extbase\ORM\Lazy
-     */
-    protected $additionalComments;
+	/**
+	 * Getter for title
+	 *
+	 * @return string
+	 */
+	public function getTitle() {
+		return $this->title;
+	}
 
-    /**
-     * Constructs this post
-     */
-    public function __construct()
-    {
-        $this->tags = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->comments = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->relatedPosts = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->date = new \DateTime();
-        $this->additionalComments = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-    }
+	/**
+	 * Setter for date
+	 *
+	 * @param DateTime $date
+	 * @return void
+	 */
+	public function setDate(DateTime $date) {
+		$this->date = $date;
+	}
 
-    /**
-     * Sets the blog this post is part of
-     *
-     * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Blog $blog The blog
-     */
-    public function setBlog(\FriendsOfTYPO3\BlogExample\Domain\Model\Blog $blog)
-    {
-        $this->blog = $blog;
-    }
+	/**
+	 * Getter for date
+	 *
+	 *
+	 * @return DateTime
+	 */
+	public function getDate() {
+		return $this->date;
+	}
 
-    /**
-     * Returns the blog this post is part of
-     *
-     * @return \FriendsOfTYPO3\BlogExample\Domain\Model\Blog The blog this post is part of
-     */
-    public function getBlog()
-    {
-        return $this->blog;
-    }
+	/**
+	 * Setter for tags
+	 *
+	 * @param Tx_Extbase_Persistence_ObjectStorage $tags One or more Tx_BlogExample_Domain_Model_Tag objects
+	 * @return void
+	 */
+	public function setTags(Tx_Extbase_Persistence_ObjectStorage $tags) {
+		$this->tags = $tags;
+	}
 
-    /**
-     * Setter for title
-     *
-     * @param string $title
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
+	/**
+	 * Adds a tag to this post
+	 *
+	 * @param Tx_BlogExample_Domain_Model_Tag $tag
+	 * @return void
+	 */
+	public function addTag(Tx_BlogExample_Domain_Model_Tag $tag) {
+		$this->tags->attach($tag);
+	}
 
-    /**
-     * Getter for title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
+	/**
+	 * Removes a tag from this post
+	 *
+	 * @param Tx_BlogExample_Domain_Model_Tag $tag
+	 * @return void
+	 */
+	public function removeTag(Tx_BlogExample_Domain_Model_Tag $tag) {
+		$this->tags->detach($tag);
+	}
 
-    /**
-     * Setter for date
-     *
-     * @param \DateTime $date
-     */
-    public function setDate(\DateTime $date)
-    {
-        $this->date = $date;
-    }
+	/**
+	 * Remove all tags from this post
+	 *
+	 * @return void
+	 */
+	public function removeAllTags() {
+		$this->tags = new Tx_Extbase_Persistence_ObjectStorage();
+	}
 
-    /**
-     * Getter for date
-     *
-     *
-     * @return \DateTime
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
+	/**
+	 * Getter for tags
+	 * Note: We return a clone of the tags because they must not be modified as they are Value Objects
+	 *
+	 * @return Tx_Extbase_Persistence_ObjectStorage A storage holding Tx_BlogExample_Domain_Model_Tag objects
+	 */
+	public function getTags() {
+		return clone $this->tags;
+	}
 
-    /**
-     * Setter for tags
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $tags One or more Tag objects
-     */
-    public function setTags(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $tags)
-    {
-        $this->tags = $tags;
-    }
+	/**
+	 * Sets the author for this post
+	 *
+	 * @param Tx_BlogExample_Domain_Model_Person $author
+	 * @return void
+	 */
+	public function setAuthor(Tx_BlogExample_Domain_Model_Person $author) {
+		$this->author = $author;
+	}
 
-    /**
-     * Adds a tag to this post
-     *
-     * @param Tag $tag
-     */
-    public function addTag(Tag $tag)
-    {
-        $this->tags->attach($tag);
-    }
+	/**
+	 * Getter for author
+	 *
+	 * @return Tx_BlogExample_Domain_Model_Person
+	 */
+	public function getAuthor() {
+		return $this->author;
+	}
 
-    /**
-     * Removes a tag from this post
-     *
-     * @param Tag $tag
-     */
-    public function removeTag(Tag $tag)
-    {
-        $this->tags->detach($tag);
-    }
+	/**
+	 * Sets the content for this post
+	 *
+	 * @param string $content
+	 * @return void
+	 */
+	public function setContent($content) {
+		$this->content = $content;
+	}
 
-    /**
-     * Remove all tags from this post
-     */
-    public function removeAllTags()
-    {
-        $this->tags = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-    }
+	/**
+	 * Getter for content
+	 *
+	 * @return string
+	 */
+	public function getContent() {
+		return $this->content;
+	}
 
-    /**
-     * Getter for tags
-     * Note: We return a clone of the tags because they must not be modified as they are Value Objects
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage A storage holding objects
-     */
-    public function getTags()
-    {
-        return clone $this->tags;
-    }
+	/**
+	 * Setter for the comments to this post
+	 *
+	 * @param Tx_Extbase_Persistence_ObjectStorage $comments An Object Storage of related Comment instances
+	 * @return void
+	 */
+	public function setComments(Tx_Extbase_Persistence_ObjectStorage $comments) {
+		$this->comments = $comments;
+	}
 
-    /**
-     * Add category to a post
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $category
-     */
-    public function addCategory(\TYPO3\CMS\Extbase\Domain\Model\Category $category)
-    {
-        $this->categories->attach($category);
-    }
+	/**
+	 * Adds a comment to this post
+	 *
+	 * @param Tx_BlogExample_Domain_Model_Comment $comment
+	 * @return void
+	 */
+	public function addComment(Tx_BlogExample_Domain_Model_Comment $comment) {
+		$this->comments->attach($comment);
+	}
 
-    /**
-     * Set categories
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories
-     */
-    public function setCategories($categories)
-    {
-        $this->categories = $categories;
-    }
+	/**
+	 * Removes Comment from this post
+	 *
+	 * @param Tx_BlogExample_Domain_Model_Comment $commentToDelete
+	 * @return void
+	 */
+	public function removeComment(Tx_BlogExample_Domain_Model_Comment $commentToDelete) {
+		$this->comments->detach($commentToDelete);
+	}
 
-    /**
-     * Get categories
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
+	/**
+	 * Remove all comments from this post
+	 *
+	 * @return void
+	 */
+	public function removeAllComments() {
+		$comments = clone $this->comments;
+		foreach($comments as $comment) {
+			$this->comments->detach($comment);
+		}
+	}
 
-    /**
-     * Remove category from post
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $category
-     */
-    public function removeCategory(\TYPO3\CMS\Extbase\Domain\Model\Category $category)
-    {
-        $this->categories->detach($category);
-    }
+	/**
+	 * Returns the comments to this post
+	 *
+	 * @return An Tx_Extbase_Persistence_ObjectStorage holding instances of Tx_BlogExample_Domain_Model_Comment
+	 */
+	public function getComments() {
+		return $this->comments;
+	}
 
-    /**
-     * Sets the author for this post
-     *
-     * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Person $author
-     */
-    public function setAuthor(\FriendsOfTYPO3\BlogExample\Domain\Model\Person $author)
-    {
-        $this->author = $author;
-    }
+	/**
+	 * Setter for the related posts
+	 *
+	 * @param Tx_Extbase_Persistence_ObjectStorage $relatedPosts An Object Storage containing related Posts instances
+	 * @return void
+	 */
+	public function setRelatedPosts(Tx_Extbase_Persistence_ObjectStorage $relatedPosts) {
+		$this->relatedPosts = $relatedPosts;
+	}
 
-    /**
-     * Getter for author
-     *
-     * @return \FriendsOfTYPO3\BlogExample\Domain\Model\Person
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
+	/**
+	 * Adds a related post
+	 *
+	 * @param Tx_BlogExample_Domain_Model_Post $comment
+	 * @return void
+	 */
+	public function addRelatedPost(Tx_BlogExample_Domain_Model_Post $post) {
+		$this->relatedPosts->attach($post);
+	}
 
-    /**
-     * @return \FriendsOfTYPO3\BlogExample\Domain\Model\Person
-     */
-    public function getSecondAuthor(): ?\FriendsOfTYPO3\BlogExample\Domain\Model\Person
-    {
-        return $this->secondAuthor;
-    }
+	/**
+	 * Remove all related posts
+	 *
+	 * @return void
+	 */
+	public function removeAllRelatedPosts() {
+		$relatedPosts = clone $this->relatedPosts;
+		foreach($relatedPosts as $relatedPost) {
+			$this->relatedPosts->detach($relatedPost);
+		}
+	}
 
-    /**
-     * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Person $secondAuthor
-     */
-    public function setSecondAuthor(\FriendsOfTYPO3\BlogExample\Domain\Model\Person $secondAuthor): void
-    {
-        $this->secondAuthor = $secondAuthor;
-    }
+	/**
+	 * Returns the related posts
+	 *
+	 * @return An Tx_Extbase_Persistence_ObjectStorage holding instances of Tx_BlogExample_Domain_Model_Post
+	 */
+	public function getRelatedPosts() {
+		return $this->relatedPosts;
+	}
 
-    /**
-     * @return \FriendsOfTYPO3\BlogExample\Domain\Model\Person
-     */
-    public function getReviewer()
-    {
-        return $this->reviewer;
-    }
-
-    /**
-     * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Person $reviewer
-     */
-    public function setReviewer(\FriendsOfTYPO3\BlogExample\Domain\Model\Person $reviewer)
-    {
-        $this->reviewer = $reviewer;
-    }
-
-    /**
-     * Sets the content for this post
-     *
-     * @param string $content
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-    }
-
-    /**
-     * Getter for content
-     *
-     * @return string
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     * Setter for the comments to this post
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $comments An Object Storage of related Comment instances
-     */
-    public function setComments(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $comments)
-    {
-        $this->comments = $comments;
-    }
-
-    /**
-     * Adds a comment to this post
-     *
-     * @param Comment $comment
-     */
-    public function addComment(Comment $comment)
-    {
-        $this->comments->attach($comment);
-    }
-
-    /**
-     * Removes Comment from this post
-     *
-     * @param Comment $commentToDelete
-     */
-    public function removeComment(Comment $commentToDelete)
-    {
-        $this->comments->detach($commentToDelete);
-    }
-
-    /**
-     * Remove all comments from this post
-     */
-    public function removeAllComments()
-    {
-        $comments = clone $this->comments;
-        $this->comments->removeAll($comments);
-    }
-
-    /**
-     * Returns the comments to this post
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage holding instances of Comment
-     */
-    public function getComments()
-    {
-        return $this->comments;
-    }
-
-    /**
-     * Setter for the related posts
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $relatedPosts An Object Storage containing related Posts instances
-     */
-    public function setRelatedPosts(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $relatedPosts)
-    {
-        $this->relatedPosts = $relatedPosts;
-    }
-
-    /**
-     * Adds a related post
-     *
-     * @param Post $post
-     */
-    public function addRelatedPost(Post $post)
-    {
-        $this->relatedPosts->attach($post);
-    }
-
-    /**
-     * Remove all related posts
-     */
-    public function removeAllRelatedPosts()
-    {
-        $relatedPosts = clone $this->relatedPosts;
-        $this->relatedPosts->removeAll($relatedPosts);
-    }
-
-    /**
-     * Returns the related posts
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage holding instances of Post
-     */
-    public function getRelatedPosts()
-    {
-        return $this->relatedPosts;
-    }
-
-    /**
-     * @return ?Info
-     */
-    public function getAdditionalName(): ?Info
-    {
-        return $this->additionalName;
-    }
-
-    /**
-     * @param Info $additionalName
-     */
-    public function setAdditionalName(Info $additionalName): void
-    {
-        $this->additionalName = $additionalName;
-    }
-
-    /**
-     * @return ?Info
-     */
-    public function getAdditionalInfo(): ?Info
-    {
-        return $this->additionalInfo;
-    }
-
-    /**
-     * @param Info $additionalInfo
-     */
-    public function setAdditionalInfo(Info $additionalInfo): void
-    {
-        $this->additionalInfo = $additionalInfo;
-    }
-
-    /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     */
-    public function getAdditionalComments(): \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-    {
-        return $this->additionalComments;
-    }
-
-    /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $additionalComments
-     */
-    public function setAdditionalComments(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $additionalComments): void
-    {
-        $this->additionalComments = $additionalComments;
-    }
-
-    /**
-     * @param Comment $comment
-     */
-    public function addAdditionalComment(Comment $comment)
-    {
-        $this->additionalComments->attach($comment);
-    }
-
-    /**
-     * Remove all additional Comments
-     */
-    public function removeAllAdditionalComments()
-    {
-        $comments = clone $this->additionalComments;
-        $this->additionalComments->removeAll($comments);
-    }
-
-    /**
-     * @param Comment $comment
-     */
-    public function removeAdditionalComment(Comment $comment)
-    {
-        $this->additionalComments->detach($comment);
-    }
-
-    /**
-     * Returns this post as a formatted string
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->title . chr(10) .
-            ' written on ' . $this->date->format('Y-m-d') . chr(10) .
-            ' by ' . $this->author->getFullName() . chr(10) .
-            wordwrap($this->content, 70, chr(10)) . chr(10) .
-            implode(', ', $this->tags->toArray());
-    }
+	/**
+	 * Returns this post as a formatted string
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		return $this->title . chr(10) .
+			' written on ' . $this->date->format('Y-m-d') . chr(10) .
+			' by ' . $this->author->getFullName() . chr(10) .
+			wordwrap($this->content, 70, chr(10)) . chr(10) .
+			implode(', ', $this->tags->toArray());
+	}
 }
+?>

@@ -14,7 +14,7 @@
 			<label index="by">by</label>
 			<label index="postedOn">posted on</label>
 			<label index="blog.header">Welcome to the Blog Example!</label>
-			<label index="blog.introduction">This extension serves as a demonstration for basic development techniques used in Extbase applications.</label>
+			<label index="blog.introduction">This extension serves as a demonstration for basic development techniques used in Extbase/FLOW3 applications.</label>
 			<label index="blog.list">Here is a list of %d blogs</label>
 			<label index="blog.numberOfPosts">%d posts</label>
 			<label index="blog.noEntries">There are currently no blogs</label>
@@ -30,10 +30,10 @@
 			<label index="blog.createHeader">Create new blog</label>
 			<label index="blog.createIntroduction">Edit the information about the new blog below</label>
 			<label index="post.header">Welcome to the Blog &quot;%s&quot;</label>
-			<label index="post.introductionAdministrator">If you have any questions, feel free to contact the administrator %s.</label>
+			<label index="post.introductionAdministrator">If you have any questions, feel free to contact the administrator &lt;a href="%s"&gt;%s&lt;/a&gt;.</label>
 			<label index="post.introductionNoAdministrator">There is currently no administrator assigned to this Blog</label>
 			<label index="post.list">This blog contains %d posts</label>
-			<label index="post.listTag">This blog contains %d posts tagged with "%s"</label>
+			<label index="post.listTag">This blog contains %d posts tagged with &lt;span class="tag"&gt;%s&lt;/span&gt;</label>
 			<label index="post.noEntries">There are currently no posts in this blog</label>
 			<label index="post.createFirst">Create your first post</label>
 			<label index="post.createAnother">Create another post</label>
@@ -100,7 +100,7 @@
 			<label index="by">von</label>
 			<label index="postedOn">verfasst am</label>
 			<label index="blog.header">Willkommen zum Blog Example!</label>
-			<label index="blog.introduction">Diese Extension soll einen Einblick in die Technik von Extbase Applikationen bieten.</label>
+			<label index="blog.introduction">Diese Extension soll einen Einblick in die Technik von Extbase/FLOW3 Applikationen bieten.</label>
 			<label index="blog.list">Hier eine Liste von %d Blogs</label>
 			<label index="blog.numberOfPosts">%d Beiträge</label>
 			<label index="blog.noEntries">Es sind momentan keine Blogs angelegt</label>
@@ -116,10 +116,10 @@
 			<label index="blog.createHeader">Neues Blog anlegen</label>
 			<label index="blog.createIntroduction">Geben Sie hier die Informationen zu diesem Blog an</label>
 			<label index="post.header">Willkommen zum Blog &quot;%s&quot;</label>
-			<label index="post.introductionAdministrator">Wenn Sie Fragen haben, wenden Sie sich an den Administrator %s.</label>
+			<label index="post.introductionAdministrator">Wenn Sie Fragen haben, wenden Sie sich an den Administrator &lt;a href="%s"&gt;%s&lt;/a&gt;.</label>
 			<label index="post.introductionNoAdministrator">Für dieses Blog ist kein Administrator angegeben</label>
 			<label index="post.list">Dieses Blog enthält %d Beiträge</label>
-			<label index="post.listTag">Dieses Blog enthält %d Beiträge die mit dem Tag "%s" markiert sind</label>
+			<label index="post.listTag">Dieses Blog enthält %d Beiträge die mit dem Tag &lt;span class="tag"&gt;%s&lt;/span&gt; markiert sind</label>
 			<label index="post.noEntries">Dieses Blog enthält noch keine Beiträge</label>
 			<label index="post.createFirst">Ersten Beitrag verfassen</label>
 			<label index="post.createAnother">Weiteren Beitrag anlegen</label>
@@ -145,9 +145,9 @@
 			<label index="flashmessage.Blog.created.title">Blog hinzugefügt</label>
 			<label index="flashmessage.Blog.created">Ein neues Blog wurde angelegt</label>
 			<label index="flashmessage.Blog.updated.title">Blog aktualisiert</label>
-			<label index="flashmessage.Blog.updated">Der Blog wurde aktualisiert</label>
+			<label index="flashmessage.Blog.updated">Das Blog wurde aktualisiert</label>
 			<label index="flashmessage.Blog.deleted.title">Blog gelöscht</label>
-			<label index="flashmessage.Blog.deleted">Der Blog wurde entfernt</label>
+			<label index="flashmessage.Blog.deleted">Das Blog wurde entfernt</label>
 			<label index="flashmessage.Blog.populated.title">Beispieldaten angelegt</label>
 			<label index="flashmessage.Blog.populated">Einige beispielhafte Blogs und Beiträge wurden erzeugt</label>
 			<label index="flashmessage.Post.created.title">Beitrag hinzugefügt</label>
@@ -165,8 +165,8 @@
 			<label index="culture.date.formatLong">d.m.Y H:i\h</label>
 			<label index="culture.date.formatShort">d.m.Y</label>
 			<label index="error.errorsOccurred">Es sind Fehler aufgetreten</label>
-			<label index="error.Blog.updateAction">Der Blog konnte nicht aktualisiert werden</label>
-			<label index="error.Blog.createAction">Der Blog konnte nicht angelegt werden</label>
+			<label index="error.Blog.updateAction">Das Blog konnte nicht aktualisiert werden</label>
+			<label index="error.Blog.createAction">Das Blog konnte nicht angelegt werden</label>
 			<label index="error.Blog.invalidTitle">&quot;Extbase&quot; darf nicht als Blog Bezeichnung verwendet werden</label>
 			<label index="error.Post.updateAction">Der Beitrag konnte nicht aktualisiert werden</label>
 			<label index="error.Post.createAction">Der Beitrag konnte nicht angelegt werden</label>

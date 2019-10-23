@@ -22,9 +22,9 @@ module.tx_blogexample {
 	view {
 		 # cat=module.tx_blogexample/file; type=string; label=Path to template root (BE)
 		templateRootPath = EXT:blog_example/Resources/Private/Backend/Templates/
-		 # cat=module.tx_blogexample/file; type=string; label=Path to template partials (BE)
+		 # cat=plugin.tx_blogexample/file; type=string; label=Path to template partials (BE)
 		partialRootPath = EXT:blog_example/Resources/Private/Partials/
-		 # cat=module.tx_blogexample/file; type=string; label=Path to template layouts (BE)
+		 # cat=plugin.tx_blogexample/file; type=string; label=Path to template layouts (BE)
 		layoutRootPath = EXT:blog_example/Resources/Private/Backend/Layouts/
 	}
 }

@@ -1,56 +1,61 @@
 <?php
-namespace FriendsOfTYPO3\BlogExample\Domain\Model;
-
-/*
- * This file is part of the TYPO3 CMS project.
+/***************************************************************
+ *  Copyright notice
  *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ *  (c) 2009 Jochen Rau <jochen.rau@typoplanet.de>
+ *  (c) 2011 Bastian Waidelich <bastian@typo3.org>
+ *  All rights reserved
  *
- * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
+ *  This script is part of the TYPO3 project. The TYPO3 project is
+ *  free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- * The TYPO3 project - inspiring people to share!
- */
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ ***************************************************************/
 
 /**
  * A blog post tag
  */
-class Tag extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
-{
-    /**
-     * @var string
-     */
-    protected $name = '';
+class Tx_BlogExample_Domain_Model_Tag extends Tx_Extbase_DomainObject_AbstractValueObject {
 
-    /**
-     * Constructs this tag
-     *
-     * @param $name
-     */
-    public function __construct($name)
-    {
-        $this->name = $name;
-    }
+	/**
+	 * @var string
+	 */
+	protected $name;
 
-    /**
-     * Returns this tag's name
-     *
-     * @return string This tag's name
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
+	/*
+	 * Constructs this tag
+	 */
+	public function __construct($name) {
+		$this->name = $name;
+	}
 
-    /**
-     * Returns this tag as a formatted string
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getName();
-    }
+	/**
+	 * Returns this tag's name
+	 *
+	 * @return string This tag's name
+	 */
+	public function getName() {
+		return $this->name;
+	}
+
+	/**
+	 * Returns this tag as a formatted string
+	 *
+	 * @return string
+	 */
+	public function __toString() {
+		return $this->getName();
+	}
 }
+?>

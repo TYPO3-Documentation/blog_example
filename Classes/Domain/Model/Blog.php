@@ -1,255 +1,168 @@
 <?php
-namespace FriendsOfTYPO3\BlogExample\Domain\Model;
-
-/*
- * This file is part of the TYPO3 CMS project.
+/***************************************************************
+ *  Copyright notice
  *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ *  (c) 2009 Jochen Rau <jochen.rau@typoplanet.de>
+ *  (c) 2011 Bastian Waidelich <bastian@typo3.org>
+ *  All rights reserved
  *
- * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
+ *  This script is part of the TYPO3 project. The TYPO3 project is
+ *  free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- * The TYPO3 project - inspiring people to share!
- */
-
-use TYPO3\CMS\Extbase\Annotation as Extbase;
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ ***************************************************************/
 
 /**
  * A blog
  */
-class Blog extends AbstractEntity
-{
-    /**
-     * The blog's title.
-     *
-     * @var string
-     * @Extbase\Validate("StringLength", options={"minimum": 1, "maximum": 80})
-     */
-    protected $title = '';
+class Tx_BlogExample_Domain_Model_Blog extends Tx_Extbase_DomainObject_AbstractEntity {
 
-    /**
-     * The blog's subtitle
-     *
-     * @var string
-     */
-    protected $subtitle;
+	/**
+	 * The blog's title.
+	 *
+	 * @var string
+	 * @validate StringLength(minimum = 1, maximum = 80)
+	 */
+	protected $title = '';
 
-    /**
-     * A short description of the blog
-     *
-     * @var string
-     * @Extbase\Validate("StringLength", options={"maximum": 150})
-     */
-    protected $description = '';
+	/**
+	 * A short description of the blog
+	 *
+	 * @var string
+	 * @validate StringLength(maximum = 150)
+	 */
+	protected $description = '';
 
-    /**
-     * A relative path to a logo image
-     *
-     * @var string
-     */
-    protected $logo = '';
+	/**
+	 * The posts of this blog
+	 *
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_BlogExample_Domain_Model_Post>
+	 * @lazy
+	 * @cascade remove
+	 */
+	protected $posts;
 
-    /**
-     * The posts of this blog
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\BlogExample\Domain\Model\Post>
-     * @Extbase\ORM\Lazy
-     * @Extbase\ORM\Cascade("remove")
-     */
-    protected $posts;
+	/**
+	 * The blog's administrator
+	 *
+	 * @var Tx_BlogExample_Domain_Model_Administrator
+	 * @lazy
+	 */
+	protected $administrator;
 
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
-     */
-    protected $categories;
+	/**
+	 * Constructs a new Blog
+	 *
+	 */
+	public function __construct() {
+		$this->posts = new Tx_Extbase_Persistence_ObjectStorage();
+	}
 
-    /**
-     * The blog's administrator
-     *
-     * @var \FriendsOfTYPO3\BlogExample\Domain\Model\Administrator
-     * @Extbase\ORM\Lazy
-     */
-    protected $administrator;
+	/**
+	 * Sets this blog's title
+	 *
+	 * @param string $title The blog's title
+	 * @return void
+	 */
+	public function setTitle($title) {
+		$this->title = $title;
+	}
 
-    /**
-     * Constructs a new Blog
-     */
-    public function __construct()
-    {
-        $this->posts = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-    }
+	/**
+	 * Returns the blog's title
+	 *
+	 * @return string The blog's title
+	 */
+	public function getTitle() {
+		return $this->title;
+	}
 
-    /**
-     * @return string
-     */
-    public function getSubtitle()
-    {
-        return $this->subtitle;
-    }
+	/**
+	 * Sets the description for the blog
+	 *
+	 * @param string $description
+	 * @return void
+	 */
+	public function setDescription($description) {
+		$this->description = $description;
+	}
 
-    /**
-     * Sets this blog's title
-     *
-     * @param string $title The blog's title
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
+	/**
+	 * Returns the description
+	 *
+	 * @return string
+	 */
+	public function getDescription() {
+		return $this->description;
+	}
 
-    /**
-     * Returns the blog's title
-     *
-     * @return string The blog's title
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
+	/**
+	 * Adds a post to this blog
+	 *
+	 * @param Tx_BlogExample_Domain_Model_Post $post
+	 * @return void
+	 */
+	public function addPost(Tx_BlogExample_Domain_Model_Post $post) {
+		$this->posts->attach($post);
+	}
 
-    /**
-     * @param string $logo
-     */
-    public function setLogo($logo)
-    {
-        $this->logo = $logo;
-    }
+	/**
+	 * Remove a post from this blog
+	 *
+	 * @param Tx_BlogExample_Domain_Model_Post $postToRemove The post to be removed
+	 * @return void
+	 */
+	public function removePost(Tx_BlogExample_Domain_Model_Post $postToRemove) {
+		$this->posts->detach($postToRemove);
+	}
 
-    /**
-     * @return string
-     */
-    public function getLogo()
-    {
-        return $this->logo;
-    }
+	/**
+	 * Remove all posts from this blog
+	 *
+	 * @return void
+	 */
+	public function removeAllPosts() {
+		$this->posts = new Tx_Extbase_Persistence_ObjectStorage();
+	}
 
-    /**
-     * Sets the description for the blog
-     *
-     * @param string $description
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    }
+	/**
+	 * Returns all posts in this blog
+	 *
+	 * @return Tx_Extbase_Persistence_ObjectStorage
+	 */
+	public function getPosts() {
+		return $this->posts;
+	}
 
-    /**
-     * Returns the description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
+	/**
+	 * Sets the administrator value
+	 *
+	 * @param Tx_BlogExample_Domain_Model_Administrator $administrator The Administrator of this Blog
+	 * @return void
+	 */
+	public function setAdministrator(Tx_BlogExample_Domain_Model_Administrator $administrator) {
+		$this->administrator = $administrator;
+	}
 
-    /**
-     * Adds a post to this blog
-     *
-     * @param Post $post
-     */
-    public function addPost(Post $post)
-    {
-        $this->posts->attach($post);
-    }
+	/**
+	 * Returns the administrator value
+	 *
+	 * @return Tx_BlogExample_Domain_Model_Administrator
+	 */
+	public function getAdministrator() {
+		return $this->administrator;
+	}
 
-    /**
-     * Remove a post from this blog
-     *
-     * @param Post $postToRemove The post to be removed
-     */
-    public function removePost(Post $postToRemove)
-    {
-        $this->posts->detach($postToRemove);
-    }
-
-    /**
-     * Remove all posts from this blog
-     */
-    public function removeAllPosts()
-    {
-        $this->posts = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-    }
-
-    /**
-     * Returns all posts in this blog
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     */
-    public function getPosts()
-    {
-        return $this->posts;
-    }
-
-    /**
-     * Add category to a blog
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $category
-     */
-    public function addCategory(\TYPO3\CMS\Extbase\Domain\Model\Category $category)
-    {
-        $this->categories->attach($category);
-    }
-
-    /**
-     * Set categories
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories
-     */
-    public function setCategories($categories)
-    {
-        $this->categories = $categories;
-    }
-
-    /**
-     * Get categories
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     */
-    public function getCategories()
-    {
-        return $this->categories;
-    }
-
-    /**
-     * Remove category from blog
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $category
-     */
-    public function removeCategory(\TYPO3\CMS\Extbase\Domain\Model\Category $category)
-    {
-        $this->categories->detach($category);
-    }
-
-    /**
-     * Sets the administrator value
-     *
-     * @param Administrator $administrator The Administrator of this Blog
-     */
-    public function setAdministrator(Administrator $administrator)
-    {
-        $this->administrator = $administrator;
-    }
-
-    /**
-     * Returns the administrator value
-     *
-     * @return Administrator
-     */
-    public function getAdministrator()
-    {
-        return $this->administrator;
-    }
-
-    /**
-     * @param ?string $subtitle
-     */
-    public function setSubtitle($subtitle)
-    {
-        $this->subtitle = $subtitle;
-    }
 }
+?>

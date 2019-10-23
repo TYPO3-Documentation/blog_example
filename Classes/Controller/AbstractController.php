@@ -1,72 +1,75 @@
 <?php
-declare(strict_types = 1);
-
-namespace FriendsOfTYPO3\BlogExample\Controller;
-
-/*
- * This file is part of the TYPO3 CMS project.
+/***************************************************************
+ *  Copyright notice
  *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ *  (c) 2009 Jochen Rau <jochen.rau@typoplanet.de>
+ *  (c) 2011 Bastian Waidelich <bastian@typo3.org>
+ *  All rights reserved
  *
- * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
+ *  This script is part of the TYPO3 project. The TYPO3 project is
+ *  free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- * The TYPO3 project - inspiring people to share!
- */
-
-use TYPO3\CMS\Core\Messaging\FlashMessage;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ ***************************************************************/
 
 /**
  * Abstract base controller for the BlogExample extension
  */
-abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
-{
+abstract class Tx_BlogExample_Controller_AbstractController extends Tx_Extbase_MVC_Controller_ActionController {
 
-    /**
-     * Override getErrorFlashMessage to present
-     * nice flash error messages.
-     *
-     * @return string
-     */
-    protected function getErrorFlashMessage()
-    {
-        $defaultFlashMessage = parent::getErrorFlashMessage();
-        $locallangKey = sprintf('error.%s.%s', $this->request->getControllerName(), $this->actionMethodName);
-        return $this->translate($locallangKey, $defaultFlashMessage);
-    }
+	/**
+	 * Override getErrorFlashMessage to present
+	 * nice flash error messages.
+	 *
+	 * @return string
+	 */
+	protected function getErrorFlashMessage() {
+		$defaultFlashMessage = parent::getErrorFlashMessage();
+		$locallangKey = sprintf('error.%s.%s', $this->request->getControllerName(), $this->actionMethodName);
+		return $this->translate($locallangKey, $defaultFlashMessage);
+	}
 
-    /**
-     * helper function to render localized flashmessages
-     *
-     * @param string $action
-     * @param integer $severity optional severity code. One of the t3lib_FlashMessage constants
-     * @return void
-     */
-    public function addLocalizedFlashMessage(string $action, int $severity = FlashMessage::OK): void
-    {
-        $messageLocallangKey = sprintf('flashmessage.%s.%s', $this->request->getControllerName(), $action);
-        $localizedMessage = $this->translate($messageLocallangKey, '[' . $messageLocallangKey . ']');
-        $titleLocallangKey = sprintf('%s.title', $messageLocallangKey);
-        $localizedTitle = $this->translate($titleLocallangKey, '[' . $titleLocallangKey . ']');
-        $this->addFlashMessage($localizedMessage, $localizedTitle, $severity);
-    }
+	/**
+	 * helper function to render localized flashmessages
+	 *
+	 * @param string $action
+	 * @param integer $severity optional severity code. One of the t3lib_FlashMessage constants
+	 * @return void
+	 */
+	protected function addFlashMessage($action, $severity = t3lib_FlashMessage::OK) {
+		$messageLocallangKey = sprintf('flashmessage.%s.%s', $this->request->getControllerName(), $action);
+		$localizedMessage = $this->translate($messageLocallangKey, '[' . $messageLocallangKey . ']');
+		$titleLocallangKey = sprintf('%s.title', $messageLocallangKey);
+		$localizedTitle = $this->translate($titleLocallangKey, '[' . $titleLocallangKey . ']');
+		$this->flashMessageContainer->add($localizedMessage, $localizedTitle, $severity);
+	}
 
-    /**
-     * helper function to use localized strings in BlogExample controllers
-     *
-     * @param string $key locallang key
-     * @param string $defaultMessage
-     * @return string
-     */
-    protected function translate(string $key, string $defaultMessage = ''): string
-    {
-        $message = LocalizationUtility::translate($key, 'BlogExample');
-        if ($message === null) {
-            $message = $defaultMessage;
-        }
-        return $message;
-    }
+	/**
+	 * helper function to use localized strings in BlogExample controllers
+	 *
+	 * @param string $key locallang key
+	 * @param string $default the default message to show if key was not found
+	 * @return string
+	 */
+	protected function translate($key, $defaultMessage = '') {
+		$message = Tx_Extbase_Utility_Localization::translate($key, 'BlogExample');
+		if ($message === NULL) {
+			$message = $defaultMessage;
+		}
+		return $message;
+	}
+
 }
+
+?>

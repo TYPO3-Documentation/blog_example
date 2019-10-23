@@ -1,39 +1,35 @@
-# Plugin configuration
+ # Plugin configuration
 plugin.tx_blogexample {
 	settings {
-		# maximum number of posts to display per page
+		 # maximum number of posts to display per page
 		postsPerPage = 3
-		# Editor FE Usergroup uid
+		 # Editor FE Usergroup uid
 		editorUsergroupUid = {$plugin.tx_blogexample.settings.editorUsergroupUid}
-		# Plaintext page type number
+		 # Plaintext page type number
 		plaintextPageType = {$plugin.tx_blogexample.settings.plaintextPageType}
 	}
-
 	persistence {
 		storagePid = {$plugin.tx_blogexample.persistence.storagePid}
 		classes {
-			TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
+			Tx_Extbase_Domain_Model_FrontendUser {
 				subclasses {
-					\FriendsOfTYPO3\BlogExample\Domain\Model\Administrator = FriendsOfTYPO3\BlogExample\Domain\Model\Administrator
+					Tx_BlogExample_Domain_Model_Administrator = Tx_BlogExample_Domain_Model_Administrator
 				}
 			}
-
-			FriendsOfTYPO3\BlogExample\Domain\Model\Administrator {
+			Tx_BlogExample_Domain_Model_Administrator {
 				mapping {
 					tableName = fe_users
-					recordType = FriendsOfTYPO3\BlogExample\Domain\Model\Administrator
+					recordType = Tx_BlogExample_Domain_Model_Administrator
 				}
 			}
 		}
 	}
-
 	view {
 		templateRootPath = {$plugin.tx_blogexample.view.templateRootPath}
 		partialRootPath = {$plugin.tx_blogexample.view.partialRootPath}
 		layoutRootPath = {$plugin.tx_blogexample.view.layoutRootPath}
 		defaultPid = auto
 	}
-
 	# This is an example how to modify the translation
 	_LOCAL_LANG {
 		default {
@@ -42,7 +38,7 @@ plugin.tx_blogexample {
 	}
 }
 
-# Module configuration
+ # Module configuration
 module.tx_blogexample {
 	settings < plugin.tx_blogexample.settings
 	persistence < plugin.tx_blogexample.persistence
@@ -54,37 +50,34 @@ module.tx_blogexample {
 	}
 }
 
-# plaintext rendering
+ # plaintext rendering
 tx_blogexample_plaintext = PAGE
 tx_blogexample_plaintext {
 	typeNum = {$plugin.tx_blogexample.settings.plaintextPageType}
 	10 = USER
 	10 {
-		userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+		userFunc = tx_extbase_core_bootstrap->run
 		extensionName = BlogExample
 		pluginName = PostList
-		vendorName = FriendsOfTYPO3
 		switchableControllerActions {
 			Post {
 				1 = index
 			}
 		}
 	}
-
 	config {
 		admPanel = 0
 		no_cache = 1
 		disableAllHeaderCode = 1
-		additionalHeaders.10.header = Content-Type: text/plain
-		additionalHeaders.10.replace = 1
+		additionalHeaders = Content-type:text/plain
 		defaultGetVars {
 			tx_blogexample_postlist.format = txt
 		}
 	}
 }
 
-# Adjust plaintext rendering, if blog_example runs as single, fully fledged plugin
-[globalVar = TYPO3_CONF_VARS|EXTENSIONS|blog_example|registerSinglePlugin > 0]
+ # Adjust plaintext rendering, if blog_example runs as single, fully fledged plugin
+[globalVar = TYPO3_CONF_VARS|EXTCONF|blog_example|registerSinglePlugin > 0]
 	tx_blogexample_plaintext {
 		10.pluginName = Pi1
 		#config.defaultGetVars =
