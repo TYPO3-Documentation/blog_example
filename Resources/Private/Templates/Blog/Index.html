@@ -1,3 +1,6 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
 <f:layout name="Default" />
 
 <f:section name="content">
@@ -13,30 +16,30 @@
                 <f:translate key="blog.list" arguments="{numberOfBlogs: '{blogs -> f:count()}'}">[list of blogs]</f:translate>
                 :
             </h2>
-            <f:widget.paginate objects="{blogs}" as="paginatedBlogs" configuration="{itemsPerPage: 3}">
-                <ol class="tx-blogexample-blog-list">
-                    <f:for each="{paginatedBlogs}" as="blog">
-                        <li>
-                            <h3>
-                                <f:link.action action="index" controller="Post" arguments="{blog : blog}">{blog.title} ({f:translate(key: 'blog.numberOfPosts', arguments: '{numberOfPosts: \'{blog.posts -> f:count()}\'}')})</f:link.action>
-                            </h3>
-                            <f:security.ifHasRole role="{settings.editorUsergroupUid}">
-                                <div class="tx-blogexample-options">
-                                    <f:link.action action="edit" class="icon edit" arguments="{blog : blog}" title="{f:translate(key: 'blog.edit')}">
-                                        <f:translate key="blog.edit" />
-                                    </f:link.action>
-                                    <f:link.action action="delete" class="icon delete" arguments="{blog : blog}" title="{f:translate(key: 'blog.delete')}">
-                                        <f:translate key="blog.delete" />
-                                    </f:link.action>
-                                </div>
-                            </f:security.ifHasRole>
-                            <p class="tx-blogexample-description">
-                                <f:format.nl2br>{blog.description}</f:format.nl2br>
-                            </p>
-                        </li>
-                    </f:for>
-                </ol>
-            </f:widget.paginate>
+            <f:render partial="Pagination" arguments="{pagination: pagination, pages: pages, paginator: paginator}" />
+            <ol class="tx-blogexample-blog-list">
+                <f:for each="{paginator.paginatedItems}" as="blog">
+                    <li>
+                        <h3>
+                            <f:link.action action="index" controller="Post" arguments="{blog : blog}">{blog.title} ({f:translate(key: 'blog.numberOfPosts', arguments: '{numberOfPosts: \'{blog.posts -> f:count()}\'}')})</f:link.action>
+                        </h3>
+                        <f:security.ifHasRole role="{settings.editorUsergroupUid}">
+                            <div class="tx-blogexample-options">
+                                <f:link.action action="edit" class="icon edit" arguments="{blog : blog}" title="{f:translate(key: 'blog.edit')}">
+                                    <f:translate key="blog.edit" />
+                                </f:link.action>
+                                <f:link.action action="delete" class="icon delete" arguments="{blog : blog}" title="{f:translate(key: 'blog.delete')}">
+                                    <f:translate key="blog.delete" />
+                                </f:link.action>
+                            </div>
+                        </f:security.ifHasRole>
+                        <p class="tx-blogexample-description">
+                            <f:format.nl2br>{blog.description}</f:format.nl2br>
+                        </p>
+                    </li>
+                </f:for>
+            </ol>
+            <f:render partial="Pagination" arguments="{pagination: pagination, pages: pages, paginator: paginator}" />
             <f:security.ifHasRole role="{settings.editorUsergroupUid}">
                 <ul class="tx-blogexample-linksection">
                     <li>
@@ -85,3 +88,4 @@
         </f:else>
     </f:if>
 </f:section>
+</html>

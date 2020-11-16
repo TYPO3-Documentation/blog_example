@@ -1,0 +1,57 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+<ul class="f3-widget-paginator">
+    <f:if condition="{pagination.previousPageNumber} && {pagination.previousPageNumber} >= {pagination.firstPageNumber}">
+        <f:then>
+            <li>
+                <a href="{f:uri.action(action:actionName, arguments:{currentPage: 1, blog: blog})}" title="{f:translate(key:'pagination.first')}">
+                    <core:icon identifier="actions-caret-bar-left" alternativeMarkupIdentifier="inline" size="small" />
+                </a>
+            </li>
+            <li>
+                <a href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.previousPageNumber, blog: blog})}" title="{f:translate(key:'pagination.previous')}">
+                    <core:icon identifier="actions-caret-left" alternativeMarkupIdentifier="inline" size="small" />
+                </a>
+            </li>
+        </f:then>
+        <f:else>
+            <li class="disabled">
+                <core:icon identifier="actions-caret-bar-left" alternativeMarkupIdentifier="inline" size="small" />
+            </li>
+            <li class="disabled">
+                <core:icon identifier="actions-caret-left" alternativeMarkupIdentifier="inline" size="small" />
+            </li>
+        </f:else>
+    </f:if>
+    <f:for each="{pages}" as="page">
+        <li class="{f:if(condition: '{page} == {paginator.currentPageNumber}', then:'active', else:'')}">
+            <a href="{f:uri.action(action:actionName, arguments:{currentPage: page, blog: blog})}">{page}</a>
+        </li>
+    </f:for>
+
+    <f:if condition="{pagination.nextPageNumber} && {pagination.nextPageNumber} <= {pagination.lastPageNumber}">
+        <f:then>
+            <li>
+                <a href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.nextPageNumber, blog: blog})}" title="{f:translate(key:'pagination.next')}">
+                    <core:icon identifier="actions-caret-right" alternativeMarkupIdentifier="inline" size="small" />
+                </a>
+            </li>
+            <li>
+                <a href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.lastPageNumber, blog: blog})}" title="{f:translate(key:'pagination.last')}">
+                    <core:icon identifier="actions-caret-bar-right" alternativeMarkupIdentifier="inline" size="small" />
+                </a>
+            </li>
+        </f:then>
+        <f:else>
+            <li class=" disabled">
+                <core:icon identifier="actions-caret-right" alternativeMarkupIdentifier="inline" size="small" />
+            </li>
+            <li class=" disabled">
+                <core:icon identifier="actions-caret-bar-right" alternativeMarkupIdentifier="inline" size="small" />
+            </li>
+        </f:else>
+    </f:if>
+</ul>
+</html>

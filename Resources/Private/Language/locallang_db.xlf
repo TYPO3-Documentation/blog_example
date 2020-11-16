@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" datatype="plaintext" original="messages" date="2020-11-16T10:33:06Z" product-name="blog_example">
+		<header/>
+		<body>
+			<trans-unit id="tx_blogexample_domain_model_blog" xml:space="preserve">
+				<source>Blog</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_blog.title" xml:space="preserve">
+				<source>Blog title</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_blog.description" xml:space="preserve">
+				<source>Short description</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_blog.logo" xml:space="preserve">
+				<source>Logo</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_blog.posts" xml:space="preserve">
+				<source>Posts</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_blog.administrator" xml:space="preserve">
+				<source>Administrator</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_post" xml:space="preserve">
+				<source>Post</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_post.blog" xml:space="preserve">
+				<source>Related to</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_post.title" xml:space="preserve">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_post.date" xml:space="preserve">
+				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_post.author" xml:space="preserve">
+				<source>Author</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_post.content" xml:space="preserve">
+				<source>Content</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_post.votes" xml:space="preserve">
+				<source>Votes</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_post.published" xml:space="preserve">
+				<source>Published</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_post.tags" xml:space="preserve">
+				<source>Tags</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_post.comments" xml:space="preserve">
+				<source>Comments</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_post.related" xml:space="preserve">
+				<source>Related posts</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_person" xml:space="preserve">
+				<source>Person</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_person.firstname" xml:space="preserve">
+				<source>Firstname</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_person.lastname" xml:space="preserve">
+				<source>Lastname</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_person.email" xml:space="preserve">
+				<source>E-Mail</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_person.avatar" xml:space="preserve">
+				<source>Avatar</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_comment" xml:space="preserve">
+				<source>Comment</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_comment.date" xml:space="preserve">
+				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_comment.author" xml:space="preserve">
+				<source>Author</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_comment.email" xml:space="preserve">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_comment.content" xml:space="preserve">
+				<source>Content</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_tag" xml:space="preserve">
+				<source>Tag</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_tag.name" xml:space="preserve">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_tag.posts" xml:space="preserve">
+				<source>Related posts</source>
+			</trans-unit>
+			<trans-unit id="fe_users.tx_extbase_type.administrator" xml:space="preserve">
+				<source>Blog Admin (BlogExample)</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

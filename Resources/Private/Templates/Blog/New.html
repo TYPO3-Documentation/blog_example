@@ -1,8 +1,18 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
 <f:layout name="Default" />
 
 <f:section name="content">
-	<f:link.action action="index" class="textIcon cancel" title="{f:translate(key: 'cancel')}"><f:translate key="cancel">[cancel]</f:translate></f:link.action>
-	<h1><f:translate key="blog.createHeader">[create blog]</f:translate></h1>
-	<p><f:translate key="blog.createIntroduction">[create blog below]</f:translate></p>
-	<f:render partial="BlogForm" arguments="{object: newBlog, objectName: 'newBlog', action: 'create', administrators: administrators}" />
+    <f:link.action action="index" class="textIcon cancel" title="{f:translate(key: 'cancel')}">
+        <f:translate key="cancel">[cancel]</f:translate>
+    </f:link.action>
+    <h1>
+        <f:translate key="blog.createHeader">[create blog]</f:translate>
+    </h1>
+    <p>
+        <f:translate key="blog.createIntroduction">[create blog below]</f:translate>
+    </p>
+    <f:render partial="BlogForm" arguments="{object: newBlog, objectName: 'newBlog', action: 'create', administrators: administrators}" />
 </f:section>
+</html>

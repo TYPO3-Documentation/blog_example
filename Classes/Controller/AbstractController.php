@@ -31,7 +31,7 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      *
      * @return string
      */
-    protected function getErrorFlashMessage()
+    protected function getErrorFlashMessage(): string
     {
         $defaultFlashMessage = parent::getErrorFlashMessage();
         $locallangKey = sprintf('error.%s.%s', $this->request->getControllerName(), $this->actionMethodName);

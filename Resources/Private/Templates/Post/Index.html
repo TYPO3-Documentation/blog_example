@@ -1,3 +1,6 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
 <f:layout name="Default" />
 
 <f:section name="content">
@@ -37,35 +40,35 @@
                     </h2>
                 </f:else>
             </f:if>
-            <f:widget.paginate objects="{posts}" as="paginatedPosts" configuration="{itemsPerPage: settings.postsPerPage}">
-                <ol class="tx-blogexample-post-list">
-                    <f:for each="{paginatedPosts}" as="post">
-                        <li>
-                            <h3>
-                                <f:link.action action="show" controller="Post" arguments="{post: post, blog: post.blog}">{post.title}</f:link.action>
-                            </h3>
-                            <f:security.ifHasRole role="{settings.editorUsergroupUid}">
-                                <div class="tx-blogexample-options">
-                                    <f:link.action action="edit" class="icon edit" arguments="{post: post, blog: post.blog}" title="{f:translate(key: 'post.edit')}">
-                                        <f:translate key="post.edit" />
-                                    </f:link.action>
-                                    <f:link.action action="delete" class="icon delete" arguments="{post: post, blog: post.blog}" title="{f:translate(key: 'post.delete')}">
-                                        <f:translate key="post.delete" />
-                                    </f:link.action>
-                                </div>
-                            </f:security.ifHasRole>
-                            <p class="tx-blogexample-content">
-                                <f:format.crop maxCharacters="100">{post.content}</f:format.crop>
-                                <f:link.action action="show" arguments="{post: post}">
-                                    <f:translate key="post.readMore">[read more]</f:translate>
+            <f:render partial="Pagination" arguments="{pagination: pagination, pages: pages, paginator: paginator, blog: blog}" />
+            <ol class="tx-blogexample-post-list">
+                <f:for each="{paginator.paginatedItems}" as="post">
+                    <li>
+                        <h3>
+                            <f:link.action action="show" controller="Post" arguments="{post: post, blog: post.blog}">{post.title}</f:link.action>
+                        </h3>
+                        <f:security.ifHasRole role="{settings.editorUsergroupUid}">
+                            <div class="tx-blogexample-options">
+                                <f:link.action action="edit" class="icon edit" arguments="{post: post, blog: post.blog}" title="{f:translate(key: 'post.edit')}">
+                                    <f:translate key="post.edit" />
                                 </f:link.action>
-                            </p>
-                            <f:render partial="PostTags" arguments="{post: post}" />
-                            <f:render partial="PostMetaData" arguments="{post: post}" />
-                        </li>
-                    </f:for>
-                </ol>
-            </f:widget.paginate>
+                                <f:link.action action="delete" class="icon delete" arguments="{post: post, blog: post.blog}" title="{f:translate(key: 'post.delete')}">
+                                    <f:translate key="post.delete" />
+                                </f:link.action>
+                            </div>
+                        </f:security.ifHasRole>
+                        <p class="tx-blogexample-content">
+                            <f:format.crop maxCharacters="100">{post.content}</f:format.crop>
+                            <f:link.action action="show" arguments="{post: post}">
+                                <f:translate key="post.readMore">[read more]</f:translate>
+                            </f:link.action>
+                        </p>
+                        <f:render partial="PostTags" arguments="{post: post}" />
+                        <f:render partial="PostMetaData" arguments="{post: post}" />
+                    </li>
+                </f:for>
+            </ol>
+            <f:render partial="Pagination" arguments="{pagination: pagination, pages: pages, paginator: paginator}" />
             <f:security.ifHasRole role="{settings.editorUsergroupUid}">
                 <ul class="tx-blogexample-linksection">
                     <li>
@@ -97,3 +100,4 @@
         </f:else>
     </f:if>
 </f:section>
+</html>
