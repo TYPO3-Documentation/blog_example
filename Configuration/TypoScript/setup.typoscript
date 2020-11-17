@@ -50,16 +50,10 @@ tx_blogexample_plaintext {
     extensionName = BlogExample
     pluginName = PostList
     vendorName = FriendsOfTYPO3
-    switchableControllerActions {
-      Post {
-        1 = index
-      }
-    }
   }
 
   config {
     admPanel = 0
-    no_cache = 1
     disableAllHeaderCode = 1
     additionalHeaders.10.header = Content-Type: text/plain
     additionalHeaders.10.replace = 1
