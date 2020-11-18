@@ -20,7 +20,9 @@ use FriendsOfTYPO3\BlogExample\Domain\Repository\AdministratorRepository;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository;
 use FriendsOfTYPO3\BlogExample\Service\BlogFactory;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
+use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 
 /**
  * The blog controller for the BlogExample extension
@@ -29,19 +31,19 @@ class BlogController extends AbstractController
 {
 
     /**
-     * @var \FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository
+     * @var BlogRepository
      */
     protected $blogRepository;
 
     /**
-     * @var \FriendsOfTYPO3\BlogExample\Domain\Repository\AdministratorRepository
+     * @var AdministratorRepository
      */
     protected $administratorRepository;
 
     /**
      * Dependency injection of the Administrator Repository
      *
-     * @param \FriendsOfTYPO3\BlogExample\Domain\Repository\AdministratorRepository $administratorRepository
+     * @param AdministratorRepository $administratorRepository
      * @return void
      */
     public function injectAdministratorRepository(AdministratorRepository $administratorRepository): void
@@ -52,23 +54,29 @@ class BlogController extends AbstractController
     /**
      * BlogController constructor.
      *
-     * @param \FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository $blogRepository
+     * @param BlogRepository $blogRepository
      */
     public function __construct(BlogRepository $blogRepository)
     {
-        parent::__construct();
         $this->blogRepository = $blogRepository;
     }
 
     /**
      * Index action for this controller. Displays a list of blogs.
      *
+     * @param int $currentPage
      * @return void
      */
-    public function indexAction()
+    public function indexAction(int $currentPage = 1): void
     {
         $allAvailableBlogs = $this->blogRepository->findAll();
-        $this->view->assign('blogs', $allAvailableBlogs);
+        $paginator = new QueryResultPaginator($allAvailableBlogs, $currentPage, 3);
+        $pagination = new SimplePagination($paginator);
+        $this->view
+            ->assign('blogs', $allAvailableBlogs)
+            ->assign('paginator', $paginator)
+            ->assign('pagination', $pagination)
+            ->assign('pages', range(1, $pagination->getLastPageNumber()));
     }
 
     /**

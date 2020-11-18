@@ -1,92 +1,71 @@
 # Plugin configuration
 plugin.tx_blogexample {
-	settings {
-		# maximum number of posts to display per page
-		postsPerPage = 3
-		# Editor FE Usergroup uid
-		editorUsergroupUid = {$plugin.tx_blogexample.settings.editorUsergroupUid}
-		# Plaintext page type number
-		plaintextPageType = {$plugin.tx_blogexample.settings.plaintextPageType}
-	}
+  settings {
+    # maximum number of posts to display per page
+    postsPerPage = 3
+    # Editor FE Usergroup uid
+    editorUsergroupUid = {$plugin.tx_blogexample.settings.editorUsergroupUid}
+    # Plaintext page type number
+    plaintextPageType = {$plugin.tx_blogexample.settings.plaintextPageType}
+  }
 
-	persistence {
-		storagePid = {$plugin.tx_blogexample.persistence.storagePid}
-		classes {
-			TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
-				subclasses {
-					\FriendsOfTYPO3\BlogExample\Domain\Model\Administrator = FriendsOfTYPO3\BlogExample\Domain\Model\Administrator
-				}
-			}
+  persistence {
+    storagePid = {$plugin.tx_blogexample.persistence.storagePid}
+  }
 
-			FriendsOfTYPO3\BlogExample\Domain\Model\Administrator {
-				mapping {
-					tableName = fe_users
-					recordType = FriendsOfTYPO3\BlogExample\Domain\Model\Administrator
-				}
-			}
-		}
-	}
+  view {
+    templateRootPaths.10 = {$plugin.tx_blogexample.view.templateRootPath}
+    partialRootPaths.10 = {$plugin.tx_blogexample.view.partialRootPath}
+    layoutRootPaths.10 = {$plugin.tx_blogexample.view.layoutRootPath}
+    defaultPid = auto
+  }
 
-	view {
-		templateRootPath = {$plugin.tx_blogexample.view.templateRootPath}
-		partialRootPath = {$plugin.tx_blogexample.view.partialRootPath}
-		layoutRootPath = {$plugin.tx_blogexample.view.layoutRootPath}
-		defaultPid = auto
-	}
-
-	# This is an example how to modify the translation
-	_LOCAL_LANG {
-		default {
-			someUnusedKey = foo
-		}
-	}
+  # This is an example how to modify the translation
+  _LOCAL_LANG {
+    default {
+      someUnusedKey = foo
+    }
+  }
 }
 
 # Module configuration
 module.tx_blogexample {
-	settings < plugin.tx_blogexample.settings
-	persistence < plugin.tx_blogexample.persistence
-	view < plugin.tx_blogexample.view
-	view {
-		templateRootPath = {$module.tx_blogexample.view.templateRootPath}
-		partialRootPath = {$module.tx_blogexample.view.partialRootPath}
-		layoutRootPath = {$module.tx_blogexample.view.layoutRootPath}
-	}
+  settings < plugin.tx_blogexample.settings
+  persistence < plugin.tx_blogexample.persistence
+  view < plugin.tx_blogexample.view
+  view {
+    templateRootPaths.10 = {$module.tx_blogexample.view.templateRootPath}
+    partialRootPaths.10 = {$module.tx_blogexample.view.partialRootPath}
+    layoutRootPaths.10 = {$module.tx_blogexample.view.layoutRootPath}
+  }
 }
 
 # plaintext rendering
 tx_blogexample_plaintext = PAGE
 tx_blogexample_plaintext {
-	typeNum = {$plugin.tx_blogexample.settings.plaintextPageType}
-	10 = USER
-	10 {
-		userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
-		extensionName = BlogExample
-		pluginName = PostList
-		vendorName = FriendsOfTYPO3
-		switchableControllerActions {
-			Post {
-				1 = index
-			}
-		}
-	}
+  typeNum = {$plugin.tx_blogexample.settings.plaintextPageType}
+  10 = USER
+  10 {
+    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+    extensionName = BlogExample
+    pluginName = PostList
+    vendorName = FriendsOfTYPO3
+  }
 
-	config {
-		admPanel = 0
-		no_cache = 1
-		disableAllHeaderCode = 1
-		additionalHeaders.10.header = Content-Type: text/plain
-		additionalHeaders.10.replace = 1
-		defaultGetVars {
-			tx_blogexample_postlist.format = txt
-		}
-	}
+  config {
+    admPanel = 0
+    disableAllHeaderCode = 1
+    additionalHeaders.10.header = Content-Type: text/plain
+    additionalHeaders.10.replace = 1
+    defaultGetVars {
+      tx_blogexample_postlist.format = txt
+    }
+  }
 }
 
 # Adjust plaintext rendering, if blog_example runs as single, fully fledged plugin
-[globalVar = TYPO3_CONF_VARS|EXTENSIONS|blog_example|registerSinglePlugin > 0]
-	tx_blogexample_plaintext {
-		10.pluginName = Pi1
-		#config.defaultGetVars =
-	}
+[blogConfiguration['registerSinglePlugin'] == 1]
+  tx_blogexample_plaintext {
+    10.pluginName = Pi1
+  }
 [end]

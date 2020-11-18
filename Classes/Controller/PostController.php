@@ -8,7 +8,9 @@ use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\PersonRepository;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
+use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -65,10 +67,11 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      * Displays a list of posts. If $tag is set only posts matching this tag are shown
      *
      * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Blog $blog The blog to show the posts of
-     * @param string $tag The name of the tag to show the posts for
+     * @param null $tag The name of the tag to show the posts for
+     * @param int $currentPage
      * @return void
      */
-    public function indexAction(Blog $blog, $tag = null)
+    public function indexAction(Blog $blog, $tag = null, int $currentPage = 1): void
     {
         if (empty($tag)) {
             $posts = $this->postRepository->findByBlog($blog);
@@ -77,8 +80,14 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
             $posts = $this->postRepository->findByTagAndBlog($tag, $blog);
             $this->view->assign('tag', $tag);
         }
-        $this->view->assign('blog', $blog);
-        $this->view->assign('posts', $posts);
+        $paginator = new QueryResultPaginator($posts, $currentPage, 3);
+        $pagination = new SimplePagination($paginator);
+        $this->view
+            ->assign('paginator', $paginator)
+            ->assign('pagination', $pagination)
+            ->assign('pages', range(1, $pagination->getLastPageNumber()))
+            ->assign('blog', $blog)
+            ->assign('posts', $posts);
     }
 
     /**
@@ -114,8 +123,8 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
     /**
      * Creates a new post
      *
-     * @param Blog $blog The blog the post belogns to
-     * @param Post $newBlog A fresh Blog object which has not yet been added to the repository
+     * @param Blog $blog The blog the post belongs to
+     * @param Post $newPost The new post object
      * @return void
      */
     public function createAction(Blog $blog, Post $newPost)
@@ -123,6 +132,7 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
         // TODO access protection
         $blog->addPost($newPost);
         $newPost->setBlog($blog);
+        $this->postRepository->add($newPost);
         $this->addFlashMessage('created');
         $this->redirect('index', null, null, ['blog' => $blog]);
     }
@@ -135,7 +145,7 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      * @return void
      * @IgnoreValidation $post
      */
-    public function editAction(Blog $blog, Post $post)
+    public function editAction(Blog $blog, Post $post): void
     {
         $this->view->assign('authors', $this->personRepository->findAll());
         $this->view->assign('blog', $blog);

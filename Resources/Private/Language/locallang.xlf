@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" datatype="plaintext" original="messages" date="2020-11-16T10:32:58Z" product-name="blog_example">
+		<header/>
+		<body>
+			<trans-unit id="back" xml:space="preserve">
+				<source>back</source>
+			</trans-unit>
+			<trans-unit id="cancel" xml:space="preserve">
+				<source>cancel</source>
+			</trans-unit>
+			<trans-unit id="submit" xml:space="preserve">
+				<source>submit</source>
+			</trans-unit>
+			<trans-unit id="logInToCreateBlogs" xml:space="preserve">
+				<source>Log in with a FE user that belongs to group #%d (configurable) in order to add/modify blogs and posts in FE mode!</source>
+			</trans-unit>
+			<trans-unit id="publishedOn" xml:space="preserve">
+				<source>published on</source>
+			</trans-unit>
+			<trans-unit id="by" xml:space="preserve">
+				<source>by</source>
+			</trans-unit>
+			<trans-unit id="postedOn" xml:space="preserve">
+				<source>posted on</source>
+			</trans-unit>
+			<trans-unit id="blog.header" xml:space="preserve">
+				<source>Welcome to the Blog Example!</source>
+			</trans-unit>
+			<trans-unit id="blog.introduction" xml:space="preserve">
+				<source>This extension serves as a demonstration for basic development techniques used in Extbase applications.</source>
+			</trans-unit>
+			<trans-unit id="blog.list" xml:space="preserve">
+				<source>Here is a list of %d blogs</source>
+			</trans-unit>
+			<trans-unit id="blog.numberOfPosts" xml:space="preserve">
+				<source>%d posts</source>
+			</trans-unit>
+			<trans-unit id="blog.noEntries" xml:space="preserve">
+				<source>There are currently no blogs</source>
+			</trans-unit>
+			<trans-unit id="blog.edit" xml:space="preserve">
+				<source>Edit this blog</source>
+			</trans-unit>
+			<trans-unit id="blog.delete" xml:space="preserve">
+				<source>Delete this blog</source>
+			</trans-unit>
+			<trans-unit id="blog.createFirst" xml:space="preserve">
+				<source>Create your first blog</source>
+			</trans-unit>
+			<trans-unit id="blog.createAnother" xml:space="preserve">
+				<source>Create another blog</source>
+			</trans-unit>
+			<trans-unit id="blog.createExampleData" xml:space="preserve">
+				<source>Create sample data</source>
+			</trans-unit>
+			<trans-unit id="blog.deleteAll" xml:space="preserve">
+				<source>Delete all blogs</source>
+			</trans-unit>
+			<trans-unit id="blog.deleteAllConfirmation" xml:space="preserve">
+				<source>Are you sure that you want to delete all blogs?</source>
+			</trans-unit>
+			<trans-unit id="blog.editHeader" xml:space="preserve">
+				<source>Edit blog &quot;%s&quot;</source>
+			</trans-unit>
+			<trans-unit id="blog.editIntroduction" xml:space="preserve">
+				<source>Edit the information about your blog below</source>
+			</trans-unit>
+			<trans-unit id="blog.createHeader" xml:space="preserve">
+				<source>Create new blog</source>
+			</trans-unit>
+			<trans-unit id="blog.createIntroduction" xml:space="preserve">
+				<source>Edit the information about the new blog below</source>
+			</trans-unit>
+			<trans-unit id="post.header" xml:space="preserve">
+				<source>Welcome to the Blog &quot;%s&quot;</source>
+			</trans-unit>
+			<trans-unit id="post.introductionAdministrator" xml:space="preserve">
+				<source>If you have any questions, feel free to contact the administrator %s.</source>
+			</trans-unit>
+			<trans-unit id="post.introductionNoAdministrator" xml:space="preserve">
+				<source>There is currently no administrator assigned to this Blog</source>
+			</trans-unit>
+			<trans-unit id="post.list" xml:space="preserve">
+				<source>This blog contains %d posts</source>
+			</trans-unit>
+			<trans-unit id="post.listTag" xml:space="preserve">
+				<source>This blog contains %d posts tagged with &quot;%s&quot;</source>
+			</trans-unit>
+			<trans-unit id="post.noEntries" xml:space="preserve">
+				<source>There are currently no posts in this blog</source>
+			</trans-unit>
+			<trans-unit id="post.createFirst" xml:space="preserve">
+				<source>Create your first post</source>
+			</trans-unit>
+			<trans-unit id="post.createAnother" xml:space="preserve">
+				<source>Create another post</source>
+			</trans-unit>
+			<trans-unit id="post.showAll" xml:space="preserve">
+				<source>Show all posts of this blog</source>
+			</trans-unit>
+			<trans-unit id="post.edit" xml:space="preserve">
+				<source>Edit this post</source>
+			</trans-unit>
+			<trans-unit id="post.delete" xml:space="preserve">
+				<source>Delete this post</source>
+			</trans-unit>
+			<trans-unit id="post.readMore" xml:space="preserve">
+				<source>read more</source>
+			</trans-unit>
+			<trans-unit id="post.related" xml:space="preserve">
+				<source>related posts</source>
+			</trans-unit>
+			<trans-unit id="post.comments" xml:space="preserve">
+				<source>Comments</source>
+			</trans-unit>
+			<trans-unit id="post.addComment" xml:space="preserve">
+				<source>Add your own</source>
+			</trans-unit>
+			<trans-unit id="post.editHeader" xml:space="preserve">
+				<source>Edit post &quot;%s&quot;</source>
+			</trans-unit>
+			<trans-unit id="post.createHeader" xml:space="preserve">
+				<source>Create new post</source>
+			</trans-unit>
+			<trans-unit id="post.listPlaintext" xml:space="preserve">
+				<source>Show posts as plaintext</source>
+			</trans-unit>
+			<trans-unit id="comment.delete" xml:space="preserve">
+				<source>Delete this comment</source>
+			</trans-unit>
+			<trans-unit id="property.title" xml:space="preserve">
+				<source>title</source>
+			</trans-unit>
+			<trans-unit id="property.description" xml:space="preserve">
+				<source>description</source>
+			</trans-unit>
+			<trans-unit id="property.administrator" xml:space="preserve">
+				<source>administrator</source>
+			</trans-unit>
+			<trans-unit id="property.content" xml:space="preserve">
+				<source>content</source>
+			</trans-unit>
+			<trans-unit id="property.author" xml:space="preserve">
+				<source>author</source>
+			</trans-unit>
+			<trans-unit id="property.email" xml:space="preserve">
+				<source>email</source>
+			</trans-unit>
+			<trans-unit id="property.message" xml:space="preserve">
+				<source>message</source>
+			</trans-unit>
+			<trans-unit id="property.relatedPosts" xml:space="preserve">
+				<source>related posts</source>
+			</trans-unit>
+			<trans-unit id="flashmessage.Blog.created.title" xml:space="preserve">
+				<source>Blog added</source>
+			</trans-unit>
+			<trans-unit id="flashmessage.Blog.created" xml:space="preserve">
+				<source>A new blog was created</source>
+			</trans-unit>
+			<trans-unit id="flashmessage.Blog.updated.title" xml:space="preserve">
+				<source>Blog updated</source>
+			</trans-unit>
+			<trans-unit id="flashmessage.Blog.updated" xml:space="preserve">
+				<source>The blog was updated</source>
+			</trans-unit>
+			<trans-unit id="flashmessage.Blog.deleted.title" xml:space="preserve">
+				<source>Blog deleted</source>
+			</trans-unit>
+			<trans-unit id="flashmessage.Blog.deleted" xml:space="preserve">
+				<source>The blog has been removed</source>
+			</trans-unit>
+			<trans-unit id="flashmessage.Blog.populated.title" xml:space="preserve">
+				<source>Sample data created</source>
+			</trans-unit>
+			<trans-unit id="flashmessage.Blog.populated" xml:space="preserve">
+				<source>Some exemplary blogs and posts have been created</source>
+			</trans-unit>
+			<trans-unit id="flashmessage.Post.created.title" xml:space="preserve">
+				<source>Post added</source>
+			</trans-unit>
+			<trans-unit id="flashmessage.Post.created" xml:space="preserve">
+				<source>A new post was created</source>
+			</trans-unit>
+			<trans-unit id="flashmessage.Post.updated.title" xml:space="preserve">
+				<source>Post updated</source>
+			</trans-unit>
+			<trans-unit id="flashmessage.Post.updated" xml:space="preserve">
+				<source>The blog post was updated</source>
+			</trans-unit>
+			<trans-unit id="flashmessage.Post.deleted.title" xml:space="preserve">
+				<source>Post deleted</source>
+			</trans-unit>
+			<trans-unit id="flashmessage.Post.deleted" xml:space="preserve">
+				<source>The blog post has been removed</source>
+			</trans-unit>
+			<trans-unit id="flashmessage.Comment.created.title" xml:space="preserve">
+				<source>Comment added</source>
+			</trans-unit>
+			<trans-unit id="flashmessage.Comment.created" xml:space="preserve">
+				<source>Your comment has been created</source>
+			</trans-unit>
+			<trans-unit id="flashmessage.Comment.deleted.title" xml:space="preserve">
+				<source>Comment deleted</source>
+			</trans-unit>
+			<trans-unit id="flashmessage.Comment.deleted" xml:space="preserve">
+				<source>The comment has been removed</source>
+			</trans-unit>
+			<trans-unit id="flashmessage.Comment.deletedAll.title" xml:space="preserve">
+				<source>Comments deleted</source>
+			</trans-unit>
+			<trans-unit id="flashmessage.Comment.deletedAll" xml:space="preserve">
+				<source>All comments of this post have been removed</source>
+			</trans-unit>
+			<trans-unit id="culture.date.formatLong" xml:space="preserve">
+				<source>Y-m-d H:i\h</source>
+			</trans-unit>
+			<trans-unit id="culture.date.formatShort" xml:space="preserve">
+				<source>Y-m-d</source>
+			</trans-unit>
+			<trans-unit id="error.errorsOccurred" xml:space="preserve">
+				<source>Following errors occurred</source>
+			</trans-unit>
+			<trans-unit id="error.Blog.updateAction" xml:space="preserve">
+				<source>Could not update blog</source>
+			</trans-unit>
+			<trans-unit id="error.Blog.createAction" xml:space="preserve">
+				<source>Could not create blog</source>
+			</trans-unit>
+			<trans-unit id="error.Blog.invalidTitle" xml:space="preserve">
+				<source>&quot;Extbase&quot; can't be used as a blog title</source>
+			</trans-unit>
+			<trans-unit id="error.Post.updateAction" xml:space="preserve">
+				<source>Could not update post</source>
+			</trans-unit>
+			<trans-unit id="error.Post.createAction" xml:space="preserve">
+				<source>Could not create post</source>
+			</trans-unit>
+			<trans-unit id="error.Comment.createAction" xml:space="preserve">
+				<source>Could not create comment</source>
+			</trans-unit>
+			<trans-unit id="error.code.1238108067" xml:space="preserve">
+				<source>The given &lt;strong&gt;%s&lt;/strong&gt; is either too long or too short</source>
+			</trans-unit>
+			<trans-unit id="error.code.1238108068" xml:space="preserve">
+				<source>The given &lt;strong&gt;%s&lt;/strong&gt; is too short</source>
+			</trans-unit>
+			<trans-unit id="error.code.1238108069" xml:space="preserve">
+				<source>The given &lt;strong&gt;%s&lt;/strong&gt; is too long</source>
+			</trans-unit>
+			<trans-unit id="error.code.1221559976" xml:space="preserve">
+				<source>The given &lt;strong&gt;%s&lt;/strong&gt; is not a valid email address</source>
+			</trans-unit>
+			<trans-unit id="error.code.1221560718" xml:space="preserve">
+				<source>The &lt;strong&gt;%s&lt;/strong&gt; must not be empty</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
