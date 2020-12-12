@@ -27,15 +27,11 @@ use TYPO3\CMS\Core\Messaging\FlashMessage;
 class CommentController extends AbstractController
 {
     /**
-     * @var \FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository
+     * @var PostRepository
      */
     private $postRepository;
 
-
-    /**
-     * @param \FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository $postRepository
-     */
-    public function injectPostRepository(PostRepository $postRepository): void
+    public function __construct(PostRepository $postRepository)
     {
         $this->postRepository = $postRepository;
     }

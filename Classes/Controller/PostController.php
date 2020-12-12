@@ -30,37 +30,20 @@ use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
  */
 class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractController
 {
-
     /**
-     * @var \FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository
+     * @var PostRepository
      */
     protected $postRepository;
 
     /**
-     * @var \FriendsOfTYPO3\BlogExample\Domain\Repository\PersonRepository
+     * @var PersonRepository
      */
     protected $personRepository;
 
-    /**
-     * Dependency injection of the Post Repository
-     *
-     * @param \FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository $postRepository
-     * @return void
-     */
-    public function injectPostRepository(PostRepository $postRepository): void
-    {
-        $this->postRepository = $postRepository;
-    }
-
-    /**
-     * Dependency injection of the Post Repository
-     *
-     * @param \FriendsOfTYPO3\BlogExample\Domain\Repository\PersonRepository $personRepository
-     * @return void
-     */
-    public function injectPersonRepository(PersonRepository $personRepository): void
+    public function __construct(PersonRepository $personRepository, PostRepository $postRepository)
     {
         $this->personRepository = $personRepository;
+        $this->postRepository = $postRepository;
     }
 
     /**
