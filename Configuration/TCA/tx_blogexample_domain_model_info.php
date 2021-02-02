@@ -8,8 +8,8 @@ return [
         'crdate' => 'crdate',
         'versioningWS' => true,
         'languageField' => 'sys_language_uid',
-        'transOrigPointerField' => 'l18n_parent',
-        'transOrigDiffSourceField' => 'l18n_diffsource',
+        'transOrigPointerField' => 'l10n_parent',
+        'transOrigDiffSourceField' => 'l10n_diffsource',
         'delete' => 'deleted',
         'sortby' => 'sorting',
         'enablecolumns' => [
@@ -35,9 +35,9 @@ return [
                 'default' => 0,
             ]
         ],
-        'l18n_parent' => [
+        'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.l10n_parent',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -49,7 +49,7 @@ return [
                 'default' => 0
             ]
         ],
-        'l18n_diffsource' => [
+        'l10n_diffsource' => [
             'config' => [
                 'type' => 'passthrough',
                 'default' => '',
@@ -86,6 +86,6 @@ return [
         ],
     ],
     'types' => [
-        0 => ['showitem' => 'sys_language_uid, l18n_parent, hidden, name']
+        0 => ['showitem' => 'sys_language_uid, l10n_parent, hidden, name']
     ],
 ];
