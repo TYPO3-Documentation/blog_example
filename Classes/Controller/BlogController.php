@@ -29,7 +29,6 @@ use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
  */
 class BlogController extends AbstractController
 {
-
     /**
      * @var BlogRepository
      */
@@ -41,24 +40,14 @@ class BlogController extends AbstractController
     protected $administratorRepository;
 
     /**
-     * Dependency injection of the Administrator Repository
-     *
-     * @param AdministratorRepository $administratorRepository
-     * @return void
-     */
-    public function injectAdministratorRepository(AdministratorRepository $administratorRepository): void
-    {
-        $this->administratorRepository = $administratorRepository;
-    }
-
-    /**
      * BlogController constructor.
      *
      * @param BlogRepository $blogRepository
      */
-    public function __construct(BlogRepository $blogRepository)
+    public function __construct(BlogRepository $blogRepository, AdministratorRepository $administratorRepository)
     {
         $this->blogRepository = $blogRepository;
+        $this->administratorRepository = $administratorRepository;
     }
 
     /**
