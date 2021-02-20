@@ -11,6 +11,7 @@ return [
         'origUid' => 't3_origuid',
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
+        'transOrigDiffSourceField' => 'l10n_diffsource',
         'prependAtCopy' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.prependAtCopy',
         'delete' => 'deleted',
         'enablecolumns' => [
@@ -38,7 +39,7 @@ return [
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.l10n_parent',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -48,6 +49,12 @@ return [
                 'foreign_table' => 'tx_blogexample_domain_model_person',
                 'foreign_table_where' => 'AND tx_blogexample_domain_model_person.uid=###REC_FIELD_l10n_parent### AND tx_blogexample_domain_model_person.sys_language_uid IN (-1,0)',
             ]
+        ],
+        'l10n_diffsource' => [
+            'config' => [
+                'type' => 'passthrough',
+                'default' => '',
+            ],
         ],
         'hidden' => [
             'exclude' => true,
