@@ -9,7 +9,6 @@ use FriendsOfTYPO3\BlogExample\Domain\Repository\PersonRepository;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
-use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 
 /*
@@ -79,7 +78,7 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Post $post The post to display
      * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Comment $newComment A new comment
      * @return void
-     * @IgnoreValidation $newComment
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation $newComment
      */
     public function showAction(Post $post, Comment $newComment = null)
     {
@@ -93,7 +92,7 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      * @param Blog $blog The blog the post belogs to
      * @param Post $newPost A fresh post object taken as a basis for the rendering
      * @return void
-     * @IgnoreValidation $newPost
+     * @@TYPO3\CMS\Extbase\Annotation\IgnoreValidation $newPost
      */
     public function newAction(Blog $blog, Post $newPost = null)
     {
@@ -126,7 +125,7 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      * @param Blog $blog The blog the post belogs to
      * @param Post $post The original post
      * @return void
-     * @IgnoreValidation $post
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation $post
      */
     public function editAction(Blog $blog, Post $post): void
     {
