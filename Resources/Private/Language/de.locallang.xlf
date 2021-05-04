@@ -16,8 +16,8 @@
 				<target>Abschicken</target>
 			</trans-unit>
 			<trans-unit id="logInToCreateBlogs" xml:space="preserve" approved="yes">
-				<source>Log in with a FE user that belongs to group #%d (configurable) in order to add/modify blogs and posts in FE mode!</source>
-				<target>Melden Sie sich mit einem Websitenbenutzer aus der Benutzergruppe #%d (konfigurierbar) ein, um Blogs und Beiträge im FE Modus hinzuzufügen/zu editieren!</target>
+				<source>Log in with a FE user that belongs to group #%d (configurable by settings.editorUsergroupUid) in order to add/modify blogs and posts in FE mode!</source>
+				<target>Melden Sie sich mit einem Websitenbenutzer aus der Benutzergruppe #%d (konfigurierbar über settings.editorUsergroupUid) ein, um Blogs und Beiträge im FE Modus hinzuzufügen/zu editieren!</target>
 			</trans-unit>
 			<trans-unit id="publishedOn" xml:space="preserve" approved="yes">
 				<source>published on</source>
