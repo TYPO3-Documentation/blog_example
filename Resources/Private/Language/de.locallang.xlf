@@ -69,7 +69,7 @@
 			</trans-unit>
 			<trans-unit id="blog.createExampleData" xml:space="preserve" approved="yes">
 				<source>Create sample data</source>
-				<target>Beispieldatem erzeugen</target>
+				<target>Beispieldaten erzeugen</target>
 			</trans-unit>
 			<trans-unit id="blog.deleteAll" xml:space="preserve" approved="yes">
 				<source>Delete all blogs</source>
