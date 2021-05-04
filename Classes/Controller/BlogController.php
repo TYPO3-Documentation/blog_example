@@ -21,7 +21,6 @@ use FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository;
 use FriendsOfTYPO3\BlogExample\Service\BlogFactory;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
-use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 
 /**
@@ -73,7 +72,7 @@ class BlogController extends AbstractController
      *
      * @param Blog $newBlog A fresh blog object taken as a basis for the rendering
      * @return void
-     * @IgnoreValidation $newBlog
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation $newBlog
      */
     public function newAction(Blog $newBlog = null)
     {
@@ -100,7 +99,7 @@ class BlogController extends AbstractController
      *
      * @param Blog $blog The blog to be edited. This might also be a clone of the original blog already containing modifications if the edit form has been submitted, contained errors and therefore ended up in this action again.
      * @return void
-     * @IgnoreValidation $blog
+     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation $blog
      */
     public function editAction(Blog $blog)
     {
