@@ -13,7 +13,7 @@
 				<source>submit</source>
 			</trans-unit>
 			<trans-unit id="logInToCreateBlogs" xml:space="preserve">
-				<source>Log in with a FE user that belongs to group #%d (configurable) in order to add/modify blogs and posts in FE mode!</source>
+				<source>Log in with a FE user that belongs to group #%d (configurable by settings.editorUsergroupUid) in order to add/modify blogs and posts in FE mode!</source>
 			</trans-unit>
 			<trans-unit id="publishedOn" xml:space="preserve">
 				<source>published on</source>
