@@ -7,7 +7,7 @@
     }
   ],
   "type": "typo3-cms-extension",
-  "description": "",
+  "description": "This blog example extension is described in the TYPO3 documentation. - Developing TYPO3 Extensions with Extbase and Fluid.",
   "license": "GPL-2.0-or-later",
   "autoload": {
     "psr-4": {
