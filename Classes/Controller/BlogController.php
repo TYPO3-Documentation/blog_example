@@ -73,7 +73,7 @@ class BlogController extends AbstractController
      *
      * @param Blog $newBlog A fresh blog object taken as a basis for the rendering
      * @return void
-     * @IgnoreValidation $newBlog
+     * @IgnoreValidation("newBlog")
      */
     public function newAction(Blog $newBlog = null)
     {
@@ -100,7 +100,7 @@ class BlogController extends AbstractController
      *
      * @param Blog $blog The blog to be edited. This might also be a clone of the original blog already containing modifications if the edit form has been submitted, contained errors and therefore ended up in this action again.
      * @return void
-     * @IgnoreValidation $blog
+     * @IgnoreValidation("blog")
      */
     public function editAction(Blog $blog)
     {
