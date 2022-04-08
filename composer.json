@@ -9,6 +9,11 @@
   "type": "typo3-cms-extension",
   "description": "This blog example extension is described in the TYPO3 documentation. - Developing TYPO3 Extensions with Extbase and Fluid.",
   "license": "GPL-2.0-or-later",
+  "homepage": "https://extensions.typo3.org/extension/blog_example/",
+  "support": {
+    "issues": "https://github.com/FriendsOfTYPO3/blog_example/issues",
+    "source": "https://github.com/FriendsOfTYPO3/blog_example"
+  },
   "autoload": {
     "psr-4": {
       "FriendsOfTYPO3\\BlogExample\\": "Classes/"
