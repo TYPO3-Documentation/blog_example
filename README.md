@@ -1,3 +1,8 @@
+[![Latest Stable Version](https://poser.pugx.org/friendsoftypo3/blog-example/v/stable.svg)](https://extensions.typo3.org/extension/blog_example/)
+[![TYPO3 10](https://img.shields.io/badge/TYPO3-10-orange.svg?style=flat-square)](https://get.typo3.org/version/10)
+[![Total Downloads](https://poser.pugx.org/friendsoftypo3/blog-example/d/total.svg)](https://packagist.org/packages/friendsoftypo3/blog-example)
+[![Monthly Downloads](https://poser.pugx.org/friendsoftypo3/blog-example/d/monthly)](https://packagist.org/packages/friendsoftypo3/blog-example)
+
 # TYPO3 extension ``blog_example``
 
 This example is part of the [Extbase documentation](https://docs.typo3.org/m/typo3/book-extbasefluid/main/en-us/)
