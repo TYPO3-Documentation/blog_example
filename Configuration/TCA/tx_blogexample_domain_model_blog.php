@@ -38,10 +38,10 @@ return [
                         0,
                     ],
                 ],
-                'foreign_table' => 'tx_myextension_domain_model_something',
+                'foreign_table' => 'tx_blogexample_domain_model_blog',
                 'foreign_table_where' =>
-                    'AND {#tx_myextension_domain_model_something}.{#pid}=###CURRENT_PID###'
-                    . ' AND {#tx_myextension_domain_model_something}.{#sys_language_uid} IN (-1,0)',
+                    'AND {#tx_blogexample_domain_model_blog}.{#pid}=###CURRENT_PID###'
+                    . ' AND {#tx_blogexample_domain_model_blog}.{#sys_language_uid} IN (-1,0)',
                 'default' => 0,
             ],
         ],
