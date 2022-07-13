@@ -19,9 +19,17 @@
       "FriendsOfTYPO3\\BlogExample\\": "Classes/"
     }
   },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "blog_example"
+    },
+    "branch-alias": {
+      "dev-master": "11.5.x-dev"
+    }
+  },
   "require": {
-    "typo3/cms-core": "^10.4",
-    "typo3/cms-extbase": "^10.4",
-    "typo3/cms-fluid": "^10.4"
+    "typo3/cms-core": "^11.5",
+    "typo3/cms-extbase": "^11.5",
+    "typo3/cms-fluid": "^11.5"
   }
 }
