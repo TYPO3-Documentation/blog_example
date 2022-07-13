@@ -1,19 +1,24 @@
 <?php
 defined('TYPO3') or die();
 
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+use FriendsOfTYPO3\BlogExample\Controller\BlogController;
+use FriendsOfTYPO3\BlogExample\Controller\PostController;
+use FriendsOfTYPO3\BlogExample\Controller\CommentController;
+
 (static function (string $extensionKey): void {
     /**
      * Registers a Backend Module
      */
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+    ExtensionUtility::registerModule(
         'BlogExample',
         'web', // Make module a submodule of 'web'
         'tx_blogexample_m1', // Submodule key
         '', // Position
         [ // An array holding the controller-action-combinations that are accessible
-            \FriendsOfTYPO3\BlogExample\Controller\BlogController::class => 'index,new,create,delete,deleteAll,edit,update,populate', // The first controller and its first action will be the default
-            \FriendsOfTYPO3\BlogExample\Controller\PostController::class => 'index,show,new,create,delete,edit,update',
-            \FriendsOfTYPO3\BlogExample\Controller\CommentController::class => 'create,delete,deleteAll',
+            BlogController::class => 'index,new,create,delete,deleteAll,edit,update,populate', // The first controller and its first action will be the default
+            PostController::class => 'index,show,new,create,delete,edit,update',
+            CommentController::class => 'create,delete,deleteAll',
         ],
         [
             'access' => 'user,group',
