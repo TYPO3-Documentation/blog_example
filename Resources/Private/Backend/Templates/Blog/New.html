@@ -24,7 +24,7 @@
     <f:render partial="FormErrors" arguments="{for: 'newBlog'}" />
     <f:form method="post" controller="Blog" action="create" name="newBlog" object="{newBlog}">
         <label for="title">Title <span class="required">(required)</span></label><br />
-        <f:form.textbox property="title" />
+        <f:form.textfield property="title" />
         <br />
         <label for="description">Description (max. 150 chars)</label><br />
         <f:form.textarea property="description" rows="8" cols="46" />

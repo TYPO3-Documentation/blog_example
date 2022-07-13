@@ -1,7 +1,6 @@
 <?php
-if (!defined('TYPO3_MODE')) {
-    die ('Access denied.');
-}
+defined('TYPO3') or die();
+
 (static function (string $extensionKey): void {
     /**
      * Registers a Backend Module
@@ -22,12 +21,5 @@ if (!defined('TYPO3_MODE')) {
             'labels' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_mod.xlf',
         ]
     );
-    /**
-     * Add labels for context sensitive help (CSH)
-     */
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('_MOD_web_BlogExampleTxBlogexampleM1', 'EXT:blog_example/Resources/Private/Language/locallang_csh.xlf');
 
-// Categorize Blog,Post records
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable($extensionKey, 'tx_blogexample_domain_model_blog');
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable($extensionKey, 'tx_blogexample_domain_model_post');
 })('blog_example');

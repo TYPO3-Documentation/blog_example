@@ -1,7 +1,6 @@
 <?php
-if (!defined('TYPO3_MODE')) {
-    die ('Access denied.');
-}
+defined('TYPO3') or die();
+
 (static function (string $extensionName): void {
     /**
      * Configure the Plugin to call the
@@ -62,4 +61,5 @@ if (!defined('TYPO3_MODE')) {
             ]
         );
     }
+
 })('BlogExample');
