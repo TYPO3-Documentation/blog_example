@@ -1,0 +1,40 @@
+mod.wizards.newContentElement.wizardItems {
+  // add the content element to the tab "plugins"
+  plugins {
+    elements {
+      blogexample_bloglist {
+        iconIdentifier = blog_example_icon
+        title = BlogList
+        description = Display a list of blogs
+        tt_content_defValues {
+          CType = blogexample_bloglist
+        }
+      }
+      blogexample_postlist {
+        iconIdentifier = blog_example_icon
+        title = PostList
+        description = Display a list of posts in a blog
+        tt_content_defValues {
+          CType = blogexample_postlist
+        }
+      }
+      blogexample_postsingle {
+        iconIdentifier = blog_example_icon
+        title = PostSingle
+        description = Display a single blog post
+        tt_content_defValues {
+          CType = blogexample_postsingle
+        }
+      }
+      blogexample_blogadmin {
+        iconIdentifier = blog_example_icon
+        title = BlogAdmin
+        description = Administrate the blog
+        tt_content_defValues {
+          CType = blogexample_blogadmin
+        }
+      }
+    }
+    show := addToList(blogexample_postlist,blogexample_postsingle,blogexample_blogadmin)
+  }
+}

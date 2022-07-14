@@ -3,6 +3,9 @@ defined('TYPO3') or die();
 
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+use TYPO3\CMS\Core\Information\Typo3Version;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 use FriendsOfTYPO3\BlogExample\Controller\BlogController;
 use FriendsOfTYPO3\BlogExample\Controller\PostController;
@@ -10,13 +13,20 @@ use FriendsOfTYPO3\BlogExample\Controller\CommentController;
 
 
 (static function (string $extensionName): void {
+    $versionInformation = GeneralUtility::makeInstance(Typo3Version::class);
+    // Only include page.tsconfig if TYPO3 version is below 12 so that it is not imported twice.
+    if ($versionInformation->getMajorVersion() < 12) {
+        ExtensionManagementUtility::addPageTSConfig('
+      @import "EXT:blog_example/Configuration/page.tsconfig"
+   ');
+    }
     /**
      * Configure the Plugin to call the
      * right combination of Controller and Action according to
      * the user input (default settings, FlexForm, URL etc.)
      */
     if (
-        \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('blog_example',
+        GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('blog_example',
             'registerSinglePlugin')
     ) {
         ExtensionUtility::configurePlugin(
