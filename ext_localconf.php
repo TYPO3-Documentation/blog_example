@@ -64,6 +64,13 @@ use FriendsOfTYPO3\BlogExample\Controller\CommentController;
             [CommentController::class => 'create']
         );
 
+        // RSS Feed
+        ExtensionUtility::configurePlugin(
+            $extensionName,
+            'PostListRss',
+            [PostController::class => 'displayRssList']
+        );
+
         // admin plugins
         ExtensionUtility::configurePlugin(
             $extensionName,

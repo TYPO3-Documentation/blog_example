@@ -93,6 +93,20 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
                 ->assign('posts', $posts);
         }
     }
+    /**
+     * Displays a list of posts as Rss feed
+     *
+     * @return void
+     */
+    public function displayRssListAction() {
+        $defaultBlog = $this->settings['defaultBlog'] ?? 0;
+        if ($defaultBlog > 0) {
+            $blog = $this->blogRepository->findByUid((int) $defaultBlog);
+        } else {
+            $blog = $this->blogRepository->findAll()->getFirst();
+        }
+        $this->view->assign('blog', $blog);
+    }
 
     /**
      * Displays one single post
