@@ -46,7 +46,7 @@ module.tx_blogexample {
   }
 }
 
-# plaintext rendering
+# RSS rendering
 tx_blogexample_rss = PAGE
 tx_blogexample_rss {
   typeNum = {$plugin.tx_blogexample.settings.rssPageType}
