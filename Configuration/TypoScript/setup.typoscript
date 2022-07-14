@@ -44,13 +44,7 @@ module.tx_blogexample {
 tx_blogexample_plaintext = PAGE
 tx_blogexample_plaintext {
   typeNum = {$plugin.tx_blogexample.settings.plaintextPageType}
-  10 = USER
-  10 {
-    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
-    extensionName = BlogExample
-    pluginName = PostList
-    vendorName = FriendsOfTYPO3
-  }
+  10 < tt_content.list.20.blogexample_postlist
 
   config {
     admPanel = 0
@@ -59,9 +53,14 @@ tx_blogexample_plaintext {
     additionalHeaders.10.replace = 1
     defaultGetVars {
       tx_blogexample_postlist.format = txt
+      tx_blogexample_postlist.blog = 1
     }
   }
 }
+
+# Make postlist available as lib.blog_example_post_list
+
+lib.blog_example_post_list < tt_content.list.20.blogexample_postlist
 
 # Adjust plaintext rendering, if blog_example runs as single, fully fledged plugin
 [blogConfiguration['registerSinglePlugin'] == 1]

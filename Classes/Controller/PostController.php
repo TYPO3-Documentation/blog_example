@@ -6,6 +6,7 @@ namespace FriendsOfTYPO3\BlogExample\Controller;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Comment;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
+use FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\PersonRepository;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
@@ -33,6 +34,11 @@ use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractController
 {
     /**
+     * @var BlogRepository
+     */
+    protected $blogRepository;
+
+    /**
      * @var PostRepository
      */
     protected $postRepository;
@@ -42,8 +48,9 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      */
     protected $personRepository;
 
-    public function __construct(PersonRepository $personRepository, PostRepository $postRepository)
+    public function __construct(BlogRepository $blogRepository, PersonRepository $personRepository, PostRepository $postRepository)
     {
+        $this->blogRepository = $blogRepository;
         $this->personRepository = $personRepository;
         $this->postRepository = $postRepository;
     }
@@ -52,27 +59,39 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      * Displays a list of posts. If $tag is set only posts matching this tag are shown
      *
      * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Blog $blog The blog to show the posts of
-     * @param null $tag The name of the tag to show the posts for
+     * @param string $tag The name of the tag to show the posts for
      * @param int $currentPage
      * @return void
      */
-    public function indexAction(Blog $blog, $tag = null, int $currentPage = 1): void
+    public function indexAction(Blog $blog = null, $tag = '', int $currentPage = 1): void
     {
-        if (empty($tag)) {
-            $posts = $this->postRepository->findByBlog($blog);
-        } else {
-            $tag = urldecode($tag);
-            $posts = $this->postRepository->findByTagAndBlog($tag, $blog);
-            $this->view->assign('tag', $tag);
+        if ($blog == null) {
+            $defaultBlog = $this->settings['defaultBlog'] ?? 0;
+            if ($defaultBlog > 0) {
+                $blog = $this->blogRepository->findByUid((int) $defaultBlog);
+            } else {
+                $blog = $this->blogRepository->findAll()->getFirst();
+            }
         }
-        $paginator = new QueryResultPaginator($posts, $currentPage, 3);
-        $pagination = new SimplePagination($paginator);
-        $this->view
-            ->assign('paginator', $paginator)
-            ->assign('pagination', $pagination)
-            ->assign('pages', range(1, $pagination->getLastPageNumber()))
-            ->assign('blog', $blog)
-            ->assign('posts', $posts);
+        if ($blog == null) {
+            $this->view->assign('blog', 0);
+        } else {
+            if (empty($tag)) {
+                $posts = $this->postRepository->findByBlog($blog);
+            } else {
+                $tag = urldecode($tag);
+                $posts = $this->postRepository->findByTagAndBlog($tag, $blog);
+                $this->view->assign('tag', $tag);
+            }
+            $paginator = new QueryResultPaginator($posts, $currentPage, 3);
+            $pagination = new SimplePagination($paginator);
+            $this->view
+                ->assign('paginator', $paginator)
+                ->assign('pagination', $pagination)
+                ->assign('pages', range(1, $pagination->getLastPageNumber()))
+                ->assign('blog', $blog)
+                ->assign('posts', $posts);
+        }
     }
 
     /**
