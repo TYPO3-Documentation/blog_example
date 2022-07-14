@@ -7,7 +7,8 @@ mod.wizards.newContentElement.wizardItems {
         title = BlogList
         description = Display a list of blogs
         tt_content_defValues {
-          CType = blogexample_bloglist
+          CType = list
+          list_type = blogexample_bloglist
         }
       }
       blogexample_postlist {
@@ -15,7 +16,8 @@ mod.wizards.newContentElement.wizardItems {
         title = PostList
         description = Display a list of posts in a blog
         tt_content_defValues {
-          CType = blogexample_postlist
+          CType = list
+          list_type = blogexample_postlist
         }
       }
       blogexample_postsingle {
@@ -23,7 +25,8 @@ mod.wizards.newContentElement.wizardItems {
         title = PostSingle
         description = Display a single blog post
         tt_content_defValues {
-          CType = blogexample_postsingle
+          CType = list
+          list_type = blogexample_postsingle
         }
       }
       blogexample_blogadmin {
@@ -31,7 +34,8 @@ mod.wizards.newContentElement.wizardItems {
         title = BlogAdmin
         description = Administrate the blog
         tt_content_defValues {
-          CType = blogexample_blogadmin
+          CType = list
+          list_type = blogexample_blogadmin
         }
       }
     }
