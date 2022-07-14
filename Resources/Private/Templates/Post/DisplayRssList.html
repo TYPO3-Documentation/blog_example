@@ -20,8 +20,8 @@
                     <pubDate><f:format.date format="r">{post.datetime}</f:format.date></pubDate>
                     <title>{post.title -> f:format.htmlspecialchars()}</title>
                     <link><f:format.htmlentities><f:uri.action extensionName="blog_example" controller="Post" action="show" pageType="1" arguments="{post: post}"/></f:format.htmlentities></link>
-                    <description>{post.teaser -> f:format.stripTags() -> f:format.htmlspecialchars()}</description>
-                    <content:encoded><f:format.cdata><f:format.html>{post.bodytext}</f:format.html></f:format.cdata></content:encoded>
+                    <description>{post.content -> f:format.stripTags() -> f:format.htmlspecialchars()}</description>
+                    <content:encoded><f:format.cdata><f:format.html>{post.content}</f:format.html></f:format.cdata></content:encoded>
                     <f:if condition="{post.categories}">
                         <f:for each="{post.categories}" as="postCategory">
                             <category>{postCategory.title -> f:format.htmlspecialchars()}</category>

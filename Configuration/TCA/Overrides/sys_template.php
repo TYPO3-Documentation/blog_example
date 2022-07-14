@@ -5,3 +5,4 @@ defined('TYPO3') or die();
 
 ExtensionManagementUtility::addStaticFile('blog_example', 'Configuration/TypoScript', 'BlogExample setup');
 ExtensionManagementUtility::addStaticFile('blog_example', 'Configuration/TypoScript/DefaultStyles', 'BlogExample CSS Styles (optional)');
+ExtensionManagementUtility::addStaticFile('blog_example', 'Configuration/TypoScript/RssFeed', 'BlogExample RSS Feed (optional)');
