@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+
 namespace FriendsOfTYPO3\BlogExample\Domain\Repository;
 
 /*
@@ -17,6 +19,6 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Repository;
 /**
  * A repository for administrators
  */
-class AdministratorRepository extends \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository
+class AdministratorRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
 }

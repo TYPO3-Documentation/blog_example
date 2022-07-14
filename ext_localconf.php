@@ -1,65 +1,91 @@
 <?php
-if (!defined('TYPO3_MODE')) {
-    die ('Access denied.');
-}
+defined('TYPO3') or die();
+
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+use TYPO3\CMS\Core\Information\Typo3Version;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
+use FriendsOfTYPO3\BlogExample\Controller\BlogController;
+use FriendsOfTYPO3\BlogExample\Controller\PostController;
+use FriendsOfTYPO3\BlogExample\Controller\CommentController;
+
+
 (static function (string $extensionName): void {
+    $versionInformation = GeneralUtility::makeInstance(Typo3Version::class);
+    // Only include page.tsconfig if TYPO3 version is below 12 so that it is not imported twice.
+    if ($versionInformation->getMajorVersion() < 12) {
+        ExtensionManagementUtility::addPageTSConfig('
+      @import "EXT:blog_example/Configuration/page.tsconfig"
+   ');
+    }
     /**
      * Configure the Plugin to call the
      * right combination of Controller and Action according to
      * the user input (default settings, FlexForm, URL etc.)
      */
     if (
-    \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)->get('blog_example', 'registerSinglePlugin')
+        GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('blog_example',
+            'registerSinglePlugin')
     ) {
-        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        ExtensionUtility::configurePlugin(
             $extensionName,
             'Pi1',
             [
-                \FriendsOfTYPO3\BlogExample\Controller\BlogController::class => 'index,new,create,delete,deleteAll,edit,update,populate',
-                \FriendsOfTYPO3\BlogExample\Controller\PostController::class => 'index,show,new,create,delete,edit,update',
-                \FriendsOfTYPO3\BlogExample\Controller\CommentController::class => 'create,delete',
+                BlogController::class => 'index,new,create,delete,deleteAll,edit,update,populate',
+                PostController::class => 'index,show,new,create,delete,edit,update',
+                CommentController::class => 'create,delete',
             ],
             [
-                \FriendsOfTYPO3\BlogExample\Controller\BlogController::class => 'create,delete,deleteAll,update,populate',
-                \FriendsOfTYPO3\BlogExample\Controller\PostController::class => 'create,delete,update',
-                \FriendsOfTYPO3\BlogExample\Controller\CommentController::class => 'create,delete',
+                BlogController::class => 'create,delete,deleteAll,update,populate',
+                PostController::class => 'create,delete,update',
+                CommentController::class => 'create,delete',
             ]
         );
     } else {
         // Blog plugins
-        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        ExtensionUtility::configurePlugin(
             $extensionName,
             'BlogList',
-            [\FriendsOfTYPO3\BlogExample\Controller\BlogController::class => 'index']
+            [BlogController::class => 'index']
         );
 
         // Post plugins
-        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        ExtensionUtility::configurePlugin(
             $extensionName,
             'PostList',
-            [\FriendsOfTYPO3\BlogExample\Controller\PostController::class => 'index']
+            [PostController::class => 'index']
         );
-        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-            $extensionName,
+        ExtensionUtility::configurePlugin(
+            'BlogExample',
             'PostSingle',
-            [\FriendsOfTYPO3\BlogExample\Controller\PostController::class => 'show', 'Comment' => 'create'],
-            [\FriendsOfTYPO3\BlogExample\Controller\CommentController::class => 'create']
+            [PostController::class => 'show',CommentController::class => 'create'],
+            [CommentController::class => 'create']
+        );
+
+        // RSS Feed
+        ExtensionUtility::configurePlugin(
+            $extensionName,
+            'PostListRss',
+            [PostController::class => 'displayRssList']
         );
 
         // admin plugins
-        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        ExtensionUtility::configurePlugin(
             $extensionName,
             'BlogAdmin',
             [
-                \FriendsOfTYPO3\BlogExample\Controller\BlogController::class => 'new,create,delete,deleteAll,edit,update,populate',
-                \FriendsOfTYPO3\BlogExample\Controller\PostController::class => 'new,create,delete,edit,update',
-                \FriendsOfTYPO3\BlogExample\Controller\CommentController::class => 'delete',
+                BlogController::class => 'new,create,delete,deleteAll,edit,update,populate',
+                PostController::class => 'new,create,delete,edit,update',
+                CommentController::class => 'delete',
             ],
             [
-                \FriendsOfTYPO3\BlogExample\Controller\BlogController::class => 'create,delete,deleteAll,update,populate',
-                \FriendsOfTYPO3\BlogExample\Controller\PostController::class => 'create,delete,update',
-                \FriendsOfTYPO3\BlogExample\Controller\CommentController::class => 'delete',
+                BlogController::class => 'create,delete,deleteAll,update,populate',
+                PostController::class => 'create,delete,update',
+                CommentController::class => 'delete',
             ]
         );
     }
+
 })('BlogExample');
