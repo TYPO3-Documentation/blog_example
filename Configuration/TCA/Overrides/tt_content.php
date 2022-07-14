@@ -29,22 +29,26 @@ if ($extensionConfiguration->get('blog_example', 'registerSinglePlugin')) {
     ExtensionUtility::registerPlugin(
         'blog_example',
         'BlogList',
-        'List of Blogs (BlogExample)'
+        'List of Blogs (BlogExample)',
+        'blog_example_icon'
     );
     ExtensionUtility::registerPlugin(
         'blog_example',
         'PostList',
-        'List of Posts (BlogExample)'
+        'List of Posts (BlogExample)',
+        'blog_example_icon'
     );
     ExtensionUtility::registerPlugin(
         'blog_example',
         'PostSingle',
-        'Single Post (BlogExample)'
+        'Single Post (BlogExample)',
+        'blog_example_icon'
     );
     ExtensionUtility::registerPlugin(
         'blog_example',
         'BlogAdmin',
-        'Admin Plugin (BlogExample)'
+        'Admin Plugin (BlogExample)',
+        'blog_example_icon'
     );
 
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blogexample_postlist']
