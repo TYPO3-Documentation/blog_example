@@ -85,7 +85,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 20,
-                'eval' => 'trim,required',
+                'eval' => 'trim',
+                'required' => true,
                 'max' => 256
             ]
         ],
@@ -94,7 +95,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 20,
-                'eval' => 'trim,required',
+                'eval' => 'trim',
+                'required' => true,
                 'max' => 256
             ]
         ],
@@ -103,7 +105,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 20,
-                'eval' => 'trim, required',
+                'eval' => 'trim',
+                'required' => true,
                 'max' => 256
             ]
         ],

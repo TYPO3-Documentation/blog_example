@@ -102,7 +102,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 20,
-                'eval' => 'trim, required',
+                'eval' => 'trim',
+                'required' => true,
                 'max' => 256
             ]
         ],
@@ -110,10 +111,10 @@ return [
             'exclude' => true,
             'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_post.date',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
+                'type' => 'datetime',
                 'size' => 12,
-                'eval' => 'datetime, required',
+                'eval' => 'datetime',
+                'required' => true,
                 'default' => time()
             ]
         ],
@@ -142,7 +143,6 @@ return [
             'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_post.second_author',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'allowed' => 'tx_blogexample_domain_model_person',
                 'foreign_table' => 'tx_blogexample_domain_model_person',
                 'maxitems' => 1,

@@ -41,11 +41,11 @@ return [
             'exclude' => true,
             'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_comment.date',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
+                'type' => 'datetime',
                 'dbType' => 'datetime',
                 'size' => 12,
-                'eval' => 'datetime, required',
+                'eval' => 'datetime',
+                'required' => true,
                 'default' => time()
             ]
         ],
@@ -54,7 +54,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 20,
-                'eval' => 'trim, required',
+                'eval' => 'trim',
+                'required' => true,
                 'max' => 256
             ]
         ],
@@ -63,7 +64,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 20,
-                'eval' => 'trim, required',
+                'eval' => 'trim',
+                'required' => true,
                 'max' => 256
             ]
         ],
