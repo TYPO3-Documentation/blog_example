@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Domain\Validator;
 
@@ -17,6 +17,7 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Validator;
  */
 
 use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\Validation\Error;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 
@@ -26,13 +27,7 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 class PostValidator extends AbstractValidator
 {
 
-    /**
-     * Check if $value is valid. If it is not valid, needs to add an error
-     * to result.
-     *
-     * @param Post $value
-     */
-    protected function isValid($value)
+    protected function isValid(mixed $value): void
     {
         if ($value->getTitle() === '77') {
             $error = new Error('Title custom validation failed', 1480872650);

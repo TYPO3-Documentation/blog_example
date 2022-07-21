@@ -1,9 +1,10 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Domain\Validator;
 
 use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
+use TYPO3\CMS\Extbase\Error\Result;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /*
@@ -24,20 +25,11 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class BlogValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
 {
-
-    /**
-     * Checks whether the given blog is valid
-     *
-     * @param Blog $blog The blog
-     * @return boolean TRUE if blog could be validated, otherwise FALSE
-     */
-    public function isValid($blog)
+    protected function isValid(mixed $value): void
     {
-        if (strtolower($blog->getTitle()) === 'extbase') {
-            $this->addError(LocalizationUtility::translate('error.Blog.invalidTitle', 'BlogExample'), 1297418974);
-            return false;
+        if (strtolower($value->getTitle()) === 'extbase') {
+            $this->addError(LocalizationUtility::translate('error.Blog.invalidTitle',
+                'BlogExample'), 1297418974);
         }
-        return true;
     }
-
 }
