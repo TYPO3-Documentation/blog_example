@@ -9,6 +9,7 @@ use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\PersonRepository;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
@@ -63,7 +64,7 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      * @param int $currentPage
      * @return void
      */
-    public function indexAction(Blog $blog = null, $tag = '', int $currentPage = 1): void
+    public function indexAction(Blog $blog = null, $tag = '', int $currentPage = 1): ResponseInterface
     {
         if ($blog == null) {
             $defaultBlog = $this->settings['defaultBlog'] ?? 0;
@@ -92,13 +93,14 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
                 ->assign('blog', $blog)
                 ->assign('posts', $posts);
         }
+        return $this->htmlResponse();
     }
     /**
      * Displays a list of posts as Rss feed
      *
      * @return void
      */
-    public function displayRssListAction() {
+    public function displayRssListAction() : ResponseInterface {
         $defaultBlog = $this->settings['defaultBlog'] ?? 0;
         if ($defaultBlog > 0) {
             $blog = $this->blogRepository->findByUid((int) $defaultBlog);
@@ -106,6 +108,7 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
             $blog = $this->blogRepository->findAll()->getFirst();
         }
         $this->view->assign('blog', $blog);
+        return $this->htmlResponse();
     }
 
     /**
@@ -116,10 +119,11 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      * @return void
      * @IgnoreValidation("newComment")
      */
-    public function showAction(Post $post, Comment $newComment = null)
+    public function showAction(Post $post, Comment $newComment = null): ResponseInterface
     {
         $this->view->assign('post', $post);
         $this->view->assign('newComment', $newComment);
+        return $this->htmlResponse();
     }
 
     /**
@@ -130,12 +134,13 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      * @return void
      * @IgnoreValidation("newPost")
      */
-    public function newAction(Blog $blog, Post $newPost = null)
+    public function newAction(Blog $blog, Post $newPost = null): ResponseInterface
     {
         $this->view->assign('authors', $this->personRepository->findAll());
         $this->view->assign('blog', $blog);
         $this->view->assign('newPost', $newPost);
         $this->view->assign('remainingPosts', $this->postRepository->findByBlog($blog));
+        return $this->htmlResponse();
     }
 
     /**
@@ -145,14 +150,14 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      * @param Post $newPost The new post object
      * @return void
      */
-    public function createAction(Blog $blog, Post $newPost)
+    public function createAction(Blog $blog, Post $newPost): ResponseInterface
     {
         // TODO access protection
         $blog->addPost($newPost);
         $newPost->setBlog($blog);
         $this->postRepository->add($newPost);
         $this->addFlashMessage('created');
-        $this->redirect('index', null, null, ['blog' => $blog]);
+        return $this->redirect('index', null, null, ['blog' => $blog]);
     }
 
     /**
@@ -163,12 +168,13 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      * @return void
      * @IgnoreValidation("post")
      */
-    public function editAction(Blog $blog, Post $post): void
+    public function editAction(Blog $blog, Post $post): ResponseInterface
     {
         $this->view->assign('authors', $this->personRepository->findAll());
         $this->view->assign('blog', $blog);
         $this->view->assign('post', $post);
         $this->view->assign('remainingPosts', $this->postRepository->findRemaining($post));
+        return $this->htmlResponse();
     }
 
     /**
@@ -178,12 +184,12 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      * @param Post $post A clone of the original post with the updated values already applied
      * @return void
      */
-    public function updateAction(Blog $blog, Post $post): void
+    public function updateAction(Blog $blog, Post $post): ResponseInterface
     {
         // TODO access protection
         $this->postRepository->update($post);
         $this->addFlashMessage('updated');
-        $this->redirect('show', null, null, ['post' => $post, 'blog' => $blog]);
+        return $this->redirect('show', null, null, ['post' => $post, 'blog' => $blog]);
     }
 
     /**
@@ -193,11 +199,11 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      * @param Post $post The post to be deleted
      * @return void
      */
-    public function deleteAction(Blog $blog, Post $post): void
+    public function deleteAction(Blog $blog, Post $post): ResponseInterface
     {
         // TODO access protection
         $this->postRepository->remove($post);
         $this->addFlashMessage('deleted', FlashMessage::INFO);
-        $this->redirect('index', null, null, ['blog' => $blog]);
+        return $this->redirect('index', null, null, ['blog' => $blog]);
     }
 }

@@ -8,7 +8,7 @@ return [
         'recordType' => \FriendsOfTYPO3\BlogExample\Domain\Model\Administrator::class
     ],
     \FriendsOfTYPO3\BlogExample\Domain\Model\FrontendUserGroup::class => [
-        'tableName' => 'fe_user_groups',
+        'tableName' => 'fe_groups',
         'recordType' => \FriendsOfTYPO3\BlogExample\Domain\Model\FrontendUserGroup::class
     ],
 ];

@@ -22,6 +22,7 @@ use FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository;
 use FriendsOfTYPO3\BlogExample\Service\BlogFactory;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 
@@ -31,24 +32,15 @@ use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 class BlogController extends AbstractController
 {
     /**
-     * @var BlogRepository
-     */
-    protected $blogRepository;
-
-    /**
-     * @var AdministratorRepository
-     */
-    protected $administratorRepository;
-
-    /**
      * BlogController constructor.
      *
      * @param BlogRepository $blogRepository
      */
-    public function __construct(BlogRepository $blogRepository, AdministratorRepository $administratorRepository)
-    {
-        $this->blogRepository = $blogRepository;
-        $this->administratorRepository = $administratorRepository;
+    public function __construct(
+        protected readonly BlogRepository $blogRepository,
+        protected readonly BlogFactory $blogFactory,
+        protected readonly AdministratorRepository $administratorRepository
+    ) {
     }
 
     /**
@@ -57,7 +49,7 @@ class BlogController extends AbstractController
      * @param int $currentPage
      * @return void
      */
-    public function indexAction(int $currentPage = 1): void
+    public function indexAction(int $currentPage = 1): ResponseInterface
     {
         $allAvailableBlogs = $this->blogRepository->findAll();
         $paginator = new QueryResultPaginator($allAvailableBlogs, $currentPage, 3);
@@ -67,6 +59,7 @@ class BlogController extends AbstractController
             ->assign('paginator', $paginator)
             ->assign('pagination', $pagination)
             ->assign('pages', range(1, $pagination->getLastPageNumber()));
+        return $this->htmlResponse();
     }
 
     /**
@@ -76,10 +69,11 @@ class BlogController extends AbstractController
      * @return void
      * @IgnoreValidation("newBlog")
      */
-    public function newAction(Blog $newBlog = null)
+    public function newAction(Blog $newBlog = null): ResponseInterface
     {
         $this->view->assign('newBlog', $newBlog);
         $this->view->assign('administrators', $this->administratorRepository->findAll());
+        return $this->htmlResponse();
     }
 
     /**
@@ -88,12 +82,12 @@ class BlogController extends AbstractController
      * @param Blog $newBlog A fresh Blog object which has not yet been added to the repository
      * @return void
      */
-    public function createAction(Blog $newBlog)
+    public function createAction(Blog $newBlog): ResponseInterface
     {
         // TODO access protection
         $this->blogRepository->add($newBlog);
         $this->addFlashMessage('created');
-        $this->redirect('index');
+        return $this->redirect('index');
     }
 
     /**
@@ -103,10 +97,11 @@ class BlogController extends AbstractController
      * @return void
      * @IgnoreValidation("blog")
      */
-    public function editAction(Blog $blog)
+    public function editAction(Blog $blog): ResponseInterface
     {
         $this->view->assign('blog', $blog);
         $this->view->assign('administrators', $this->administratorRepository->findAll());
+        return $this->htmlResponse();
     }
 
     /**
@@ -115,12 +110,12 @@ class BlogController extends AbstractController
      * @param Blog $blog A not yet persisted clone of the original blog containing the modifications
      * @return void
      */
-    public function updateAction(Blog $blog)
+    public function updateAction(Blog $blog): ResponseInterface
     {
         // TODO access protection
         $this->blogRepository->update($blog);
         $this->addFlashMessage('updated');
-        $this->redirect('index');
+        return $this->redirect('index');
     }
 
     /**
@@ -129,12 +124,12 @@ class BlogController extends AbstractController
      * @param Blog $blog The blog to delete
      * @return void
      */
-    public function deleteAction(Blog $blog)
+    public function deleteAction(Blog $blog): ResponseInterface
     {
         // TODO access protection
         $this->blogRepository->remove($blog);
         $this->addFlashMessage('deleted', FlashMessage::INFO);
-        $this->redirect('index');
+        return $this->redirect('index');
     }
 
     /**
@@ -142,11 +137,11 @@ class BlogController extends AbstractController
      *
      * @return void
      */
-    public function deleteAllAction()
+    public function deleteAllAction(): ResponseInterface
     {
         // TODO access protection
         $this->blogRepository->removeAll();
-        $this->redirect('index');
+        return $this->redirect('index');
     }
 
 
@@ -155,17 +150,16 @@ class BlogController extends AbstractController
      *
      * @return void
      */
-    public function populateAction()
+    public function populateAction(): ResponseInterface
     {
         // TODO access protection
         $numberOfExistingBlogs = $this->blogRepository->countAll();
-        $blogFactory = $this->objectManager->get(BlogFactory::class);
         for ($blogNumber = $numberOfExistingBlogs + 1; $blogNumber < ($numberOfExistingBlogs + 5); $blogNumber++) {
-            $blog = $blogFactory->createBlog($blogNumber);
+            $blog = $this->blogFactory->createBlog($blogNumber);
             $this->blogRepository->add($blog);
         }
         $this->addFlashMessage('populated');
-        $this->redirect('index');
+        return $this->redirect('index');
     }
 }
 

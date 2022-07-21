@@ -51,7 +51,7 @@ class GravatarViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBa
         $this->registerUniversalTagAttributes();
         $this->registerArgument('emailAddress', 'string', '', true)
              ->registerArgument('defaultImageUri', 'string', '', false)
-             ->registerArgument('size', 'string', '', false);
+             ->registerArgument('size', 'int', '', false);
     }
 
     /**
@@ -67,7 +67,7 @@ class GravatarViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBa
             $uriParts[] = 'd=' . urlencode($this->arguments['defaultImageUri']);
         }
         if ($this->arguments['size'] !== null) {
-            $uriParts[] = 's=' . urlencode($this->arguments['size']);
+            $uriParts[] = 's=' . $this->arguments['size'];
         }
         if (count($uriParts) > 0) {
             $gravatarUri .= '?' . implode('&', $uriParts);

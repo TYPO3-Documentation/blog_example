@@ -6,6 +6,7 @@ namespace FriendsOfTYPO3\BlogExample\Controller;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Comment;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 
 /*
@@ -43,12 +44,12 @@ class CommentController extends AbstractController
      * @param Comment $newComment The comment to create
      * @return void
      */
-    public function createAction(Post $post, Comment $newComment): void
+    public function createAction(Post $post, Comment $newComment): ResponseInterface
     {
         $post->addComment($newComment);
         $this->postRepository->update($post);
         $this->addFlashMessage('created');
-        $this->redirect('show', 'Post', null, ['post' => $post]);
+        return $this->redirect('show', 'Post', null, ['post' => $post]);
     }
 
     /**
@@ -58,13 +59,13 @@ class CommentController extends AbstractController
      * @param Comment $comment The comment to be deleted
      * @return void
      */
-    public function deleteAction(Post $post, Comment $comment): void
+    public function deleteAction(Post $post, Comment $comment): ResponseInterface
     {
         // TODO access protection
         $post->removeComment($comment);
         $this->postRepository->update($post);
         $this->addFlashMessage('deleted', FlashMessage::INFO);
-        $this->redirect('show', 'Post', null, ['post' => $post]);
+        return $this->redirect('show', 'Post', null, ['post' => $post]);
     }
 
     /**
@@ -72,12 +73,12 @@ class CommentController extends AbstractController
      *
      * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Post $post
      */
-    public function deleteAllAction(Post $post): void
+    public function deleteAllAction(Post $post): ResponseInterface
     {
         // TODO access protection
         $post->removeAllComments();
         $this->postRepository->update($post);
         $this->addFlashMessage('deletedAll', FlashMessage::INFO);
-        $this->redirect('edit', 'Post', null, ['post' => $post, 'blog' => $post->getBlog()]);
+        return $this->redirect('edit', 'Post', null, ['post' => $post, 'blog' => $post->getBlog()]);
     }
 }
