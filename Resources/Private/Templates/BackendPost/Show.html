@@ -5,21 +5,9 @@
       data-namespace-typo3-fluid="true">
 
 
-<f:layout name="Default" />
+<f:layout name="Module" />
 
-<f:section name="iconButtons">
-    <be:moduleLayout.button.linkButton
-        icon="actions-close"
-        title="Cancel"
-        link="{f:uri.action(action:'index', arguments:{blog: post.blog})}"
-    />
-    <be:moduleLayout.button.linkButton
-        icon="actions-document-edit"
-        title="Edit this Post"
-        link="{f:uri.action(action:'edit', arguments:{post: post, blog: post.blog})}" />
-</f:section>
-
-<f:section name="content">
+<f:section name="Content">
     <div class="tx-blogexample-single-item">
         <span class="tx-blogexample-single-date"><f:format.date>{post.date}</f:format.date></span>
         <h3>

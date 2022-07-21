@@ -3,18 +3,9 @@
       xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
-<f:layout name="Default" />
+<f:layout name="Module" />
 
-<f:section name="iconButtons">
-    <be:moduleLayout.button.linkButton
-        icon="actions-add"
-        title="Add new Blog"
-        link="{f:uri.action(action:'new')}"
-    />
-    <be:moduleLayout.button.shortcutButton displayName="Shortcut" />
-</f:section>
-
-<f:section name="content">
+<f:section name="Content">
     <f:if condition="{blogs}">
         <f:then>
             <p class="bodytext">Here is a list of blogs:</p>
@@ -22,7 +13,7 @@
                 <f:for each="{blogs}" as="blog">
                     <li>
                         <h3>
-                            <f:link.action action="index" controller="Post" arguments="{blog: blog}" title="Edit this Blog">
+                            <f:link.action action="index" controller="BackendPost" arguments="{blog: blog}" title="Edit this Blog">
                                 <core:icon identifier="actions-document-edit" />
                                 {blog.title} (
                                 <f:count subject="{blog.posts}" />
