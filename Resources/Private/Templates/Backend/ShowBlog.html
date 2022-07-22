@@ -1,6 +1,5 @@
 <html
     xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
     xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
@@ -16,7 +15,7 @@
                     <f:for each="{blog.posts}" as="post">
                         <li>
                             <h3>
-                                <f:link.action action="show" controller="BackendPost" arguments="{post: post, blog: post.blog}">
+                                <f:link.action action="showPost" controller="Backend" arguments="{post: post, blog: post.blog}">
                                     <core:icon identifier="actions-document-edit" />
                                     {post.title}
                                 </f:link.action>
