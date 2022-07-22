@@ -15,6 +15,7 @@ use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 
 
 /*
@@ -178,7 +179,7 @@ class BackendPostController extends AbstractBackendController
     public function deleteAction(Blog $blog, Post $post): ResponseInterface
     {
         $this->postRepository->remove($post);
-        $this->addFlashMessage('deleted', FlashMessage::INFO);
+        $this->addFlashMessage('deleted', ContextualFeedbackSeverity::INFO);
         return $this->redirect('index', null, null, ['blog' => $blog]);
     }
 }

@@ -11,6 +11,7 @@ use FriendsOfTYPO3\BlogExample\Domain\Repository\PersonRepository;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
@@ -203,7 +204,7 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
     {
         // TODO access protection
         $this->postRepository->remove($post);
-        $this->addFlashMessage('deleted', FlashMessage::INFO);
+        $this->addFlashMessage('deleted', ContextualFeedbackSeverity::INFO);
         return $this->redirect('index', null, null, ['blog' => $blog]);
     }
 }

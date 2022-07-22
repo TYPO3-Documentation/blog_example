@@ -8,6 +8,7 @@ use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -64,7 +65,7 @@ class CommentController extends AbstractController
         // TODO access protection
         $post->removeComment($comment);
         $this->postRepository->update($post);
-        $this->addFlashMessage('deleted', FlashMessage::INFO);
+        $this->addFlashMessage('deleted', ContextualFeedbackSeverity::INFO);
         return $this->redirect('show', 'Post', null, ['post' => $post]);
     }
 
@@ -78,7 +79,7 @@ class CommentController extends AbstractController
         // TODO access protection
         $post->removeAllComments();
         $this->postRepository->update($post);
-        $this->addFlashMessage('deletedAll', FlashMessage::INFO);
+        $this->addFlashMessage('deletedAll', ContextualFeedbackSeverity::INFO);
         return $this->redirect('edit', 'Post', null, ['post' => $post, 'blog' => $post->getBlog()]);
     }
 }

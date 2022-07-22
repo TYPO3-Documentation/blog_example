@@ -21,6 +21,7 @@ use FriendsOfTYPO3\BlogExample\Domain\Repository\AdministratorRepository;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository;
 use FriendsOfTYPO3\BlogExample\Service\BlogFactory;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
@@ -128,7 +129,7 @@ class BlogController extends AbstractController
     {
         // TODO access protection
         $this->blogRepository->remove($blog);
-        $this->addFlashMessage('deleted', FlashMessage::INFO);
+        $this->addFlashMessage('deleted', ContextualFeedbackSeverity::INFO);
         return $this->redirect('index');
     }
 

@@ -16,7 +16,7 @@ namespace FriendsOfTYPO3\BlogExample\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
-use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -45,7 +45,7 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      * @param integer $severity optional severity code. One of the t3lib_FlashMessage constants
      * @return void
      */
-    public function addLocalizedFlashMessage(string $action, int $severity = FlashMessage::OK): void
+    public function addLocalizedFlashMessage(string $action, ContextualFeedbackSeverity $severity = ContextualFeedbackSeverity::OK): void
     {
         $messageLocallangKey = sprintf('flashmessage.%s.%s', $this->request->getControllerName(), $action);
         $localizedMessage = $this->translate($messageLocallangKey, '[' . $messageLocallangKey . ']');
