@@ -16,8 +16,6 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Validator;
  * The TYPO3 project - inspiring people to share!
  */
 
-use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\Validation\Error;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 

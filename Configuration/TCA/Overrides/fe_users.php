@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 defined('TYPO3') or die();
 
 if (is_array($GLOBALS['TCA']['fe_users']['columns']['tx_extbase_type'])) {

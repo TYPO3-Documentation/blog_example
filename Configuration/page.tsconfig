@@ -11,6 +11,7 @@ mod.wizards.newContentElement.wizardItems {
           list_type = blogexample_bloglist
         }
       }
+
       blogexample_postlist {
         iconIdentifier = blog_example_icon
         title = PostList
@@ -20,6 +21,7 @@ mod.wizards.newContentElement.wizardItems {
           list_type = blogexample_postlist
         }
       }
+
       blogexample_postsingle {
         iconIdentifier = blog_example_icon
         title = PostSingle
@@ -29,6 +31,7 @@ mod.wizards.newContentElement.wizardItems {
           list_type = blogexample_postsingle
         }
       }
+
       blogexample_blogadmin {
         iconIdentifier = blog_example_icon
         title = BlogAdmin
@@ -39,6 +42,7 @@ mod.wizards.newContentElement.wizardItems {
         }
       }
     }
+
     show := addToList(blogexample_postlist,blogexample_postsingle,blogexample_blogadmin)
   }
 }

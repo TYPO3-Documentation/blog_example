@@ -7,7 +7,7 @@ use DateTime;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Administrator;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Comment;
-use FriendsOfTYPO3\BlogExample\Domain\Model\Person;
+use FriendsOfTYPO3\BlogExample\Domain\Model\Author;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Tag;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -45,7 +45,7 @@ class BlogFactory implements SingletonInterface
         $blog->setDescription('A blog about TYPO3 extension development.');
 
         // create author
-        $author = new Person('Stephen', 'Smith', 'foo.bar@example.com');
+        $author = new Author('Stephen', 'Smith', 'foo.bar@example.com');
 
         // create administrator
         $administrator = new Administrator();

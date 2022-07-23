@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Controller;
 
@@ -45,8 +45,10 @@ class CommentController extends AbstractController
      * @param Comment $newComment The comment to create
      * @return void
      */
-    public function createAction(Post $post, Comment $newComment): ResponseInterface
-    {
+    public function createAction(
+        Post $post,
+        Comment $newComment
+    ): ResponseInterface {
         $post->addComment($newComment);
         $this->postRepository->update($post);
         $this->addFlashMessage('created');
@@ -60,8 +62,10 @@ class CommentController extends AbstractController
      * @param Comment $comment The comment to be deleted
      * @return void
      */
-    public function deleteAction(Post $post, Comment $comment): ResponseInterface
-    {
+    public function deleteAction(
+        Post $post,
+        Comment $comment
+    ): ResponseInterface {
         // TODO access protection
         $post->removeComment($comment);
         $this->postRepository->update($post);
@@ -80,6 +84,7 @@ class CommentController extends AbstractController
         $post->removeAllComments();
         $this->postRepository->update($post);
         $this->addFlashMessage('deletedAll', ContextualFeedbackSeverity::INFO);
-        return $this->redirect('edit', 'Post', null, ['post' => $post, 'blog' => $post->getBlog()]);
+        return $this->redirect('edit', 'Post', null,
+            ['post' => $post, 'blog' => $post->getBlog()]);
     }
 }

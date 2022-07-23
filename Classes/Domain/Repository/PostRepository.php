@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Domain\Repository;
 
@@ -34,7 +34,7 @@ class PostRepository extends Repository
     /**
      * Finds all posts by the specified blog
      */
-    public function findAllByBlog(Blog $blog) : QueryResultInterface
+    public function findAllByBlog(Blog $blog): QueryResultInterface
     {
         $query = $this->createQuery();
         return $query
@@ -47,8 +47,10 @@ class PostRepository extends Repository
     /**
      * Finds posts by the specified tag and blog
      */
-    public function findByTagAndBlog(string $tag, Blog $blog) : QueryResultInterface
-    {
+    public function findByTagAndBlog(
+        string $tag,
+        Blog $blog
+    ): QueryResultInterface {
         $query = $this->createQuery();
         return $query
             ->matching(
@@ -97,7 +99,7 @@ class PostRepository extends Repository
     /**
      * Finds the post next to the given post
      */
-    public function findNext(Post $post) : Post|null
+    public function findNext(Post $post): Post|null
     {
         $query = $this->createQuery();
         return $query
@@ -112,8 +114,10 @@ class PostRepository extends Repository
      * Finds most recent posts by the specified blog
      *
      */
-    public function findRecentByBlog(Blog $blog, int $limit = 5): QueryResultInterface
-    {
+    public function findRecentByBlog(
+        Blog $blog,
+        int $limit = 5
+    ): QueryResultInterface {
         $query = $this->createQuery();
         return $query
             ->matching(
@@ -123,7 +127,7 @@ class PostRepository extends Repository
             ->execute();
     }
 
-    public function findByCategory($categoryUid) : QueryResultInterface
+    public function findByCategory($categoryUid): QueryResultInterface
     {
         $query = $this->createQuery();
         return $query
@@ -133,7 +137,7 @@ class PostRepository extends Repository
             ->execute();
     }
 
-    public function findAllSortedByCategory(array $uids) : QueryResultInterface
+    public function findAllSortedByCategory(array $uids): QueryResultInterface
     {
         $q = $this->createQuery();
         $q->matching($q->in('uid', $uids));

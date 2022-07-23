@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Domain\Model;
 
@@ -16,130 +16,104 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
-use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * A blog post comment
  */
-class Comment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Comment extends AbstractEntity
 {
-    /**
-     * @var \DateTime
-     */
-    protected $date;
+    protected \DateTime $date;
 
     /**
-     * @var string
      * Extbase\Validate("NotEmpty")
      */
-    protected $author = '';
+    protected string $author = '';
 
     /**
-     * @var string
      * @Extbase\Validate("EmailAddress")
      */
-    protected $email = '';
+    protected string $email = '';
 
     /**
-     * @var string
      * @Extbase\Validate("StringLength", options={"maximum": 500})
      */
-    protected $content = '';
+    protected string $content = '';
 
-    /**
-     * Constructs this post
-     */
     public function __construct()
     {
         $this->date = new \DateTime();
     }
 
     /**
-     * Setter for date
-     *
-     * @param \DateTime $date
-     */
-    public function setDate(\DateTime $date)
-    {
-        $this->date = $date;
-    }
-
-    /**
-     * Getter for date
-     *
      * @return \DateTime
      */
-    public function getDate()
+    public function getDate(): \DateTime
     {
         return $this->date;
     }
 
     /**
-     * Sets the author for this comment
-     *
-     * @param string $author
+     * @param \DateTime $date
      */
-    public function setAuthor($author)
+    public function setDate(\DateTime $date): void
     {
-        $this->author = $author;
+        $this->date = $date;
     }
 
     /**
-     * Getter for author
-     *
      * @return string
      */
-    public function getAuthor()
+    public function getAuthor(): string
     {
         return $this->author;
     }
 
     /**
-     * Sets the authors email for this comment
-     *
-     * @param string $email email of the author
+     * @param string $author
      */
-    public function setEmail($email)
+    public function setAuthor(string $author): void
     {
-        $this->email = $email;
+        $this->author = $author;
     }
 
     /**
-     * Getter for authors email
-     *
      * @return string
      */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
     /**
-     * Sets the content for this comment
-     *
-     * @param string $content
+     * @param string $email
      */
-    public function setContent($content)
+    public function setEmail(string $email): void
     {
-        $this->content = $content;
+        $this->email = $email;
     }
 
     /**
-     * Getter for content
-     *
      * @return string
      */
-    public function getContent()
+    public function getContent(): string
     {
         return $this->content;
     }
 
     /**
-     * Returns this comment as a formatted string
-     *
-     * @return string
+     * @param string $content
      */
-    public function __toString()
+    public function setContent(string $content): void
+    {
+        $this->content = $content;
+    }
+
+
+    /**
+     * Returns this comment as a formatted string
+     */
+    public function __toString(): string
     {
         return $this->author . ' (' . $this->email . ') said on ' . $this->date->format('Y-m-d') . ':' . chr(10) .
             $this->content . chr(10);

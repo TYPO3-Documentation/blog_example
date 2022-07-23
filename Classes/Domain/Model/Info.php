@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Domain\Model;
 
@@ -16,43 +16,29 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /**
  * A post additional info (1:1 inline relation to post)
  */
-class Info extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Info extends AbstractEntity
 {
+    protected string $name = '';
 
-    /**
-     * @var string
-     */
-    protected $name = '';
-
-    /**
-     * Sets the name
-     *
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->content = $name;
-    }
-
-    /**
-     * Getter for name
-     *
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
     /**
      * Returns this info as a formatted string
-     *
-     * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->name;
     }

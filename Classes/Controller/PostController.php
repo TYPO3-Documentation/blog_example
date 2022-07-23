@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Controller;
 
@@ -10,10 +10,8 @@ use FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\PersonRepository;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Messaging\FlashMessage;
-use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
-use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 
 
@@ -50,8 +48,11 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      */
     protected $personRepository;
 
-    public function __construct(BlogRepository $blogRepository, PersonRepository $personRepository, PostRepository $postRepository)
-    {
+    public function __construct(
+        BlogRepository $blogRepository,
+        PersonRepository $personRepository,
+        PostRepository $postRepository
+    ) {
         $this->blogRepository = $blogRepository;
         $this->personRepository = $personRepository;
         $this->postRepository = $postRepository;
@@ -65,12 +66,15 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      * @param int $currentPage
      * @return void
      */
-    public function indexAction(Blog $blog = null, $tag = '', int $currentPage = 1): ResponseInterface
-    {
+    public function indexAction(
+        Blog $blog = null,
+        $tag = '',
+        int $currentPage = 1
+    ): ResponseInterface {
         if ($blog == null) {
             $defaultBlog = $this->settings['defaultBlog'] ?? 0;
             if ($defaultBlog > 0) {
-                $blog = $this->blogRepository->findByUid((int) $defaultBlog);
+                $blog = $this->blogRepository->findByUid((int)$defaultBlog);
             } else {
                 $blog = $this->blogRepository->findAll()->getFirst();
             }
@@ -96,15 +100,17 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
         }
         return $this->htmlResponse();
     }
+
     /**
      * Displays a list of posts as Rss feed
      *
      * @return void
      */
-    public function displayRssListAction() : ResponseInterface {
+    public function displayRssListAction(): ResponseInterface
+    {
         $defaultBlog = $this->settings['defaultBlog'] ?? 0;
         if ($defaultBlog > 0) {
-            $blog = $this->blogRepository->findByUid((int) $defaultBlog);
+            $blog = $this->blogRepository->findByUid((int)$defaultBlog);
         } else {
             $blog = $this->blogRepository->findAll()->getFirst();
         }
@@ -120,8 +126,10 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      * @return void
      * @IgnoreValidation("newComment")
      */
-    public function showAction(Post $post, Comment $newComment = null): ResponseInterface
-    {
+    public function showAction(
+        Post $post,
+        Comment $newComment = null
+    ): ResponseInterface {
         $this->view->assign('post', $post);
         $this->view->assign('newComment', $newComment);
         return $this->htmlResponse();
@@ -135,12 +143,15 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      * @return void
      * @IgnoreValidation("newPost")
      */
-    public function newAction(Blog $blog, Post $newPost = null): ResponseInterface
-    {
+    public function newAction(
+        Blog $blog,
+        Post $newPost = null
+    ): ResponseInterface {
         $this->view->assign('authors', $this->personRepository->findAll());
         $this->view->assign('blog', $blog);
         $this->view->assign('newPost', $newPost);
-        $this->view->assign('remainingPosts', $this->postRepository->findByBlog($blog));
+        $this->view->assign('remainingPosts',
+            $this->postRepository->findByBlog($blog));
         return $this->htmlResponse();
     }
 
@@ -174,7 +185,8 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
         $this->view->assign('authors', $this->personRepository->findAll());
         $this->view->assign('blog', $blog);
         $this->view->assign('post', $post);
-        $this->view->assign('remainingPosts', $this->postRepository->findRemaining($post));
+        $this->view->assign('remainingPosts',
+            $this->postRepository->findRemaining($post));
         return $this->htmlResponse();
     }
 
@@ -190,7 +202,8 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
         // TODO access protection
         $this->postRepository->update($post);
         $this->addFlashMessage('updated');
-        return $this->redirect('show', null, null, ['post' => $post, 'blog' => $blog]);
+        return $this->redirect('show', null, null,
+            ['post' => $post, 'blog' => $blog]);
     }
 
     /**

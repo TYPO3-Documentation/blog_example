@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Controller;
 
@@ -53,7 +53,8 @@ class BlogController extends AbstractController
     public function indexAction(int $currentPage = 1): ResponseInterface
     {
         $allAvailableBlogs = $this->blogRepository->findAll();
-        $paginator = new QueryResultPaginator($allAvailableBlogs, $currentPage, 3);
+        $paginator = new QueryResultPaginator($allAvailableBlogs, $currentPage,
+            3);
         $pagination = new SimplePagination($paginator);
         $this->view
             ->assign('blogs', $allAvailableBlogs)
@@ -73,7 +74,8 @@ class BlogController extends AbstractController
     public function newAction(Blog $newBlog = null): ResponseInterface
     {
         $this->view->assign('newBlog', $newBlog);
-        $this->view->assign('administrators', $this->administratorRepository->findAll());
+        $this->view->assign('administrators',
+            $this->administratorRepository->findAll());
         return $this->htmlResponse();
     }
 
@@ -101,7 +103,8 @@ class BlogController extends AbstractController
     public function editAction(Blog $blog): ResponseInterface
     {
         $this->view->assign('blog', $blog);
-        $this->view->assign('administrators', $this->administratorRepository->findAll());
+        $this->view->assign('administrators',
+            $this->administratorRepository->findAll());
         return $this->htmlResponse();
     }
 

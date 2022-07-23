@@ -1,6 +1,6 @@
 plugin.tx_blogexample {
-	settings {
-		 # cat=plugin.tx_blogexample/a; type=int+; label=Rss page type:If the default RSS page typenum (778) conflicts with your setup, you can override this setting here
-		rssPageType = 778
-	}
+  settings {
+    # cat=plugin.tx_blogexample/a; type=int+; label=Rss page type:If the default RSS page typenum (778) conflicts with your setup, you can override this setting here
+    rssPageType = 778
+  }
 }

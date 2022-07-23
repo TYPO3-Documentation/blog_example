@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Domain\Validator;
 
-use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
-use TYPO3\CMS\Extbase\Error\Result;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /*

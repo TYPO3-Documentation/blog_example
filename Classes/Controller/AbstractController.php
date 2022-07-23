@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Controller;
 
@@ -34,7 +34,8 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     protected function getErrorFlashMessage(): string
     {
         $defaultFlashMessage = parent::getErrorFlashMessage();
-        $locallangKey = sprintf('error.%s.%s', $this->request->getControllerName(), $this->actionMethodName);
+        $locallangKey = sprintf('error.%s.%s',
+            $this->request->getControllerName(), $this->actionMethodName);
         return $this->translate($locallangKey, $defaultFlashMessage);
     }
 
@@ -45,12 +46,17 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      * @param integer $severity optional severity code. One of the t3lib_FlashMessage constants
      * @return void
      */
-    public function addLocalizedFlashMessage(string $action, ContextualFeedbackSeverity $severity = ContextualFeedbackSeverity::OK): void
-    {
-        $messageLocallangKey = sprintf('flashmessage.%s.%s', $this->request->getControllerName(), $action);
-        $localizedMessage = $this->translate($messageLocallangKey, '[' . $messageLocallangKey . ']');
+    public function addLocalizedFlashMessage(
+        string $action,
+        ContextualFeedbackSeverity $severity = ContextualFeedbackSeverity::OK
+    ): void {
+        $messageLocallangKey = sprintf('flashmessage.%s.%s',
+            $this->request->getControllerName(), $action);
+        $localizedMessage = $this->translate($messageLocallangKey,
+            '[' . $messageLocallangKey . ']');
         $titleLocallangKey = sprintf('%s.title', $messageLocallangKey);
-        $localizedTitle = $this->translate($titleLocallangKey, '[' . $titleLocallangKey . ']');
+        $localizedTitle = $this->translate($titleLocallangKey,
+            '[' . $titleLocallangKey . ']');
         $this->addFlashMessage($localizedMessage, $localizedTitle, $severity);
     }
 
@@ -61,8 +67,10 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      * @param string $defaultMessage
      * @return string
      */
-    protected function translate(string $key, string $defaultMessage = ''): string
-    {
+    protected function translate(
+        string $key,
+        string $defaultMessage = ''
+    ): string {
         $message = LocalizationUtility::translate($key, 'BlogExample');
         if ($message === null) {
             $message = $defaultMessage;

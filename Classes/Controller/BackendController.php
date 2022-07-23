@@ -169,7 +169,7 @@ class BackendController extends ActionController
     {
         $view = $this->initializeModuleTemplate($this->request);
         $comments = $this->commentRepository->findAll();
-        $view->assign('post', $comments);
+        $view->assign('comments', $comments);
         return $view->renderResponse('showAllComments');
     }
 

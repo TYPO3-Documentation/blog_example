@@ -1,33 +1,33 @@
 <html
     xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+    xmlns:blog="http://typo3.org/ns/FriendsOfTYPO3/BlogExample/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
 <f:layout name="Module" />
 
 <f:section name="Content">
-    <h2>List of all comments &quot;{blog.title}&quot;</h2>
-    <div class="tx-blogexample-list-container">
+    <div class="tx-blogexample-comment-list">
+    <h2>List of all comments</h2>
         <f:if condition="{comments}">
             <f:then>
-                <ul>
                     <f:for each="{comments}" as="comment">
-                        <li>
-                            <h3>
-                                <f:link.action action="show" controller="BackendPost" arguments="{post: post, blog: post.blog}">
-                                    <core:icon identifier="actions-document-edit" />
-                                    {post.title}
-                                </f:link.action>
-                            </h3>
-                            <p class="bodytext">
-                                <f:format.crop maxCharacters="100">{post.content}</f:format.crop>
-                            </p>
-                        </li>
+                        <div class="tx-blogexample-comment">
+                            <div class="tx-blogexample-comment-info">
+                    <span class="tx-blogexample-comment-author">
+                        <blog:gravatar emailAddress="{comment.email}" size="40" class="tx-blogexample-gravatar" />
+                        <a href="mailto:{comment.email}">{comment.author}</a> posted on
+                        <span class="tx-blogexample-date"><f:format.date>{comment.date}</f:format.date></span>
+                    </span>
+                            </div>
+                            <div class="tx-blogexample-comment-text">
+                                <f:format.nl2br>{comment.content}</f:format.nl2br>
+                            </div>
+                            <hr class="clear" />
+                        </div>
                     </f:for>
-                </ul>
             </f:then>
             <f:else>
-                <p>This blog currently doesn't contain any posts.</p>
+                <p>This blog currently doesn't contain any comments.</p>
             </f:else>
         </f:if>
     </div>
