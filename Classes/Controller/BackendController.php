@@ -63,9 +63,6 @@ class BackendController extends ActionController
 
     /**
      * Index action for this controller. Displays a list of blogs.
-     *
-     * @param int $currentPage
-     * @return void
      */
     public function indexAction(int $currentPage = 1): ResponseInterface
     {

@@ -7,7 +7,6 @@ use FriendsOfTYPO3\BlogExample\Domain\Model\Comment;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 
 /*
@@ -29,21 +28,17 @@ use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 class CommentController extends AbstractController
 {
     /**
-     * @var PostRepository
+     * CommentController constructor.
+     *
+     * Takes care of dependency injection
      */
-    private $postRepository;
-
-    public function __construct(PostRepository $postRepository)
-    {
-        $this->postRepository = $postRepository;
+    public function __construct(
+        protected readonly PostRepository $postRepository
+    ) {
     }
 
     /**
      * Adds a comment to a blog post and redirects to single view
-     *
-     * @param Post $post The post the comment is related to
-     * @param Comment $newComment The comment to create
-     * @return void
      */
     public function createAction(
         Post $post,
@@ -57,10 +52,6 @@ class CommentController extends AbstractController
 
     /**
      * Deletes an existing comment
-     *
-     * @param Post $post The post the comment is related to
-     * @param Comment $comment The comment to be deleted
-     * @return void
      */
     public function deleteAction(
         Post $post,
@@ -75,8 +66,6 @@ class CommentController extends AbstractController
 
     /**
      * Deletes all comments of the given post
-     *
-     * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Post $post
      */
     public function deleteAllAction(Post $post): ResponseInterface
     {

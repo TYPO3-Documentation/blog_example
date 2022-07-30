@@ -29,7 +29,6 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      * Override getErrorFlashMessage to present
      * nice flash error messages.
      *
-     * @return string
      */
     protected function getErrorFlashMessage(): string
     {
@@ -41,10 +40,6 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 
     /**
      * helper function to render localized flashmessages
-     *
-     * @param string $action
-     * @param integer $severity optional severity code. One of the t3lib_FlashMessage constants
-     * @return void
      */
     public function addLocalizedFlashMessage(
         string $action,
@@ -62,10 +57,6 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 
     /**
      * helper function to use localized strings in BlogExample controllers
-     *
-     * @param string $key locallang key
-     * @param string $defaultMessage
-     * @return string
      */
     protected function translate(
         string $key,

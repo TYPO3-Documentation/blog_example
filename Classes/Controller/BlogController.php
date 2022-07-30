@@ -20,11 +20,9 @@ use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\AdministratorRepository;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository;
 use FriendsOfTYPO3\BlogExample\Service\BlogFactory;
-use TYPO3\CMS\Core\Messaging\FlashMessage;
-use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
-use TYPO3\CMS\Core\Pagination\SimplePagination;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
+use TYPO3\CMS\Core\Pagination\SimplePagination;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 
 /**
@@ -32,10 +30,11 @@ use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
  */
 class BlogController extends AbstractController
 {
+
     /**
      * BlogController constructor.
      *
-     * @param BlogRepository $blogRepository
+     * Takes care of dependency injection
      */
     public function __construct(
         protected readonly BlogRepository $blogRepository,
@@ -46,9 +45,6 @@ class BlogController extends AbstractController
 
     /**
      * Index action for this controller. Displays a list of blogs.
-     *
-     * @param int $currentPage
-     * @return void
      */
     public function indexAction(int $currentPage = 1): ResponseInterface
     {
@@ -67,8 +63,8 @@ class BlogController extends AbstractController
     /**
      * Displays a form for creating a new blog
      *
-     * @param Blog $newBlog A fresh blog object taken as a basis for the rendering
-     * @return void
+     * $blog is taken as a basis for the rendering
+     *
      * @IgnoreValidation("newBlog")
      */
     public function newAction(Blog $newBlog = null): ResponseInterface
@@ -82,8 +78,9 @@ class BlogController extends AbstractController
     /**
      * Creates a new blog
      *
-     * @param Blog $newBlog A fresh Blog object which has not yet been added to the repository
-     * @return void
+     * $blog is a fresh Blog object which has not yet been added to the
+     * repository
+     *
      */
     public function createAction(Blog $newBlog): ResponseInterface
     {
@@ -96,8 +93,10 @@ class BlogController extends AbstractController
     /**
      * Displays a form for editing an existing blog
      *
-     * @param Blog $blog The blog to be edited. This might also be a clone of the original blog already containing modifications if the edit form has been submitted, contained errors and therefore ended up in this action again.
-     * @return void
+     * $blog might also be a clone of the original blog already containing
+     * modifications if the edit form has been submitted, contained errors and
+     * therefore ended up in this action again.
+     *
      * @IgnoreValidation("blog")
      */
     public function editAction(Blog $blog): ResponseInterface
@@ -111,8 +110,8 @@ class BlogController extends AbstractController
     /**
      * Updates an existing blog
      *
-     * @param Blog $blog A not yet persisted clone of the original blog containing the modifications
-     * @return void
+     * $blog is a not yet persisted clone of the original blog containing
+     * the modifications
      */
     public function updateAction(Blog $blog): ResponseInterface
     {
@@ -124,9 +123,6 @@ class BlogController extends AbstractController
 
     /**
      * Deletes an existing blog
-     *
-     * @param Blog $blog The blog to delete
-     * @return void
      */
     public function deleteAction(Blog $blog): ResponseInterface
     {
@@ -138,8 +134,6 @@ class BlogController extends AbstractController
 
     /**
      * Deletes an existing blog
-     *
-     * @return void
      */
     public function deleteAllAction(): ResponseInterface
     {
@@ -151,8 +145,6 @@ class BlogController extends AbstractController
 
     /**
      * Creates a several new blogs
-     *
-     * @return void
      */
     public function populateAction(): ResponseInterface
     {
