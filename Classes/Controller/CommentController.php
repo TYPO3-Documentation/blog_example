@@ -6,6 +6,7 @@ namespace FriendsOfTYPO3\BlogExample\Controller;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Comment;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository;
+use FriendsOfTYPO3\BlogExample\Exception\NoBlogAdminAccessException;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 
@@ -52,12 +53,13 @@ class CommentController extends AbstractController
 
     /**
      * Deletes an existing comment
+     * @throws NoBlogAdminAccessException
      */
     public function deleteAction(
         Post $post,
         Comment $comment
     ): ResponseInterface {
-        // TODO access protection
+        $this->checkBlogAdminAccess();
         $post->removeComment($comment);
         $this->postRepository->update($post);
         $this->addFlashMessage('deleted', ContextualFeedbackSeverity::INFO);
@@ -66,10 +68,11 @@ class CommentController extends AbstractController
 
     /**
      * Deletes all comments of the given post
+     * @throws NoBlogAdminAccessException
      */
     public function deleteAllAction(Post $post): ResponseInterface
     {
-        // TODO access protection
+        $this->checkBlogAdminAccess();
         $post->removeAllComments();
         $this->postRepository->update($post);
         $this->addFlashMessage('deletedAll', ContextualFeedbackSeverity::INFO);

@@ -16,6 +16,8 @@ namespace FriendsOfTYPO3\BlogExample\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use FriendsOfTYPO3\BlogExample\Exception\NoBlogAdminAccessException;
+use phpDocumentor\Reflection\Types\Boolean;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -36,6 +38,21 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
         $locallangKey = sprintf('error.%s.%s',
             $this->request->getControllerName(), $this->actionMethodName);
         return $this->translate($locallangKey, $defaultFlashMessage);
+    }
+
+    protected function hasBlogAdminAccess(): boolean
+    {
+        // TODO access protection
+        return true;
+    }
+
+    /**
+     * @throws NoBlogAdminAccessException
+     */
+    protected function checkBlogAdminAccess() {
+        if (!$this->hasBlogAdminAccess()) {
+            throw new NoBlogAdminAccessException();
+        }
     }
 
     /**

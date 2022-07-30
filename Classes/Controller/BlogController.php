@@ -19,6 +19,7 @@ namespace FriendsOfTYPO3\BlogExample\Controller;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\AdministratorRepository;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository;
+use FriendsOfTYPO3\BlogExample\Exception\NoBlogAdminAccessException;
 use FriendsOfTYPO3\BlogExample\Service\BlogFactory;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
@@ -112,10 +113,11 @@ class BlogController extends AbstractController
      *
      * $blog is a not yet persisted clone of the original blog containing
      * the modifications
+     * @throws NoBlogAdminAccessException
      */
     public function updateAction(Blog $blog): ResponseInterface
     {
-        // TODO access protection
+        $this->checkBlogAdminAccess();
         $this->blogRepository->update($blog);
         $this->addFlashMessage('updated');
         return $this->redirect('index');
@@ -123,10 +125,11 @@ class BlogController extends AbstractController
 
     /**
      * Deletes an existing blog
+     * @throws NoBlogAdminAccessException
      */
     public function deleteAction(Blog $blog): ResponseInterface
     {
-        // TODO access protection
+        $this->checkBlogAdminAccess();
         $this->blogRepository->remove($blog);
         $this->addFlashMessage('deleted', ContextualFeedbackSeverity::INFO);
         return $this->redirect('index');
@@ -134,10 +137,11 @@ class BlogController extends AbstractController
 
     /**
      * Deletes an existing blog
+     * @throws NoBlogAdminAccessException
      */
     public function deleteAllAction(): ResponseInterface
     {
-        // TODO access protection
+        $this->checkBlogAdminAccess();
         $this->blogRepository->removeAll();
         return $this->redirect('index');
     }
@@ -145,10 +149,11 @@ class BlogController extends AbstractController
 
     /**
      * Creates a several new blogs
+     * @throws NoBlogAdminAccessException
      */
     public function populateAction(): ResponseInterface
     {
-        // TODO access protection
+        $this->checkBlogAdminAccess();
         $numberOfExistingBlogs = $this->blogRepository->countAll();
         for ($blogNumber = $numberOfExistingBlogs + 1; $blogNumber < ($numberOfExistingBlogs + 5); $blogNumber++) {
             $blog = $this->blogFactory->createBlog($blogNumber);

@@ -9,10 +9,12 @@ use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\PersonRepository;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository;
+use FriendsOfTYPO3\BlogExample\Exception\NoBlogAdminAccessException;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
+use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 
 
 /*
@@ -134,10 +136,11 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
 
     /**
      * Creates a new post
+     * @throws NoBlogAdminAccessException|IllegalObjectTypeException
      */
     public function createAction(Blog $blog, Post $newPost): ResponseInterface
     {
-        // TODO access protection
+        $this->checkBlogAdminAccess();
         $blog->addPost($newPost);
         $newPost->setBlog($blog);
         $this->postRepository->add($newPost);
@@ -165,10 +168,11 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      *
      * $post is a clone of the original post with the updated values already applied
      *
+     * @throws NoBlogAdminAccessException
      */
     public function updateAction(Blog $blog, Post $post): ResponseInterface
     {
-        // TODO access protection
+        $this->checkBlogAdminAccess();
         $this->postRepository->update($post);
         $this->addFlashMessage('updated');
         return $this->redirect('show', null, null,
@@ -177,10 +181,11 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
 
     /**
      * Deletes an existing post
+     * @throws NoBlogAdminAccessException
      */
     public function deleteAction(Blog $blog, Post $post): ResponseInterface
     {
-        // TODO access protection
+        $this->checkBlogAdminAccess();
         $this->postRepository->remove($post);
         $this->addFlashMessage('deleted', ContextualFeedbackSeverity::INFO);
         return $this->redirect('index', null, null, ['blog' => $blog]);
