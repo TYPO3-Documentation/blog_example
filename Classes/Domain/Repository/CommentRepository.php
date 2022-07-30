@@ -16,7 +16,11 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
@@ -25,4 +29,20 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 class CommentRepository extends Repository
 {
     protected $defaultOrderings = ['date' => QueryInterface::ORDER_DESCENDING];
+
+    public function initializeObject()
+    {
+        /** @var QuerySettingsInterface $querySettings */
+        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
+        // Show comments from all pages
+        $querySettings->setRespectStoragePage(false);
+        $this->setDefaultQuerySettings($querySettings);
+    }
+
+    public function findAllIgnoreEnableFields(): QueryResultInterface|array
+    {
+        $query = $this->createQuery();
+        $query->getQuerySettings()->setIgnoreEnableFields(true);
+        return $query->execute();
+    }
 }
