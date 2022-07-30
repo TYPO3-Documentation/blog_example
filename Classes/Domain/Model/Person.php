@@ -26,6 +26,10 @@ class Person extends AbstractEntity
 {
     protected string $firstname = '';
     protected string $lastname = '';
+    /**
+     * @Extbase\ORM\Transient
+     */
+    protected string $fullname = '';
     protected string $email = '';
 
     /**
@@ -101,7 +105,8 @@ class Person extends AbstractEntity
 
     public function getFullName(): string
     {
-        return $this->firstname . ' ' . $this->lastname;
+        $this->fullname = $this->firstname . ' ' . $this->lastname;
+        return $this->fullname;
     }
 
     /**
