@@ -64,7 +64,7 @@ class BlogController extends AbstractController
     /**
      * Displays a form for creating a new blog
      *
-     * $blog is taken as a basis for the rendering
+     * $newBlog is taken as a basis for the rendering
      *
      * @IgnoreValidation("newBlog")
      */
