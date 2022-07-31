@@ -98,7 +98,9 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
             $blog = $this->blogRepository->findAll()->getFirst();
         }
         $this->view->assign('blog', $blog);
-        return $this->htmlResponse();
+        return $this->responseFactory->createResponse()
+            ->withHeader('Content-Type', 'text/xml; charset=utf-8')
+            ->withBody($this->streamFactory->createStream($this->view->render()));
     }
 
     /**
