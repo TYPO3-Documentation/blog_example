@@ -24,12 +24,21 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Person extends AbstractEntity
 {
+    /**
+     * @Extbase\Validate("StringLength", options={"maximum": 80})
+     */
     protected string $firstname = '';
+    /**
+     * @Extbase\Validate("StringLength", options={"minimum": 2, maximum": 80})
+     */
     protected string $lastname = '';
     /**
      * @Extbase\ORM\Transient
      */
     protected string $fullname = '';
+    /**
+     * @Extbase\Validate("EmailAddress")
+     */
     protected string $email = '';
 
     /**
