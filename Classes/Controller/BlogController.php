@@ -171,5 +171,11 @@ class BlogController extends AbstractController
         $this->addFlashMessage('populated');
         return $this->redirect('index');
     }
+
+    public function showBlogAjaxAction(Blog $blog): ResponseInterface
+    {
+        $jsonOutput = json_encode($blog);
+        return $this->jsonResponse($jsonOutput);
+    }
 }
 
