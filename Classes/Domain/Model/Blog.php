@@ -26,9 +26,12 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 class Blog extends AbstractEntity
 {
     /**
-     * @Extbase\Validate("StringLength", options={"minimum": 1, "maximum": 80})
+     * @Extbase\Validate("FriendsOfTYPO3\BlogExample\Domain\Validator\TitleValidator")
      */
     protected string $title = '';
+    /**
+     * @Extbase\Validate("StringLength", options={"minimum": 5, "maximum": 80})
+     */
     protected string|null $subtitle;
 
     /**

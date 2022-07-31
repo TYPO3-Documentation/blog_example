@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Domain\Validator;
 
+use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -21,13 +23,31 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 /**
  * An exemplary Blog validator
  */
-class BlogValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
+final class BlogValidator extends AbstractValidator
 {
     protected function isValid(mixed $value): void
     {
-        if (strtolower($value->getTitle()) === 'extbase') {
-            $this->addError(LocalizationUtility::translate('error.Blog.invalidTitle',
-                'BlogExample'), 1297418974);
+        if (!$value instanceof Blog) {
+            $errorString = 'The blog validator can only handle classes '
+                . 'of type FriendsOfTYPO3\BlogExample\Domain\Validator\Blog. '
+                . $value::class . ' given instead.';
+            $this->addError($errorString, 1297418975);
+        }
+        if ($value->getCategories()->count() > 3) {
+            $errorString = LocalizationUtility::translate(
+                'error.Blog.tooManyCategories',
+                'BlogExample'
+            );
+            // Add the error to the property if it is specific to one property
+            $this->addErrorForProperty('categories', $errorString, 1297418976);
+        }
+        if (strtolower($value->getTitle()) === strtolower($value->getSubtitle())) {
+            $errorString = LocalizationUtility::translate(
+                'error.Blog.invalidSubTitle',
+                'BlogExample'
+            );
+            // Add the error directly if it takes several properties into account
+            $this->addError($errorString, 1297418974);
         }
     }
 }

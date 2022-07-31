@@ -91,10 +91,11 @@ class BlogController extends AbstractController
      * $blog is a fresh Blog object which has not yet been added to the
      * repository
      *
+     * @Extbase\Validate(param="newBlog", validator="FriendsOfTYPO3\ExtbaseExample\Domain\Validator\BlogValidator")
      */
     public function createAction(Blog $newBlog): ResponseInterface
     {
-        // TODO access protection
+        $this->checkBlogAdminAccess();
         $this->blogRepository->add($newBlog);
         $this->addFlashMessage('created');
         return $this->redirect('index');
@@ -122,6 +123,8 @@ class BlogController extends AbstractController
      *
      * $blog is a not yet persisted clone of the original blog containing
      * the modifications
+     *
+     * @Extbase\Validate(param="blog", validator="FriendsOfTYPO3\ExtbaseExample\Domain\Validator\BlogValidator")
      * @throws NoBlogAdminAccessException
      */
     public function updateAction(Blog $blog): ResponseInterface
