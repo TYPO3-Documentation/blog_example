@@ -61,6 +61,15 @@ class BlogController extends AbstractController
         return $this->htmlResponse();
     }
 
+
+    /**
+     * Output <h1>Hello World!</h1>
+     */
+    public function helloWorldAction(): ResponseInterface
+    {
+        return $this->htmlResponse('<h1>Hello World!</h1>');
+    }
+
     /**
      * Displays a form for creating a new blog
      *
