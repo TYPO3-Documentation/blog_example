@@ -17,6 +17,7 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Model;
  */
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 
 /**
  * A blog post comment
@@ -31,12 +32,12 @@ class Comment extends AbstractEntity
     protected string $author = '';
 
     /**
-     * @Extbase\Validate("EmailAddress")
+     * @Validate("EmailAddress")
      */
     protected string $email = '';
 
     /**
-     * @Extbase\Validate("StringLength", options={"maximum": 500})
+     * @Validate("StringLength", options={"maximum": 500})
      */
     protected string $content = '';
 

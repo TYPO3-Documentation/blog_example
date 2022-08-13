@@ -18,6 +18,8 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Annotation\Validate;
+use TYPO3\CMS\Extbase\Annotation\ORM\Transient;
 
 /**
  * A person - acting as author
@@ -25,19 +27,19 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 class Person extends AbstractEntity
 {
     /**
-     * @Extbase\Validate("StringLength", options={"maximum": 80})
+     * @Validate("StringLength", options={"maximum": 80})
      */
     protected string $firstname = '';
     /**
-     * @Extbase\Validate("StringLength", options={"minimum": 2, maximum": 80})
+     * @Validate("StringLength", options={"minimum": 2, "maximum": 80})
      */
     protected string $lastname = '';
     /**
-     * @Extbase\ORM\Transient
+     * @Transient
      */
     protected string $fullname = '';
     /**
-     * @Extbase\Validate("EmailAddress")
+     * @Validate("EmailAddress")
      */
     protected string $email = '';
 

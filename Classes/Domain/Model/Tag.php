@@ -23,7 +23,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractValueObject;
  */
 final class Tag extends AbstractValueObject
 {
-    private string $name = '';
+    protected string $name = '';
 
     public function __construct(string $name = '')
     {
@@ -33,5 +33,9 @@ final class Tag extends AbstractValueObject
     public function getName(): string
     {
         return $this->name;
+    }
+    public function setName(string $name): void
+    {
+        $this->name = $name;
     }
 }

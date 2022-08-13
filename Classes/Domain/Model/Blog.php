@@ -19,6 +19,10 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Model;
 use TYPO3\CMS\Extbase\Domain\Model\Category;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Annotation\Validate;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
+use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
+
 
 /**
  * A blog
@@ -26,47 +30,47 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 class Blog extends AbstractEntity
 {
     /**
-     * @Extbase\Validate("FriendsOfTYPO3\BlogExample\Domain\Validator\TitleValidator")
+     * @Validate("FriendsOfTYPO3\BlogExample\Domain\Validator\TitleValidator")
      */
-    protected string $title = '';
+    public string $title = '';
     /**
-     * @Extbase\Validate("StringLength", options={"minimum": 5, "maximum": 80})
+     * @Validate("StringLength", options={"minimum": 5, "maximum": 80})
      */
-    protected string|null $subtitle;
+    public string|null $subtitle;
 
     /**
      * A short description of the blog
      *
-     * @Extbase\Validate("StringLength", options={"maximum": 150})
+     * @Validate("StringLength", options={"maximum": 150})
      */
-    protected string $description = '';
+    public string $description = '';
 
     /**
      * A relative path to a logo image
      */
-    protected string $logo = '';
+    public string $logo = '';
 
     /**
      * The posts of this blog
      *
      * @var ObjectStorage<Post>
-     * @Extbase\ORM\Lazy
-     * @Extbase\ORM\Cascade("remove")
+     * @Lazy
+     * @Cascade("remove")
      */
-    protected $posts;
+    public $posts;
 
     /**
      * @var ObjectStorage<Category>
      */
-    protected $categories;
+    public $categories;
 
     /**
      * The blog's administrator
      *
      * @var Administrator
-     * @Extbase\ORM\Lazy
+     * @Lazy
      */
-    protected $administrator;
+    public $administrator;
 
     /**
      * Constructs a new Blog

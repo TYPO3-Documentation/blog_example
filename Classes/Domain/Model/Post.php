@@ -19,6 +19,9 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Model;
 use TYPO3\CMS\Extbase\Domain\Model\Category;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Annotation\Validate;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
+use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
 
 /**
  * A blog post
@@ -28,7 +31,7 @@ class Post extends AbstractEntity
     protected Blog $blog;
 
     /**
-     * @Extbase\Validate("StringLength", options={"minimum": 3, "maximum": 50})
+     * @Validate("StringLength", options={"minimum": 3, "maximum": 50})
      */
     protected string $title = '';
 
@@ -41,11 +44,11 @@ class Post extends AbstractEntity
      * @var Person
      */
     protected Person $author;
-    protected Person $secondAuthor;
-    protected Person $reviewer;
+    protected ?Person $secondAuthor = null;
+    protected ?Person $reviewer = null;
 
     /**
-     * @Extbase\Validate("StringLength", options={"minimum": 3})
+     * @Validate("StringLength", options={"minimum": 3})
      */
     protected string $content = '';
 
@@ -61,14 +64,14 @@ class Post extends AbstractEntity
 
     /**
      * @var ObjectStorage<Comment>
-     * @Extbase\ORM\Lazy
-     * @Extbase\ORM\Cascade("remove")
+     * @Lazy
+     * @Cascade("remove")
      */
     protected ObjectStorage $comments;
 
     /**
      * @var ObjectStorage<Post>
-     * @Extbase\ORM\Lazy
+     * @Lazy
      */
     protected ObjectStorage $relatedPosts;
 
@@ -85,7 +88,7 @@ class Post extends AbstractEntity
     /**
      * 1:n relation stored as CSV value
      * @var ObjectStorage<Comment>
-     * @Extbase\ORM\Lazy
+     * @Lazy
      */
     protected ObjectStorage $additionalComments;
 
@@ -213,7 +216,7 @@ class Post extends AbstractEntity
         $this->secondAuthor = $secondAuthor;
     }
 
-    public function getReviewer(): Person
+    public function getReviewer(): ?Person
     {
         return $this->reviewer;
     }
