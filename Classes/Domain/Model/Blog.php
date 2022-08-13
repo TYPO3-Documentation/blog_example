@@ -116,6 +116,14 @@ class Blog extends AbstractEntity
     }
 
     /**
+     * @param ObjectStorage<Post> $posts
+     */
+    public function setPosts(ObjectStorage $posts): void
+    {
+        $this->posts = $posts;
+    }
+
+    /**
      * Add category to a blog
      *
      * @param Category $category

@@ -24,6 +24,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 class Info extends AbstractEntity
 {
     protected string $name = '';
+    protected string $bodytext = '';
 
     public function getName(): string
     {
@@ -33,6 +34,27 @@ class Info extends AbstractEntity
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBodytext(): string
+    {
+        return $this->bodytext;
+    }
+
+    /**
+     * @param string $bodytext
+     */
+    public function setBodytext(string $bodytext): void
+    {
+        $this->bodytext = $bodytext;
+    }
+
+    public function getCombinedString(): string
+    {
+        return $this->name . ': ' . $this->bodytext;
     }
 
     /**

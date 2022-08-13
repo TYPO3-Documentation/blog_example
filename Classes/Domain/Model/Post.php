@@ -76,7 +76,8 @@ class Post extends AbstractEntity
     protected ObjectStorage $relatedPosts;
 
     /**
-     * 1:1 relation stored as CSV value in this class
+     * 1:1 optional relation
+     * @Extbase\ORM\Cascade("remove")
      */
     protected Info|null $additionalName;
 

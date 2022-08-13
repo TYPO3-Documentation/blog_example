@@ -90,11 +90,23 @@
 			<trans-unit id="tx_blogexample_domain_model_tag.name" xml:space="preserve">
 				<source>Name</source>
 			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_tag.priority" xml:space="preserve">
+				<source>Priority</source>
+			</trans-unit>
 			<trans-unit id="tx_blogexample_domain_model_tag.posts" xml:space="preserve">
 				<source>Related posts</source>
 			</trans-unit>
 			<trans-unit id="fe_users.tx_extbase_type.administrator" xml:space="preserve">
 				<source>Blog Admin (BlogExample)</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_info" xml:space="preserve">
+				<source>Bloginfo</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_info.name" xml:space="preserve">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_info.bodytext" xml:space="preserve">
+				<source>Text</source>
 			</trans-unit>
 		</body>
 	</file>

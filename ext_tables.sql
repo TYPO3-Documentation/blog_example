@@ -59,6 +59,7 @@ CREATE TABLE tx_blogexample_domain_model_person (
 #
 CREATE TABLE tx_blogexample_domain_model_tag (
 	name varchar(255) DEFAULT '' NOT NULL,
+	priority int(11) DEFAULT '0' NOT NULL,
 	posts int(11) unsigned DEFAULT '0' NOT NULL
 );
 
@@ -68,6 +69,7 @@ CREATE TABLE tx_blogexample_domain_model_tag (
 #
 CREATE TABLE tx_blogexample_domain_model_info (
 	name varchar(255) DEFAULT '' NOT NULL,
+	bodytext text,
 	post int(11) DEFAULT '0' NOT NULL
 );
 

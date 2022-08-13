@@ -23,18 +23,10 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractValueObject;
  */
 final class Tag extends AbstractValueObject
 {
-    protected string $name = '';
+    public string $name = '';
+    public int $priority = 0;
 
     public function __construct(string $name = '')
-    {
-        $this->name = $name;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-    public function setName(string $name): void
     {
         $this->name = $name;
     }
