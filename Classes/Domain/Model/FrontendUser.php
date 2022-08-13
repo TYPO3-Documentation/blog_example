@@ -25,9 +25,6 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class FrontendUser extends AbstractEntity
 {
-    protected string $username = '';
-    protected string $password = '';
-
     /**
      * @var ObjectStorage<FrontendUserGroup>
      */

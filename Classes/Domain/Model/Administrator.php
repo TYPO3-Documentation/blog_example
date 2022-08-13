@@ -22,4 +22,5 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Model;
  */
 class Administrator extends FrontendUser
 {
+    public String $administratorName = '';
 }
