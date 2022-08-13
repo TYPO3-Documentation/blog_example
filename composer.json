@@ -30,6 +30,7 @@
   "require": {
     "typo3/cms-core": "^11.5",
     "typo3/cms-extbase": "^11.5",
-    "typo3/cms-fluid": "^11.5"
+    "typo3/cms-fluid": "^11.5",
+    "typo3fluid/fluid": "^2.7.2"
   }
 }
