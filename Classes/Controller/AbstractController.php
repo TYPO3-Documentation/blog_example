@@ -16,7 +16,7 @@ namespace FriendsOfTYPO3\BlogExample\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
-use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -24,12 +24,9 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
-
     /**
      * Override getErrorFlashMessage to present
      * nice flash error messages.
-     *
-     * @return string
      */
     protected function getErrorFlashMessage(): string
     {
@@ -41,12 +38,9 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     /**
      * helper function to render localized flashmessages
      *
-     * @param string $action
-     * @param integer $severity optional severity code. One of the t3lib_FlashMessage constants
-     *
-     * @return void
+     * @param AbstractMessage::* $severity
      */
-    public function addLocalizedFlashMessage(string $action, int $severity = FlashMessage::OK): void
+    public function addLocalizedFlashMessage(string $action, int $severity = AbstractMessage::OK): void
     {
         $messageLocallangKey = sprintf('flashmessage.%s.%s', $this->request->getControllerName(), $action);
         $localizedMessage = $this->translate($messageLocallangKey, '[' . $messageLocallangKey . ']');
@@ -57,11 +51,6 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
 
     /**
      * helper function to use localized strings in BlogExample controllers
-     *
-     * @param string $key locallang key
-     * @param string $defaultMessage
-     *
-     * @return string
      */
     protected function translate(string $key, string $defaultMessage = ''): string
     {

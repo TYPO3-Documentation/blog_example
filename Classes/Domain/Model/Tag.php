@@ -16,42 +16,29 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractValueObject;
+
 /**
  * A blog post tag
  */
-class Tag extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
+class Tag extends AbstractValueObject
 {
-    /**
-     * @var string
-     */
-    protected $name = '';
+    protected string $name = '';
 
-    /**
-     * Constructs this tag
-     *
-     * @param $name
-     */
-    public function __construct($name)
+    public function __construct(string $name)
     {
         $this->name = $name;
     }
 
-    /**
-     * Returns this tag's name
-     *
-     * @return string This tag's name
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
      * Returns this tag as a formatted string
-     *
-     * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getName();
     }

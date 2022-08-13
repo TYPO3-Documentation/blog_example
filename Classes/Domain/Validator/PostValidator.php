@@ -32,7 +32,7 @@ class PostValidator extends AbstractValidator
      *
      * @param Post $value
      */
-    protected function isValid($value)
+    protected function isValid($value): bool
     {
         if ($value->getTitle() === '77') {
             $error = new Error('Title custom validation failed', 1480872650);

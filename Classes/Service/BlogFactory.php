@@ -33,12 +33,8 @@ class BlogFactory implements SingletonInterface
     /**
      * Returns a sample blog populated with generic data
      * It is also an example how to handle objects and repositories in general
-     *
-     * @param integer $blogNumber
-     *
-     * @return \FriendsOfTYPO3\BlogExample\Domain\Model\Blog
      */
-    public function createBlog($blogNumber = 1)
+    public function createBlog(int $blogNumber = 1): Blog
     {
         // initialize blog
         $blog = new Blog();
@@ -56,7 +52,6 @@ class BlogFactory implements SingletonInterface
 
         // create sample posts
         for ($postNumber = 1; $postNumber < 6; $postNumber++) {
-
             // create post
             $post = new Post();
             $post->setTitle('The ' . $postNumber . '. post of blog #' . $blogNumber);

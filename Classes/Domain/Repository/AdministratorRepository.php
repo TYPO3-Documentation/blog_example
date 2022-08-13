@@ -16,9 +16,11 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Extbase\Persistence\Repository;
+
 /**
  * A repository for administrators
  */
-class AdministratorRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class AdministratorRepository extends Repository
 {
 }
