@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\ViewHelpers;
 
@@ -50,8 +50,8 @@ class GravatarViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBa
 
         $this->registerUniversalTagAttributes();
         $this->registerArgument('emailAddress', 'string', '', true)
-             ->registerArgument('defaultImageUri', 'string', '', false)
-             ->registerArgument('size', 'string', '', false);
+            ->registerArgument('defaultImageUri', 'string', '', false)
+            ->registerArgument('size', 'string', '', false);
     }
 
     /**

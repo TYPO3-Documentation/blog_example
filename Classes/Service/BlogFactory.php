@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Service;
 
@@ -35,6 +35,7 @@ class BlogFactory implements SingletonInterface
      * It is also an example how to handle objects and repositories in general
      *
      * @param integer $blogNumber
+     *
      * @return \FriendsOfTYPO3\BlogExample\Domain\Model\Blog
      */
     public function createBlog($blogNumber = 1)

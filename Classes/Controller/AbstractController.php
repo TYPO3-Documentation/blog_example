@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Controller;
 
@@ -43,6 +43,7 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      *
      * @param string $action
      * @param integer $severity optional severity code. One of the t3lib_FlashMessage constants
+     *
      * @return void
      */
     public function addLocalizedFlashMessage(string $action, int $severity = FlashMessage::OK): void
@@ -59,6 +60,7 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      *
      * @param string $key locallang key
      * @param string $defaultMessage
+     *
      * @return string
      */
     protected function translate(string $key, string $defaultMessage = ''): string

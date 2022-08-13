@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Controller;
 
@@ -41,6 +41,7 @@ class CommentController extends AbstractController
      *
      * @param Post $post The post the comment is related to
      * @param Comment $newComment The comment to create
+     *
      * @return void
      */
     public function createAction(Post $post, Comment $newComment): void
@@ -56,6 +57,7 @@ class CommentController extends AbstractController
      *
      * @param Post $post The post the comment is related to
      * @param Comment $comment The comment to be deleted
+     *
      * @return void
      */
     public function deleteAction(Post $post, Comment $comment): void

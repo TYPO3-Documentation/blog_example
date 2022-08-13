@@ -1,8 +1,7 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\ExpressionLanguage;
-
 
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\ExpressionLanguage\AbstractProvider;
@@ -14,7 +13,7 @@ class ExtensionConfigurationProvider extends AbstractProvider
     {
         $configuration = GeneralUtility::makeInstance(ExtensionConfiguration::class);
         $this->expressionLanguageVariables = [
-            'blogConfiguration' => $configuration->get('blog_example')
+            'blogConfiguration' => $configuration->get('blog_example'),
         ];
     }
 }

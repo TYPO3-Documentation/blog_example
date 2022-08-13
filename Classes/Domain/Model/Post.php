@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Domain\Model;
 
@@ -85,18 +85,21 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * 1:1 relation stored as CSV value in this class
+     *
      * @var \FriendsOfTYPO3\BlogExample\Domain\Model\Info
      */
     protected $additionalName;
 
     /**
      * 1:1 relation stored as foreign key in Info class
+     *
      * @var \FriendsOfTYPO3\BlogExample\Domain\Model\Info
      */
     protected $additionalInfo;
 
     /**
      * 1:n relation stored as CSV value
+     *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\BlogExample\Domain\Model\Comment>
      * @Extbase\ORM\Lazy
      */
@@ -389,7 +392,8 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Setter for the related posts
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $relatedPosts An Object Storage containing related Posts instances
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $relatedPosts An Object Storage containing related Posts
+     *     instances
      */
     public function setRelatedPosts(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $relatedPosts)
     {

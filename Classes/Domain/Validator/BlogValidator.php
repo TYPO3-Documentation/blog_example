@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Domain\Validator;
 
@@ -29,6 +29,7 @@ class BlogValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractVali
      * Checks whether the given blog is valid
      *
      * @param Blog $blog The blog
+     *
      * @return boolean TRUE if blog could be validated, otherwise FALSE
      */
     public function isValid($blog)

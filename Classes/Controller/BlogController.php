@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Controller;
 
@@ -55,6 +55,7 @@ class BlogController extends AbstractController
      * Index action for this controller. Displays a list of blogs.
      *
      * @param int $currentPage
+     *
      * @return void
      */
     public function indexAction(int $currentPage = 1): void
@@ -73,6 +74,7 @@ class BlogController extends AbstractController
      * Displays a form for creating a new blog
      *
      * @param Blog $newBlog A fresh blog object taken as a basis for the rendering
+     *
      * @return void
      * @IgnoreValidation("newBlog")
      */
@@ -86,6 +88,7 @@ class BlogController extends AbstractController
      * Creates a new blog
      *
      * @param Blog $newBlog A fresh Blog object which has not yet been added to the repository
+     *
      * @return void
      */
     public function createAction(Blog $newBlog)
@@ -99,7 +102,10 @@ class BlogController extends AbstractController
     /**
      * Displays a form for editing an existing blog
      *
-     * @param Blog $blog The blog to be edited. This might also be a clone of the original blog already containing modifications if the edit form has been submitted, contained errors and therefore ended up in this action again.
+     * @param Blog $blog The blog to be edited. This might also be a clone of the original blog already containing
+     *     modifications if the edit form has been submitted, contained errors and therefore ended up in this action
+     *     again.
+     *
      * @return void
      * @IgnoreValidation("blog")
      */
@@ -113,6 +119,7 @@ class BlogController extends AbstractController
      * Updates an existing blog
      *
      * @param Blog $blog A not yet persisted clone of the original blog containing the modifications
+     *
      * @return void
      */
     public function updateAction(Blog $blog)
@@ -127,6 +134,7 @@ class BlogController extends AbstractController
      * Deletes an existing blog
      *
      * @param Blog $blog The blog to delete
+     *
      * @return void
      */
     public function deleteAction(Blog $blog)
@@ -148,7 +156,6 @@ class BlogController extends AbstractController
         $this->blogRepository->removeAll();
         $this->redirect('index');
     }
-
 
     /**
      * Creates a several new blogs

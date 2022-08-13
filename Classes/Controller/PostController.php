@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Controller;
 
@@ -13,7 +13,6 @@ use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
-
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -48,8 +47,11 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      */
     protected $personRepository;
 
-    public function __construct(BlogRepository $blogRepository, PersonRepository $personRepository, PostRepository $postRepository)
-    {
+    public function __construct(
+        BlogRepository $blogRepository,
+        PersonRepository $personRepository,
+        PostRepository $postRepository
+    ) {
         $this->blogRepository = $blogRepository;
         $this->personRepository = $personRepository;
         $this->postRepository = $postRepository;
@@ -61,6 +63,7 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Blog $blog The blog to show the posts of
      * @param string $tag The name of the tag to show the posts for
      * @param int $currentPage
+     *
      * @return void
      */
     public function indexAction(Blog $blog = null, $tag = '', int $currentPage = 1): void
@@ -68,7 +71,7 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
         if ($blog == null) {
             $defaultBlog = $this->settings['defaultBlog'] ?? 0;
             if ($defaultBlog > 0) {
-                $blog = $this->blogRepository->findByUid((int) $defaultBlog);
+                $blog = $this->blogRepository->findByUid((int)$defaultBlog);
             } else {
                 $blog = $this->blogRepository->findAll()->getFirst();
             }
@@ -93,15 +96,17 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
                 ->assign('posts', $posts);
         }
     }
+
     /**
      * Displays a list of posts as Rss feed
      *
      * @return void
      */
-    public function displayRssListAction() {
+    public function displayRssListAction()
+    {
         $defaultBlog = $this->settings['defaultBlog'] ?? 0;
         if ($defaultBlog > 0) {
-            $blog = $this->blogRepository->findByUid((int) $defaultBlog);
+            $blog = $this->blogRepository->findByUid((int)$defaultBlog);
         } else {
             $blog = $this->blogRepository->findAll()->getFirst();
         }
@@ -113,6 +118,7 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      *
      * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Post $post The post to display
      * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Comment $newComment A new comment
+     *
      * @return void
      * @IgnoreValidation("newComment")
      */
@@ -127,6 +133,7 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      *
      * @param Blog $blog The blog the post belogs to
      * @param Post $newPost A fresh post object taken as a basis for the rendering
+     *
      * @return void
      * @IgnoreValidation("newPost")
      */
@@ -143,6 +150,7 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      *
      * @param Blog $blog The blog the post belongs to
      * @param Post $newPost The new post object
+     *
      * @return void
      */
     public function createAction(Blog $blog, Post $newPost)
@@ -160,6 +168,7 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      *
      * @param Blog $blog The blog the post belogs to
      * @param Post $post The original post
+     *
      * @return void
      * @IgnoreValidation("post")
      */
@@ -176,6 +185,7 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      *
      * @param Blog $blog The blog the post belongs to
      * @param Post $post A clone of the original post with the updated values already applied
+     *
      * @return void
      */
     public function updateAction(Blog $blog, Post $post): void
@@ -191,6 +201,7 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      *
      * @param Blog $blog The blog the post belongs to
      * @param Post $post The post to be deleted
+     *
      * @return void
      */
     public function deleteAction(Blog $blog, Post $post): void
