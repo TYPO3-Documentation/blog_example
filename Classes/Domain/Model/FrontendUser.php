@@ -29,9 +29,9 @@ class FrontendUser extends AbstractEntity
      * @var ObjectStorage<FrontendUserGroup>
      */
     protected $usergroup;
-    protected string $name = '';
-    protected string $email = '';
-    protected \DateTime|null $lastlogin;
+    public string $name = '';
+    public string $email = '';
+    public \DateTime|null $lastlogin;
 
     public function __construct()
     {

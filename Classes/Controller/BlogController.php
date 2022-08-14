@@ -25,6 +25,8 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
+use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 
 /**
  * The blog controller for the BlogExample extension
@@ -91,7 +93,7 @@ class BlogController extends AbstractController
      * $blog is a fresh Blog object which has not yet been added to the
      * repository
      *
-     * @Extbase\Validate(param="newBlog", validator="FriendsOfTYPO3\ExtbaseExample\Domain\Validator\BlogValidator")
+     * @Validate(param="newBlog", validator="FriendsOfTYPO3\BlogExample\Domain\Validator\BlogValidator")
      */
     public function createAction(Blog $newBlog): ResponseInterface
     {
@@ -124,7 +126,7 @@ class BlogController extends AbstractController
      * $blog is a not yet persisted clone of the original blog containing
      * the modifications
      *
-     * @Extbase\Validate(param="blog", validator="FriendsOfTYPO3\ExtbaseExample\Domain\Validator\BlogValidator")
+     * @Validate(param="blog", validator="FriendsOfTYPO3\BlogExample\Domain\Validator\BlogValidator")
      * @throws NoBlogAdminAccessException
      */
     public function updateAction(Blog $blog): ResponseInterface
