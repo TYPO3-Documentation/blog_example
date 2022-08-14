@@ -55,43 +55,44 @@ class Post extends AbstractEntity
     /**
      * @var ObjectStorage<Tag>
      */
-    protected ObjectStorage $tags;
+    public ObjectStorage $tags;
 
     /**
      * @var ObjectStorage<Category>
      */
-    protected ObjectStorage $categories;
+    public ObjectStorage $categories;
 
     /**
      * @var ObjectStorage<Comment>
      * @Lazy
      * @Cascade("remove")
      */
-    protected ObjectStorage $comments;
+    public ObjectStorage $comments;
 
     /**
      * @var ObjectStorage<Post>
      * @Lazy
      */
-    protected ObjectStorage $relatedPosts;
+    public ObjectStorage $relatedPosts;
 
     /**
      * 1:1 optional relation
-     * @Extbase\ORM\Cascade("remove")
+     * @Cascade("remove")
      */
-    protected Info|null $additionalName;
+    public ?Info $additionalName;
 
     /**
-     * 1:1 relation stored as foreign key in Info class
+     * 1:1 optional relation
+     * @Cascade("remove")
      */
-    protected Info|null $additionalInfo;
+    protected ?Info $additionalInfo;
 
     /**
      * 1:n relation stored as CSV value
      * @var ObjectStorage<Comment>
      * @Lazy
      */
-    protected ObjectStorage $additionalComments;
+    public ObjectStorage $additionalComments;
 
     /**
      * Constructs this post
@@ -429,17 +430,12 @@ class Post extends AbstractEntity
         $this->additionalName = $additionalName;
     }
 
-    /**
-     * @return Info|null
-     */
+
     public function getAdditionalInfo(): ?Info
     {
         return $this->additionalInfo;
     }
 
-    /**
-     * @param Info|null $additionalInfo
-     */
     public function setAdditionalInfo(?Info $additionalInfo): void
     {
         $this->additionalInfo = $additionalInfo;
