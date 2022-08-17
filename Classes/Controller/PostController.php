@@ -13,6 +13,7 @@ use FriendsOfTYPO3\BlogExample\Exception\NoBlogAdminAccessException;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
@@ -59,32 +60,26 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
         int $currentPage = 1
     ): ResponseInterface {
         if ($blog == null) {
-            $defaultBlog = $this->settings['defaultBlog'] ?? 0;
-            if ($defaultBlog > 0) {
-                $blog = $this->blogRepository->findByUid((int)$defaultBlog);
-            } else {
-                $blog = $this->blogRepository->findAll()->getFirst();
-            }
+            return (new ForwardResponse('index'))
+                ->withControllerName(('Blog'))
+                ->withExtensionName('blog_example')
+                ->withArguments(['currentPage' => $currentPage]);
         }
-        if ($blog == null) {
-            $this->view->assign('blog', 0);
+        if (empty($tag)) {
+            $posts = $this->postRepository->findByBlog($blog);
         } else {
-            if (empty($tag)) {
-                $posts = $this->postRepository->findByBlog($blog);
-            } else {
-                $tag = urldecode($tag);
-                $posts = $this->postRepository->findByTagAndBlog($tag, $blog);
-                $this->view->assign('tag', $tag);
-            }
-            $paginator = new QueryResultPaginator($posts, $currentPage, 3);
-            $pagination = new SimplePagination($paginator);
-            $this->view
-                ->assign('paginator', $paginator)
-                ->assign('pagination', $pagination)
-                ->assign('pages', range(1, $pagination->getLastPageNumber()))
-                ->assign('blog', $blog)
-                ->assign('posts', $posts);
+            $tag = urldecode($tag);
+            $posts = $this->postRepository->findByTagAndBlog($tag, $blog);
+            $this->view->assign('tag', $tag);
         }
+        $paginator = new QueryResultPaginator($posts, $currentPage, 3);
+        $pagination = new SimplePagination($paginator);
+        $this->view
+            ->assign('paginator', $paginator)
+            ->assign('pagination', $pagination)
+            ->assign('pages', range(1, $pagination->getLastPageNumber()))
+            ->assign('blog', $blog)
+            ->assign('posts', $posts);
         return $this->htmlResponse();
     }
 
