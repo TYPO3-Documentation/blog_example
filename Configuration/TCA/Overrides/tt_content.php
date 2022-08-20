@@ -24,7 +24,7 @@ if ($extensionConfiguration->get('blog_example', 'registerSinglePlugin')) {
         = 'pi_flexform,recursive';
     ExtensionManagementUtility::addPiFlexFormValue(
         'blogexample_pi1',
-        'FILE:EXT:blog_example/Configuration/FlexForms/flexform_list.xml');
+        'FILE:EXT:blog_example/Configuration/FlexForms/PluginSettings.xml');
 } else {
     ExtensionUtility::registerPlugin(
         'blog_example',
@@ -57,6 +57,6 @@ if ($extensionConfiguration->get('blog_example', 'registerSinglePlugin')) {
         = 'pi_flexform,recursive';
     ExtensionManagementUtility::addPiFlexFormValue(
         'blogexample_postlist',
-        'FILE:EXT:blog_example/Configuration/FlexForms/flexform_list.xml'
+        'FILE:EXT:blog_example/Configuration/FlexForms/PluginSettings.xml'
     );
 }
