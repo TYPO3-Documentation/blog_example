@@ -6,6 +6,7 @@ namespace FriendsOfTYPO3\BlogExample\Controller;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Comment;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
+use FriendsOfTYPO3\BlogExample\Domain\Model\Tag;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\PersonRepository;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository;
@@ -18,6 +19,7 @@ use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Annotation\Validate;
+use TYPO3\CMS\Extbase\Property\PropertyMapper;
 
 
 /*
@@ -47,8 +49,31 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
     public function __construct(
         protected readonly BlogRepository $blogRepository,
         protected readonly PersonRepository $personRepository,
-        protected readonly PostRepository $postRepository
+        protected readonly PostRepository $postRepository,
+        protected readonly PropertyMapper $propertyMapper
     ) {
+    }
+
+    /**
+     * This method demonstrates property mapping to an object
+     * @throws \TYPO3\CMS\Extbase\Property\Exception
+     */
+    protected function mapTagFromString(string $tagString = 'some tag'): Tag {
+        $input = [
+            'name' => $tagString,
+        ];
+        return $this->propertyMapper->convert (
+            $input,
+            Tag::class
+        );
+    }
+
+    /**
+     * This method demonstrates property mapping to an integer
+     * @throws \TYPO3\CMS\Extbase\Property\Exception
+     */
+    protected function mapIntegerFromString(string $numberString = '42'): int {
+        return $output = $this->propertyMapper->convert($numberString, 'integer');
     }
 
     /**
