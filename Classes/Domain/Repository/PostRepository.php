@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Domain\Repository;
 
@@ -33,6 +33,7 @@ class PostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * Finds all posts by the specified blog
      *
      * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Blog $blog The blog the post must refer to
+     *
      * @return QueryResultInterface The posts
      */
     public function findAllByBlog(\FriendsOfTYPO3\BlogExample\Domain\Model\Blog $blog)
@@ -50,6 +51,7 @@ class PostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      *
      * @param string $tag
      * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Blog $blog The blog the post must refer to
+     *
      * @return QueryResultInterface The posts
      */
     public function findByTagAndBlog($tag, \FriendsOfTYPO3\BlogExample\Domain\Model\Blog $blog)
@@ -69,6 +71,7 @@ class PostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * Finds all remaining posts of the blog
      *
      * @param Post $post The reference post
+     *
      * @return QueryResultInterface The posts
      */
     public function findRemaining(Post $post)
@@ -91,6 +94,7 @@ class PostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * Finds the previous of the given post
      *
      * @param Post $post The reference post
+     *
      * @return Post
      */
     public function findPrevious(Post $post)
@@ -108,6 +112,7 @@ class PostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * Finds the post next to the given post
      *
      * @param Post $post The reference post
+     *
      * @return Post
      */
     public function findNext(Post $post)
@@ -126,6 +131,7 @@ class PostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      *
      * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Blog $blog The blog the post must refer to
      * @param int $limit The number of posts to return at max
+     *
      * @return QueryResultInterface The posts
      */
     public function findRecentByBlog(\FriendsOfTYPO3\BlogExample\Domain\Model\Blog $blog, $limit = 5)
@@ -143,6 +149,7 @@ class PostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * Find posts by category
      *
      * @param int $categoryUid
+     *
      * @return QueryResultInterface
      */
     public function findByCategory($categoryUid)
