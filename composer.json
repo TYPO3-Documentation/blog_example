@@ -33,5 +33,11 @@
     "typo3/cms-extbase": "^11.5",
     "typo3/cms-fluid": "^11.5",
     "typo3fluid/fluid": "^2.7.2"
+  },
+  "config": {
+    "allow-plugins": {
+      "typo3/class-alias-loader": true,
+      "typo3/cms-composer-installers": true
+    }
   }
 }
