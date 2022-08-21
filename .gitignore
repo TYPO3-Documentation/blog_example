@@ -1,4 +1,4 @@
-.idea
-.Build
-composer.lock
+/*.idea
+/.Build
+/composer.lock
 *GENERATED*
