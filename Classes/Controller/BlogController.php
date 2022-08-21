@@ -77,8 +77,6 @@ class BlogController extends AbstractController
     /**
      * Displays a form for creating a new blog
      *
-     * $newBlog is taken as a basis for the rendering
-     *
      * @IgnoreValidation("newBlog")
      */
     public function newAction(Blog $newBlog = null): ResponseInterface
@@ -113,7 +111,6 @@ class BlogController extends AbstractController
      * $blog might also be a clone of the original blog already containing
      * modifications if the edit form has been submitted, contained errors and
      * therefore ended up in this action again.
-     *
      * @IgnoreValidation("blog")
      */
     public function editAction(Blog $blog): ResponseInterface
