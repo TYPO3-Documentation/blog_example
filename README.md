@@ -30,4 +30,9 @@ Build/Scripts/runTests.sh -s composerUpdate
 Build/Scripts/runTests.sh -s unit
 ```
 
+# Normalize composer.json
+
+```
+Build/Scripts/runTests.sh -s composerNormalize -n
+```
 
