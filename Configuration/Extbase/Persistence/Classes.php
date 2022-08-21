@@ -8,7 +8,7 @@ return [
         'recordType' => \FriendsOfTYPO3\BlogExample\Domain\Model\Administrator::class,
         'properties' => [
             'administratorName' => [
-                'fieldName' => 'username'
+                'fieldName' => 'username',
             ],
         ],
     ],

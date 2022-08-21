@@ -15,9 +15,9 @@ return [
         'delete' => 'deleted',
         'sortby' => 'sorting',
         'enablecolumns' => [
-            'disabled' => 'hidden'
+            'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:blog_example/Resources/Public/Icons/icon_tx_blogexample_domain_model_tag.gif'
+        'iconfile' => 'EXT:blog_example/Resources/Public/Icons/icon_tx_blogexample_domain_model_tag.gif',
     ],
     'columns' => [
         'name' => [
@@ -27,20 +27,20 @@ return [
                 'size' => 20,
                 'eval' => 'trim',
                 'required' => true,
-                'max' => 256
-            ]
+                'max' => 256,
+            ],
         ],
         'bodytext' => [
             'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_info.bodytext',
             'config' => [
                 'type' => 'text',
                 'enableRichtext' => true,
-            ]
+            ],
         ],
         'post' => [
             'config' => [
                 'type' => 'passthrough',
-            ]
+            ],
         ],
         'sys_language_uid' => [
             'exclude' => true,
@@ -84,7 +84,7 @@ return [
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.versionLabel',
             'config' => [
                 'type' => 'none',
-            ]
+            ],
         ],
         'hidden' => [
             'exclude' => true,
@@ -96,13 +96,13 @@ return [
                     [
                         0 => '',
                         1 => '',
-                        'invertStateDisplay' => true
-                    ]
+                        'invertStateDisplay' => true,
+                    ],
                 ],
-            ]
+            ],
         ],
     ],
     'types' => [
-        0 => ['showitem' => 'sys_language_uid, l10n_parent, hidden, name, bodytext']
+        0 => ['showitem' => 'sys_language_uid, l10n_parent, hidden, name, bodytext'],
     ],
 ];

@@ -15,3 +15,19 @@ adjusted over time to reflect current development in the TYPO3 project.
 |------------------|------------------------------------------------------|
 | **Repository:**  | https://github.com/FriendsOfTYPO3/blog_example       |
 | **TER:**         | https://extensions.typo3.org/extension/blog_example/ |
+
+# Running tests
+
+The blog-example comes with a simple demo set of tests. It relies
+on the runTests.sh script which is a simplified version of a similar script from the TYPO3 core.
+Find detailed usage examples by executing `Build/Scripts/runTests.sh -h` and have a look at
+`.github/workflows/tests.yml` to see how this is used in CI.
+
+Example usage:
+
+```
+Build/Scripts/runTests.sh -s composerUpdate
+Build/Scripts/runTests.sh -s unit
+```
+
+

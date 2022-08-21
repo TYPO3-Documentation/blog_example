@@ -14,9 +14,9 @@ return [
         'translationSource' => 'l10n_source',
         'delete' => 'deleted',
         'enablecolumns' => [
-            'disabled' => 'hidden'
+            'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:blog_example/Resources/Public/Icons/icon_tx_blogexample_domain_model_tag.gif'
+        'iconfile' => 'EXT:blog_example/Resources/Public/Icons/icon_tx_blogexample_domain_model_tag.gif',
     ],
     'columns' => [
         'name' => [
@@ -26,15 +26,15 @@ return [
                 'size' => 20,
                 'eval' => 'trim',
                 'required' => true,
-                'max' => 256
-            ]
+                'max' => 256,
+            ],
         ],
         'priority' => [
             'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_tag.priority',
             'config' => [
                 'type' => 'number',
                 'default' => 0,
-            ]
+            ],
         ],
         'posts' => [
             'exclude' => true,
@@ -49,7 +49,7 @@ return [
                 'foreign_table' => 'tx_blogexample_domain_model_post',
                 'MM' => 'tx_blogexample_post_tag_mm',
                 'MM_opposite_field' => 'tags',
-            ]
+            ],
         ],
         'sys_language_uid' => [
             'exclude' => true,
@@ -93,7 +93,7 @@ return [
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.versionLabel',
             'config' => [
                 'type' => 'none',
-            ]
+            ],
         ],
         'hidden' => [
             'exclude' => true,
@@ -105,16 +105,16 @@ return [
                     [
                         0 => '',
                         1 => '',
-                        'invertStateDisplay' => true
-                    ]
+                        'invertStateDisplay' => true,
+                    ],
                 ],
-            ]
+            ],
         ],
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, hidden, name, priority, posts']
+        '1' => ['showitem' => 'sys_language_uid, hidden, name, priority, posts'],
     ],
     'palettes' => [
-        '1' => ['showitem' => '']
-    ]
+        '1' => ['showitem' => ''],
+    ],
 ];

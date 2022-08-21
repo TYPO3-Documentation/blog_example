@@ -1,4 +1,5 @@
 <?php
+
 return [
     'ctrl' => [
         'title' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_comment',
@@ -10,9 +11,9 @@ return [
         'crdate' => 'crdate',
         'delete' => 'deleted',
         'enablecolumns' => [
-            'disabled' => 'hidden'
+            'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:blog_example/Resources/Public/Icons/icon_tx_blogexample_domain_model_comment.gif'
+        'iconfile' => 'EXT:blog_example/Resources/Public/Icons/icon_tx_blogexample_domain_model_comment.gif',
     ],
     'columns' => [
         'hidden' => [
@@ -25,17 +26,17 @@ return [
                     [
                         0 => '',
                         1 => '',
-                        'invertStateDisplay' => true
-                    ]
+                        'invertStateDisplay' => true,
+                    ],
                 ],
-            ]
+            ],
         ],
         't3ver_label' => [
             'displayCond' => 'FIELD:t3ver_label:REQ:true',
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.versionLabel',
             'config' => [
                 'type' => 'none',
-            ]
+            ],
         ],
         'date' => [
             'exclude' => true,
@@ -46,8 +47,8 @@ return [
                 'size' => 12,
                 'eval' => 'datetime',
                 'required' => true,
-                'default' => time()
-            ]
+                'default' => time(),
+            ],
         ],
         'author' => [
             'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_comment.author',
@@ -56,8 +57,8 @@ return [
                 'size' => 20,
                 'eval' => 'trim',
                 'required' => true,
-                'max' => 256
-            ]
+                'max' => 256,
+            ],
         ],
         'email' => [
             'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_comment.email',
@@ -66,8 +67,8 @@ return [
                 'size' => 20,
                 'eval' => 'trim',
                 'required' => true,
-                'max' => 256
-            ]
+                'max' => 256,
+            ],
         ],
         'content' => [
             'exclude' => true,
@@ -75,19 +76,19 @@ return [
             'config' => [
                 'type' => 'text',
                 'rows' => 30,
-                'cols' => 80
-            ]
+                'cols' => 80,
+            ],
         ],
         'post' => [
             'config' => [
                 'type' => 'passthrough',
-            ]
+            ],
         ],
     ],
     'types' => [
-        '1' => ['showitem' => 'hidden, date, author, email, content']
+        '1' => ['showitem' => 'hidden, date, author, email, content'],
     ],
     'palettes' => [
-        '1' => ['showitem' => '']
-    ]
+        '1' => ['showitem' => ''],
+    ],
 ];

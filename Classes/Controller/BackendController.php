@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Controller;
@@ -37,7 +38,6 @@ use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
  */
 class BackendController extends ActionController
 {
-
     protected int $pageUid = 0;
 
     /**
@@ -68,8 +68,11 @@ class BackendController extends ActionController
     {
         $view = $this->initializeModuleTemplate($this->request);
         $allAvailableBlogs = $this->blogRepository->findAll();
-        $paginator = new QueryResultPaginator($allAvailableBlogs, $currentPage,
-            3);
+        $paginator = new QueryResultPaginator(
+            $allAvailableBlogs,
+            $currentPage,
+            3
+        );
         $pagination = new SimplePagination($paginator);
 
         $view->assignMultiple([
@@ -91,7 +94,6 @@ class BackendController extends ActionController
         return $this->redirect('index');
     }
 
-
     /**
      * Creates a several new blogs
      */
@@ -105,7 +107,6 @@ class BackendController extends ActionController
         $this->addFlashMessage('populated');
         return $this->redirect('index');
     }
-
 
     /**
      * Displays a list of posts. If $tag is set only posts matching this tag are shown
@@ -173,7 +174,8 @@ class BackendController extends ActionController
     /**
      * Generates the action menu
      */
-    protected function initializeModuleTemplate(ServerRequestInterface $request
+    protected function initializeModuleTemplate(
+        ServerRequestInterface $request
     ): ModuleTemplate {
         $menuItems = [
             'index' => [
@@ -198,8 +200,11 @@ class BackendController extends ActionController
             $isActive = $this->request->getControllerActionName() === $menuItemConfig['action'];
             $menuItem = $menu->makeMenuItem()
                 ->setTitle($menuItemConfig['label'])
-                ->setHref($this->uriBuilder->reset()->uriFor($menuItemConfig['action'],
-                    [], $menuItemConfig['controller']))
+                ->setHref($this->uriBuilder->reset()->uriFor(
+                    $menuItemConfig['action'],
+                    [],
+                    $menuItemConfig['controller']
+                ))
                 ->setActive($isActive);
             $menu->addMenuItem($menuItem);
             if ($isActive) {
@@ -214,8 +219,10 @@ class BackendController extends ActionController
         );
 
         $permissionClause = $GLOBALS['BE_USER']->getPagePermsClause(Permission::PAGE_SHOW);
-        $pageRecord = BackendUtility::readPageAccess($this->pageUid,
-            $permissionClause);
+        $pageRecord = BackendUtility::readPageAccess(
+            $this->pageUid,
+            $permissionClause
+        );
         if ($pageRecord) {
             $view->getDocHeaderComponent()->setMetaInformation($pageRecord);
         }
@@ -223,5 +230,4 @@ class BackendController extends ActionController
 
         return $view;
     }
-
 }

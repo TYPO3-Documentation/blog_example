@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
@@ -24,7 +25,8 @@ if ($extensionConfiguration->get('blog_example', 'registerSinglePlugin')) {
         = 'pi_flexform,recursive';
     ExtensionManagementUtility::addPiFlexFormValue(
         'blogexample_pi1',
-        'FILE:EXT:blog_example/Configuration/FlexForms/PluginSettings.xml');
+        'FILE:EXT:blog_example/Configuration/FlexForms/PluginSettings.xml'
+    );
 } else {
     ExtensionUtility::registerPlugin(
         'blog_example',

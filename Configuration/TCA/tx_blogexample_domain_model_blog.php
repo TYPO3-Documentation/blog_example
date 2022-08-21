@@ -1,4 +1,5 @@
 <?php
+
 return [
     'ctrl' => [
         'title' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_blog',
@@ -16,7 +17,7 @@ return [
             'disabled' => 'hidden',
             'fe_group' => 'fe_group',
         ],
-        'iconfile' => 'EXT:blog_example/Resources/Public/Icons/icon_tx_blogexample_domain_model_blog.gif'
+        'iconfile' => 'EXT:blog_example/Resources/Public/Icons/icon_tx_blogexample_domain_model_blog.gif',
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -61,7 +62,7 @@ return [
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.versionLabel',
             'config' => [
                 'type' => 'none',
-            ]
+            ],
         ],
         'hidden' => [
             'exclude' => true,
@@ -73,10 +74,10 @@ return [
                     [
                         0 => '',
                         1 => '',
-                        'invertStateDisplay' => true
-                    ]
+                        'invertStateDisplay' => true,
+                    ],
                 ],
-            ]
+            ],
         ],
         'fe_group' => [
             'exclude' => true,
@@ -112,8 +113,8 @@ return [
                 'size' => 20,
                 'eval' => 'trim',
                 'required' => true,
-                'max' => 256
-            ]
+                'max' => 256,
+            ],
         ],
         'subtitle' => [
             'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_blog.subtitle',
@@ -121,8 +122,8 @@ return [
                 'type' => 'input',
                 'size' => 20,
                 'eval' => 'trim',
-                'max' => 256
-            ]
+                'max' => 256,
+            ],
         ],
         'description' => [
             'exclude' => true,
@@ -132,7 +133,7 @@ return [
                 'required' => true,
                 'rows' => 30,
                 'cols' => 80,
-            ]
+            ],
         ],
         'logo' => [
             'exclude' => true,
@@ -141,14 +142,14 @@ return [
                 'logo',
                 [
                     'appearance' => [
-                        'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference'
+                        'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference',
                     ],
                     'overrideChildTca' => [
                         'types' => [
                             \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
                                 'showitem' => '
                                 --palette--;;imageoverlayPalette,
-                                --palette--;;filePalette'
+                                --palette--;;filePalette',
                             ],
                         ],
                     ],
@@ -168,7 +169,7 @@ return [
                     'collapseAll' => 1,
                     'expandSingle' => 1,
                 ],
-            ]
+            ],
         ],
         'administrator' => [
             'exclude' => true,
@@ -196,14 +197,14 @@ return [
         ],
         'category' => [
             'config' => [
-                'type' => 'category'
-            ]
-        ]
+                'type' => 'category',
+            ],
+        ],
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, hidden, fe_group, title, description, logo, posts, administrator']
+        '1' => ['showitem' => 'sys_language_uid, hidden, fe_group, title, description, logo, posts, administrator'],
     ],
     'palettes' => [
-        '1' => ['showitem' => '']
-    ]
+        '1' => ['showitem' => ''],
+    ],
 ];

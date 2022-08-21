@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Domain\Model;
@@ -105,5 +106,4 @@ class FrontendUser extends AbstractEntity
     {
         return $this->image;
     }
-
 }

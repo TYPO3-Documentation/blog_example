@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Domain\Model;
@@ -15,7 +16,6 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Model;
  *
  * The TYPO3 project - inspiring people to share!
  */
-
 
 /**
  * An Administrator of a Blog

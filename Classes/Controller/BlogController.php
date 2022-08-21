@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Controller;
@@ -24,16 +25,15 @@ use FriendsOfTYPO3\BlogExample\Service\BlogFactory;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
-use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Annotation\Validate;
+use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 
 /**
  * The blog controller for the BlogExample extension
  */
 class BlogController extends AbstractController
 {
-
     /**
      * BlogController constructor.
      *
@@ -52,8 +52,11 @@ class BlogController extends AbstractController
     public function indexAction(int $currentPage = 1): ResponseInterface
     {
         $allAvailableBlogs = $this->blogRepository->findAll();
-        $paginator = new QueryResultPaginator($allAvailableBlogs, $currentPage,
-            3);
+        $paginator = new QueryResultPaginator(
+            $allAvailableBlogs,
+            $currentPage,
+            3
+        );
         $pagination = new SimplePagination($paginator);
         $this->view
             ->assign('blogs', $allAvailableBlogs)
@@ -62,7 +65,6 @@ class BlogController extends AbstractController
             ->assign('pages', range(1, $pagination->getLastPageNumber()));
         return $this->htmlResponse();
     }
-
 
     /**
      * Output <h1>Hello World!</h1>
@@ -82,8 +84,10 @@ class BlogController extends AbstractController
     public function newAction(Blog $newBlog = null): ResponseInterface
     {
         $this->view->assign('newBlog', $newBlog);
-        $this->view->assign('administrators',
-            $this->administratorRepository->findAll());
+        $this->view->assign(
+            'administrators',
+            $this->administratorRepository->findAll()
+        );
         return $this->htmlResponse();
     }
 
@@ -115,8 +119,10 @@ class BlogController extends AbstractController
     public function editAction(Blog $blog): ResponseInterface
     {
         $this->view->assign('blog', $blog);
-        $this->view->assign('administrators',
-            $this->administratorRepository->findAll());
+        $this->view->assign(
+            'administrators',
+            $this->administratorRepository->findAll()
+        );
         return $this->htmlResponse();
     }
 
@@ -160,7 +166,6 @@ class BlogController extends AbstractController
         return $this->redirect('index');
     }
 
-
     /**
      * Creates a several new blogs
      * @throws NoBlogAdminAccessException
@@ -183,4 +188,3 @@ class BlogController extends AbstractController
         return $this->jsonResponse($jsonOutput);
     }
 }
-

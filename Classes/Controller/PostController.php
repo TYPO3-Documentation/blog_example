@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Controller;
@@ -14,13 +15,11 @@ use FriendsOfTYPO3\BlogExample\Exception\NoBlogAdminAccessException;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
+use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
-use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
-use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Property\PropertyMapper;
-
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -40,7 +39,6 @@ use TYPO3\CMS\Extbase\Property\PropertyMapper;
  */
 class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractController
 {
-
     /**
      * PostController constructor.
      *
@@ -58,11 +56,12 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      * This method demonstrates property mapping to an object
      * @throws \TYPO3\CMS\Extbase\Property\Exception
      */
-    protected function mapTagFromString(string $tagString = 'some tag'): Tag {
+    protected function mapTagFromString(string $tagString = 'some tag'): Tag
+    {
         $input = [
             'name' => $tagString,
         ];
-        return $this->propertyMapper->convert (
+        return $this->propertyMapper->convert(
             $input,
             Tag::class
         );
@@ -72,7 +71,8 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      * This method demonstrates property mapping to an integer
      * @throws \TYPO3\CMS\Extbase\Property\Exception
      */
-    protected function mapIntegerFromString(string $numberString = '42'): int {
+    protected function mapIntegerFromString(string $numberString = '42'): int
+    {
         return $output = $this->propertyMapper->convert($numberString, 'integer');
     }
 
@@ -153,8 +153,10 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
         $this->view->assign('authors', $this->personRepository->findAll());
         $this->view->assign('blog', $blog);
         $this->view->assign('newPost', $newPost);
-        $this->view->assign('remainingPosts',
-            $this->postRepository->findByBlog($blog));
+        $this->view->assign(
+            'remainingPosts',
+            $this->postRepository->findByBlog($blog)
+        );
         return $this->htmlResponse();
     }
 
@@ -182,8 +184,10 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
         $this->view->assign('authors', $this->personRepository->findAll());
         $this->view->assign('blog', $blog);
         $this->view->assign('post', $post);
-        $this->view->assign('remainingPosts',
-            $this->postRepository->findRemaining($post));
+        $this->view->assign(
+            'remainingPosts',
+            $this->postRepository->findRemaining($post)
+        );
         return $this->htmlResponse();
     }
 
@@ -199,8 +203,12 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
         $this->checkBlogAdminAccess();
         $this->postRepository->update($post);
         $this->addFlashMessage('updated');
-        return $this->redirect('show', null, null,
-            ['post' => $post, 'blog' => $blog]);
+        return $this->redirect(
+            'show',
+            null,
+            null,
+            ['post' => $post, 'blog' => $blog]
+        );
     }
 
     /**

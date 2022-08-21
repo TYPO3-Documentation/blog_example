@@ -1,13 +1,14 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Service;
 
 use DateTime;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Administrator;
+use FriendsOfTYPO3\BlogExample\Domain\Model\Author;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Comment;
-use FriendsOfTYPO3\BlogExample\Domain\Model\Author;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Tag;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -34,7 +35,7 @@ class BlogFactory implements SingletonInterface
      * Returns a sample blog populated with generic data
      * It is also an example how to handle objects and repositories in general
      *
-     * @param integer $blogNumber
+     * @param int $blogNumber
      * @return \FriendsOfTYPO3\BlogExample\Domain\Model\Blog
      */
     public function createBlog($blogNumber = 1)
@@ -55,7 +56,6 @@ class BlogFactory implements SingletonInterface
 
         // create sample posts
         for ($postNumber = 1; $postNumber < 6; $postNumber++) {
-
             // create post
             $post = new Post();
             $post->setTitle('The ' . $postNumber . '. post of blog #' . $blogNumber);

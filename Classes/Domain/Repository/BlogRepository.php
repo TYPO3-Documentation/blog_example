@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Domain\Repository;
@@ -26,6 +27,6 @@ class BlogRepository extends Repository
 {
     protected $defaultOrderings = [
         'crdate' => QueryInterface::ORDER_DESCENDING,
-        'uid' => QueryInterface::ORDER_DESCENDING
+        'uid' => QueryInterface::ORDER_DESCENDING,
     ];
 }

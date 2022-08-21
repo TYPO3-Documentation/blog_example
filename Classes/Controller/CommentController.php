@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Controller;
@@ -76,7 +77,11 @@ class CommentController extends AbstractController
         $post->removeAllComments();
         $this->postRepository->update($post);
         $this->addFlashMessage('deletedAll', ContextualFeedbackSeverity::INFO);
-        return $this->redirect('edit', 'Post', null,
-            ['post' => $post, 'blog' => $post->getBlog()]);
+        return $this->redirect(
+            'edit',
+            'Post',
+            null,
+            ['post' => $post, 'blog' => $post->getBlog()]
+        );
     }
 }

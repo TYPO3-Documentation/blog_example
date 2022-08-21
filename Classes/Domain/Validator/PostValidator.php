@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Domain\Validator;
@@ -24,7 +25,6 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
  */
 class PostValidator extends AbstractValidator
 {
-
     protected function isValid(mixed $value): void
     {
         if ($value->getTitle() === '77') {

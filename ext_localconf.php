@@ -1,16 +1,16 @@
 <?php
+
 defined('TYPO3') or die();
 
+use FriendsOfTYPO3\BlogExample\Controller\BlogController;
+use FriendsOfTYPO3\BlogExample\Controller\CommentController;
+use FriendsOfTYPO3\BlogExample\Controller\PostController;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
-use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 use TYPO3\CMS\Core\Information\Typo3Version;
+
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-
-use FriendsOfTYPO3\BlogExample\Controller\BlogController;
-use FriendsOfTYPO3\BlogExample\Controller\PostController;
-use FriendsOfTYPO3\BlogExample\Controller\CommentController;
-
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 (static function (string $extensionName): void {
     $versionInformation = GeneralUtility::makeInstance(Typo3Version::class);
@@ -26,8 +26,10 @@ use FriendsOfTYPO3\BlogExample\Controller\CommentController;
      * the user input (default settings, FlexForm, URL etc.)
      */
     if (
-        GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('blog_example',
-            'registerSinglePlugin')
+        GeneralUtility::makeInstance(ExtensionConfiguration::class)->get(
+            'blog_example',
+            'registerSinglePlugin'
+        )
     ) {
         ExtensionUtility::configurePlugin(
             $extensionName,
@@ -60,7 +62,7 @@ use FriendsOfTYPO3\BlogExample\Controller\CommentController;
         ExtensionUtility::configurePlugin(
             'BlogExample',
             'PostSingle',
-            [PostController::class => 'show',CommentController::class => 'create'],
+            [PostController::class => 'show', CommentController::class => 'create'],
             [CommentController::class => 'create']
         );
 
@@ -87,5 +89,4 @@ use FriendsOfTYPO3\BlogExample\Controller\CommentController;
             ]
         );
     }
-
 })('BlogExample');

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Controller;
@@ -26,17 +27,18 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
-
     /**
      * Override getErrorFlashMessage to present
      * nice flash error messages.
-     *
      */
     protected function getErrorFlashMessage(): string
     {
         $defaultFlashMessage = parent::getErrorFlashMessage();
-        $locallangKey = sprintf('error.%s.%s',
-            $this->request->getControllerName(), $this->actionMethodName);
+        $locallangKey = sprintf(
+            'error.%s.%s',
+            $this->request->getControllerName(),
+            $this->actionMethodName
+        );
         return $this->translate($locallangKey, $defaultFlashMessage);
     }
 
@@ -49,7 +51,8 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     /**
      * @throws NoBlogAdminAccessException
      */
-    protected function checkBlogAdminAccess() {
+    protected function checkBlogAdminAccess()
+    {
         if (!$this->hasBlogAdminAccess()) {
             throw new NoBlogAdminAccessException();
         }
@@ -62,13 +65,20 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
         string $action,
         ContextualFeedbackSeverity $severity = ContextualFeedbackSeverity::OK
     ): void {
-        $messageLocallangKey = sprintf('flashmessage.%s.%s',
-            $this->request->getControllerName(), $action);
-        $localizedMessage = $this->translate($messageLocallangKey,
-            '[' . $messageLocallangKey . ']');
+        $messageLocallangKey = sprintf(
+            'flashmessage.%s.%s',
+            $this->request->getControllerName(),
+            $action
+        );
+        $localizedMessage = $this->translate(
+            $messageLocallangKey,
+            '[' . $messageLocallangKey . ']'
+        );
         $titleLocallangKey = sprintf('%s.title', $messageLocallangKey);
-        $localizedTitle = $this->translate($titleLocallangKey,
-            '[' . $titleLocallangKey . ']');
+        $localizedTitle = $this->translate(
+            $titleLocallangKey,
+            '[' . $titleLocallangKey . ']'
+        );
         $this->addFlashMessage($localizedMessage, $localizedTitle, $severity);
     }
 

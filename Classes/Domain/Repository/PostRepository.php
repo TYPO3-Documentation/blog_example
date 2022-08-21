@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Domain\Repository;
@@ -64,7 +65,6 @@ class PostRepository extends Repository
 
     /**
      * Finds all remaining posts of the blog
-     *
      */
     public function findRemaining(Post $post): QueryResultInterface
     {
@@ -112,7 +112,6 @@ class PostRepository extends Repository
 
     /**
      * Finds most recent posts by the specified blog
-     *
      */
     public function findRecentByBlog(
         Blog $blog,

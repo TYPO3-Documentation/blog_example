@@ -1,4 +1,5 @@
 <?php
+
 return [
     'ctrl' => [
         'title' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_post',
@@ -16,16 +17,16 @@ return [
         'delete' => 'deleted',
         'sortby' => 'sorting',
         'enablecolumns' => [
-            'disabled' => 'hidden'
+            'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:blog_example/Resources/Public/Icons/icon_tx_blogexample_domain_model_post.gif'
+        'iconfile' => 'EXT:blog_example/Resources/Public/Icons/icon_tx_blogexample_domain_model_post.gif',
     ],
     'interface' => [
         'maxDBListItems' => 100,
-        'maxSingleDBListItems' => 500
+        'maxSingleDBListItems' => 500,
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, hidden, blog, title, date, author, second_author, content, tags, comments, related_posts, additional_name, additional_info, additional_comments']
+        '1' => ['showitem' => 'sys_language_uid, hidden, blog, title, date, author, second_author, content, tags, comments, related_posts, additional_name, additional_info, additional_comments'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -70,7 +71,7 @@ return [
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.versionLabel',
             'config' => [
                 'type' => 'none',
-            ]
+            ],
         ],
         'hidden' => [
             'exclude' => true,
@@ -82,10 +83,10 @@ return [
                     [
                         0 => '',
                         1 => '',
-                        'invertStateDisplay' => true
-                    ]
+                        'invertStateDisplay' => true,
+                    ],
                 ],
-            ]
+            ],
         ],
         'blog' => [
             'exclude' => true,
@@ -95,7 +96,7 @@ return [
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_blogexample_domain_model_blog',
                 'maxitems' => 1,
-            ]
+            ],
         ],
         'title' => [
             'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_post.title',
@@ -104,8 +105,8 @@ return [
                 'size' => 20,
                 'eval' => 'trim',
                 'required' => true,
-                'max' => 256
-            ]
+                'max' => 256,
+            ],
         ],
         'date' => [
             'exclude' => true,
@@ -115,8 +116,8 @@ return [
                 'size' => 12,
                 'eval' => 'datetime',
                 'required' => true,
-                'default' => time()
-            ]
+                'default' => time(),
+            ],
         ],
         'author' => [
             'exclude' => true,
@@ -185,8 +186,8 @@ return [
             'config' => [
                 'type' => 'text',
                 'rows' => 30,
-                'cols' => 80
-            ]
+                'cols' => 80,
+            ],
         ],
         'tags' => [
             'exclude' => true,
@@ -200,8 +201,8 @@ return [
                     'useSortable' => 1,
                     'collapseAll' => 1,
                     'expandSingle' => 1,
-                ]
-            ]
+                ],
+            ],
         ],
         'comments' => [
             'exclude' => true,
@@ -216,8 +217,8 @@ return [
                 'appearance' => [
                     'collapseAll' => 1,
                     'expandSingle' => 1,
-                ]
-            ]
+                ],
+            ],
         ],
         'related_posts' => [
             'exclude' => true,
@@ -232,7 +233,7 @@ return [
                 'foreign_table_where' => 'AND ###THIS_UID### != tx_blogexample_domain_model_post.uid',
                 'MM' => 'tx_blogexample_post_post_mm',
                 'MM_opposite_field' => 'related_posts',
-            ]
+            ],
         ],
         'additional_name' => [
             'exclude' => true,
@@ -267,8 +268,8 @@ return [
         ],
         'category' => [
             'config' => [
-                'type' => 'category'
-            ]
-        ]
-    ]
+                'type' => 'category',
+            ],
+        ],
+    ],
 ];

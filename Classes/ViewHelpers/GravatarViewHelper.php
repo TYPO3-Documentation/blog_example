@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\ViewHelpers;
 
@@ -31,7 +32,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  */
 class GravatarViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper
 {
-
     use CompileWithRenderStatic;
 
     /**
@@ -41,8 +41,6 @@ class GravatarViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBa
 
     /**
      * Initialize arguments
-     *
-     * @return void
      */
     public function initializeArguments()
     {

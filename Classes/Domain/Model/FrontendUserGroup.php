@@ -75,7 +75,6 @@ class FrontendUserGroup extends AbstractEntity
         $this->description = $description;
     }
 
-
     /**
      * Sets the subgroups. Keep in mind that the property is called "subgroup"
      * although it can hold several subgroups.
