@@ -26,10 +26,7 @@ use TYPO3\CMS\Core\Messaging\FlashMessage;
  */
 class CommentController extends AbstractController
 {
-    /**
-     * @var PostRepository
-     */
-    private $postRepository;
+    private PostRepository $postRepository;
 
     public function __construct(PostRepository $postRepository)
     {
@@ -41,8 +38,6 @@ class CommentController extends AbstractController
      *
      * @param Post $post The post the comment is related to
      * @param Comment $newComment The comment to create
-     *
-     * @return void
      */
     public function createAction(Post $post, Comment $newComment): void
     {
@@ -57,8 +52,6 @@ class CommentController extends AbstractController
      *
      * @param Post $post The post the comment is related to
      * @param Comment $comment The comment to be deleted
-     *
-     * @return void
      */
     public function deleteAction(Post $post, Comment $comment): void
     {
@@ -71,8 +64,6 @@ class CommentController extends AbstractController
 
     /**
      * Deletes all comments of the given post
-     *
-     * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Post $post
      */
     public function deleteAllAction(Post $post): void
     {

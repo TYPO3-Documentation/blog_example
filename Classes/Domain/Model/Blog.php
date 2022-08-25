@@ -17,7 +17,9 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Model;
  */
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Domain\Model\Category;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * A blog
@@ -27,230 +29,150 @@ class Blog extends AbstractEntity
     /**
      * The blog's title.
      *
-     * @var string
      * @Extbase\Validate("StringLength", options={"minimum": 1, "maximum": 80})
      */
-    protected $title = '';
+    protected string $title = '';
 
     /**
      * The blog's subtitle
-     *
-     * @var string
      */
-    protected $subtitle;
+    protected ?string $subtitle = null;
 
     /**
      * A short description of the blog
      *
-     * @var string
      * @Extbase\Validate("StringLength", options={"maximum": 150})
      */
-    protected $description = '';
+    protected string $description = '';
 
     /**
      * A relative path to a logo image
-     *
-     * @var string
      */
-    protected $logo = '';
+    protected string $logo = '';
 
     /**
      * The posts of this blog
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\BlogExample\Domain\Model\Post>
+     * @var ObjectStorage<Post>
      * @Extbase\ORM\Lazy
      * @Extbase\ORM\Cascade("remove")
      */
-    protected $posts;
+    protected ObjectStorage $posts;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
+     * @var ObjectStorage<Category>
      */
-    protected $categories;
+    protected ObjectStorage $categories;
 
     /**
      * The blog's administrator
      *
-     * @var \FriendsOfTYPO3\BlogExample\Domain\Model\Administrator
+     * @var Administrator
      * @Extbase\ORM\Lazy
      */
     protected $administrator;
 
-    /**
-     * Constructs a new Blog
-     */
     public function __construct()
     {
-        $this->posts = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->posts = new ObjectStorage();
+        $this->categories = new ObjectStorage();
     }
 
-    /**
-     * @return string
-     */
-    public function getSubtitle()
+    public function getSubtitle(): string
     {
         return $this->subtitle;
     }
 
-    /**
-     * Sets this blog's title
-     *
-     * @param string $title The blog's title
-     */
-    public function setTitle($title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
 
-    /**
-     * Returns the blog's title
-     *
-     * @return string The blog's title
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * @param string $logo
-     */
-    public function setLogo($logo)
+    public function setLogo(string $logo): void
     {
         $this->logo = $logo;
     }
 
-    /**
-     * @return string
-     */
-    public function getLogo()
+    public function getLogo(): string
     {
         return $this->logo;
     }
 
-    /**
-     * Sets the description for the blog
-     *
-     * @param string $description
-     */
-    public function setDescription($description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
 
-    /**
-     * Returns the description
-     *
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * Adds a post to this blog
-     *
-     * @param Post $post
-     */
-    public function addPost(Post $post)
+    public function addPost(Post $post): void
     {
         $this->posts->attach($post);
     }
 
-    /**
-     * Remove a post from this blog
-     *
-     * @param Post $postToRemove The post to be removed
-     */
-    public function removePost(Post $postToRemove)
+    public function removePost(Post $postToRemove): void
     {
         $this->posts->detach($postToRemove);
     }
 
-    /**
-     * Remove all posts from this blog
-     */
-    public function removeAllPosts()
+    public function removeAllPosts(): void
     {
-        $this->posts = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->posts = new ObjectStorage();
     }
 
     /**
-     * Returns all posts in this blog
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     * @return ObjectStorage<Post>
      */
-    public function getPosts()
+    public function getPosts(): ObjectStorage
     {
         return $this->posts;
     }
 
-    /**
-     * Add category to a blog
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $category
-     */
-    public function addCategory(\TYPO3\CMS\Extbase\Domain\Model\Category $category)
+    public function addCategory(Category $category): void
     {
         $this->categories->attach($category);
     }
 
     /**
-     * Set categories
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories
+     * @param ObjectStorage<Category> $categories
      */
-    public function setCategories($categories)
+    public function setCategories(ObjectStorage $categories): void
     {
         $this->categories = $categories;
     }
 
     /**
-     * Get categories
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     * @return ObjectStorage<Category>
      */
-    public function getCategories()
+    public function getCategories(): ObjectStorage
     {
         return $this->categories;
     }
 
-    /**
-     * Remove category from blog
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $category
-     */
-    public function removeCategory(\TYPO3\CMS\Extbase\Domain\Model\Category $category)
+    public function removeCategory(Category $category): void
     {
         $this->categories->detach($category);
     }
 
-    /**
-     * Sets the administrator value
-     *
-     * @param Administrator $administrator The Administrator of this Blog
-     */
-    public function setAdministrator(Administrator $administrator)
+    public function setAdministrator(Administrator $administrator): void
     {
         $this->administrator = $administrator;
     }
 
-    /**
-     * Returns the administrator value
-     *
-     * @return Administrator
-     */
-    public function getAdministrator()
+    public function getAdministrator(): Administrator
     {
         return $this->administrator;
     }
 
-    /**
-     * @param ?string $subtitle
-     */
-    public function setSubtitle($subtitle)
+    public function setSubtitle(?string $subtitle): void
     {
         $this->subtitle = $subtitle;
     }

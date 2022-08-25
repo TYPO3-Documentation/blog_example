@@ -30,21 +30,10 @@ use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
  */
 class BlogController extends AbstractController
 {
-    /**
-     * @var BlogRepository
-     */
-    protected $blogRepository;
+    protected BlogRepository $blogRepository;
 
-    /**
-     * @var AdministratorRepository
-     */
-    protected $administratorRepository;
+    protected AdministratorRepository $administratorRepository;
 
-    /**
-     * BlogController constructor.
-     *
-     * @param BlogRepository $blogRepository
-     */
     public function __construct(BlogRepository $blogRepository, AdministratorRepository $administratorRepository)
     {
         $this->blogRepository = $blogRepository;
@@ -53,10 +42,6 @@ class BlogController extends AbstractController
 
     /**
      * Index action for this controller. Displays a list of blogs.
-     *
-     * @param int $currentPage
-     *
-     * @return void
      */
     public function indexAction(int $currentPage = 1): void
     {
@@ -73,12 +58,9 @@ class BlogController extends AbstractController
     /**
      * Displays a form for creating a new blog
      *
-     * @param Blog $newBlog A fresh blog object taken as a basis for the rendering
-     *
-     * @return void
      * @IgnoreValidation("newBlog")
      */
-    public function newAction(Blog $newBlog = null)
+    public function newAction(?Blog $newBlog = null): void
     {
         $this->view->assign('newBlog', $newBlog);
         $this->view->assign('administrators', $this->administratorRepository->findAll());
@@ -88,10 +70,8 @@ class BlogController extends AbstractController
      * Creates a new blog
      *
      * @param Blog $newBlog A fresh Blog object which has not yet been added to the repository
-     *
-     * @return void
      */
-    public function createAction(Blog $newBlog)
+    public function createAction(Blog $newBlog): void
     {
         // TODO access protection
         $this->blogRepository->add($newBlog);
@@ -105,11 +85,9 @@ class BlogController extends AbstractController
      * @param Blog $blog The blog to be edited. This might also be a clone of the original blog already containing
      *     modifications if the edit form has been submitted, contained errors and therefore ended up in this action
      *     again.
-     *
-     * @return void
      * @IgnoreValidation("blog")
      */
-    public function editAction(Blog $blog)
+    public function editAction(Blog $blog): void
     {
         $this->view->assign('blog', $blog);
         $this->view->assign('administrators', $this->administratorRepository->findAll());
@@ -119,10 +97,8 @@ class BlogController extends AbstractController
      * Updates an existing blog
      *
      * @param Blog $blog A not yet persisted clone of the original blog containing the modifications
-     *
-     * @return void
      */
-    public function updateAction(Blog $blog)
+    public function updateAction(Blog $blog): void
     {
         // TODO access protection
         $this->blogRepository->update($blog);
@@ -132,12 +108,8 @@ class BlogController extends AbstractController
 
     /**
      * Deletes an existing blog
-     *
-     * @param Blog $blog The blog to delete
-     *
-     * @return void
      */
-    public function deleteAction(Blog $blog)
+    public function deleteAction(Blog $blog): void
     {
         // TODO access protection
         $this->blogRepository->remove($blog);
@@ -147,10 +119,8 @@ class BlogController extends AbstractController
 
     /**
      * Deletes an existing blog
-     *
-     * @return void
      */
-    public function deleteAllAction()
+    public function deleteAllAction(): void
     {
         // TODO access protection
         $this->blogRepository->removeAll();
@@ -159,10 +129,8 @@ class BlogController extends AbstractController
 
     /**
      * Creates a several new blogs
-     *
-     * @return void
      */
-    public function populateAction()
+    public function populateAction(): void
     {
         // TODO access protection
         $numberOfExistingBlogs = $this->blogRepository->countAll();

@@ -25,108 +25,51 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Administrator extends AbstractEntity
 {
-    /**
-     * @var string
-     */
-    protected $username = '';
+    protected string $username = '';
 
-    /**
-     * @var string
-     */
-    protected $password = '';
+    protected string $password = '';
 
     /**
      * @var ObjectStorage<FrontendUserGroup>
      */
-    protected $usergroup;
+    protected ObjectStorage $usergroup;
 
-    /**
-     * @var string
-     */
-    protected $name = '';
+    protected string $name = '';
 
-    /**
-     * @var string
-     */
-    protected $firstName = '';
+    protected string $firstName = '';
 
-    /**
-     * @var string
-     */
-    protected $middleName = '';
+    protected string $middleName = '';
 
-    /**
-     * @var string
-     */
-    protected $lastName = '';
+    protected string $lastName = '';
 
-    /**
-     * @var string
-     */
-    protected $address = '';
+    protected string $address = '';
 
-    /**
-     * @var string
-     */
-    protected $telephone = '';
+    protected string $telephone = '';
 
-    /**
-     * @var string
-     */
-    protected $fax = '';
+    protected string $fax = '';
 
-    /**
-     * @var string
-     */
-    protected $email = '';
+    protected string $email = '';
 
-    /**
-     * @var string
-     */
-    protected $title = '';
+    protected string $title = '';
 
-    /**
-     * @var string
-     */
-    protected $zip = '';
+    protected string $zip = '';
 
-    /**
-     * @var string
-     */
-    protected $city = '';
+    protected string $city = '';
 
-    /**
-     * @var string
-     */
-    protected $country = '';
+    protected string $country = '';
 
-    /**
-     * @var string
-     */
-    protected $www = '';
+    protected string $www = '';
 
-    /**
-     * @var string
-     */
-    protected $company = '';
+    protected string $company = '';
 
     /**
      * @var ObjectStorage<FileReference>
      */
-    protected $image;
+    protected ObjectStorage $image;
 
-    /**
-     * @var \DateTime|null
-     */
-    protected $lastlogin;
+    protected ?\DateTime $lastlogin = null;
 
-    /**
-     * Constructs a new Front-End User
-     *
-     * @param string $username
-     * @param string $password
-     */
-    public function __construct($username = '', $password = '')
+    public function __construct(string $username = '', string $password = '')
     {
         $this->username = $username;
         $this->password = $password;
@@ -137,48 +80,28 @@ class Administrator extends AbstractEntity
     /**
      * Called again with initialize object, as fetching an entity from the DB does not use the constructor
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
         $this->usergroup = $this->usergroup ?? new ObjectStorage();
         $this->image = $this->image ?? new ObjectStorage();
     }
 
-    /**
-     * Sets the username value
-     *
-     * @param string $username
-     */
-    public function setUsername($username)
+    public function setUsername(string $username): void
     {
         $this->username = $username;
     }
 
-    /**
-     * Returns the username value
-     *
-     * @return string
-     */
-    public function getUsername()
+    public function getUsername(): string
     {
         return $this->username;
     }
 
-    /**
-     * Sets the password value
-     *
-     * @param string $password
-     */
-    public function setPassword($password)
+    public function setPassword(string $password): void
     {
         $this->password = $password;
     }
 
-    /**
-     * Returns the password value
-     *
-     * @return string
-     */
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -189,27 +112,17 @@ class Administrator extends AbstractEntity
      *
      * @param ObjectStorage<FrontendUserGroup> $usergroup
      */
-    public function setUsergroup(ObjectStorage $usergroup)
+    public function setUsergroup(ObjectStorage $usergroup): void
     {
         $this->usergroup = $usergroup;
     }
 
-    /**
-     * Adds a usergroup to the frontend user
-     *
-     * @param FrontendUserGroup $usergroup
-     */
-    public function addUsergroup(FrontendUserGroup $usergroup)
+    public function addUsergroup(FrontendUserGroup $usergroup): void
     {
         $this->usergroup->attach($usergroup);
     }
 
-    /**
-     * Removes a usergroup from the frontend user
-     *
-     * @param FrontendUserGroup $usergroup
-     */
-    public function removeUsergroup(FrontendUserGroup $usergroup)
+    public function removeUsergroup(FrontendUserGroup $usergroup): void
     {
         $this->usergroup->detach($usergroup);
     }
@@ -220,294 +133,152 @@ class Administrator extends AbstractEntity
      *
      * @return ObjectStorage<FrontendUserGroup> An object storage containing the usergroup
      */
-    public function getUsergroup()
+    public function getUsergroup(): ObjectStorage
     {
         return $this->usergroup;
     }
 
-    /**
-     * Sets the name value
-     *
-     * @param string $name
-     */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * Returns the name value
-     *
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * Sets the firstName value
-     *
-     * @param string $firstName
-     */
-    public function setFirstName($firstName)
+    public function setFirstName(string $firstName): void
     {
         $this->firstName = $firstName;
     }
 
-    /**
-     * Returns the firstName value
-     *
-     * @return string
-     */
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
 
-    /**
-     * Sets the middleName value
-     *
-     * @param string $middleName
-     */
-    public function setMiddleName($middleName)
+    public function setMiddleName(string $middleName): void
     {
         $this->middleName = $middleName;
     }
 
-    /**
-     * Returns the middleName value
-     *
-     * @return string
-     */
-    public function getMiddleName()
+    public function getMiddleName(): string
     {
         return $this->middleName;
     }
 
-    /**
-     * Sets the lastName value
-     *
-     * @param string $lastName
-     */
-    public function setLastName($lastName)
+    public function setLastName(string $lastName): void
     {
         $this->lastName = $lastName;
     }
 
-    /**
-     * Returns the lastName value
-     *
-     * @return string
-     */
-    public function getLastName()
+    public function getLastName(): string
     {
         return $this->lastName;
     }
 
-    /**
-     * Sets the address value
-     *
-     * @param string $address
-     */
-    public function setAddress($address)
+    public function setAddress(string $address): void
     {
         $this->address = $address;
     }
 
-    /**
-     * Returns the address value
-     *
-     * @return string
-     */
-    public function getAddress()
+    public function getAddress(): string
     {
         return $this->address;
     }
 
-    /**
-     * Sets the telephone value
-     *
-     * @param string $telephone
-     */
-    public function setTelephone($telephone)
+    public function setTelephone(string $telephone): void
     {
         $this->telephone = $telephone;
     }
 
-    /**
-     * Returns the telephone value
-     *
-     * @return string
-     */
-    public function getTelephone()
+    public function getTelephone(): string
     {
         return $this->telephone;
     }
 
-    /**
-     * Sets the fax value
-     *
-     * @param string $fax
-     */
-    public function setFax($fax)
+    public function setFax(string $fax): void
     {
         $this->fax = $fax;
     }
 
-    /**
-     * Returns the fax value
-     *
-     * @return string
-     */
-    public function getFax()
+    public function getFax(): string
     {
         return $this->fax;
     }
 
-    /**
-     * Sets the email value
-     *
-     * @param string $email
-     */
-    public function setEmail($email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
 
-    /**
-     * Returns the email value
-     *
-     * @return string
-     */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * Sets the title value
-     *
-     * @param string $title
-     */
-    public function setTitle($title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
 
-    /**
-     * Returns the title value
-     *
-     * @return string
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * Sets the zip value
-     *
-     * @param string $zip
-     */
-    public function setZip($zip)
+    public function setZip(string $zip): void
     {
         $this->zip = $zip;
     }
 
-    /**
-     * Returns the zip value
-     *
-     * @return string
-     */
-    public function getZip()
+    public function getZip(): string
     {
         return $this->zip;
     }
 
-    /**
-     * Sets the city value
-     *
-     * @param string $city
-     */
-    public function setCity($city)
+    public function setCity(string $city): void
     {
         $this->city = $city;
     }
 
-    /**
-     * Returns the city value
-     *
-     * @return string
-     */
-    public function getCity()
+    public function getCity(): string
     {
         return $this->city;
     }
 
-    /**
-     * Sets the country value
-     *
-     * @param string $country
-     */
-    public function setCountry($country)
+    public function setCountry(string $country): void
     {
         $this->country = $country;
     }
 
-    /**
-     * Returns the country value
-     *
-     * @return string
-     */
-    public function getCountry()
+    public function getCountry(): string
     {
         return $this->country;
     }
 
-    /**
-     * Sets the www value
-     *
-     * @param string $www
-     */
-    public function setWww($www)
+    public function setWww(string $www): void
     {
         $this->www = $www;
     }
 
-    /**
-     * Returns the www value
-     *
-     * @return string
-     */
-    public function getWww()
+    public function getWww(): string
     {
         return $this->www;
     }
 
-    /**
-     * Sets the company value
-     *
-     * @param string $company
-     */
-    public function setCompany($company)
+    public function setCompany(string $company): void
     {
         $this->company = $company;
     }
 
-    /**
-     * Returns the company value
-     *
-     * @return string
-     */
-    public function getCompany()
+    public function getCompany(): string
     {
         return $this->company;
     }
 
     /**
-     * Sets the image value
-     *
      * @param ObjectStorage<FileReference> $image
      */
     public function setImage(ObjectStorage $image)
@@ -516,31 +287,19 @@ class Administrator extends AbstractEntity
     }
 
     /**
-     * Gets the image value
-     *
      * @return ObjectStorage<FileReference>
      */
-    public function getImage()
+    public function getImage(): ObjectStorage
     {
         return $this->image;
     }
 
-    /**
-     * Sets the lastlogin value
-     *
-     * @param \DateTime $lastlogin
-     */
-    public function setLastlogin(\DateTime $lastlogin)
+    public function setLastlogin(\DateTime $lastlogin): void
     {
         $this->lastlogin = $lastlogin;
     }
 
-    /**
-     * Returns the lastlogin value
-     *
-     * @return \DateTime
-     */
-    public function getLastlogin()
+    public function getLastlogin(): ?\DateTime
     {
         return $this->lastlogin;
     }

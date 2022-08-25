@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\ViewHelpers;
 
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /*
@@ -29,9 +30,8 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  * <img src="http://www.gravatar.com/avatar/4a28b782cade3dbcd6e306fa4757849d?d=someDefaultImage&s=40" />
  * </output>
  */
-class GravatarViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper
+class GravatarViewHelper extends AbstractTagBasedViewHelper
 {
-
     use CompileWithRenderStatic;
 
     /**
@@ -39,12 +39,7 @@ class GravatarViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBa
      */
     protected $tagName = 'img';
 
-    /**
-     * Initialize arguments
-     *
-     * @return void
-     */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
 
@@ -54,12 +49,7 @@ class GravatarViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBa
             ->registerArgument('size', 'string', '', false);
     }
 
-    /**
-     * Render the gravatar image
-     *
-     * @return string The rendered image tag
-     */
-    public function render()
+    public function render(): string
     {
         $gravatarUri = 'http://www.gravatar.com/avatar/' . md5($this->arguments['emailAddress']);
         $uriParts = [];
