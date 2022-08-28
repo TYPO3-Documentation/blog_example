@@ -79,7 +79,7 @@ class BlogController extends AbstractController
      *
      * @IgnoreValidation("newBlog")
      */
-    public function newAction(Blog $newBlog = null): ResponseInterface
+    public function newAction(?Blog $newBlog = null): ResponseInterface
     {
         $this->view->assign('newBlog', $newBlog);
         $this->view->assign(

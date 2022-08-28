@@ -80,7 +80,7 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      * Displays a list of posts. If $tag is set only posts matching this tag are shown
      */
     public function indexAction(
-        Blog $blog = null,
+        ?Blog $blog = null,
         string $tag = '',
         int $currentPage = 1
     ): ResponseInterface {
@@ -132,7 +132,7 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      */
     public function showAction(
         Post $post,
-        Comment $newComment = null
+        ?Comment $newComment = null
     ): ResponseInterface {
         $this->view->assign('post', $post);
         $this->view->assign('newComment', $newComment);
@@ -148,7 +148,7 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      */
     public function newAction(
         Blog $blog,
-        Post $newPost = null
+        ?Post $newPost = null
     ): ResponseInterface {
         $this->view->assign('authors', $this->personRepository->findAll());
         $this->view->assign('blog', $blog);
@@ -164,8 +164,10 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      * Creates a new post
      * @throws NoBlogAdminAccessException|IllegalObjectTypeException
      */
-    public function createAction(Blog $blog, Post $newPost): ResponseInterface
-    {
+    public function createAction(
+        Blog $blog,
+        Post $newPost
+    ): ResponseInterface {
         $this->checkBlogAdminAccess();
         $blog->addPost($newPost);
         $newPost->setBlog($blog);
@@ -198,8 +200,10 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      *
      * @throws NoBlogAdminAccessException
      */
-    public function updateAction(Blog $blog, Post $post): ResponseInterface
-    {
+    public function updateAction(
+        Blog $blog,
+        Post $post
+    ): ResponseInterface {
         $this->checkBlogAdminAccess();
         $this->postRepository->update($post);
         $this->addFlashMessage('updated');
@@ -215,8 +219,10 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
      * Deletes an existing post
      * @throws NoBlogAdminAccessException
      */
-    public function deleteAction(Blog $blog, Post $post): ResponseInterface
-    {
+    public function deleteAction(
+        Blog $blog,
+        Post $post
+    ): ResponseInterface {
         $this->checkBlogAdminAccess();
         $this->postRepository->remove($post);
         $this->addFlashMessage('deleted', ContextualFeedbackSeverity::INFO);

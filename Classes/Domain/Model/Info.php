@@ -25,6 +25,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 class Info extends AbstractEntity
 {
     protected string $name = '';
+
     protected string $bodytext = '';
 
     public function getName(): string

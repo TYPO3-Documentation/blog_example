@@ -26,6 +26,11 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
  */
 final class BlogValidator extends AbstractValidator
 {
+    /**
+     * Checks whether the given blog is valid
+     *
+     * @param Blog $blog The blog
+     */
     protected function isValid(mixed $value): void
     {
         if (!$value instanceof Blog) {

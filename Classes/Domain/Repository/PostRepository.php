@@ -34,6 +34,8 @@ class PostRepository extends Repository
 
     /**
      * Finds all posts by the specified blog
+     *
+     * @param Blog $blog The blog the post must refer to
      */
     public function findAllByBlog(Blog $blog): QueryResultInterface
     {
@@ -47,6 +49,8 @@ class PostRepository extends Repository
 
     /**
      * Finds posts by the specified tag and blog
+     *
+     * @param Blog $blog The blog the post must refer to
      */
     public function findByTagAndBlog(
         string $tag,
@@ -65,6 +69,8 @@ class PostRepository extends Repository
 
     /**
      * Finds all remaining posts of the blog
+     *
+     * @param Post $post The reference post
      */
     public function findRemaining(Post $post): QueryResultInterface
     {
@@ -84,8 +90,10 @@ class PostRepository extends Repository
 
     /**
      * Finds the previous of the given post
+     *
+     * @param Post $post The reference post
      */
-    public function findPrevious(Post $post): Post|null
+    public function findPrevious(Post $post): ?Post
     {
         $query = $this->createQuery();
         return $query
@@ -98,8 +106,10 @@ class PostRepository extends Repository
 
     /**
      * Finds the post next to the given post
+     *
+     * @param Post $post The reference post
      */
-    public function findNext(Post $post): Post|null
+    public function findNext(Post $post): ?Post
     {
         $query = $this->createQuery();
         return $query
@@ -112,6 +122,9 @@ class PostRepository extends Repository
 
     /**
      * Finds most recent posts by the specified blog
+     *
+     * @param Blog $blog The blog the post must refer to
+     * @param int $limit The number of posts to return at max
      */
     public function findRecentByBlog(
         Blog $blog,
@@ -126,7 +139,7 @@ class PostRepository extends Repository
             ->execute();
     }
 
-    public function findByCategory($categoryUid): QueryResultInterface
+    public function findByCategory(int $categoryUid): QueryResultInterface
     {
         $query = $this->createQuery();
         return $query

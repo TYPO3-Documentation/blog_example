@@ -33,6 +33,7 @@ class Blog extends AbstractEntity
      * @Validate("FriendsOfTYPO3\BlogExample\Domain\Validator\TitleValidator")
      */
     public string $title = '';
+
     /**
      * @Validate("StringLength", options={"minimum": 5, "maximum": 80})
      */
@@ -72,9 +73,6 @@ class Blog extends AbstractEntity
      */
     public $administrator;
 
-    /**
-     * Constructs a new Blog
-     */
     public function __construct()
     {
         $this->posts = new ObjectStorage();

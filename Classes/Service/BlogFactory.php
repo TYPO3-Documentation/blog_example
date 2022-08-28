@@ -39,7 +39,7 @@ class BlogFactory implements SingletonInterface
      *
      * @return \FriendsOfTYPO3\BlogExample\Domain\Model\Blog
      */
-    public function createBlog($blogNumber = 1)
+    public function createBlog(int $blogNumber = 1): Blog
     {
         // initialize blog
         $blog = new Blog();

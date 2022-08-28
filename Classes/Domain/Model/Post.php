@@ -95,9 +95,6 @@ class Post extends AbstractEntity
      */
     public ObjectStorage $additionalComments;
 
-    /**
-     * Constructs this post
-     */
     public function __construct()
     {
         $this->tags = new ObjectStorage();
@@ -109,50 +106,37 @@ class Post extends AbstractEntity
     }
 
     /**
-     * Setter for tags
+     * Set one or more Tag objects
      *
-     * @param ObjectStorage $tags One or more Tag objects
+     * @param ObjectStorage<Tag> $tags
      */
-    public function setTags(ObjectStorage $tags)
+    public function setTags(ObjectStorage $tags): void
     {
         $this->tags = $tags;
     }
 
-    /**
-     * Adds a tag to this post
-     *
-     * @param Tag $tag
-     */
-    public function addTag(Tag $tag)
+    public function addTag(Tag $tag): void
     {
         $this->tags->attach($tag);
     }
 
-    /**
-     * Removes a tag from this post
-     *
-     * @param Tag $tag
-     */
-    public function removeTag(Tag $tag)
+    public function removeTag(Tag $tag): void
     {
         $this->tags->detach($tag);
     }
 
-    /**
-     * Remove all tags from this post
-     */
-    public function removeAllTags()
+    public function removeAllTags(): void
     {
         $this->tags = new ObjectStorage();
     }
 
     /**
-     * Getter for tags
+     * Getter for tags, A storage holding objects
      * Note: We return a clone of the tags because they must not be modified as they are Value Objects
      *
-     * @return ObjectStorage A storage holding objects
+     * @return ObjectStorage<Tag>
      */
-    public function getTags()
+    public function getTags(): ObjectStorage
     {
         return clone $this->tags;
     }
@@ -160,7 +144,7 @@ class Post extends AbstractEntity
     /**
      * Add category to a post
      */
-    public function addCategory(Category $category)
+    public function addCategory(Category $category): void
     {
         $this->categories->attach($category);
     }
@@ -168,9 +152,9 @@ class Post extends AbstractEntity
     /**
      * Set categories
      *
-     * @param ObjectStorage $categories
+     * @param ObjectStorage<Category> $categories
      */
-    public function setCategories(ObjectStorage $categories)
+    public function setCategories(ObjectStorage $categories): void
     {
         $this->categories = $categories;
     }
@@ -178,7 +162,7 @@ class Post extends AbstractEntity
     /**
      * Get categories
      *
-     * @return ObjectStorage
+     * @return ObjectStorage<Category>
      */
     public function getCategories(): ObjectStorage
     {
@@ -188,7 +172,7 @@ class Post extends AbstractEntity
     /**
      * Remove category from post
      */
-    public function removeCategory(Category $category)
+    public function removeCategory(Category $category): void
     {
         $this->categories->detach($category);
     }
@@ -196,7 +180,7 @@ class Post extends AbstractEntity
     /**
      * Sets the author for this post
      */
-    public function setAuthor(Person $author)
+    public function setAuthor(Person $author): void
     {
         $this->author = $author;
     }
@@ -224,17 +208,17 @@ class Post extends AbstractEntity
         return $this->reviewer;
     }
 
-    public function setReviewer(Person $reviewer)
+    public function setReviewer(Person $reviewer): void
     {
         $this->reviewer = $reviewer;
     }
 
     /**
-     * Setter for the comments to this post
+     * Set the comments to this post, an Object Storage of related Comment instances
      *
-     * @param ObjectStorage $comments An Object Storage of related Comment instances
+     * @param ObjectStorage<Comment> $comments
      */
-    public function setComments(ObjectStorage $comments)
+    public function setComments(ObjectStorage $comments): void
     {
         $this->comments = $comments;
     }
@@ -242,23 +226,23 @@ class Post extends AbstractEntity
     /**
      * Adds a comment to this post
      */
-    public function addComment(Comment $comment)
+    public function addComment(Comment $commentToAdd): void
     {
-        $this->comments->attach($comment);
+        $this->comments->attach($commentToAdd);
     }
 
     /**
-     * Removes Comment from this post
+     * Removes Comment from this post and deletes it due to annotation `@Cascade("remove")`
      */
-    public function removeComment(Comment $commentToDelete)
+    public function removeComment(Comment $commentToDelete): void
     {
         $this->comments->detach($commentToDelete);
     }
 
     /**
-     * Remove all comments from this post
+     * @TODO: explain what's done in the method an why
      */
-    public function removeAllComments()
+    public function removeAllComments(): void
     {
         $comments = clone $this->comments;
         $this->comments->removeAll($comments);
@@ -267,37 +251,29 @@ class Post extends AbstractEntity
     /**
      * Returns the comments to this post
      *
-     * @return ObjectStorage holding instances of Comment
+     * @return ObjectStorage<Comment>
      */
-    public function getComments()
+    public function getComments(): ObjectStorage
     {
         return $this->comments;
     }
 
     /**
-     * Setter for the related posts
+     * Set the related posts with ObjectStorage containing the instances of relatedPosts
      *
-     * @param ObjectStorage $relatedPosts An Object Storage containing related Posts instances
+     * @param ObjectStorage<Post> $relatedPosts
      */
-    public function setRelatedPosts(ObjectStorage $relatedPosts)
+    public function setRelatedPosts(ObjectStorage $relatedPosts): void
     {
         $this->relatedPosts = $relatedPosts;
     }
 
-    /**
-     * Adds a related post
-     *
-     * @param Post $post
-     */
-    public function addRelatedPost(Post $post)
+    public function addRelatedPost(Post $post): void
     {
         $this->relatedPosts->attach($post);
     }
 
-    /**
-     * Remove all related posts
-     */
-    public function removeAllRelatedPosts()
+    public function removeAllRelatedPosts(): void
     {
         $relatedPosts = clone $this->relatedPosts;
         $this->relatedPosts->removeAll($relatedPosts);
@@ -306,9 +282,9 @@ class Post extends AbstractEntity
     /**
      * Returns the related posts
      *
-     * @return ObjectStorage holding instances of Post
+     * @return ObjectStorage<Post>
      */
-    public function getRelatedPosts()
+    public function getRelatedPosts(): ObjectStorage
     {
         return $this->relatedPosts;
     }
@@ -324,16 +300,15 @@ class Post extends AbstractEntity
     /**
      * @param ObjectStorage $additionalComments
      */
-    public function setAdditionalComments(
-        ObjectStorage $additionalComments
-    ): void {
+    public function setAdditionalComments(ObjectStorage $additionalComments): void
+    {
         $this->additionalComments = $additionalComments;
     }
 
     /**
      * @param Comment $comment
      */
-    public function addAdditionalComment(Comment $comment)
+    public function addAdditionalComment(Comment $comment): void
     {
         $this->additionalComments->attach($comment);
     }
@@ -341,13 +316,13 @@ class Post extends AbstractEntity
     /**
      * Remove all additional Comments
      */
-    public function removeAllAdditionalComments()
+    public function removeAllAdditionalComments(): void
     {
         $comments = clone $this->additionalComments;
         $this->additionalComments->removeAll($comments);
     }
 
-    public function removeAdditionalComment(Comment $comment)
+    public function removeAdditionalComment(Comment $comment): void
     {
         $this->additionalComments->detach($comment);
     }
@@ -444,10 +419,8 @@ class Post extends AbstractEntity
 
     /**
      * Returns this post as a formatted string
-     *
-     * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->title . chr(10) .
             ' written on ' . $this->date->format('Y-m-d') . chr(10) .

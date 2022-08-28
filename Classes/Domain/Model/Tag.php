@@ -31,4 +31,12 @@ final class Tag extends AbstractValueObject
     {
         $this->name = $name;
     }
+
+    /**
+     * Returns this tag as a formatted string
+     */
+    public function __toString(): string
+    {
+        return $this->getName();
+    }
 }

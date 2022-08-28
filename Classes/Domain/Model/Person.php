@@ -31,14 +31,17 @@ class Person extends AbstractEntity
      * @Validate("StringLength", options={"maximum": 80})
      */
     protected string $firstname = '';
+
     /**
      * @Validate("StringLength", options={"minimum": 2, "maximum": 80})
      */
     protected string $lastname = '';
+
     /**
      * @Transient
      */
     protected string $fullname = '';
+
     /**
      * @Validate("EmailAddress")
      */
@@ -57,7 +60,7 @@ class Person extends AbstractEntity
     /**
      * Constructs a new Person
      */
-    public function __construct($firstname = '', $lastname = '', $email = '')
+    public function __construct(string $firstname, string $lastname, string $email)
     {
         $this->setFirstname($firstname);
         $this->setLastname($lastname);
@@ -132,17 +135,17 @@ class Person extends AbstractEntity
     /**
      * @param ObjectStorage<Tag> $tags
      */
-    public function setTags(ObjectStorage $tags)
+    public function setTags(ObjectStorage $tags): void
     {
         $this->tags = $tags;
     }
 
-    public function addTag(Tag $tag)
+    public function addTag(Tag $tag): void
     {
         $this->tags->attach($tag);
     }
 
-    public function removeTag(Tag $tag)
+    public function removeTag(Tag $tag): void
     {
         $this->tags->detach($tag);
     }
@@ -158,17 +161,17 @@ class Person extends AbstractEntity
     /**
      * @param ObjectStorage<Tag> $tagsSpecial
      */
-    public function setTagsSpecial(ObjectStorage $tagsSpecial)
+    public function setTagsSpecial(ObjectStorage $tagsSpecial): void
     {
         $this->tagsSpecial = $tagsSpecial;
     }
 
-    public function addTagSpecial(Tag $tag)
+    public function addTagSpecial(Tag $tag): void
     {
         $this->tagsSpecial->attach($tag);
     }
 
-    public function removeTagSpecial(Tag $tag)
+    public function removeTagSpecial(Tag $tag): void
     {
         $this->tagsSpecial->detach($tag);
     }

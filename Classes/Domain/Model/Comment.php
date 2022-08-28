@@ -89,6 +89,7 @@ class Comment extends AbstractEntity
 
     /**
      * @param string $email
+     * Sets the authors email for this comment
      */
     public function setEmail(string $email): void
     {
