@@ -175,6 +175,7 @@ return [
                 'items' => [
                     ['--none--', 0],
                 ],
+                'default' => 0,
                 'fieldControl' => [
                     'editPopup' => [
                         'disabled' => false,
