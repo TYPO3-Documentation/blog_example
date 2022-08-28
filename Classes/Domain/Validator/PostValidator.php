@@ -25,7 +25,6 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
  */
 class PostValidator extends AbstractValidator
 {
-
     /**
      * Check if $value is valid. If it's not valid, it needs to add an error
      * to the result.

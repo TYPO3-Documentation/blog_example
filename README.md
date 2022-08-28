@@ -40,6 +40,13 @@ Build/Scripts/runTests.sh -s composerUpdate
 Build/Scripts/runTests.sh -s unit
 ```
 
+Running some tests locally can fix errors that are just displayed in actions on github.  
+The following command can fix things like linebreaks or indentations:
+
+```
+Build/Scripts/runTests.sh -s cgl
+```
+
 # Normalize composer.json
 
 ```
