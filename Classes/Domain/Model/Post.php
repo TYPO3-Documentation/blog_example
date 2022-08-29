@@ -44,7 +44,7 @@ class Post extends AbstractEntity
     /**
      * @var Person
      */
-    protected Person $author;
+    protected ?Person $author = null;
     protected ?Person $secondAuthor = null;
     protected ?Person $reviewer = null;
 
@@ -188,7 +188,7 @@ class Post extends AbstractEntity
     /**
      * Getter for author
      */
-    public function getAuthor(): Person
+    public function getAuthor(): ?Person
     {
         return $this->author;
     }

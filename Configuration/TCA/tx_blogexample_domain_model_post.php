@@ -147,6 +147,7 @@ return [
                 'allowed' => 'tx_blogexample_domain_model_person',
                 'foreign_table' => 'tx_blogexample_domain_model_person',
                 'maxitems' => 1,
+                'default' => 0,
                 'fieldControl' => [
                     'editPopup' => [
                         'disabled' => false,
