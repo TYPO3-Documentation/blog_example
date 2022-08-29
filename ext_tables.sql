@@ -73,10 +73,28 @@ CREATE TABLE tx_blogexample_domain_model_info (
 	post int(11) DEFAULT '0' NOT NULL
 );
 
+
+#
+# Table structure for table 'tx_blogexample_post_post_mm'
+# @TODO fix tx_blogexample_domain_model_post to create and recognize this mm-table automatically, remove this entry
+#
 CREATE TABLE tx_blogexample_post_post_mm (
-    uid_local int(11) DEFAULT '0' NOT NULL,
-    uid_foreign int(11) DEFAULT '0' NOT NULL,
-    sorting int(11) DEFAULT '0' NOT NULL,
-    sorting_foerign int(11) DEFAULT '0' NOT NULL,
+  `uid_local` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `uid_foreign` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `sorting` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `sorting_foreign` int(10) UNSIGNED NOT NULL DEFAULT 0
+);
+
+#
+# Table structure for table 'tx_blogexample_post_post_mm'
+# @TODO fix tx_blogexample_domain_model_post to create and recognize this mm-table
+#       with the field `fieldnames` automatically, remove this entry
+#
+CREATE TABLE `tx_blogexample_domain_model_tag_mm` (
+  `uid_local` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `uid_foreign` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `sorting` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `sorting_foreign` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `fieldname` varchar(63) DEFAULT '' NOT NULL
 );
 
