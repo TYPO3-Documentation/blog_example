@@ -73,3 +73,10 @@ CREATE TABLE tx_blogexample_domain_model_info (
 	post int(11) DEFAULT '0' NOT NULL
 );
 
+CREATE TABLE tx_blogexample_post_post_mm (
+    uid_local int(11) DEFAULT '0' NOT NULL,
+    uid_foreign int(11) DEFAULT '0' NOT NULL,
+    sorting int(11) DEFAULT '0' NOT NULL,
+    sorting_foerign int(11) DEFAULT '0' NOT NULL,
+);
+
