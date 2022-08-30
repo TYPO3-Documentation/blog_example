@@ -54,7 +54,7 @@ class Blog extends AbstractEntity
     /**
      * The posts of this blog
      * 
-     * @TÒDO: replace Lazy Annotation
+     * @TODO: replace Lazy Annotation
      *
      * @var ObjectStorage<Post>
      * @\TYPO3\CMS\Extbase\Annotation\ORM\Lazy
@@ -70,7 +70,7 @@ class Blog extends AbstractEntity
     /**
      * The blog's administrator
      * 
-     * @TÒDO: replace Lazy Annotation
+     * @TODO: replace Lazy Annotation
      *
      * @var Administrator
      * @\TYPO3\CMS\Extbase\Annotation\ORM\Lazy

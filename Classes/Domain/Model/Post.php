@@ -49,7 +49,7 @@ class Post extends AbstractEntity
     protected ?Person $reviewer = null;
 
     /**
-     * @Validate("StringLength", options={"minimum": 3})
+     * #[Validate(['validator' => 'StringLength', 'options' => ['minimum' => 3]])]
      */
     protected string $content = '';
 
@@ -65,31 +65,40 @@ class Post extends AbstractEntity
 
     /**
      * @var ObjectStorage<Comment>
+     * 
+     * @TODO: replace Lazy Annotation
+     * 
      * @Lazy
-     * @Cascade("remove")
+     * #[Cascade(['value' => 'remove'])]
      */
     public ObjectStorage $comments;
 
     /**
      * @var ObjectStorage<Post>
+     * 
+     * @TODO: replace Lazy Annotation
+     * 
      * @Lazy
      */
     public ObjectStorage $relatedPosts;
 
     /**
      * 1:1 optional relation
-     * @Cascade("remove")
+     * #[Cascade(['value' => 'remove'])]
      */
     public ?Info $additionalName;
 
     /**
      * 1:1 optional relation
-     * @Cascade("remove")
+     * #[Cascade(['value' => 'remove'])]
      */
     protected ?Info $additionalInfo;
 
     /**
      * 1:n relation stored as CSV value
+     * 
+     * @TODO: replace Lazy Annotation
+     * 
      * @var ObjectStorage<Comment>
      * @Lazy
      */
