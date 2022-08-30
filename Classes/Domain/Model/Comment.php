@@ -38,7 +38,7 @@ class Comment extends AbstractEntity
     protected string $email = '';
 
     /**
-     * @Validate("StringLength", options={"maximum": 500})
+     * #[Validate(['validator' => 'StringLength', 'options' => ['maximum' => 500]])]
      */
     protected string $content = '';
 
