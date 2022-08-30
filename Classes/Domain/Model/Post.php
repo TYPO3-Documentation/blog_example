@@ -65,9 +65,9 @@ class Post extends AbstractEntity
 
     /**
      * @var ObjectStorage<Comment>
-     * 
+     *
      * @TODO: replace Lazy Annotation
-     * 
+     *
      * @Lazy
      * #[Cascade(['value' => 'remove'])]
      */
@@ -75,9 +75,9 @@ class Post extends AbstractEntity
 
     /**
      * @var ObjectStorage<Post>
-     * 
+     *
      * @TODO: replace Lazy Annotation
-     * 
+     *
      * @Lazy
      */
     public ObjectStorage $relatedPosts;
@@ -96,9 +96,9 @@ class Post extends AbstractEntity
 
     /**
      * 1:n relation stored as CSV value
-     * 
+     *
      * @TODO: replace Lazy Annotation
-     * 
+     *
      * @var ObjectStorage<Comment>
      * @Lazy
      */

@@ -53,7 +53,7 @@ class Blog extends AbstractEntity
 
     /**
      * The posts of this blog
-     * 
+     *
      * @TODO: replace Lazy Annotation
      *
      * @var ObjectStorage<Post>
@@ -69,7 +69,7 @@ class Blog extends AbstractEntity
 
     /**
      * The blog's administrator
-     * 
+     *
      * @TODO: replace Lazy Annotation
      *
      * @var Administrator
