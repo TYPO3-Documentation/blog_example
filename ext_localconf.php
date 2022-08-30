@@ -54,7 +54,7 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
             'BlogList',
             // Cache-able Controller-Actions
             [
-                BlogController::class => 'index'
+                BlogController::class => 'index',
             ]
         );
 
@@ -64,7 +64,7 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
             'PostList',
             // Cache-able Controller-Actions
             [
-                PostController::class => 'index'
+                PostController::class => 'index',
             ]
         );
         ExtensionUtility::configurePlugin(
@@ -73,21 +73,21 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
             // Cache-able Controller-Actions
             [
                 PostController::class => 'show',
-                CommentController::class => 'create'
+                CommentController::class => 'create',
             ],
             // Non-Cache-able Controller-Actions
             [
-                CommentController::class => 'create'
+                CommentController::class => 'create',
             ]
         );
 
         // RSS Feed
         ExtensionUtility::configurePlugin(
             $extensionName,
-            'PostListRss',            
+            'PostListRss',
             // Cache-able Controller-Actions
             [
-                PostController::class => 'displayRssList'
+                PostController::class => 'displayRssList',
             ]
         );
 
@@ -110,4 +110,3 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
         );
     }
 })('BlogExample');
-
