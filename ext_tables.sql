@@ -73,28 +73,13 @@ CREATE TABLE tx_blogexample_domain_model_info (
 	post int(11) DEFAULT '0' NOT NULL
 );
 
-
 #
-# Table structure for table 'tx_blogexample_post_post_mm'
-# @TODO fix tx_blogexample_domain_model_post to create and recognize this mm-table automatically, remove this entry
+# Table structure for table 'tx_blogexample_domain_model_tag_mm'
+# @TODO fix tx_blogexample_domain_model_person to create and recognize this mm-table
+#       with the field `fieldname` automatically, remove this entry
+# @see https://forge.typo3.org/issues/98322
 #
-CREATE TABLE tx_blogexample_post_post_mm (
-  `uid_local` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `uid_foreign` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `sorting` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `sorting_foreign` int(10) UNSIGNED NOT NULL DEFAULT 0
-);
-
-#
-# Table structure for table 'tx_blogexample_post_post_mm'
-# @TODO fix tx_blogexample_domain_model_post to create and recognize this mm-table
-#       with the field `fieldnames` automatically, remove this entry
-#
-CREATE TABLE `tx_blogexample_domain_model_tag_mm` (
-  `uid_local` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `uid_foreign` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `sorting` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `sorting_foreign` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `fieldname` varchar(63) DEFAULT '' NOT NULL
-);
+-- CREATE TABLE `tx_blogexample_domain_model_tag_mm` (
+--	`fieldname` varchar(63) DEFAULT '' NOT NULL
+-- );
 

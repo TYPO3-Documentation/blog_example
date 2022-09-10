@@ -115,7 +115,7 @@ return [
             'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_person.tags',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_blogexample_domain_model_tag',
+                'foreign_table' => 'tx_blogexample_domain_model_tag', // needed by Extbase
                 'MM' => 'tx_blogexample_domain_model_tag_mm',
                 'MM_match_fields' => [
                     'fieldname' => 'tags',
@@ -133,7 +133,7 @@ return [
             'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_person.tags_special',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_blogexample_domain_model_tag',
+                'foreign_table' => 'tx_blogexample_domain_model_tag', // needed by Extbase
                 'MM' => 'tx_blogexample_domain_model_tag_mm',
                 'MM_match_fields' => [
                     'fieldname' => 'tags_special',

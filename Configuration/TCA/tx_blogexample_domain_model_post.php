@@ -233,7 +233,8 @@ return [
                 'foreign_table' => 'tx_blogexample_domain_model_post',
                 'foreign_table_where' => 'AND ###THIS_UID### != tx_blogexample_domain_model_post.uid',
                 'MM' => 'tx_blogexample_post_post_mm',
-                'MM_opposite_field' => 'related_posts',
+                // @see https://forge.typo3.org/issues/98323
+                // 'MM_opposite_field' => 'related_posts',
             ],
         ],
         'additional_name' => [
