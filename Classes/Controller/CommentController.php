@@ -6,10 +6,13 @@ namespace FriendsOfTYPO3\BlogExample\Controller;
 
 use FriendsOfTYPO3\BlogExample\Domain\Model\Comment;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
+use FriendsOfTYPO3\BlogExample\Domain\Repository\CommentRepository;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository;
 use FriendsOfTYPO3\BlogExample\Exception\NoBlogAdminAccessException;
+use FriendsOfTYPO3\BlogExample\Property\TypeConverters\HiddenCommentConverter;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
+use TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -35,7 +38,9 @@ class CommentController extends AbstractController
      * Takes care of dependency injection
      */
     public function __construct(
-        protected readonly PostRepository $postRepository
+        protected readonly PostRepository $postRepository,
+        protected readonly CommentRepository $commentRepository,
+        protected readonly HiddenCommentConverter $hiddenCommentConverter,
     ) {
     }
 
@@ -64,6 +69,27 @@ class CommentController extends AbstractController
         $post->removeComment($comment);
         $this->postRepository->update($post);
         $this->addFlashMessage('deleted', ContextualFeedbackSeverity::INFO);
+        return $this->redirect('show', 'Post', null, ['post' => $post]);
+    }
+
+    /**
+     * @throws NoSuchArgumentException
+     */
+    public function initializeUnhideAction(): void
+    {
+        $this->arguments->getArgument('comment')
+            ->getPropertyMappingConfiguration()
+            ->setTypeConverter($this->hiddenCommentConverter);
+    }
+
+    public function publishAction(
+        Post $post,
+        Comment $comment
+    ): ResponseInterface {
+        $this->checkBlogAdminAccess();
+        $comment->setHidden(false);
+        $this->commentRepository->update($comment);
+        $this->addFlashMessage('published', ContextualFeedbackSeverity::INFO);
         return $this->redirect('show', 'Post', null, ['post' => $post]);
     }
 

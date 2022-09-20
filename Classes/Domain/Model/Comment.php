@@ -42,6 +42,8 @@ class Comment extends AbstractEntity
      */
     protected string $content = '';
 
+    protected bool $hidden = true;
+
     public function __construct()
     {
         $this->date = new \DateTime();
@@ -110,6 +112,16 @@ class Comment extends AbstractEntity
     public function setContent(string $content): void
     {
         $this->content = $content;
+    }
+
+    public function isHidden(): bool
+    {
+        return $this->hidden;
+    }
+
+    public function setHidden(bool $hidden): void
+    {
+        $this->hidden = $hidden;
     }
 
     /**
