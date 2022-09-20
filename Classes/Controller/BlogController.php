@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Controller;
@@ -19,10 +20,13 @@ namespace FriendsOfTYPO3\BlogExample\Controller;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\AdministratorRepository;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository;
+use FriendsOfTYPO3\BlogExample\Exception\NoBlogAdminAccessException;
 use FriendsOfTYPO3\BlogExample\Service\BlogFactory;
-use TYPO3\CMS\Core\Messaging\FlashMessage;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 
 /**
@@ -30,29 +34,44 @@ use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
  */
 class BlogController extends AbstractController
 {
-    protected BlogRepository $blogRepository;
-
-    protected AdministratorRepository $administratorRepository;
-
-    public function __construct(BlogRepository $blogRepository, AdministratorRepository $administratorRepository)
-    {
-        $this->blogRepository = $blogRepository;
-        $this->administratorRepository = $administratorRepository;
+    /**
+     * BlogController constructor.
+     *
+     * Takes care of dependency injection
+     */
+    public function __construct(
+        protected readonly BlogRepository $blogRepository,
+        protected readonly BlogFactory $blogFactory,
+        protected readonly AdministratorRepository $administratorRepository
+    ) {
     }
 
     /**
      * Index action for this controller. Displays a list of blogs.
      */
-    public function indexAction(int $currentPage = 1): void
+    public function indexAction(int $currentPage = 1): ResponseInterface
     {
         $allAvailableBlogs = $this->blogRepository->findAll();
-        $paginator = new QueryResultPaginator($allAvailableBlogs, $currentPage, 3);
+        $paginator = new QueryResultPaginator(
+            $allAvailableBlogs,
+            $currentPage,
+            3
+        );
         $pagination = new SimplePagination($paginator);
         $this->view
             ->assign('blogs', $allAvailableBlogs)
             ->assign('paginator', $paginator)
             ->assign('pagination', $pagination)
             ->assign('pages', range(1, $pagination->getLastPageNumber()));
+        return $this->htmlResponse();
+    }
+
+    /**
+     * Output <h1>Hello World!</h1>
+     */
+    public function helloWorldAction(): ResponseInterface
+    {
+        return $this->htmlResponse('<h1>Hello World!</h1>');
     }
 
     /**
@@ -60,87 +79,109 @@ class BlogController extends AbstractController
      *
      * @IgnoreValidation("newBlog")
      */
-    public function newAction(?Blog $newBlog = null): void
+    public function newAction(?Blog $newBlog = null): ResponseInterface
     {
         $this->view->assign('newBlog', $newBlog);
-        $this->view->assign('administrators', $this->administratorRepository->findAll());
+        $this->view->assign(
+            'administrators',
+            $this->administratorRepository->findAll()
+        );
+        return $this->htmlResponse();
     }
 
     /**
      * Creates a new blog
      *
-     * @param Blog $newBlog A fresh Blog object which has not yet been added to the repository
+     * $blog is a fresh Blog object which has not yet been added to the
+     * repository
+     *
+     * @Validate(param="newBlog", validator="FriendsOfTYPO3\BlogExample\Domain\Validator\BlogValidator")
      */
-    public function createAction(Blog $newBlog): void
+    public function createAction(Blog $newBlog): ResponseInterface
     {
-        // TODO access protection
+        $this->checkBlogAdminAccess();
         $this->blogRepository->add($newBlog);
         $this->addFlashMessage('created');
-        $this->redirect('index');
+        return $this->redirect('index');
     }
 
     /**
      * Displays a form for editing an existing blog
      *
-     * @param Blog $blog The blog to be edited. This might also be a clone of the original blog already containing
-     *     modifications if the edit form has been submitted, contained errors and therefore ended up in this action
-     *     again.
+     * $blog might also be a clone of the original blog already containing
+     * modifications if the edit form has been submitted, contained errors and
+     * therefore ended up in this action again.
      * @IgnoreValidation("blog")
      */
-    public function editAction(Blog $blog): void
+    public function editAction(Blog $blog): ResponseInterface
     {
         $this->view->assign('blog', $blog);
-        $this->view->assign('administrators', $this->administratorRepository->findAll());
+        $this->view->assign(
+            'administrators',
+            $this->administratorRepository->findAll()
+        );
+        return $this->htmlResponse();
     }
 
     /**
      * Updates an existing blog
      *
-     * @param Blog $blog A not yet persisted clone of the original blog containing the modifications
+     * $blog is a not yet persisted clone of the original blog containing
+     * the modifications
+     *
+     * @Validate(param="blog", validator="FriendsOfTYPO3\BlogExample\Domain\Validator\BlogValidator")
+     * @throws NoBlogAdminAccessException
      */
-    public function updateAction(Blog $blog): void
+    public function updateAction(Blog $blog): ResponseInterface
     {
-        // TODO access protection
+        $this->checkBlogAdminAccess();
         $this->blogRepository->update($blog);
         $this->addFlashMessage('updated');
-        $this->redirect('index');
+        return $this->redirect('index');
     }
 
     /**
      * Deletes an existing blog
+     * @throws NoBlogAdminAccessException
      */
-    public function deleteAction(Blog $blog): void
+    public function deleteAction(Blog $blog): ResponseInterface
     {
-        // TODO access protection
+        $this->checkBlogAdminAccess();
         $this->blogRepository->remove($blog);
-        $this->addFlashMessage('deleted', FlashMessage::INFO);
-        $this->redirect('index');
+        $this->addFlashMessage('deleted', ContextualFeedbackSeverity::INFO);
+        return $this->redirect('index');
     }
 
     /**
      * Deletes an existing blog
+     * @throws NoBlogAdminAccessException
      */
-    public function deleteAllAction(): void
+    public function deleteAllAction(): ResponseInterface
     {
-        // TODO access protection
+        $this->checkBlogAdminAccess();
         $this->blogRepository->removeAll();
-        $this->redirect('index');
+        return $this->redirect('index');
     }
 
     /**
      * Creates a several new blogs
+     * @throws NoBlogAdminAccessException
      */
-    public function populateAction(): void
+    public function populateAction(): ResponseInterface
     {
-        // TODO access protection
+        $this->checkBlogAdminAccess();
         $numberOfExistingBlogs = $this->blogRepository->countAll();
-        $blogFactory = $this->objectManager->get(BlogFactory::class);
         for ($blogNumber = $numberOfExistingBlogs + 1; $blogNumber < ($numberOfExistingBlogs + 5); $blogNumber++) {
-            $blog = $blogFactory->createBlog($blogNumber);
+            $blog = $this->blogFactory->createBlog($blogNumber);
             $this->blogRepository->add($blog);
         }
         $this->addFlashMessage('populated');
-        $this->redirect('index');
+        return $this->redirect('index');
+    }
+
+    public function showBlogAjaxAction(Blog $blog): ResponseInterface
+    {
+        $jsonOutput = json_encode($blog);
+        return $this->jsonResponse($jsonOutput);
     }
 }
-

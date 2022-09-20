@@ -1,29 +1,11 @@
 <html
     xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
     xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
-<f:layout name="Default" />
+<f:layout name="Module" />
 
-<f:section name="iconButtons">
-    <be:moduleLayout.button.linkButton
-        icon="actions-close"
-        title="Cancel"
-        link="{f:uri.action(action:'index', controller:'Blog')}"
-    />
-    <be:moduleLayout.button.linkButton
-        icon="actions-document-add"
-        title="Create new Post"
-        link="{f:uri.action(action:'new', arguments:{blog: blog})}"
-    />
-    <be:moduleLayout.button.linkButton
-        icon="actions-document-edit"
-        title="Edit this Blog"
-        link="{f:uri.action(action:'edit', controller:'Blog', arguments:{blog: blog})}" />
-</f:section>
-
-<f:section name="content">
+<f:section name="Content">
     <h2>Posts of Blog &quot;{blog.title}&quot;</h2>
     <p class="bodytext">{blog.description}</p>
     <div class="tx-blogexample-list-container">
@@ -33,7 +15,7 @@
                     <f:for each="{blog.posts}" as="post">
                         <li>
                             <h3>
-                                <f:link.action action="show" controller="Post" arguments="{post: post, blog: post.blog}">
+                                <f:link.action action="showPost" controller="Backend" arguments="{post: post, blog: post.blog}">
                                     <core:icon identifier="actions-document-edit" />
                                     {post.title}
                                 </f:link.action>
@@ -44,9 +26,6 @@
                         </li>
                     </f:for>
                 </ul>
-                <p>
-                    <f:link.action arguments="{blog : blog}" format="txt" target="_blank"><strong>Show posts as text</strong> (experimental)</f:link.action>
-                </p>
             </f:then>
             <f:else>
                 <p>This blog currently doesn't contain any posts.</p>

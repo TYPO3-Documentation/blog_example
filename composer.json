@@ -1,43 +1,59 @@
 {
   "name": "friendsoftypo3/blog-example",
+  "description": "This blog example extension is described in the TYPO3 documentation. - Developing TYPO3 Extensions with Extbase and Fluid.",
+  "license": "GPL-2.0-or-later",
+  "type": "typo3-cms-extension",
   "authors": [
     {
       "name": "TYPO3 Core Team",
       "role": "Developer"
     }
   ],
-  "type": "typo3-cms-extension",
-  "description": "This blog example extension is described in the TYPO3 documentation. - Developing TYPO3 Extensions with Extbase and Fluid.",
-  "license": "GPL-2.0-or-later",
   "homepage": "https://extensions.typo3.org/extension/blog_example/",
   "support": {
     "issues": "https://github.com/FriendsOfTYPO3/blog_example/issues",
     "source": "https://github.com/FriendsOfTYPO3/blog_example"
   },
+  "require": {
+    "typo3/cms-core": "^12.0.0 || dev-main",
+    "typo3/cms-extbase": "^12.0.0 || dev-main",
+    "typo3/cms-fluid": "^12.0.0 || dev-main"
+  },
+  "require-dev": {
+    "ergebnis/composer-normalize": "^2.28",
+    "typo3/coding-standards": "^0.5.5"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "autoload": {
     "psr-4": {
       "FriendsOfTYPO3\\BlogExample\\": "Classes/"
     }
   },
-  "extra": {
-    "typo3/cms": {
-      "extension-key": "blog_example"
-    },
-    "branch-alias": {
-      "dev-master": "11.5.x-dev"
-    }
-  },
-  "require": {
-    "php": "^7.4 || ^8.0",
-    "typo3/cms-core": "^11.5",
-    "typo3/cms-extbase": "^11.5",
-    "typo3/cms-fluid": "^11.5",
-    "typo3fluid/fluid": "^2.7.2"
-  },
   "config": {
     "allow-plugins": {
       "typo3/class-alias-loader": true,
-      "typo3/cms-composer-installers": true
+      "typo3/cms-composer-installers": true,
+      "ergebnis/composer-normalize": true
+    },
+    "bin-dir": ".Build/bin",
+    "sort-packages": true,
+    "vendor-dir": ".Build/vendor"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "12.0.x-dev"
+    },
+    "typo3/cms": {
+      "extension-key": "blog_example",
+      "web-dir": ".Build/web"
     }
+  },
+  "scripts": {
+    "prepare-release": [
+      "rm -rf .github",
+      "rm .gitignore",
+      "rm .editorconfig"
+    ]
   }
 }

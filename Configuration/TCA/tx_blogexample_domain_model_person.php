@@ -1,4 +1,5 @@
 <?php
+
 return [
     'ctrl' => [
         'title' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_person',
@@ -16,9 +17,9 @@ return [
         'prependAtCopy' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.prependAtCopy',
         'delete' => 'deleted',
         'enablecolumns' => [
-            'disabled' => 'hidden'
+            'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:blog_example/Resources/Public/Icons/icon_tx_blogexample_domain_model_person.gif'
+        'iconfile' => 'EXT:blog_example/Resources/Public/Icons/icon_tx_blogexample_domain_model_person.gif',
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -63,7 +64,7 @@ return [
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.versionLabel',
             'config' => [
                 'type' => 'none',
-            ]
+            ],
         ],
         'hidden' => [
             'exclude' => true,
@@ -75,37 +76,40 @@ return [
                     [
                         0 => '',
                         1 => '',
-                        'invertStateDisplay' => true
-                    ]
+                        'invertStateDisplay' => true,
+                    ],
                 ],
-            ]
+            ],
         ],
         'firstname' => [
             'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_person.firstname',
             'config' => [
                 'type' => 'input',
                 'size' => 20,
-                'eval' => 'trim,required',
-                'max' => 256
-            ]
+                'eval' => 'trim',
+                'required' => true,
+                'max' => 256,
+            ],
         ],
         'lastname' => [
             'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_person.lastname',
             'config' => [
                 'type' => 'input',
                 'size' => 20,
-                'eval' => 'trim,required',
-                'max' => 256
-            ]
+                'eval' => 'trim',
+                'required' => true,
+                'max' => 256,
+            ],
         ],
         'email' => [
             'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_person.email',
             'config' => [
                 'type' => 'input',
                 'size' => 20,
-                'eval' => 'trim, required',
-                'max' => 256
-            ]
+                'eval' => 'trim',
+                'required' => true,
+                'max' => 256,
+            ],
         ],
         'tags' => [
             'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_person.tags',
@@ -114,15 +118,15 @@ return [
                 'foreign_table' => 'tx_blogexample_domain_model_tag',
                 'MM' => 'tx_blogexample_domain_model_tag_mm',
                 'MM_match_fields' => [
-                    'fieldname' => 'tags'
+                    'fieldname' => 'tags',
                 ],
                 'appearance' => [
                     'useCombination' => 1,
                     'useSortable' => 1,
                     'collapseAll' => 1,
                     'expandSingle' => 1,
-                ]
-            ]
+                ],
+            ],
         ],
         'tags_special' => [
             'exclude' => true,
@@ -132,21 +136,21 @@ return [
                 'foreign_table' => 'tx_blogexample_domain_model_tag',
                 'MM' => 'tx_blogexample_domain_model_tag_mm',
                 'MM_match_fields' => [
-                    'fieldname' => 'tags_special'
+                    'fieldname' => 'tags_special',
                 ],
                 'appearance' => [
                     'useCombination' => 1,
                     'useSortable' => 1,
                     'collapseAll' => 1,
                     'expandSingle' => 1,
-                ]
-            ]
+                ],
+            ],
         ],
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, firstname, lastname, email, avatar, tags, tags_special']
+        '1' => ['showitem' => 'sys_language_uid, firstname, lastname, email, avatar, tags, tags_special'],
     ],
     'palettes' => [
-        '1' => ['showitem' => '']
-    ]
+        '1' => ['showitem' => ''],
+    ],
 ];

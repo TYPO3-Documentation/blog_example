@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Domain\Model;
@@ -21,18 +22,14 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractValueObject;
 /**
  * A blog post tag
  */
-class Tag extends AbstractValueObject
+final class Tag extends AbstractValueObject
 {
-    protected string $name = '';
+    public string $name = '';
+    public int $priority = 0;
 
-    public function __construct(string $name)
+    public function __construct(string $name = '')
     {
         $this->name = $name;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
     }
 
     /**

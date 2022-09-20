@@ -14,11 +14,43 @@ return [
         'translationSource' => 'l10n_source',
         'delete' => 'deleted',
         'enablecolumns' => [
-            'disabled' => 'hidden'
+            'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:blog_example/Resources/Public/Icons/icon_tx_blogexample_domain_model_tag.gif'
+        'iconfile' => 'EXT:blog_example/Resources/Public/Icons/icon_tx_blogexample_domain_model_tag.gif',
     ],
     'columns' => [
+        'name' => [
+            'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_tag.name',
+            'config' => [
+                'type' => 'input',
+                'size' => 20,
+                'eval' => 'trim',
+                'required' => true,
+                'max' => 256,
+            ],
+        ],
+        'priority' => [
+            'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_tag.priority',
+            'config' => [
+                'type' => 'number',
+                'default' => 0,
+            ],
+        ],
+        'posts' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_tag.posts',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'size' => 10,
+                'minitems' => 0,
+                'autoSizeMax' => 30,
+                'multiple' => 0,
+                'foreign_table' => 'tx_blogexample_domain_model_post',
+                'MM' => 'tx_blogexample_post_tag_mm',
+                'MM_opposite_field' => 'tags',
+            ],
+        ],
         'sys_language_uid' => [
             'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
@@ -61,7 +93,7 @@ return [
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.versionLabel',
             'config' => [
                 'type' => 'none',
-            ]
+            ],
         ],
         'hidden' => [
             'exclude' => true,
@@ -73,40 +105,16 @@ return [
                     [
                         0 => '',
                         1 => '',
-                        'invertStateDisplay' => true
-                    ]
+                        'invertStateDisplay' => true,
+                    ],
                 ],
-            ]
-        ],
-        'name' => [
-            'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_tag.name',
-            'config' => [
-                'type' => 'input',
-                'size' => 20,
-                'eval' => 'trim, required',
-                'max' => 256
-            ]
-        ],
-        'posts' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_tag.posts',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'size' => 10,
-                'minitems' => 0,
-                'autoSizeMax' => 30,
-                'multiple' => 0,
-                'foreign_table' => 'tx_blogexample_domain_model_post',
-                'MM' => 'tx_blogexample_post_tag_mm',
-                'MM_opposite_field' => 'tags',
-            ]
+            ],
         ],
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, hidden, name, posts']
+        '1' => ['showitem' => 'sys_language_uid, hidden, name, priority, posts'],
     ],
     'palettes' => [
-        '1' => ['showitem' => '']
-    ]
+        '1' => ['showitem' => ''],
+    ],
 ];

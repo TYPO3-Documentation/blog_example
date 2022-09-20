@@ -3,6 +3,12 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2020-11-16T10:32:58Z" product-name="blog_example">
 		<header/>
 		<body>
+			<trans-unit id="administration.menu.index" xml:space="preserve">
+				<source>Blog list</source>
+			</trans-unit>
+			<trans-unit id="administration.menu.comments" xml:space="preserve">
+				<source>All comments</source>
+			</trans-unit>
 			<trans-unit id="back" xml:space="preserve">
 				<source>back</source>
 			</trans-unit>

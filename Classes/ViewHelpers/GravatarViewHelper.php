@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\ViewHelpers;
@@ -39,14 +40,17 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
      */
     protected $tagName = 'img';
 
+    /**
+     * Initialize arguments
+     */
     public function initializeArguments(): void
     {
         parent::initializeArguments();
 
         $this->registerUniversalTagAttributes();
         $this->registerArgument('emailAddress', 'string', '', true)
-            ->registerArgument('defaultImageUri', 'string', '', false)
-            ->registerArgument('size', 'string', '', false);
+             ->registerArgument('defaultImageUri', 'string', '', false)
+             ->registerArgument('size', 'int', '', false);
     }
 
     public function render(): string
@@ -57,7 +61,7 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
             $uriParts[] = 'd=' . urlencode($this->arguments['defaultImageUri']);
         }
         if ($this->arguments['size'] !== null) {
-            $uriParts[] = 's=' . urlencode($this->arguments['size']);
+            $uriParts[] = 's=' . $this->arguments['size'];
         }
         if (count($uriParts) > 0) {
             $gravatarUri .= '?' . implode('&', $uriParts);

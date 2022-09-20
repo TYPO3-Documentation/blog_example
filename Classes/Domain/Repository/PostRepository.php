@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Domain\Repository;
@@ -51,8 +52,10 @@ class PostRepository extends Repository
      *
      * @param Blog $blog The blog the post must refer to
      */
-    public function findByTagAndBlog(string $tag, Blog $blog): QueryResultInterface
-    {
+    public function findByTagAndBlog(
+        string $tag,
+        Blog $blog
+    ): QueryResultInterface {
         $query = $this->createQuery();
         return $query
             ->matching(
@@ -123,8 +126,10 @@ class PostRepository extends Repository
      * @param Blog $blog The blog the post must refer to
      * @param int $limit The number of posts to return at max
      */
-    public function findRecentByBlog(Blog $blog, int $limit = 5): QueryResultInterface
-    {
+    public function findRecentByBlog(
+        Blog $blog,
+        int $limit = 5
+    ): QueryResultInterface {
         $query = $this->createQuery();
         return $query
             ->matching(

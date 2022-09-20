@@ -1,16 +1,16 @@
 <?php
+
 defined('TYPO3') or die();
 
+use FriendsOfTYPO3\BlogExample\Controller\BlogController;
+use FriendsOfTYPO3\BlogExample\Controller\CommentController;
+use FriendsOfTYPO3\BlogExample\Controller\PostController;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
-use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 use TYPO3\CMS\Core\Information\Typo3Version;
+
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-
-use FriendsOfTYPO3\BlogExample\Controller\BlogController;
-use FriendsOfTYPO3\BlogExample\Controller\PostController;
-use FriendsOfTYPO3\BlogExample\Controller\CommentController;
-
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 (static function (string $extensionName): void {
     $versionInformation = GeneralUtility::makeInstance(Typo3Version::class);
@@ -26,17 +26,21 @@ use FriendsOfTYPO3\BlogExample\Controller\CommentController;
      * the user input (default settings, FlexForm, URL etc.)
      */
     if (
-        GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('blog_example',
-            'registerSinglePlugin')
+        GeneralUtility::makeInstance(ExtensionConfiguration::class)->get(
+            'blog_example',
+            'registerSinglePlugin'
+        )
     ) {
         ExtensionUtility::configurePlugin(
             $extensionName,
             'Pi1',
+            // Cache-able Controller-Actions
             [
                 BlogController::class => 'index,new,create,delete,deleteAll,edit,update,populate',
                 PostController::class => 'index,show,new,create,delete,edit,update',
                 CommentController::class => 'create,delete',
             ],
+            // Non-Cache-able Controller-Actions
             [
                 BlogController::class => 'create,delete,deleteAll,update,populate',
                 PostController::class => 'create,delete,update',
@@ -48,38 +52,56 @@ use FriendsOfTYPO3\BlogExample\Controller\CommentController;
         ExtensionUtility::configurePlugin(
             $extensionName,
             'BlogList',
-            [BlogController::class => 'index']
+            // Cache-able Controller-Actions
+            [
+                BlogController::class => 'index',
+            ]
         );
 
         // Post plugins
         ExtensionUtility::configurePlugin(
             $extensionName,
             'PostList',
-            [PostController::class => 'index']
+            // Cache-able Controller-Actions
+            [
+                PostController::class => 'index',
+            ]
         );
         ExtensionUtility::configurePlugin(
             'BlogExample',
             'PostSingle',
-            [PostController::class => 'show',CommentController::class => 'create'],
-            [CommentController::class => 'create']
+            // Cache-able Controller-Actions
+            [
+                PostController::class => 'show',
+                CommentController::class => 'create',
+            ],
+            // Non-Cache-able Controller-Actions
+            [
+                CommentController::class => 'create',
+            ]
         );
 
         // RSS Feed
         ExtensionUtility::configurePlugin(
             $extensionName,
             'PostListRss',
-            [PostController::class => 'displayRssList']
+            // Cache-able Controller-Actions
+            [
+                PostController::class => 'displayRssList',
+            ]
         );
 
         // admin plugins
         ExtensionUtility::configurePlugin(
             $extensionName,
             'BlogAdmin',
+            // Cache-able Controller-Actions
             [
                 BlogController::class => 'new,create,delete,deleteAll,edit,update,populate',
                 PostController::class => 'new,create,delete,edit,update',
                 CommentController::class => 'delete',
             ],
+            // Non-Cache-able Controller-Actions
             [
                 BlogController::class => 'create,delete,deleteAll,update,populate',
                 PostController::class => 'create,delete,update',
@@ -87,5 +109,4 @@ use FriendsOfTYPO3\BlogExample\Controller\CommentController;
             ]
         );
     }
-
 })('BlogExample');

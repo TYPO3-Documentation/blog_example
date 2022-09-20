@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 defined('TYPO3') or die();
 
@@ -24,7 +25,8 @@ if ($extensionConfiguration->get('blog_example', 'registerSinglePlugin')) {
         = 'pi_flexform,recursive';
     ExtensionManagementUtility::addPiFlexFormValue(
         'blogexample_pi1',
-        'FILE:EXT:blog_example/Configuration/FlexForms/flexform_list.xml');
+        'FILE:EXT:blog_example/Configuration/FlexForms/PluginSettings.xml'
+    );
 } else {
     ExtensionUtility::registerPlugin(
         'blog_example',
@@ -57,6 +59,6 @@ if ($extensionConfiguration->get('blog_example', 'registerSinglePlugin')) {
         = 'pi_flexform,recursive';
     ExtensionManagementUtility::addPiFlexFormValue(
         'blogexample_postlist',
-        'FILE:EXT:blog_example/Configuration/FlexForms/flexform_list.xml'
+        'FILE:EXT:blog_example/Configuration/FlexForms/PluginSettings.xml'
     );
 }

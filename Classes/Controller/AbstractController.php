@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Controller;
@@ -16,7 +17,8 @@ namespace FriendsOfTYPO3\BlogExample\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
-use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use FriendsOfTYPO3\BlogExample\Exception\NoBlogAdminAccessException;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -31,29 +33,61 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     protected function getErrorFlashMessage(): string
     {
         $defaultFlashMessage = parent::getErrorFlashMessage();
-        $locallangKey = sprintf('error.%s.%s', $this->request->getControllerName(), $this->actionMethodName);
+        $locallangKey = sprintf(
+            'error.%s.%s',
+            $this->request->getControllerName(),
+            $this->actionMethodName
+        );
         return $this->translate($locallangKey, $defaultFlashMessage);
+    }
+
+    protected function hasBlogAdminAccess(): bool
+    {
+        // TODO access protection
+        return true;
+    }
+
+    /**
+     * @throws NoBlogAdminAccessException
+     */
+    protected function checkBlogAdminAccess()
+    {
+        if (!$this->hasBlogAdminAccess()) {
+            throw new NoBlogAdminAccessException();
+        }
     }
 
     /**
      * helper function to render localized flashmessages
-     *
-     * @param AbstractMessage::* $severity
      */
-    public function addLocalizedFlashMessage(string $action, int $severity = AbstractMessage::OK): void
-    {
-        $messageLocallangKey = sprintf('flashmessage.%s.%s', $this->request->getControllerName(), $action);
-        $localizedMessage = $this->translate($messageLocallangKey, '[' . $messageLocallangKey . ']');
+    public function addLocalizedFlashMessage(
+        string $action,
+        ContextualFeedbackSeverity $severity = ContextualFeedbackSeverity::OK
+    ): void {
+        $messageLocallangKey = sprintf(
+            'flashmessage.%s.%s',
+            $this->request->getControllerName(),
+            $action
+        );
+        $localizedMessage = $this->translate(
+            $messageLocallangKey,
+            '[' . $messageLocallangKey . ']'
+        );
         $titleLocallangKey = sprintf('%s.title', $messageLocallangKey);
-        $localizedTitle = $this->translate($titleLocallangKey, '[' . $titleLocallangKey . ']');
+        $localizedTitle = $this->translate(
+            $titleLocallangKey,
+            '[' . $titleLocallangKey . ']'
+        );
         $this->addFlashMessage($localizedMessage, $localizedTitle, $severity);
     }
 
     /**
      * helper function to use localized strings in BlogExample controllers
      */
-    protected function translate(string $key, string $defaultMessage = ''): string
-    {
+    protected function translate(
+        string $key,
+        string $defaultMessage = ''
+    ): string {
         $message = LocalizationUtility::translate($key, 'BlogExample');
         if ($message === null) {
             $message = $defaultMessage;

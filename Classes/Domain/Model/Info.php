@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Domain\Model;
@@ -25,14 +26,37 @@ class Info extends AbstractEntity
 {
     protected string $name = '';
 
-    public function setName(string $name)
-    {
-        $this->name = $name;
-    }
+    protected string $bodytext = '';
 
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBodytext(): string
+    {
+        return $this->bodytext;
+    }
+
+    /**
+     * @param string $bodytext
+     */
+    public function setBodytext(string $bodytext): void
+    {
+        $this->bodytext = $bodytext;
+    }
+
+    public function getCombinedString(): string
+    {
+        return $this->name . ': ' . $this->bodytext;
     }
 
     /**

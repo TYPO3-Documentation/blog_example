@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Controller;
@@ -6,13 +7,19 @@ namespace FriendsOfTYPO3\BlogExample\Controller;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Comment;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
+use FriendsOfTYPO3\BlogExample\Domain\Model\Tag;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\PersonRepository;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository;
-use TYPO3\CMS\Core\Messaging\FlashMessage;
+use FriendsOfTYPO3\BlogExample\Exception\NoBlogAdminAccessException;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
+use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
+use TYPO3\CMS\Extbase\Property\PropertyMapper;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -32,63 +39,79 @@ use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
  */
 class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractController
 {
-    protected BlogRepository $blogRepository;
-
-    protected PostRepository $postRepository;
-
-    protected PersonRepository $personRepository;
-
+    /**
+     * PostController constructor.
+     *
+     * Takes care of dependency injection
+     */
     public function __construct(
-        BlogRepository $blogRepository,
-        PersonRepository $personRepository,
-        PostRepository $postRepository
+        protected readonly BlogRepository $blogRepository,
+        protected readonly PersonRepository $personRepository,
+        protected readonly PostRepository $postRepository,
+        protected readonly PropertyMapper $propertyMapper
     ) {
-        $this->blogRepository = $blogRepository;
-        $this->personRepository = $personRepository;
-        $this->postRepository = $postRepository;
+    }
+
+    /**
+     * This method demonstrates property mapping to an object
+     * @throws \TYPO3\CMS\Extbase\Property\Exception
+     */
+    protected function mapTagFromString(string $tagString = 'some tag'): Tag
+    {
+        $input = [
+            'name' => $tagString,
+        ];
+        return $this->propertyMapper->convert(
+            $input,
+            Tag::class
+        );
+    }
+
+    /**
+     * This method demonstrates property mapping to an integer
+     * @throws \TYPO3\CMS\Extbase\Property\Exception
+     */
+    protected function mapIntegerFromString(string $numberString = '42'): int
+    {
+        return $output = $this->propertyMapper->convert($numberString, 'integer');
     }
 
     /**
      * Displays a list of posts. If $tag is set only posts matching this tag are shown
-     *
-     * @param Blog|null $blog The blog to show the posts of
-     * @param string $tag The name of the tag to show the posts for
      */
-    public function indexAction(?Blog $blog = null, string $tag = '', int $currentPage = 1): void
-    {
+    public function indexAction(
+        ?Blog $blog = null,
+        string $tag = '',
+        int $currentPage = 1
+    ): ResponseInterface {
         if ($blog == null) {
-            $defaultBlog = $this->settings['defaultBlog'] ?? 0;
-            if ($defaultBlog > 0) {
-                $blog = $this->blogRepository->findByUid((int)$defaultBlog);
-            } else {
-                $blog = $this->blogRepository->findAll()->getFirst();
-            }
+            return (new ForwardResponse('index'))
+                ->withControllerName(('Blog'))
+                ->withExtensionName('blog_example')
+                ->withArguments(['currentPage' => $currentPage]);
         }
-        if ($blog == null) {
-            $this->view->assign('blog', 0);
+        if (empty($tag)) {
+            $posts = $this->postRepository->findByBlog($blog);
         } else {
-            if (empty($tag)) {
-                $posts = $this->postRepository->findByBlog($blog);
-            } else {
-                $tag = urldecode($tag);
-                $posts = $this->postRepository->findByTagAndBlog($tag, $blog);
-                $this->view->assign('tag', $tag);
-            }
-            $paginator = new QueryResultPaginator($posts, $currentPage, 3);
-            $pagination = new SimplePagination($paginator);
-            $this->view
-                ->assign('paginator', $paginator)
-                ->assign('pagination', $pagination)
-                ->assign('pages', range(1, $pagination->getLastPageNumber()))
-                ->assign('blog', $blog)
-                ->assign('posts', $posts);
+            $tag = urldecode($tag);
+            $posts = $this->postRepository->findByTagAndBlog($tag, $blog);
+            $this->view->assign('tag', $tag);
         }
+        $paginator = new QueryResultPaginator($posts, $currentPage, 3);
+        $pagination = new SimplePagination($paginator);
+        $this->view
+            ->assign('paginator', $paginator)
+            ->assign('pagination', $pagination)
+            ->assign('pages', range(1, $pagination->getLastPageNumber()))
+            ->assign('blog', $blog)
+            ->assign('posts', $posts);
+        return $this->htmlResponse();
     }
 
     /**
-     * Displays a list of posts as Rss feed
+     * Displays a list of posts as RSS feed
      */
-    public function displayRssListAction(): void
+    public function displayRssListAction(): ResponseInterface
     {
         $defaultBlog = $this->settings['defaultBlog'] ?? 0;
         if ($defaultBlog > 0) {
@@ -97,95 +120,112 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
             $blog = $this->blogRepository->findAll()->getFirst();
         }
         $this->view->assign('blog', $blog);
+        return $this->responseFactory->createResponse()
+            ->withHeader('Content-Type', 'text/xml; charset=utf-8')
+            ->withBody($this->streamFactory->createStream($this->view->render()));
     }
 
     /**
      * Displays one single post
      *
-     * @param Post $post The post to display
-     * @param Comment|null $newComment A new comment
-     *
      * @IgnoreValidation("newComment")
      */
-    public function showAction(Post $post, ?Comment $newComment = null): void
-    {
+    public function showAction(
+        Post $post,
+        ?Comment $newComment = null
+    ): ResponseInterface {
         $this->view->assign('post', $post);
         $this->view->assign('newComment', $newComment);
+        return $this->htmlResponse();
     }
 
     /**
      * Displays a form for creating a new post
      *
-     * @param Blog $blog The blog the post belongs to
-     * @param Post|null $newPost A fresh post object taken as a basis for the rendering
+     * $newPost is a fresh post object taken as a basis for the rendering
      *
      * @IgnoreValidation("newPost")
      */
-    public function newAction(Blog $blog, ?Post $newPost = null): void
-    {
+    public function newAction(
+        Blog $blog,
+        ?Post $newPost = null
+    ): ResponseInterface {
         $this->view->assign('authors', $this->personRepository->findAll());
         $this->view->assign('blog', $blog);
         $this->view->assign('newPost', $newPost);
-        $this->view->assign('remainingPosts', $this->postRepository->findByBlog($blog));
+        $this->view->assign(
+            'remainingPosts',
+            $this->postRepository->findByBlog($blog)
+        );
+        return $this->htmlResponse();
     }
 
     /**
      * Creates a new post
-     *
-     * @param Blog $blog The blog the post belongs to
-     * @param Post $newPost The new post object
+     * @throws NoBlogAdminAccessException|IllegalObjectTypeException
      */
-    public function createAction(Blog $blog, Post $newPost): void
-    {
-        // TODO access protection
+    public function createAction(
+        Blog $blog,
+        Post $newPost
+    ): ResponseInterface {
+        $this->checkBlogAdminAccess();
         $blog->addPost($newPost);
         $newPost->setBlog($blog);
         $this->postRepository->add($newPost);
         $this->addFlashMessage('created');
-        $this->redirect('index', null, null, ['blog' => $blog]);
+        return $this->redirect('index', null, null, ['blog' => $blog]);
     }
 
     /**
      * Displays a form to edit an existing post
      *
-     * @param Blog $blog The blog the post belongs to
-     * @param Post $post The original post
-     *
      * @IgnoreValidation("post")
      */
-    public function editAction(Blog $blog, Post $post): void
+    public function editAction(Blog $blog, Post $post): ResponseInterface
     {
         $this->view->assign('authors', $this->personRepository->findAll());
         $this->view->assign('blog', $blog);
         $this->view->assign('post', $post);
-        $this->view->assign('remainingPosts', $this->postRepository->findRemaining($post));
+        $this->view->assign(
+            'remainingPosts',
+            $this->postRepository->findRemaining($post)
+        );
+        return $this->htmlResponse();
     }
 
     /**
      * Updates an existing post
      *
-     * @param Blog $blog The blog the post belongs to
-     * @param Post $post A clone of the original post with the updated values already applied
+     * $post is a clone of the original post with the updated values already applied
+     *
+     * @throws NoBlogAdminAccessException
      */
-    public function updateAction(Blog $blog, Post $post): void
-    {
-        // TODO access protection
+    public function updateAction(
+        Blog $blog,
+        Post $post
+    ): ResponseInterface {
+        $this->checkBlogAdminAccess();
         $this->postRepository->update($post);
         $this->addFlashMessage('updated');
-        $this->redirect('show', null, null, ['post' => $post, 'blog' => $blog]);
+        return $this->redirect(
+            'show',
+            null,
+            null,
+            ['post' => $post, 'blog' => $blog]
+        );
     }
 
     /**
      * Deletes an existing post
-     *
-     * @param Blog $blog The blog the post belongs to
-     * @param Post $post The post to be deleted
+     * @throws NoBlogAdminAccessException
      */
-    public function deleteAction(Blog $blog, Post $post): void
-    {
-        // TODO access protection
+    public function deleteAction(
+        Blog $blog,
+        Post $post
+    ): ResponseInterface {
+        $this->checkBlogAdminAccess();
         $this->postRepository->remove($post);
-        $this->addFlashMessage('deleted', FlashMessage::INFO);
-        $this->redirect('index', null, null, ['blog' => $blog]);
+        $this->addFlashMessage('deleted', ContextualFeedbackSeverity::INFO);
+        return $this->redirect('index', null, null, ['blog' => $blog]);
     }
 }

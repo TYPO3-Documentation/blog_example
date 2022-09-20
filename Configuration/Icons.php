@@ -1,4 +1,5 @@
 <?php
+
 return [
     // icon identifier
     'blog_example_icon' => [

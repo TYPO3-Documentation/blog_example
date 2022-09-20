@@ -1,4 +1,5 @@
 /*.idea
+/.Build
 /composer.lock
-/public
-/vendor
+*GENERATED*
+/Build/testing-docker/.env

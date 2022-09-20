@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Controller;
@@ -6,7 +7,9 @@ namespace FriendsOfTYPO3\BlogExample\Controller;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Comment;
 use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
 use FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository;
-use TYPO3\CMS\Core\Messaging\FlashMessage;
+use FriendsOfTYPO3\BlogExample\Exception\NoBlogAdminAccessException;
+use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -26,51 +29,59 @@ use TYPO3\CMS\Core\Messaging\FlashMessage;
  */
 class CommentController extends AbstractController
 {
-    private PostRepository $postRepository;
-
-    public function __construct(PostRepository $postRepository)
-    {
-        $this->postRepository = $postRepository;
+    /**
+     * CommentController constructor.
+     *
+     * Takes care of dependency injection
+     */
+    public function __construct(
+        protected readonly PostRepository $postRepository
+    ) {
     }
 
     /**
      * Adds a comment to a blog post and redirects to single view
-     *
-     * @param Post $post The post the comment is related to
-     * @param Comment $newComment The comment to create
      */
-    public function createAction(Post $post, Comment $newComment): void
-    {
+    public function createAction(
+        Post $post,
+        Comment $newComment
+    ): ResponseInterface {
         $post->addComment($newComment);
         $this->postRepository->update($post);
         $this->addFlashMessage('created');
-        $this->redirect('show', 'Post', null, ['post' => $post]);
+        return $this->redirect('show', 'Post', null, ['post' => $post]);
     }
 
     /**
      * Deletes an existing comment
-     *
-     * @param Post $post The post the comment is related to
-     * @param Comment $comment The comment to be deleted
+     * @throws NoBlogAdminAccessException
      */
-    public function deleteAction(Post $post, Comment $comment): void
-    {
-        // TODO access protection
+    public function deleteAction(
+        Post $post,
+        Comment $comment
+    ): ResponseInterface {
+        $this->checkBlogAdminAccess();
         $post->removeComment($comment);
         $this->postRepository->update($post);
-        $this->addFlashMessage('deleted', FlashMessage::INFO);
-        $this->redirect('show', 'Post', null, ['post' => $post]);
+        $this->addFlashMessage('deleted', ContextualFeedbackSeverity::INFO);
+        return $this->redirect('show', 'Post', null, ['post' => $post]);
     }
 
     /**
      * Deletes all comments of the given post
+     * @throws NoBlogAdminAccessException
      */
-    public function deleteAllAction(Post $post): void
+    public function deleteAllAction(Post $post): ResponseInterface
     {
-        // TODO access protection
+        $this->checkBlogAdminAccess();
         $post->removeAllComments();
         $this->postRepository->update($post);
-        $this->addFlashMessage('deletedAll', FlashMessage::INFO);
-        $this->redirect('edit', 'Post', null, ['post' => $post, 'blog' => $post->getBlog()]);
+        $this->addFlashMessage('deletedAll', ContextualFeedbackSeverity::INFO);
+        return $this->redirect(
+            'edit',
+            'Post',
+            null,
+            ['post' => $post, 'blog' => $post->getBlog()]
+        );
     }
 }

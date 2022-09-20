@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Domain\Model;
@@ -16,6 +17,8 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Extbase\Annotation\ORM\Transient;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -24,10 +27,24 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Person extends AbstractEntity
 {
+    /**
+     * @Validate("StringLength", options={"maximum": 80})
+     */
     protected string $firstname = '';
 
+    /**
+     * @Validate("StringLength", options={"minimum": 2, "maximum": 80})
+     */
     protected string $lastname = '';
 
+    /**
+     * @Transient
+     */
+    protected string $fullname = '';
+
+    /**
+     * @Validate("EmailAddress")
+     */
     protected string $email = '';
 
     /**
@@ -40,6 +57,9 @@ class Person extends AbstractEntity
      */
     protected ObjectStorage $tagsSpecial;
 
+    /**
+     * Constructs a new Person
+     */
     public function __construct(string $firstname, string $lastname, string $email)
     {
         $this->setFirstname($firstname);
@@ -50,45 +70,64 @@ class Person extends AbstractEntity
         $this->tagsSpecial = new ObjectStorage();
     }
 
-    public function setFirstname(string $firstname): void
-    {
-        $this->firstname = $firstname;
-    }
-
+    /**
+     * @return string
+     */
     public function getFirstname(): string
     {
         return $this->firstname;
     }
 
-    public function setLastname(string $lastname): void
+    /**
+     * @param string $firstname
+     */
+    public function setFirstname(string $firstname): void
     {
-        $this->lastname = $lastname;
+        $this->firstname = $firstname;
     }
 
+    /**
+     * @return string
+     */
     public function getLastname(): string
     {
         return $this->lastname;
     }
 
-    public function getFullName(): string
+    /**
+     * @param string $lastname
+     */
+    public function setLastname(string $lastname): void
     {
-        return $this->firstname . ' ' . $this->lastname;
+        $this->lastname = $lastname;
     }
 
-    public function setEmail(string $email): void
-    {
-        $this->email = $email;
-    }
-
+    /**
+     * @return string
+     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
     /**
-     * @return ObjectStorage<Tag>
+     * @param string $email
      */
-    public function getTags(): ObjectStorage
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    public function getFullName(): string
+    {
+        $this->fullname = $this->firstname . ' ' . $this->lastname;
+        return $this->fullname;
+    }
+
+    /**
+     * @return ObjectStorage|Tag[]
+     */
+    public function getTags(): ObjectStorage|array
     {
         return $this->tags;
     }
@@ -112,9 +151,9 @@ class Person extends AbstractEntity
     }
 
     /**
-     * @return ObjectStorage<Tag>
+     * @return ObjectStorage|Tag[]
      */
-    public function getTagsSpecial(): ObjectStorage
+    public function getTagsSpecial(): ObjectStorage|array
     {
         return $this->tagsSpecial;
     }

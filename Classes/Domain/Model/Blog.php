@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Domain\Model;
@@ -16,7 +17,9 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
-use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Domain\Model\Category;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -27,50 +30,48 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 class Blog extends AbstractEntity
 {
     /**
-     * The blog's title.
-     *
-     * @Extbase\Validate("StringLength", options={"minimum": 1, "maximum": 80})
+     * @Validate("FriendsOfTYPO3\BlogExample\Domain\Validator\TitleValidator")
      */
-    protected string $title = '';
+    public string $title = '';
 
     /**
-     * The blog's subtitle
+     * @Validate("StringLength", options={"minimum": 5, "maximum": 80})
      */
-    protected ?string $subtitle = null;
+    public string|null $subtitle;
 
     /**
      * A short description of the blog
      *
-     * @Extbase\Validate("StringLength", options={"maximum": 150})
+     * @Validate("StringLength", options={"maximum": 150})
      */
-    protected string $description = '';
+    public string $description = '';
 
     /**
      * A relative path to a logo image
      */
-    protected string $logo = '';
+    public string $logo = '';
 
     /**
      * The posts of this blog
      *
      * @var ObjectStorage<Post>
-     * @Extbase\ORM\Lazy
-     * @Extbase\ORM\Cascade("remove")
+     * @Lazy
+     * @Cascade("remove")
      */
-    protected ObjectStorage $posts;
+    public $posts;
 
     /**
      * @var ObjectStorage<Category>
      */
-    protected ObjectStorage $categories;
+    public $categories;
 
     /**
      * The blog's administrator
      *
      * @var Administrator
-     * @Extbase\ORM\Lazy
+     * @Lazy
      */
-    protected $administrator;
+    public $administrator;
 
     public function __construct()
     {
@@ -78,102 +79,95 @@ class Blog extends AbstractEntity
         $this->categories = new ObjectStorage();
     }
 
-    public function getSubtitle(): string
-    {
-        return $this->subtitle;
-    }
-
-    public function setTitle(string $title): void
-    {
-        $this->title = $title;
-    }
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    public function setLogo(string $logo): void
-    {
-        $this->logo = $logo;
-    }
-
-    public function getLogo(): string
-    {
-        return $this->logo;
-    }
-
-    public function setDescription(string $description): void
-    {
-        $this->description = $description;
-    }
-
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-
-    public function addPost(Post $post): void
+    /**
+     * Adds a post to this blog
+     */
+    public function addPost(Post $post)
     {
         $this->posts->attach($post);
     }
 
-    public function removePost(Post $postToRemove): void
+    /**
+     * Remove a post from this blog
+     */
+    public function removePost(Post $postToRemove)
     {
         $this->posts->detach($postToRemove);
     }
 
+    /**
+     * Remove all posts from this blog
+     */
     public function removeAllPosts(): void
     {
         $this->posts = new ObjectStorage();
     }
 
     /**
-     * @return ObjectStorage<Post>
+     * Returns all posts in this blog
+     *
+     * @return ObjectStorage
      */
     public function getPosts(): ObjectStorage
     {
         return $this->posts;
     }
 
-    public function addCategory(Category $category): void
+    /**
+     * @param ObjectStorage<Post> $posts
+     */
+    public function setPosts(ObjectStorage $posts): void
+    {
+        $this->posts = $posts;
+    }
+
+    /**
+     * Add category to a blog
+     *
+     * @param Category $category
+     */
+    public function addCategory(Category $category)
     {
         $this->categories->attach($category);
     }
 
     /**
-     * @param ObjectStorage<Category> $categories
+     * Set categories
      */
-    public function setCategories(ObjectStorage $categories): void
+    public function setCategories(ObjectStorage $categories)
     {
         $this->categories = $categories;
     }
 
     /**
-     * @return ObjectStorage<Category>
+     * Get categories
      */
     public function getCategories(): ObjectStorage
     {
         return $this->categories;
     }
 
-    public function removeCategory(Category $category): void
+    /**
+     * Remove category from blog
+     */
+    public function removeCategory(Category $category)
     {
         $this->categories->detach($category);
     }
 
-    public function setAdministrator(Administrator $administrator): void
+    /**
+     * @return string
+     */
+    public function getTitle(): string
     {
-        $this->administrator = $administrator;
+        return $this->title;
     }
 
-    public function getAdministrator(): Administrator
+    /**
+     * @param string $title
+     */
+    public function setTitle(string $title): void
     {
-        return $this->administrator;
-    }
-
-    public function setSubtitle(?string $subtitle): void
-    {
-        $this->subtitle = $subtitle;
+        $this->title = $title;
     }
 }

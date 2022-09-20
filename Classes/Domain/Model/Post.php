@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Domain\Model;
@@ -16,75 +17,83 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
-use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Domain\Model\Category;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * A blog post
  */
-class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Post extends AbstractEntity
 {
-    protected ?Blog $blog = null;
+    protected Blog $blog;
 
     /**
-     * @Extbase\Validate("StringLength", options={"minimum": 3, "maximum": 50})
+     * @Validate("StringLength", options={"minimum": 3, "maximum": 50})
      */
     protected string $title = '';
 
+    /**
+     * @var \DateTime
+     */
     protected \DateTime $date;
 
-    protected ?Person $author;
-
-    protected ?Person $secondAuthor;
-
-    protected ?Person $reviewer;
+    /**
+     * @var Person
+     */
+    protected ?Person $author = null;
+    protected ?Person $secondAuthor = null;
+    protected ?Person $reviewer = null;
 
     /**
-     * @Extbase\Validate("StringLength", options={"minimum": 3})
+     * @Validate("StringLength", options={"minimum": 3})
      */
     protected string $content = '';
 
     /**
-     * @var ObjectStorageTag>
+     * @var ObjectStorage<Tag>
      */
-    protected ObjectStorage $tags;
+    public ObjectStorage $tags;
 
     /**
      * @var ObjectStorage<Category>
      */
-    protected ObjectStorage $categories;
+    public ObjectStorage $categories;
 
     /**
      * @var ObjectStorage<Comment>
-     * @Extbase\ORM\Lazy
-     * @Extbase\ORM\Cascade("remove")
+     * @Lazy
+     * @Cascade("remove")
      */
-    protected ObjectStorage $comments;
+    public ObjectStorage $comments;
 
     /**
      * @var ObjectStorage<Post>
-     * @Extbase\ORM\Lazy
+     * @Lazy
      */
-    protected ObjectStorage $relatedPosts;
+    public ObjectStorage $relatedPosts;
 
     /**
-     * 1:1 relation stored as CSV value in this class
+     * 1:1 optional relation
+     * @Cascade("remove")
      */
-    protected ?Info $additionalName;
+    public ?Info $additionalName;
 
     /**
-     * 1:1 relation stored as foreign key in Info class
+     * 1:1 optional relation
+     * @Cascade("remove")
      */
     protected ?Info $additionalInfo;
 
     /**
      * 1:n relation stored as CSV value
-     *
      * @var ObjectStorage<Comment>
-     * @Extbase\ORM\Lazy
+     * @Lazy
      */
-    protected ObjectStorage $additionalComments;
+    public ObjectStorage $additionalComments;
 
     public function __construct()
     {
@@ -97,42 +106,8 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Sets the blog this post is part of
-     */
-    public function setBlog(Blog $blog)
-    {
-        $this->blog = $blog;
-    }
-
-    /**
-     * Returns the blog this post is part of
-     */
-    public function getBlog(): ?Blog
-    {
-        return $this->blog;
-    }
-
-    public function setTitle(string $title): void
-    {
-        $this->title = $title;
-    }
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    public function setDate(\DateTime $date): void
-    {
-        $this->date = $date;
-    }
-
-    public function getDate(): \DateTime
-    {
-        return $this->date;
-    }
-
-    /**
+     * Set one or more Tag objects
+     *
      * @param ObjectStorage<Tag> $tags
      */
     public function setTags(ObjectStorage $tags): void
@@ -156,7 +131,7 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Getter for tags
+     * Getter for tags, A storage holding objects
      * Note: We return a clone of the tags because they must not be modified as they are Value Objects
      *
      * @return ObjectStorage<Tag>
@@ -166,12 +141,17 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         return clone $this->tags;
     }
 
+    /**
+     * Add category to a post
+     */
     public function addCategory(Category $category): void
     {
         $this->categories->attach($category);
     }
 
     /**
+     * Set categories
+     *
      * @param ObjectStorage<Category> $categories
      */
     public function setCategories(ObjectStorage $categories): void
@@ -180,6 +160,8 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Get categories
+     *
      * @return ObjectStorage<Category>
      */
     public function getCategories(): ObjectStorage
@@ -187,16 +169,25 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         return $this->categories;
     }
 
+    /**
+     * Remove category from post
+     */
     public function removeCategory(Category $category): void
     {
         $this->categories->detach($category);
     }
 
+    /**
+     * Sets the author for this post
+     */
     public function setAuthor(Person $author): void
     {
         $this->author = $author;
     }
 
+    /**
+     * Getter for author
+     */
     public function getAuthor(): ?Person
     {
         return $this->author;
@@ -222,17 +213,9 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->reviewer = $reviewer;
     }
 
-    public function setContent(string $content): void
-    {
-        $this->content = $content;
-    }
-
-    public function getContent(): string
-    {
-        return $this->content;
-    }
-
     /**
+     * Set the comments to this post, an Object Storage of related Comment instances
+     *
      * @param ObjectStorage<Comment> $comments
      */
     public function setComments(ObjectStorage $comments): void
@@ -240,16 +223,25 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->comments = $comments;
     }
 
-    public function addComment(Comment $comment): void
+    /**
+     * Adds a comment to this post
+     */
+    public function addComment(Comment $commentToAdd): void
     {
-        $this->comments->attach($comment);
+        $this->comments->attach($commentToAdd);
     }
 
+    /**
+     * Removes Comment from this post and deletes it due to annotation `@Cascade("remove")`
+     */
     public function removeComment(Comment $commentToDelete): void
     {
         $this->comments->detach($commentToDelete);
     }
 
+    /**
+     * @TODO: explain what's done in the method an why
+     */
     public function removeAllComments(): void
     {
         $comments = clone $this->comments;
@@ -257,6 +249,8 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Returns the comments to this post
+     *
      * @return ObjectStorage<Comment>
      */
     public function getComments(): ObjectStorage
@@ -265,6 +259,8 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Set the related posts with ObjectStorage containing the instances of relatedPosts
+     *
      * @param ObjectStorage<Post> $relatedPosts
      */
     public function setRelatedPosts(ObjectStorage $relatedPosts): void
@@ -284,6 +280,8 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Returns the related posts
+     *
      * @return ObjectStorage<Post>
      */
     public function getRelatedPosts(): ObjectStorage
@@ -291,28 +289,8 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         return $this->relatedPosts;
     }
 
-    public function getAdditionalName(): ?Info
-    {
-        return $this->additionalName;
-    }
-
-    public function setAdditionalName(Info $additionalName): void
-    {
-        $this->additionalName = $additionalName;
-    }
-
-    public function getAdditionalInfo(): ?Info
-    {
-        return $this->additionalInfo;
-    }
-
-    public function setAdditionalInfo(Info $additionalInfo): void
-    {
-        $this->additionalInfo = $additionalInfo;
-    }
-
     /**
-     * @return ObjectStorage<Comment>
+     * @return ObjectStorage
      */
     public function getAdditionalComments(): ObjectStorage
     {
@@ -320,18 +298,24 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param ObjectStorage<Comment> $additionalComments
+     * @param ObjectStorage $additionalComments
      */
     public function setAdditionalComments(ObjectStorage $additionalComments): void
     {
         $this->additionalComments = $additionalComments;
     }
 
+    /**
+     * @param Comment $comment
+     */
     public function addAdditionalComment(Comment $comment): void
     {
         $this->additionalComments->attach($comment);
     }
 
+    /**
+     * Remove all additional Comments
+     */
     public function removeAllAdditionalComments(): void
     {
         $comments = clone $this->additionalComments;
@@ -341,6 +325,96 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function removeAdditionalComment(Comment $comment): void
     {
         $this->additionalComments->detach($comment);
+    }
+
+    /**
+     * @return Blog
+     */
+    public function getBlog(): Blog
+    {
+        return $this->blog;
+    }
+
+    /**
+     * @param Blog $blog
+     */
+    public function setBlog(Blog $blog): void
+    {
+        $this->blog = $blog;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle(string $title): void
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDate(): \DateTime
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param \DateTime $date
+     */
+    public function setDate(\DateTime $date): void
+    {
+        $this->date = $date;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param string $content
+     */
+    public function setContent(string $content): void
+    {
+        $this->content = $content;
+    }
+
+    /**
+     * @return Info|null
+     */
+    public function getAdditionalName(): ?Info
+    {
+        return $this->additionalName;
+    }
+
+    /**
+     * @param Info|null $additionalName
+     */
+    public function setAdditionalName(?Info $additionalName): void
+    {
+        $this->additionalName = $additionalName;
+    }
+
+    public function getAdditionalInfo(): ?Info
+    {
+        return $this->additionalInfo;
+    }
+
+    public function setAdditionalInfo(?Info $additionalInfo): void
+    {
+        $this->additionalInfo = $additionalInfo;
     }
 
     /**

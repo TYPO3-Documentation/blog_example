@@ -5,8 +5,8 @@ CREATE TABLE tx_blogexample_domain_model_blog (
 	title varchar(255) DEFAULT '' NOT NULL,
 	subtitle varchar(255) DEFAULT '',
 	description text NOT NULL,
-	logo tinyblob NOT NULL,
-	administrator int(11) DEFAULT '0' NOT NULL,
+	logo tinyblob DEFAULT NULL,
+	administrator int(11) UNSIGNED NOT NULL DEFAULT '0',
 
 	posts varchar(255) DEFAULT '' NOT NULL
 );
@@ -59,6 +59,7 @@ CREATE TABLE tx_blogexample_domain_model_person (
 #
 CREATE TABLE tx_blogexample_domain_model_tag (
 	name varchar(255) DEFAULT '' NOT NULL,
+	priority int(11) DEFAULT '0' NOT NULL,
 	posts int(11) unsigned DEFAULT '0' NOT NULL
 );
 
@@ -68,6 +69,32 @@ CREATE TABLE tx_blogexample_domain_model_tag (
 #
 CREATE TABLE tx_blogexample_domain_model_info (
 	name varchar(255) DEFAULT '' NOT NULL,
+	bodytext text,
 	post int(11) DEFAULT '0' NOT NULL
+);
+
+
+#
+# Table structure for table 'tx_blogexample_post_post_mm'
+# @TODO fix tx_blogexample_domain_model_post to create and recognize this mm-table automatically, remove this entry
+#
+CREATE TABLE tx_blogexample_post_post_mm (
+  `uid_local` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `uid_foreign` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `sorting` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `sorting_foreign` int(10) UNSIGNED NOT NULL DEFAULT 0
+);
+
+#
+# Table structure for table 'tx_blogexample_post_post_mm'
+# @TODO fix tx_blogexample_domain_model_post to create and recognize this mm-table
+#       with the field `fieldnames` automatically, remove this entry
+#
+CREATE TABLE `tx_blogexample_domain_model_tag_mm` (
+  `uid_local` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `uid_foreign` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `sorting` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `sorting_foreign` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `fieldname` varchar(63) DEFAULT '' NOT NULL
 );
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -23,14 +25,8 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class FrontendUserGroup extends AbstractEntity
 {
-    /**
-     * @var string
-     */
     protected string $title = '';
 
-    /**
-     * @var string
-     */
     protected string $description = '';
 
     /**
@@ -38,35 +34,45 @@ class FrontendUserGroup extends AbstractEntity
      */
     protected ObjectStorage $subgroup;
 
+    /**
+     * Constructs a new Frontend User Group
+     */
     public function __construct(string $title = '')
     {
         $this->setTitle($title);
         $this->subgroup = new ObjectStorage();
     }
 
-    public function setTitle(string $title): void
-    {
-        $this->title = $title;
-    }
-
+    /**
+     * @return string
+     */
     public function getTitle(): string
     {
         return $this->title;
     }
 
     /**
-     * Sets the description value
-     *
+     * @param string $title
+     */
+    public function setTitle(string $title): void
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
      * @param string $description
      */
     public function setDescription(string $description): void
     {
         $this->description = $description;
-    }
-
-    public function getDescription(): string
-    {
-        return $this->description;
     }
 
     /**
@@ -80,11 +86,17 @@ class FrontendUserGroup extends AbstractEntity
         $this->subgroup = $subgroup;
     }
 
+    /**
+     * Adds a subgroup to the frontend user
+     */
     public function addSubgroup(FrontendUserGroup $subgroup): void
     {
         $this->subgroup->attach($subgroup);
     }
 
+    /**
+     * Removes a subgroup from the frontend user group
+     */
     public function removeSubgroup(FrontendUserGroup $subgroup): void
     {
         $this->subgroup->detach($subgroup);

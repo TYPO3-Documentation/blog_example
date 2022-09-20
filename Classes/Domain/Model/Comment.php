@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace FriendsOfTYPO3\BlogExample\Domain\Model;
@@ -16,7 +17,7 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
-use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
@@ -32,12 +33,12 @@ class Comment extends AbstractEntity
     protected string $author = '';
 
     /**
-     * @Extbase\Validate("EmailAddress")
+     * @Validate("EmailAddress")
      */
     protected string $email = '';
 
     /**
-     * @Extbase\Validate("StringLength", options={"maximum": 500})
+     * @Validate("StringLength", options={"maximum": 500})
      */
     protected string $content = '';
 
@@ -46,27 +47,48 @@ class Comment extends AbstractEntity
         $this->date = new \DateTime();
     }
 
-    public function setDate(\DateTime $date): void
-    {
-        $this->date = $date;
-    }
-
+    /**
+     * @return \DateTime
+     */
     public function getDate(): \DateTime
     {
         return $this->date;
     }
 
-    public function setAuthor(string $author): void
+    /**
+     * @param \DateTime $date
+     */
+    public function setDate(\DateTime $date): void
     {
-        $this->author = $author;
+        $this->date = $date;
     }
 
+    /**
+     * @return string
+     */
     public function getAuthor(): string
     {
         return $this->author;
     }
 
     /**
+     * @param string $author
+     */
+    public function setAuthor(string $author): void
+    {
+        $this->author = $author;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
      * Sets the authors email for this comment
      */
     public function setEmail(string $email): void
@@ -75,21 +97,19 @@ class Comment extends AbstractEntity
     }
 
     /**
-     * Getter for authors email
+     * @return string
      */
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    public function setContent(string $content): void
-    {
-        $this->content = $content;
-    }
-
     public function getContent(): string
     {
         return $this->content;
+    }
+
+    /**
+     * @param string $content
+     */
+    public function setContent(string $content): void
+    {
+        $this->content = $content;
     }
 
     /**
