@@ -1,4 +1,5 @@
 /*.idea
+/.ddev
 /.Build
 /composer.lock
 *GENERATED*

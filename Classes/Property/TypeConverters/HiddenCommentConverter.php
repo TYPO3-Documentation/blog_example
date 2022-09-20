@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace FriendsOfTYPO3\BlogExample\Property\TypeConverters;
 
 use FriendsOfTYPO3\BlogExample\Domain\Model\Comment;
-use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
 use TYPO3\CMS\Extbase\Property\Exception\InvalidSourceException;
 use TYPO3\CMS\Extbase\Property\Exception\TargetNotFoundException;
+use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
 
 class HiddenCommentConverter extends PersistentObjectConverter
 {
-
     /**
      * @param mixed $identity
      * @param string $targetType
