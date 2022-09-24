@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## Unreleased
 
 ### Added
-- Create a Frontend Plugin without Extbase (#34)
+- Add TypeConverter Examples (#34)
 
 ### Changed
 
