@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FriendsOfTYPO3\BlogExample\Domain\Validator;
 
 use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
+use FriendsOfTYPO3\BlogExample\Service\BlogValidationService;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 
@@ -26,6 +27,11 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
  */
 final class BlogValidator extends AbstractValidator
 {
+    public function __construct(
+        private readonly BlogValidationService $blogValidationService
+    ) {
+        parent::__construct();
+    }
     /**
      * Checks whether the given blog is valid
      *
@@ -39,7 +45,7 @@ final class BlogValidator extends AbstractValidator
                 . $value::class . ' given instead.';
             $this->addError($errorString, 1297418975);
         }
-        if ($value->getCategories()->count() > 3) {
+        if (!$this->blogValidationService->isBlogCategoryCountValid($value)) {
             $errorString = LocalizationUtility::translate(
                 'error.Blog.tooManyCategories',
                 'BlogExample'
@@ -47,7 +53,7 @@ final class BlogValidator extends AbstractValidator
             // Add the error to the property if it is specific to one property
             $this->addErrorForProperty('categories', $errorString, 1297418976);
         }
-        if (strtolower($value->getTitle()) === strtolower($value->getSubtitle())) {
+        if (!$this->blogValidationService->isBlogSubtitleValid($value)) {
             $errorString = LocalizationUtility::translate(
                 'error.Blog.invalidSubTitle',
                 'BlogExample'
