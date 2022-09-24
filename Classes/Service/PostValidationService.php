@@ -9,10 +9,11 @@ use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
 class PostValidationService
 {
     private array $forbiddenTitles = [
-        '77'
+        '77',
     ];
 
-    public function isTitleValid(Post $post) {
+    public function isTitleValid(Post $post)
+    {
         return !in_array($post->getTitle(), $this->forbiddenTitles);
     }
 }
