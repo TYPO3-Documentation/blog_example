@@ -12,13 +12,10 @@ use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
 class HiddenCommentConverter extends PersistentObjectConverter
 {
     /**
-     * @param mixed $identity
-     * @param string $targetType
      * @throws TargetNotFoundException
      * @throws InvalidSourceException
-     * @return Comment
      */
-    protected function fetchObjectFromPersistence($identity, string $targetType): object
+    protected function fetchObjectFromPersistence(mixed $identity, string $targetType): Comment
     {
         if (ctype_digit((string)$identity)) {
             $query = $this->persistenceManager->createQueryForType($targetType);
