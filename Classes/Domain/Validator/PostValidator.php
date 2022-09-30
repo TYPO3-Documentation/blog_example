@@ -33,6 +33,7 @@ class PostValidator extends AbstractValidator
     {
         $this->postValidationService = $postValidationService;
     }
+
     /**
      * Check if $value is valid. If it's not valid, it needs to add an error
      * to the result.

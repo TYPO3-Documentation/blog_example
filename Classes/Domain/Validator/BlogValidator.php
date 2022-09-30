@@ -32,6 +32,7 @@ final class BlogValidator extends AbstractValidator
     ) {
         parent::__construct();
     }
+
     /**
      * Checks whether the given blog is valid
      *
