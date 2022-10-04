@@ -29,21 +29,16 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Blog extends AbstractEntity
 {
-    /**
-     * #[Validate(['validator' => '\FriendsOfTYPO3\BlogExample\Domain\Validator\TitleValidator'])]
-     */
+    #[Validate(['validator' => '\FriendsOfTYPO3\BlogExample\Domain\Validator\TitleValidator'])]
     public string $title = '';
 
-    /**
-     * #[Validate(['validator' => 'StringLength', 'options' => ['minimum' => 5, 'maximum' => 80]])]
-     */
+    #[Validate(['validator' => 'StringLength', 'options' => ['minimum' => 5, 'maximum' => 80]])]
     public string|null $subtitle;
 
     /**
      * A short description of the blog
-     *
-     * #[Validate(['validator' => 'StringLength', 'options' => ['maximum' => 150]])]
      */
+    #[Validate(['validator' => 'StringLength', 'options' => ['maximum' => 150]])]
     public string $description = '';
 
     /**
@@ -53,13 +48,10 @@ class Blog extends AbstractEntity
 
     /**
      * The posts of this blog
-     *
-     * @TODO: replace Lazy Annotation
-     *
      * @var ObjectStorage<Post>
-     * @\TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-     * #[Cascade(['value' => 'remove'])]
      */
+    #[Extbase\ORM\Lazy()]
+    #[Cascade(['value' => 'remove'])]
     public $posts;
 
     /**
@@ -69,12 +61,9 @@ class Blog extends AbstractEntity
 
     /**
      * The blog's administrator
-     *
-     * @TODO: replace Lazy Annotation
-     *
      * @var Administrator
-     * @\TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
+    #[Extbase\ORM\Lazy()]
     public $administrator;
 
     public function __construct()
