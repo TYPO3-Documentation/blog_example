@@ -27,19 +27,13 @@ class Comment extends AbstractEntity
 {
     protected \DateTime $date;
 
-    /**
-     * Extbase\Validate("NotEmpty")
-     */
+    #[Validate(['validator' => 'NotEmpty'])]
     protected string $author = '';
 
-    /**
-     * @Validate("EmailAddress")
-     */
+    #[Validate(['validator' => 'EmailAddress'])]
     protected string $email = '';
 
-    /**
-     * @Validate("StringLength", options={"maximum": 500})
-     */
+    #[Validate(['validator' => 'StringLength', 'options' => ['maximum' => 500]])]
     protected string $content = '';
 
     protected bool $hidden = true;

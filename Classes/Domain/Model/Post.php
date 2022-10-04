@@ -31,9 +31,7 @@ class Post extends AbstractEntity
 {
     protected Blog $blog;
 
-    /**
-     * @Validate("StringLength", options={"minimum": 3, "maximum": 50})
-     */
+    #[Validate(['validator' => 'StringLength', 'options' => ['minimum' => 3, 'maximum' => 50]])]
     protected string $title = '';
 
     /**
@@ -48,9 +46,7 @@ class Post extends AbstractEntity
     protected ?Person $secondAuthor = null;
     protected ?Person $reviewer = null;
 
-    /**
-     * @Validate("StringLength", options={"minimum": 3})
-     */
+    #[Validate(['validator' => 'StringLength', 'options' => ['minimum' => 3]])]
     protected string $content = '';
 
     /**
@@ -65,34 +61,34 @@ class Post extends AbstractEntity
 
     /**
      * @var ObjectStorage<Comment>
-     * @Lazy
-     * @Cascade("remove")
      */
+    #[Extbase\ORM\Lazy()]
+    #[Cascade(['value' => 'remove'])]
     public ObjectStorage $comments;
 
     /**
      * @var ObjectStorage<Post>
-     * @Lazy
      */
+    #[Extbase\ORM\Lazy()]
     public ObjectStorage $relatedPosts;
 
     /**
      * 1:1 optional relation
-     * @Cascade("remove")
      */
+    #[Cascade(['value' => 'remove'])]
     public ?Info $additionalName;
 
     /**
      * 1:1 optional relation
-     * @Cascade("remove")
      */
+    #[Cascade(['value' => 'remove'])]
     protected ?Info $additionalInfo;
 
     /**
      * 1:n relation stored as CSV value
      * @var ObjectStorage<Comment>
-     * @Lazy
      */
+    #[Extbase\ORM\Lazy()]
     public ObjectStorage $additionalComments;
 
     public function __construct()
