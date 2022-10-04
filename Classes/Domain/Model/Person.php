@@ -27,24 +27,16 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Person extends AbstractEntity
 {
-    /**
-     * #[Validate(['validator' => 'StringLength', 'options' => ['maximum' => 80]])]
-     */
+    #[Validate(['validator' => 'StringLength', 'options' => ['maximum' => 80]])]
     protected string $firstname = '';
 
-    /**
-     * #[Validate(['validator' => 'StringLength', 'options' => ['minimum' => 2, 'maximum' => 80]])]
-     */
+    #[Validate(['validator' => 'StringLength', 'options' => ['minimum' => 2, 'maximum' => 80]])]
     protected string $lastname = '';
 
-    /**
-     * #[Transient()]
-     */
+    #[Transient()]
     protected string $fullname = '';
 
-    /**
-     * #[Validate(['validator' => 'EmailAddress'])]
-     */
+    #[Validate(['validator' => 'EmailAddress'])]
     protected string $email = '';
 
     /**
