@@ -17,6 +17,8 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Validator;
  * The TYPO3 project - inspiring people to share!
  */
 
+use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
+use FriendsOfTYPO3\BlogExample\Service\PostValidationService;
 use TYPO3\CMS\Extbase\Validation\Error;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 
@@ -25,6 +27,13 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
  */
 class PostValidator extends AbstractValidator
 {
+    private PostValidationService $postValidationService;
+
+    public function injectPostValidationService(PostValidationService $postValidationService)
+    {
+        $this->postValidationService = $postValidationService;
+    }
+
     /**
      * Check if $value is valid. If it's not valid, it needs to add an error
      * to the result.
@@ -33,7 +42,7 @@ class PostValidator extends AbstractValidator
      */
     protected function isValid(mixed $value): void
     {
-        if ($value->getTitle() === '77') {
+        if ($this->postValidationService->isTitleValid($value)) {
             $error = new Error('Title custom validation failed', 1480872650);
             $this->result->forProperty('title')->addError($error);
         }

@@ -1,6 +1,8 @@
 <?php
 
-namespace FriendsOfTYPO3\BlogExample\Domain\Validator;
+declare(strict_types=1);
+
+namespace FriendsOfTYPO3\BlogExample\Service;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -15,16 +17,16 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Validator;
  * The TYPO3 project - inspiring people to share!
  */
 
-use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
+use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
 
-final class TitleValidator extends AbstractValidator
+class PostValidationService
 {
-    protected function isValid(mixed $value): void
+    private array $forbiddenTitles = [
+        '77',
+    ];
+
+    public function isTitleValid(Post $post)
     {
-        // $value is the title string
-        if (str_starts_with('_', $value)) {
-            $errorString = 'The title may not start with an underscore. ';
-            $this->addError($errorString, 1297418976);
-        }
+        return !in_array($post->getTitle(), $this->forbiddenTitles);
     }
 }
