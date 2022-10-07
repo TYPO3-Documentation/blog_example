@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace FriendsOfTYPO3\BlogExample\ViewHelpers;
+namespace T3docs\BlogExample\ViewHelpers;
 
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;

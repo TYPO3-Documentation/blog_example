@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace FriendsOfTYPO3\BlogExample\ExpressionLanguage;
+namespace T3docs\BlogExample\ExpressionLanguage;
 
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\ExpressionLanguage\AbstractProvider;

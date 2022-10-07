@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace FriendsOfTYPO3\BlogExample\Domain\Validator;
+namespace T3docs\BlogExample\Domain\Validator;
 
-use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
+use T3docs\BlogExample\Domain\Model\Blog;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 

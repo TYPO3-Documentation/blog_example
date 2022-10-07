@@ -7,9 +7,9 @@ use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-use FriendsOfTYPO3\BlogExample\Controller\BlogController;
-use FriendsOfTYPO3\BlogExample\Controller\PostController;
-use FriendsOfTYPO3\BlogExample\Controller\CommentController;
+use T3docs\BlogExample\Controller\BlogController;
+use T3docs\BlogExample\Controller\PostController;
+use T3docs\BlogExample\Controller\CommentController;
 
 
 (static function (string $extensionName): void {

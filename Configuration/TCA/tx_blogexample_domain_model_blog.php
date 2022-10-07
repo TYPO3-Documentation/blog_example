@@ -169,7 +169,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'fe_users',
-                'foreign_table_where' => "AND fe_users.tx_extbase_type='FriendsOfTYPO3\\\\BlogExample\\\\Domain\\\\Model\\\\Administrator'",
+                'foreign_table_where' => "AND fe_users.tx_extbase_type='T3docs\\\\BlogExample\\\\Domain\\\\Model\\\\Administrator'",
                 'items' => [
                     ['--none--', 0],
                 ],

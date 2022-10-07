@@ -4,6 +4,6 @@ services:
     autoconfigure: true
     public: false
 
-  FriendsOfTYPO3\BlogExample\:
+  T3docs\BlogExample\:
     resource: '../Classes/*'
     exclude: '../Classes/Domain/Model/*'

@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace FriendsOfTYPO3\BlogExample\Controller;
+namespace T3docs\BlogExample\Controller;
 
-use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
-use FriendsOfTYPO3\BlogExample\Domain\Model\Comment;
-use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
-use FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository;
-use FriendsOfTYPO3\BlogExample\Domain\Repository\PersonRepository;
-use FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository;
+use T3docs\BlogExample\Domain\Model\Blog;
+use T3docs\BlogExample\Domain\Model\Comment;
+use T3docs\BlogExample\Domain\Model\Post;
+use T3docs\BlogExample\Domain\Repository\BlogRepository;
+use T3docs\BlogExample\Domain\Repository\PersonRepository;
+use T3docs\BlogExample\Domain\Repository\PostRepository;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
@@ -30,7 +30,7 @@ use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 /**
  * The post controller for the BlogExample extension
  */
-class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractController
+class PostController extends \T3docs\BlogExample\Controller\AbstractController
 {
     protected BlogRepository $blogRepository;
 
