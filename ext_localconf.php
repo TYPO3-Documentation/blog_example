@@ -2,9 +2,9 @@
 
 defined('TYPO3') or die();
 
-use FriendsOfTYPO3\BlogExample\Controller\BlogController;
-use FriendsOfTYPO3\BlogExample\Controller\CommentController;
-use FriendsOfTYPO3\BlogExample\Controller\PostController;
+use T3docs\BlogExample\Controller\BlogController;
+use T3docs\BlogExample\Controller\CommentController;
+use T3docs\BlogExample\Controller\PostController;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Information\Typo3Version;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FriendsOfTYPO3\BlogExample\Domain\Model;
+namespace T3docs\BlogExample\Domain\Model;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -29,7 +29,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Blog extends AbstractEntity
 {
-    #[Validate(['validator' => '\FriendsOfTYPO3\BlogExample\Domain\Validator\TitleValidator'])]
+    #[Validate(['validator' => '\T3docs\BlogExample\Domain\Validator\TitleValidator'])]
     public string $title = '';
 
     #[Validate(['validator' => 'StringLength', 'options' => ['minimum' => 5, 'maximum' => 80]])]

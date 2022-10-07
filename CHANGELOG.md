@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add TypeConverter Examples (#34)
 
 ### Changed
+- Changed the vendor to t3docs (#35)
 
 ### Fixed
 

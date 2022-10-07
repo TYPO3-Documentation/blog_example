@@ -1,6 +1,6 @@
 <?php
 
-namespace FriendsOfTYPO3\BlogExample\Domain\Validator;
+namespace T3docs\BlogExample\Domain\Validator;
 
 /*
  * This file is part of the TYPO3 CMS project.

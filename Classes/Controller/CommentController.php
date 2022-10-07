@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace FriendsOfTYPO3\BlogExample\Controller;
+namespace T3docs\BlogExample\Controller;
 
-use FriendsOfTYPO3\BlogExample\Domain\Model\Comment;
-use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
-use FriendsOfTYPO3\BlogExample\Domain\Repository\CommentRepository;
-use FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository;
-use FriendsOfTYPO3\BlogExample\Exception\NoBlogAdminAccessException;
-use FriendsOfTYPO3\BlogExample\Property\TypeConverters\HiddenCommentConverter;
 use Psr\Http\Message\ResponseInterface;
+use T3docs\BlogExample\Domain\Model\Comment;
+use T3docs\BlogExample\Domain\Model\Post;
+use T3docs\BlogExample\Domain\Repository\CommentRepository;
+use T3docs\BlogExample\Domain\Repository\PostRepository;
+use T3docs\BlogExample\Exception\NoBlogAdminAccessException;
+use T3docs\BlogExample\Property\TypeConverters\HiddenCommentConverter;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException;
 

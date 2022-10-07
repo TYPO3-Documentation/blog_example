@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FriendsOfTYPO3\BlogExample\Controller;
+namespace T3docs\BlogExample\Controller;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -17,12 +17,12 @@ namespace FriendsOfTYPO3\BlogExample\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
-use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
-use FriendsOfTYPO3\BlogExample\Domain\Repository\AdministratorRepository;
-use FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository;
-use FriendsOfTYPO3\BlogExample\Exception\NoBlogAdminAccessException;
-use FriendsOfTYPO3\BlogExample\Service\BlogFactory;
 use Psr\Http\Message\ResponseInterface;
+use T3docs\BlogExample\Domain\Model\Blog;
+use T3docs\BlogExample\Domain\Repository\AdministratorRepository;
+use T3docs\BlogExample\Domain\Repository\BlogRepository;
+use T3docs\BlogExample\Exception\NoBlogAdminAccessException;
+use T3docs\BlogExample\Service\BlogFactory;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
@@ -95,7 +95,7 @@ class BlogController extends AbstractController
      * $blog is a fresh Blog object which has not yet been added to the
      * repository
      *
-     * @Validate(param="newBlog", validator="FriendsOfTYPO3\BlogExample\Domain\Validator\BlogValidator")
+     * @Validate(param="newBlog", validator="T3docs\BlogExample\Domain\Validator\BlogValidator")
      */
     public function createAction(Blog $newBlog): ResponseInterface
     {
@@ -129,7 +129,7 @@ class BlogController extends AbstractController
      * $blog is a not yet persisted clone of the original blog containing
      * the modifications
      *
-     * @Validate(param="blog", validator="FriendsOfTYPO3\BlogExample\Domain\Validator\BlogValidator")
+     * @Validate(param="blog", validator="T3docs\BlogExample\Domain\Validator\BlogValidator")
      * @throws NoBlogAdminAccessException
      */
     public function updateAction(Blog $blog): ResponseInterface

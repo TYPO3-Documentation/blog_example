@@ -1,14 +1,14 @@
-[![Latest Stable Version](https://poser.pugx.org/friendsoftypo3/blog-example/v/stable.svg)](https://extensions.typo3.org/extension/blog_example/)
-[![TYPO3 11](https://img.shields.io/badge/TYPO3-11-orange.svg?style=flat-square)](https://get.typo3.org/version/11)
-[![Total Downloads](https://poser.pugx.org/friendsoftypo3/blog-example/d/total.svg)](https://packagist.org/packages/friendsoftypo3/blog-example)
-[![Monthly Downloads](https://poser.pugx.org/friendsoftypo3/blog-example/d/monthly)](https://packagist.org/packages/friendsoftypo3/blog-example)
+[![Latest Stable Version](https://poser.pugx.org/t3docs/blog-example/v/stable.svg)](https://extensions.typo3.org/extension/blog_example/)
+[![TYPO3 12](https://img.shields.io/badge/TYPO3-12-orange.svg?style=flat-square)](https://get.typo3.org/version/12)
+[![Total Downloads](https://poser.pugx.org/t3docs/blog-example/d/total.svg)](https://packagist.org/packages/t3docs/blog-example)
+[![Monthly Downloads](https://poser.pugx.org/t3docs/blog-example/d/monthly)](https://packagist.org/packages/t3docs/blog-example)
 
 # TYPO3 extension ``blog_example``
 
 This example provides the code examples for [Extbase reference] (https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ExtensionArchitecture/Extbase/Reference/Index.html#extbase-reference)
 of the TYPO3 project.
 
-The Code examples are automatically extracted with the TYPO3 documentation
+The code examples are automatically extracted with the TYPO3 documentation
 code-snippet tool (https://github.com/TYPO3-Documentation/t3docs-codesnippets)
 
 After changes to the code the snippets in the TYPO3-Reference-CoreApi
@@ -23,7 +23,7 @@ adjusted over time to reflect current development in the TYPO3 project.
 
 |                  | URL                                                  |
 |------------------|------------------------------------------------------|
-| **Repository:**  | https://github.com/FriendsOfTYPO3/blog_example       |
+| **Repository:**  | https://github.com/TYPO3-Documentation/blog_example  |
 | **TER:**         | https://extensions.typo3.org/extension/blog_example/ |
 
 # Running tests
@@ -40,7 +40,7 @@ Build/Scripts/runTests.sh -s composerUpdate
 Build/Scripts/runTests.sh -s unit
 ```
 
-Running some tests locally can fix errors that are just displayed in actions on github.  
+Running some tests locally can fix errors that are just displayed in actions on github.
 The following command can fix things like linebreaks or indentations:
 
 ```

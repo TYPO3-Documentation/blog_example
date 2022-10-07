@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace FriendsOfTYPO3\BlogExample\Domain\Validator;
+namespace T3docs\BlogExample\Domain\Validator;
 
-use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
-use FriendsOfTYPO3\BlogExample\Service\BlogValidationService;
+use T3docs\BlogExample\Domain\Model\Blog;
+use T3docs\BlogExample\Service\BlogValidationService;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 
@@ -42,7 +42,7 @@ final class BlogValidator extends AbstractValidator
     {
         if (!$value instanceof Blog) {
             $errorString = 'The blog validator can only handle classes '
-                . 'of type FriendsOfTYPO3\BlogExample\Domain\Validator\Blog. '
+                . 'of type T3docs\BlogExample\Domain\Validator\Blog. '
                 . $value::class . ' given instead.';
             $this->addError($errorString, 1297418975);
         }

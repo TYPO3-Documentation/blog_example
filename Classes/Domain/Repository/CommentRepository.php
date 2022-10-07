@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FriendsOfTYPO3\BlogExample\Domain\Repository;
+namespace T3docs\BlogExample\Domain\Repository;
 
 /*
  * This file is part of the TYPO3 CMS project.

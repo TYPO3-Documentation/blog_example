@@ -5,16 +5,16 @@ config.tx_extbase {
 		classes {
 			Extbase\Domain\ModelFrontendUser {
 				subclasses {
-					FriendsOfTYPO3\BlogExample\Domain\Model\Administrator = FriendsOfTYPO3\BlogExample\Domain\Model\Administrator
+					T3docs\BlogExample\Domain\Model\Administrator = T3docs\BlogExample\Domain\Model\Administrator
 				}
 			}
-			FriendsOfTYPO3\BlogExample\Domain\Model\Administrator {
+			T3docs\BlogExample\Domain\Model\Administrator {
 				mapping {
 					tableName = fe_users
-					recordType = FriendsOfTYPO3\BlogExample\Domain\Model\Administrator
+					recordType = T3docs\BlogExample\Domain\Model\Administrator
 				}
 			}
-			FriendsOfTYPO3\BlogExample\Domain\Model\TtContent {
+			T3docs\BlogExample\Domain\Model\TtContent {
 				mapping {
 					tableName = tt_content
 					columns {
