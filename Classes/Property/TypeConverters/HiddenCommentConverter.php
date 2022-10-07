@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FriendsOfTYPO3\BlogExample\Property\TypeConverters;
+namespace T3docs\BlogExample\Property\TypeConverters;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -17,7 +17,7 @@ namespace FriendsOfTYPO3\BlogExample\Property\TypeConverters;
  * The TYPO3 project - inspiring people to share!
  */
 
-use FriendsOfTYPO3\BlogExample\Domain\Model\Comment;
+use T3docs\BlogExample\Domain\Model\Comment;
 use TYPO3\CMS\Extbase\Property\Exception\InvalidSourceException;
 use TYPO3\CMS\Extbase\Property\Exception\TargetNotFoundException;
 use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;

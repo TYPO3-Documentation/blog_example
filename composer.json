@@ -1,18 +1,18 @@
 {
-  "name": "friendsoftypo3/blog-example",
-  "description": "This blog example extension is described in the TYPO3 documentation. - Developing TYPO3 Extensions with Extbase and Fluid.",
+  "name": "t3docs/blog-example",
+  "description": "This extension contains code examples used in TYPO3 explained to describe the use of Extbase.",
   "license": "GPL-2.0-or-later",
   "type": "typo3-cms-extension",
   "authors": [
     {
-      "name": "TYPO3 Core Team",
+      "name": "TYPO3 Documentation Team and contributors",
       "role": "Developer"
     }
   ],
   "homepage": "https://extensions.typo3.org/extension/blog_example/",
   "support": {
-    "issues": "https://github.com/FriendsOfTYPO3/blog_example/issues",
-    "source": "https://github.com/FriendsOfTYPO3/blog_example"
+    "issues": "https://github.com/TYPO3-Documentation/blog_example/issues",
+    "source": "https://github.com/TYPO3-Documentation/blog_example"
   },
   "require": {
     "typo3/cms-core": "^12.0.0 || dev-main",
@@ -23,11 +23,14 @@
     "ergebnis/composer-normalize": "^2.28",
     "typo3/coding-standards": "^0.5.5"
   },
+  "replace": {
+    "friendsoftypo3/blog-example": "self.version"
+  },
   "minimum-stability": "dev",
   "prefer-stable": true,
   "autoload": {
     "psr-4": {
-      "FriendsOfTYPO3\\BlogExample\\": "Classes/"
+      "T3docs\\BlogExample\\": "Classes/"
     }
   },
   "config": {

@@ -1,6 +1,6 @@
 <?php
 
-namespace FriendsOfTYPO3\BlogExample\Exception;
+namespace T3docs\BlogExample\Exception;
 
 /*
  * This file is part of the TYPO3 CMS project.

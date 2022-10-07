@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FriendsOfTYPO3\BlogExample\Domain\Validator;
+namespace T3docs\BlogExample\Domain\Validator;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -17,8 +17,8 @@ namespace FriendsOfTYPO3\BlogExample\Domain\Validator;
  * The TYPO3 project - inspiring people to share!
  */
 
-use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
-use FriendsOfTYPO3\BlogExample\Service\PostValidationService;
+use T3docs\BlogExample\Domain\Model\Post;
+use T3docs\BlogExample\Service\PostValidationService;
 use TYPO3\CMS\Extbase\Validation\Error;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 

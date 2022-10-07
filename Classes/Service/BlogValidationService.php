@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FriendsOfTYPO3\BlogExample\Service;
+namespace T3docs\BlogExample\Service;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -17,7 +17,7 @@ namespace FriendsOfTYPO3\BlogExample\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
-use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
+use T3docs\BlogExample\Domain\Model\Blog;
 
 class BlogValidationService
 {

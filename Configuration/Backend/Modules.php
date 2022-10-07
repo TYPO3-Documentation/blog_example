@@ -1,6 +1,6 @@
 <?php
 
-use FriendsOfTYPO3\BlogExample\Controller\BackendController;
+use T3docs\BlogExample\Controller\BackendController;
 
 /**
  * Definitions for the backend module provided by EXT:blog_example

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace FriendsOfTYPO3\BlogExample\Service;
+namespace T3docs\BlogExample\Service;
 
 use DateTime;
-use FriendsOfTYPO3\BlogExample\Domain\Model\Administrator;
-use FriendsOfTYPO3\BlogExample\Domain\Model\Author;
-use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
-use FriendsOfTYPO3\BlogExample\Domain\Model\Comment;
-use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
-use FriendsOfTYPO3\BlogExample\Domain\Model\Tag;
+use T3docs\BlogExample\Domain\Model\Administrator;
+use T3docs\BlogExample\Domain\Model\Author;
+use T3docs\BlogExample\Domain\Model\Blog;
+use T3docs\BlogExample\Domain\Model\Comment;
+use T3docs\BlogExample\Domain\Model\Post;
+use T3docs\BlogExample\Domain\Model\Tag;
 use TYPO3\CMS\Core\SingletonInterface;
 
 /*
@@ -37,7 +37,7 @@ class BlogFactory implements SingletonInterface
      *
      * @param int $blogNumber
      *
-     * @return \FriendsOfTYPO3\BlogExample\Domain\Model\Blog
+     * @return \T3docs\BlogExample\Domain\Model\Blog
      */
     public function createBlog(int $blogNumber = 1): Blog
     {

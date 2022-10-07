@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FriendsOfTYPO3\BlogExample\Controller;
+namespace T3docs\BlogExample\Controller;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -17,7 +17,7 @@ namespace FriendsOfTYPO3\BlogExample\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
-use FriendsOfTYPO3\BlogExample\Exception\NoBlogAdminAccessException;
+use T3docs\BlogExample\Exception\NoBlogAdminAccessException;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 

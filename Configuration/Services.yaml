@@ -4,12 +4,12 @@ services:
     autoconfigure: true
     public: false
 
-  FriendsOfTYPO3\BlogExample\:
+  T3docs\BlogExample\:
     resource: '../Classes/*'
     exclude: '../Classes/Domain/Model/*'
-  FriendsOfTYPO3\BlogExample\Property\TypeConverters\HiddenCommentConverter:
+  T3docs\BlogExample\Property\TypeConverters\HiddenCommentConverter:
     tag:
       - name: extbase.type_converter
         priority: 2
-        target: FriendsOfTYPO3\BlogExample\Domain\Model\Comment
+        target: T3docs\BlogExample\Domain\Model\Comment
         sources: int,string
