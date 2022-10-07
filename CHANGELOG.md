@@ -11,7 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Changed
 
 ### Fixed
-- Fix Service.yaml for type converter example
+- Fix Service.yaml for type converter example (#41)
 
 ### Removed
 
