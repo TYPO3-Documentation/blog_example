@@ -1,0 +1,6 @@
+/*.idea
+/.ddev
+/.Build
+/composer.lock
+*GENERATED*
+/Build/testing-docker/.env

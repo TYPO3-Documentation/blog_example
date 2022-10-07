@@ -1,6 +1,6 @@
 <?php
 
-namespace FriendsOfTYPO3\BlogExample\Controller;
+namespace T3docs\BlogExample\Controller;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -15,10 +15,10 @@ namespace FriendsOfTYPO3\BlogExample\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
-use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
-use FriendsOfTYPO3\BlogExample\Domain\Repository\AdministratorRepository;
-use FriendsOfTYPO3\BlogExample\Domain\Repository\BlogRepository;
-use FriendsOfTYPO3\BlogExample\Service\BlogFactory;
+use T3docs\BlogExample\Domain\Model\Blog;
+use T3docs\BlogExample\Domain\Repository\AdministratorRepository;
+use T3docs\BlogExample\Domain\Repository\BlogRepository;
+use T3docs\BlogExample\Service\BlogFactory;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;

@@ -12,9 +12,9 @@ if (!defined('TYPO3_MODE')) {
         'tx_blogexample_m1', // Submodule key
         '', // Position
         [ // An array holding the controller-action-combinations that are accessible
-            \FriendsOfTYPO3\BlogExample\Controller\BlogController::class => 'index,new,create,delete,deleteAll,edit,update,populate', // The first controller and its first action will be the default
-            \FriendsOfTYPO3\BlogExample\Controller\PostController::class => 'index,show,new,create,delete,edit,update',
-            \FriendsOfTYPO3\BlogExample\Controller\CommentController::class => 'create,delete,deleteAll',
+            \T3docs\BlogExample\Controller\BlogController::class => 'index,new,create,delete,deleteAll,edit,update,populate', // The first controller and its first action will be the default
+            \T3docs\BlogExample\Controller\PostController::class => 'index,show,new,create,delete,edit,update',
+            \T3docs\BlogExample\Controller\CommentController::class => 'create,delete,deleteAll',
         ],
         [
             'access' => 'user,group',

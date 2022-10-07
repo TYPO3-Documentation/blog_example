@@ -1,5 +1,5 @@
 <?php
-namespace FriendsOfTYPO3\BlogExample\Domain\Model;
+namespace T3docs\BlogExample\Domain\Model;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -55,7 +55,7 @@ class Blog extends AbstractEntity
     /**
      * The posts of this blog
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\BlogExample\Domain\Model\Post>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3docs\BlogExample\Domain\Model\Post>
      * @Extbase\ORM\Lazy
      * @Extbase\ORM\Cascade("remove")
      */
@@ -69,7 +69,7 @@ class Blog extends AbstractEntity
     /**
      * The blog's administrator
      *
-     * @var \FriendsOfTYPO3\BlogExample\Domain\Model\Administrator
+     * @var \T3docs\BlogExample\Domain\Model\Administrator
      * @Extbase\ORM\Lazy
      */
     protected $administrator;

@@ -2,7 +2,8 @@
 
 $EM_CONF[$_EXTKEY] = [
     'title' => 'A Blog Example for the Extbase Framework',
-    'description' => 'An example extension demonstrating the features of the Extbase Framework. Have fun playing with it!',
+    'description' => 'This extension contains code examples used in TYPO3 explained to describe the use of Extbase',
+    'version' => '10.4.1',
     'category' => 'example',
     'author' => 'TYPO3 Core Team',
     'author_company' => '',
@@ -11,7 +12,6 @@ $EM_CONF[$_EXTKEY] = [
     'uploadfolder' => 0,
     'createDirs' => '',
     'clearCacheOnLoad' => 1,
-    'version' => '10.4.0',
     'constraints' => [
         'depends' => [
             'typo3' => '10.4.0',

@@ -1,12 +1,12 @@
 <?php
 
-namespace FriendsOfTYPO3\BlogExample\Controller;
+namespace T3docs\BlogExample\Controller;
 
-use FriendsOfTYPO3\BlogExample\Domain\Model\Blog;
-use FriendsOfTYPO3\BlogExample\Domain\Model\Comment;
-use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
-use FriendsOfTYPO3\BlogExample\Domain\Repository\PersonRepository;
-use FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository;
+use T3docs\BlogExample\Domain\Model\Blog;
+use T3docs\BlogExample\Domain\Model\Comment;
+use T3docs\BlogExample\Domain\Model\Post;
+use T3docs\BlogExample\Domain\Repository\PersonRepository;
+use T3docs\BlogExample\Domain\Repository\PostRepository;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
@@ -28,23 +28,23 @@ use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 /**
  * The post controller for the BlogExample extension
  */
-class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractController
+class PostController extends \T3docs\BlogExample\Controller\AbstractController
 {
 
     /**
-     * @var \FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository
+     * @var \T3docs\BlogExample\Domain\Repository\PostRepository
      */
     protected $postRepository;
 
     /**
-     * @var \FriendsOfTYPO3\BlogExample\Domain\Repository\PersonRepository
+     * @var \T3docs\BlogExample\Domain\Repository\PersonRepository
      */
     protected $personRepository;
 
     /**
      * Dependency injection of the Post Repository
      *
-     * @param \FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository $postRepository
+     * @param \T3docs\BlogExample\Domain\Repository\PostRepository $postRepository
      * @return void
      */
     public function injectPostRepository(PostRepository $postRepository): void
@@ -55,7 +55,7 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
     /**
      * Dependency injection of the Post Repository
      *
-     * @param \FriendsOfTYPO3\BlogExample\Domain\Repository\PersonRepository $personRepository
+     * @param \T3docs\BlogExample\Domain\Repository\PersonRepository $personRepository
      * @return void
      */
     public function injectPersonRepository(PersonRepository $personRepository): void
@@ -66,7 +66,7 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
     /**
      * Displays a list of posts. If $tag is set only posts matching this tag are shown
      *
-     * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Blog $blog The blog to show the posts of
+     * @param \T3docs\BlogExample\Domain\Model\Blog $blog The blog to show the posts of
      * @param null $tag The name of the tag to show the posts for
      * @param int $currentPage
      * @return void
@@ -93,8 +93,8 @@ class PostController extends \FriendsOfTYPO3\BlogExample\Controller\AbstractCont
     /**
      * Displays one single post
      *
-     * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Post $post The post to display
-     * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Comment $newComment A new comment
+     * @param \T3docs\BlogExample\Domain\Model\Post $post The post to display
+     * @param \T3docs\BlogExample\Domain\Model\Comment $newComment A new comment
      * @return void
      * @IgnoreValidation $newComment
      */

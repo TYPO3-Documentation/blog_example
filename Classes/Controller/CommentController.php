@@ -1,11 +1,11 @@
 <?php
 declare(strict_types = 1);
 
-namespace FriendsOfTYPO3\BlogExample\Controller;
+namespace T3docs\BlogExample\Controller;
 
-use FriendsOfTYPO3\BlogExample\Domain\Model\Comment;
-use FriendsOfTYPO3\BlogExample\Domain\Model\Post;
-use FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository;
+use T3docs\BlogExample\Domain\Model\Comment;
+use T3docs\BlogExample\Domain\Model\Post;
+use T3docs\BlogExample\Domain\Repository\PostRepository;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 
 /*
@@ -27,13 +27,13 @@ use TYPO3\CMS\Core\Messaging\FlashMessage;
 class CommentController extends AbstractController
 {
     /**
-     * @var \FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository
+     * @var \T3docs\BlogExample\Domain\Repository\PostRepository
      */
     private $postRepository;
 
 
     /**
-     * @param \FriendsOfTYPO3\BlogExample\Domain\Repository\PostRepository $postRepository
+     * @param \T3docs\BlogExample\Domain\Repository\PostRepository $postRepository
      */
     public function injectPostRepository(PostRepository $postRepository): void
     {
@@ -74,7 +74,7 @@ class CommentController extends AbstractController
     /**
      * Deletes all comments of the given post
      *
-     * @param \FriendsOfTYPO3\BlogExample\Domain\Model\Post $post
+     * @param \T3docs\BlogExample\Domain\Model\Post $post
      */
     public function deleteAllAction(Post $post): void
     {

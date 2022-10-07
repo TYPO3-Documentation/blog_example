@@ -15,14 +15,14 @@ if (!defined('TYPO3_MODE')) {
             $extensionName,
             'Pi1',
             [
-                \FriendsOfTYPO3\BlogExample\Controller\BlogController::class => 'index,new,create,delete,deleteAll,edit,update,populate',
-                \FriendsOfTYPO3\BlogExample\Controller\PostController::class => 'index,show,new,create,delete,edit,update',
-                \FriendsOfTYPO3\BlogExample\Controller\CommentController::class => 'create,delete',
+                \T3docs\BlogExample\Controller\BlogController::class => 'index,new,create,delete,deleteAll,edit,update,populate',
+                \T3docs\BlogExample\Controller\PostController::class => 'index,show,new,create,delete,edit,update',
+                \T3docs\BlogExample\Controller\CommentController::class => 'create,delete',
             ],
             [
-                \FriendsOfTYPO3\BlogExample\Controller\BlogController::class => 'create,delete,deleteAll,update,populate',
-                \FriendsOfTYPO3\BlogExample\Controller\PostController::class => 'create,delete,update',
-                \FriendsOfTYPO3\BlogExample\Controller\CommentController::class => 'create,delete',
+                \T3docs\BlogExample\Controller\BlogController::class => 'create,delete,deleteAll,update,populate',
+                \T3docs\BlogExample\Controller\PostController::class => 'create,delete,update',
+                \T3docs\BlogExample\Controller\CommentController::class => 'create,delete',
             ]
         );
     } else {
@@ -30,20 +30,20 @@ if (!defined('TYPO3_MODE')) {
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             $extensionName,
             'BlogList',
-            [\FriendsOfTYPO3\BlogExample\Controller\BlogController::class => 'index']
+            [\T3docs\BlogExample\Controller\BlogController::class => 'index']
         );
 
         // Post plugins
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             $extensionName,
             'PostList',
-            [\FriendsOfTYPO3\BlogExample\Controller\PostController::class => 'index']
+            [\T3docs\BlogExample\Controller\PostController::class => 'index']
         );
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             $extensionName,
             'PostSingle',
-            [\FriendsOfTYPO3\BlogExample\Controller\PostController::class => 'show', 'Comment' => 'create'],
-            [\FriendsOfTYPO3\BlogExample\Controller\CommentController::class => 'create']
+            [\T3docs\BlogExample\Controller\PostController::class => 'show', 'Comment' => 'create'],
+            [\T3docs\BlogExample\Controller\CommentController::class => 'create']
         );
 
         // admin plugins
@@ -51,14 +51,14 @@ if (!defined('TYPO3_MODE')) {
             $extensionName,
             'BlogAdmin',
             [
-                \FriendsOfTYPO3\BlogExample\Controller\BlogController::class => 'new,create,delete,deleteAll,edit,update,populate',
-                \FriendsOfTYPO3\BlogExample\Controller\PostController::class => 'new,create,delete,edit,update',
-                \FriendsOfTYPO3\BlogExample\Controller\CommentController::class => 'delete',
+                \T3docs\BlogExample\Controller\BlogController::class => 'new,create,delete,deleteAll,edit,update,populate',
+                \T3docs\BlogExample\Controller\PostController::class => 'new,create,delete,edit,update',
+                \T3docs\BlogExample\Controller\CommentController::class => 'delete',
             ],
             [
-                \FriendsOfTYPO3\BlogExample\Controller\BlogController::class => 'create,delete,deleteAll,update,populate',
-                \FriendsOfTYPO3\BlogExample\Controller\PostController::class => 'create,delete,update',
-                \FriendsOfTYPO3\BlogExample\Controller\CommentController::class => 'delete',
+                \T3docs\BlogExample\Controller\BlogController::class => 'create,delete,deleteAll,update,populate',
+                \T3docs\BlogExample\Controller\PostController::class => 'create,delete,update',
+                \T3docs\BlogExample\Controller\CommentController::class => 'delete',
             ]
         );
     }

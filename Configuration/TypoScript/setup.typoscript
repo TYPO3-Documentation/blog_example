@@ -49,7 +49,7 @@ tx_blogexample_plaintext {
     userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
     extensionName = BlogExample
     pluginName = PostList
-    vendorName = FriendsOfTYPO3
+    vendorName = T3docs
   }
 
   config {

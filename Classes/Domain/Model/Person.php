@@ -1,5 +1,5 @@
 <?php
-namespace FriendsOfTYPO3\BlogExample\Domain\Model;
+namespace T3docs\BlogExample\Domain\Model;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -35,12 +35,12 @@ class Person extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $email = '';
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\BlogExample\Domain\Model\Tag>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3docs\BlogExample\Domain\Model\Tag>
      */
     protected $tags;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\BlogExample\Domain\Model\Tag>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3docs\BlogExample\Domain\Model\Tag>
      */
     protected $tagsSpecial;
 
@@ -128,7 +128,7 @@ class Person extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage|\FriendsOfTYPO3\BlogExample\Domain\Model\Tag[]
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage|\T3docs\BlogExample\Domain\Model\Tag[]
      */
     public function getTags()
     {
@@ -136,7 +136,7 @@ class Person extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\BlogExample\Domain\Model\Tag> $tags
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3docs\BlogExample\Domain\Model\Tag> $tags
      */
     public function setTags(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $tags)
     {
@@ -160,7 +160,7 @@ class Person extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage|\FriendsOfTYPO3\BlogExample\Domain\Model\Tag[]
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage|\T3docs\BlogExample\Domain\Model\Tag[]
      */
     public function getTagsSpecial()
     {
@@ -168,7 +168,7 @@ class Person extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\FriendsOfTYPO3\BlogExample\Domain\Model\Tag> $tagsSpecial
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\T3docs\BlogExample\Domain\Model\Tag> $tagsSpecial
      */
     public function setTagsSpecial(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $tagsSpecial)
     {

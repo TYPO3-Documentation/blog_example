@@ -1,6 +1,6 @@
 <?php
 
-namespace FriendsOfTYPO3\BlogExample\ViewHelpers;
+namespace T3docs\BlogExample\ViewHelpers;
 
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
