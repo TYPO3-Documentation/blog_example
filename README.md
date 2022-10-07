@@ -53,3 +53,9 @@ Build/Scripts/runTests.sh -s cgl
 Build/Scripts/runTests.sh -s composerNormalize -n
 ```
 
+
+# Tagging and releasing
+
+[packagist.org](https://packagist.org/packages/t3docs/blog-example) is enabled via the casual github hook.
+TER releases are created by the "publish.yml" github workflow when tagging versions. 
+The commit message of the tagged commit is used as TER upload comment.
