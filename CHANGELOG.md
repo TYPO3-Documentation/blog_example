@@ -11,6 +11,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Changed
 
 ### Fixed
+
+### Removed
+
+
+## 12.0.2
+
+### Added
+
+### Changed
+- The main branch was renamed from `master` to `main`
+
+### Fixed
 - Fix `Services.yaml` for type converter example (#41)
 
 ### Removed
