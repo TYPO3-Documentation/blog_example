@@ -5,6 +5,9 @@
 
 # TYPO3 extension ``blog_example``
 
+**Installation:** Can be installed via Composer:
+``composer req t3docs/blog-example``
+
 This example provides the code examples for [Extbase reference] (https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ExtensionArchitecture/Extbase/Reference/Index.html#extbase-reference)
 of the TYPO3 project.
 
@@ -57,5 +60,5 @@ Build/Scripts/runTests.sh -s composerNormalize -n
 # Tagging and releasing
 
 [packagist.org](https://packagist.org/packages/t3docs/blog-example) is enabled via the casual github hook.
-TER releases are created by the "publish.yml" github workflow when tagging versions. 
+TER releases are created by the "publish.yml" github workflow when tagging versions.
 The commit message of the tagged commit is used as TER upload comment.
