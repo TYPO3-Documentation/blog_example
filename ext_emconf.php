@@ -3,7 +3,7 @@
 $EM_CONF[$_EXTKEY] = [
     'title' => 'A Blog Example for the Extbase Framework',
     'description' => 'This extension contains code examples used in TYPO3 explained to describe the use of Extbase',
-    'version' => '12.0.2',
+    'version' => '12.0.3',
     'category' => 'example',
     'author' => 'TYPO3 Documentation Team and contributors',
     'author_company' => '',
@@ -12,7 +12,7 @@ $EM_CONF[$_EXTKEY] = [
     'clearCacheOnLoad' => 1,
     'constraints' => [
         'depends' => [
-            'typo3' => '12.0.0-12.99.99',
+            'typo3' => '12.4.0-12.4.99',
         ],
         'conflicts' => [],
         'suggests' => [],
