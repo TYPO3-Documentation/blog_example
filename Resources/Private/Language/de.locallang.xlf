@@ -1,341 +1,341 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2020-11-16T10:32:58Z" product-name="blog_example">
+	<file source-language="en" target-language="de" datatype="plaintext" original="EXT:blog_example/Resources/Private/Language/de.locallang.xlf" date="2020-11-16T10:32:58Z" product-name="blog_example">
 		<header/>
 		<body>
-			<trans-unit id="back" xml:space="preserve" approved="yes">
+			<trans-unit id="back" resname="back">
 				<source>back</source>
 				<target>Zurück</target>
 			</trans-unit>
-			<trans-unit id="cancel" xml:space="preserve" approved="yes">
+			<trans-unit id="cancel" resname="cancel">
 				<source>cancel</source>
 				<target>Abbrechen</target>
 			</trans-unit>
-			<trans-unit id="submit" xml:space="preserve" approved="yes">
+			<trans-unit id="submit" resname="submit">
 				<source>submit</source>
 				<target>Abschicken</target>
 			</trans-unit>
-			<trans-unit id="logInToCreateBlogs" xml:space="preserve" approved="yes">
+			<trans-unit id="logInToCreateBlogs" resname="logInToCreateBlogs">
 				<source>Log in with a FE user that belongs to group #%d (configurable by settings.editorUsergroupUid) in order to add/modify blogs and posts in FE mode!</source>
 				<target>Melden Sie sich mit einem Websitenbenutzer aus der Benutzergruppe #%d (konfigurierbar über settings.editorUsergroupUid) ein, um Blogs und Beiträge im FE Modus hinzuzufügen/zu editieren!</target>
 			</trans-unit>
-			<trans-unit id="publishedOn" xml:space="preserve" approved="yes">
+			<trans-unit id="publishedOn" resname="publishedOn">
 				<source>published on</source>
 				<target>veröffentlicht am</target>
 			</trans-unit>
-			<trans-unit id="by" xml:space="preserve" approved="yes">
+			<trans-unit id="by" resname="by">
 				<source>by</source>
 				<target>von</target>
 			</trans-unit>
-			<trans-unit id="postedOn" xml:space="preserve" approved="yes">
+			<trans-unit id="postedOn" resname="postedOn">
 				<source>posted on</source>
 				<target>verfasst am</target>
 			</trans-unit>
-			<trans-unit id="blog.header" xml:space="preserve" approved="yes">
+			<trans-unit id="blog.header" resname="blog.header">
 				<source>Welcome to the Blog Example!</source>
 				<target>Willkommen zum Blog Example!</target>
 			</trans-unit>
-			<trans-unit id="blog.introduction" xml:space="preserve" approved="yes">
+			<trans-unit id="blog.introduction" resname="blog.introduction">
 				<source>This extension serves as a demonstration for basic development techniques used in Extbase applications.</source>
 				<target>Diese Extension soll einen Einblick in die Technik von Extbase Applikationen bieten.</target>
 			</trans-unit>
-			<trans-unit id="blog.list" xml:space="preserve" approved="yes">
+			<trans-unit id="blog.list" resname="blog.list">
 				<source>Here is a list of %d blogs</source>
 				<target>Hier eine Liste von %d Blogs</target>
 			</trans-unit>
-			<trans-unit id="blog.numberOfPosts" xml:space="preserve" approved="yes">
+			<trans-unit id="blog.numberOfPosts" resname="blog.numberOfPosts">
 				<source>%d posts</source>
 				<target>%d Beiträge</target>
 			</trans-unit>
-			<trans-unit id="blog.noEntries" xml:space="preserve" approved="yes">
+			<trans-unit id="blog.noEntries" resname="blog.noEntries">
 				<source>There are currently no blogs</source>
 				<target>Es sind momentan keine Blogs angelegt</target>
 			</trans-unit>
-			<trans-unit id="blog.edit" xml:space="preserve" approved="yes">
+			<trans-unit id="blog.edit" resname="blog.edit">
 				<source>Edit this blog</source>
 				<target>Dieses Blog bearbeiten</target>
 			</trans-unit>
-			<trans-unit id="blog.delete" xml:space="preserve" approved="yes">
+			<trans-unit id="blog.delete" resname="blog.delete">
 				<source>Delete this blog</source>
 				<target>Dieses Blog löschen</target>
 			</trans-unit>
-			<trans-unit id="blog.createFirst" xml:space="preserve" approved="yes">
+			<trans-unit id="blog.createFirst" resname="blog.createFirst">
 				<source>Create your first blog</source>
 				<target>Erstes Blog anlegen</target>
 			</trans-unit>
-			<trans-unit id="blog.createAnother" xml:space="preserve" approved="yes">
+			<trans-unit id="blog.createAnother" resname="blog.createAnother">
 				<source>Create another blog</source>
 				<target>Weiteres Blog anlegen</target>
 			</trans-unit>
-			<trans-unit id="blog.createExampleData" xml:space="preserve" approved="yes">
+			<trans-unit id="blog.createExampleData" resname="blog.createExampleData">
 				<source>Create sample data</source>
 				<target>Beispieldaten erzeugen</target>
 			</trans-unit>
-			<trans-unit id="blog.deleteAll" xml:space="preserve" approved="yes">
+			<trans-unit id="blog.deleteAll" resname="blog.deleteAll">
 				<source>Delete all blogs</source>
 				<target>Alle Blogs löschen</target>
 			</trans-unit>
-			<trans-unit id="blog.deleteAllConfirmation" xml:space="preserve" approved="yes">
+			<trans-unit id="blog.deleteAllConfirmation" resname="blog.deleteAllConfirmation">
 				<source>Are you sure that you want to delete all blogs?</source>
 				<target>Sind Sie sicher, dass Sie alle Blogs löschen wollen?</target>
 			</trans-unit>
-			<trans-unit id="blog.editHeader" xml:space="preserve" approved="yes">
+			<trans-unit id="blog.editHeader" resname="blog.editHeader">
 				<source>Edit blog &quot;%s&quot;</source>
 				<target>Blog &quot;%s&quot; bearbeiten</target>
 			</trans-unit>
-			<trans-unit id="blog.editIntroduction" xml:space="preserve" approved="yes">
+			<trans-unit id="blog.editIntroduction" resname="blog.editIntroduction">
 				<source>Edit the information about your blog below</source>
 				<target>Editieren Sie hier die Informationen zu diesem Blog</target>
 			</trans-unit>
-			<trans-unit id="blog.createHeader" xml:space="preserve" approved="yes">
+			<trans-unit id="blog.createHeader" resname="blog.createHeader">
 				<source>Create new blog</source>
 				<target>Neues Blog anlegen</target>
 			</trans-unit>
-			<trans-unit id="blog.createIntroduction" xml:space="preserve" approved="yes">
+			<trans-unit id="blog.createIntroduction" resname="blog.createIntroduction">
 				<source>Edit the information about the new blog below</source>
 				<target>Geben Sie hier die Informationen zu diesem Blog an</target>
 			</trans-unit>
-			<trans-unit id="post.header" xml:space="preserve" approved="yes">
+			<trans-unit id="post.header" resname="post.header">
 				<source>Welcome to the Blog &quot;%s&quot;</source>
 				<target>Willkommen zum Blog &quot;%s&quot;</target>
 			</trans-unit>
-			<trans-unit id="post.introductionAdministrator" xml:space="preserve" approved="yes">
+			<trans-unit id="post.introductionAdministrator" resname="post.introductionAdministrator">
 				<source>If you have any questions, feel free to contact the administrator %s.</source>
 				<target>Wenn Sie Fragen haben, wenden Sie sich an den Administrator %s.</target>
 			</trans-unit>
-			<trans-unit id="post.introductionNoAdministrator" xml:space="preserve" approved="yes">
+			<trans-unit id="post.introductionNoAdministrator" resname="post.introductionNoAdministrator">
 				<source>There is currently no administrator assigned to this Blog</source>
 				<target>Für dieses Blog ist kein Administrator angegeben</target>
 			</trans-unit>
-			<trans-unit id="post.list" xml:space="preserve" approved="yes">
+			<trans-unit id="post.list" resname="post.list">
 				<source>This blog contains %d posts</source>
 				<target>Dieses Blog enthält %d Beiträge</target>
 			</trans-unit>
-			<trans-unit id="post.listTag" xml:space="preserve" approved="yes">
+			<trans-unit id="post.listTag" resname="post.listTag">
 				<source>This blog contains %d posts tagged with &quot;%s&quot;</source>
 				<target>Dieses Blog enthält %d Beiträge die mit dem Tag &quot;%s&quot; markiert sind</target>
 			</trans-unit>
-			<trans-unit id="post.noEntries" xml:space="preserve" approved="yes">
+			<trans-unit id="post.noEntries" resname="post.noEntries">
 				<source>There are currently no posts in this blog</source>
 				<target>Dieses Blog enthält noch keine Beiträge</target>
 			</trans-unit>
-			<trans-unit id="post.createFirst" xml:space="preserve" approved="yes">
+			<trans-unit id="post.createFirst" resname="post.createFirst">
 				<source>Create your first post</source>
 				<target>Ersten Beitrag verfassen</target>
 			</trans-unit>
-			<trans-unit id="post.createAnother" xml:space="preserve" approved="yes">
+			<trans-unit id="post.createAnother" resname="post.createAnother">
 				<source>Create another post</source>
 				<target>Weiteren Beitrag anlegen</target>
 			</trans-unit>
-			<trans-unit id="post.showAll" xml:space="preserve" approved="yes">
+			<trans-unit id="post.showAll" resname="post.showAll">
 				<source>Show all posts of this blog</source>
 				<target>Alle Beiträge dieses Blogs anzeigen</target>
 			</trans-unit>
-			<trans-unit id="post.edit" xml:space="preserve" approved="yes">
+			<trans-unit id="post.edit" resname="post.edit">
 				<source>Edit this post</source>
 				<target>Diesen Beitrag bearbeiten</target>
 			</trans-unit>
-			<trans-unit id="post.delete" xml:space="preserve" approved="yes">
+			<trans-unit id="post.delete" resname="post.delete">
 				<source>Delete this post</source>
 				<target>Diesen Beitrag löschen</target>
 			</trans-unit>
-			<trans-unit id="post.readMore" xml:space="preserve" approved="yes">
+			<trans-unit id="post.readMore" resname="post.readMore">
 				<source>read more</source>
 				<target>mehr</target>
 			</trans-unit>
-			<trans-unit id="post.related" xml:space="preserve" approved="yes">
+			<trans-unit id="post.related" resname="post.related">
 				<source>related posts</source>
 				<target>Ähnliche Beiträge</target>
 			</trans-unit>
-			<trans-unit id="post.comments" xml:space="preserve" approved="yes">
+			<trans-unit id="post.comments" resname="post.comments">
 				<source>Comments</source>
 				<target>Kommentare</target>
 			</trans-unit>
-			<trans-unit id="post.addComment" xml:space="preserve" approved="yes">
+			<trans-unit id="post.addComment" resname="post.addComment">
 				<source>Add your own</source>
 				<target>Kommentar hinzufügen</target>
 			</trans-unit>
-			<trans-unit id="post.editHeader" xml:space="preserve" approved="yes">
+			<trans-unit id="post.editHeader" resname="post.editHeader">
 				<source>Edit post &quot;%s&quot;</source>
 				<target>Beitrag &quot;%s&quot; bearbeiten</target>
 			</trans-unit>
-			<trans-unit id="post.createHeader" xml:space="preserve" approved="yes">
+			<trans-unit id="post.createHeader" resname="post.createHeader">
 				<source>Create new post</source>
 				<target>Neuen Beitrag verfassen</target>
 			</trans-unit>
-			<trans-unit id="post.listPlaintext" xml:space="preserve" approved="yes">
+			<trans-unit id="post.listPlaintext" resname="post.listPlaintext">
 				<source>Show posts as plaintext</source>
 				<target>Zeige Beiträge als Text</target>
 			</trans-unit>
-			<trans-unit id="comment.delete" xml:space="preserve" approved="yes">
+			<trans-unit id="comment.delete" resname="comment.delete">
 				<source>Delete this comment</source>
 				<target>Diesen Kommentar löschen</target>
 			</trans-unit>
-			<trans-unit id="property.title" xml:space="preserve" approved="yes">
+			<trans-unit id="property.title" resname="property.title">
 				<source>title</source>
 				<target>Bezeichnung</target>
 			</trans-unit>
-			<trans-unit id="property.description" xml:space="preserve" approved="yes">
+			<trans-unit id="property.description" resname="property.description">
 				<source>description</source>
 				<target>Beschreibung</target>
 			</trans-unit>
-			<trans-unit id="property.administrator" xml:space="preserve" approved="yes">
+			<trans-unit id="property.administrator" resname="property.administrator">
 				<source>administrator</source>
 				<target>Administrator</target>
 			</trans-unit>
-			<trans-unit id="property.content" xml:space="preserve" approved="yes">
+			<trans-unit id="property.content" resname="property.content">
 				<source>content</source>
 				<target>Inhalt</target>
 			</trans-unit>
-			<trans-unit id="property.author" xml:space="preserve" approved="yes">
+			<trans-unit id="property.author" resname="property.author">
 				<source>author</source>
 				<target>Autor</target>
 			</trans-unit>
-			<trans-unit id="property.email" xml:space="preserve" approved="yes">
+			<trans-unit id="property.email" resname="property.email">
 				<source>email</source>
 				<target>E-Mail</target>
 			</trans-unit>
-			<trans-unit id="property.message" xml:space="preserve" approved="yes">
+			<trans-unit id="property.message" resname="property.message">
 				<source>message</source>
 				<target>Nachricht</target>
 			</trans-unit>
-			<trans-unit id="property.relatedPosts" xml:space="preserve" approved="yes">
+			<trans-unit id="property.relatedPosts" resname="property.relatedPosts">
 				<source>related posts</source>
 				<target>Ähnliche Beiträge</target>
 			</trans-unit>
-			<trans-unit id="flashmessage.Blog.created.title" xml:space="preserve" approved="yes">
+			<trans-unit id="flashmessage.Blog.created.title" resname="flashmessage.Blog.created.title">
 				<source>Blog added</source>
 				<target>Blog hinzugefügt</target>
 			</trans-unit>
-			<trans-unit id="flashmessage.Blog.created" xml:space="preserve" approved="yes">
+			<trans-unit id="flashmessage.Blog.created" resname="flashmessage.Blog.created">
 				<source>A new blog was created</source>
 				<target>Ein neues Blog wurde angelegt</target>
 			</trans-unit>
-			<trans-unit id="flashmessage.Blog.updated.title" xml:space="preserve" approved="yes">
+			<trans-unit id="flashmessage.Blog.updated.title" resname="flashmessage.Blog.updated.title">
 				<source>Blog updated</source>
 				<target>Blog aktualisiert</target>
 			</trans-unit>
-			<trans-unit id="flashmessage.Blog.updated" xml:space="preserve" approved="yes">
+			<trans-unit id="flashmessage.Blog.updated" resname="flashmessage.Blog.updated">
 				<source>The blog was updated</source>
 				<target>Der Blog wurde aktualisiert</target>
 			</trans-unit>
-			<trans-unit id="flashmessage.Blog.deleted.title" xml:space="preserve" approved="yes">
+			<trans-unit id="flashmessage.Blog.deleted.title" resname="flashmessage.Blog.deleted.title">
 				<source>Blog deleted</source>
 				<target>Blog gelöscht</target>
 			</trans-unit>
-			<trans-unit id="flashmessage.Blog.deleted" xml:space="preserve" approved="yes">
+			<trans-unit id="flashmessage.Blog.deleted" resname="flashmessage.Blog.deleted">
 				<source>The blog has been removed</source>
 				<target>Der Blog wurde entfernt</target>
 			</trans-unit>
-			<trans-unit id="flashmessage.Blog.populated.title" xml:space="preserve" approved="yes">
+			<trans-unit id="flashmessage.Blog.populated.title" resname="flashmessage.Blog.populated.title">
 				<source>Sample data created</source>
 				<target>Beispieldaten angelegt</target>
 			</trans-unit>
-			<trans-unit id="flashmessage.Blog.populated" xml:space="preserve" approved="yes">
+			<trans-unit id="flashmessage.Blog.populated" resname="flashmessage.Blog.populated">
 				<source>Some exemplary blogs and posts have been created</source>
 				<target>Einige beispielhafte Blogs und Beiträge wurden erzeugt</target>
 			</trans-unit>
-			<trans-unit id="flashmessage.Post.created.title" xml:space="preserve" approved="yes">
+			<trans-unit id="flashmessage.Post.created.title" resname="flashmessage.Post.created.title">
 				<source>Post added</source>
 				<target>Beitrag hinzugefügt</target>
 			</trans-unit>
-			<trans-unit id="flashmessage.Post.created" xml:space="preserve" approved="yes">
+			<trans-unit id="flashmessage.Post.created" resname="flashmessage.Post.created">
 				<source>A new post was created</source>
 				<target>Ein neuer Blog Beitrag wurde angelegt</target>
 			</trans-unit>
-			<trans-unit id="flashmessage.Post.updated.title" xml:space="preserve" approved="yes">
+			<trans-unit id="flashmessage.Post.updated.title" resname="flashmessage.Post.updated.title">
 				<source>Post updated</source>
 				<target>Beitrag aktualisiert</target>
 			</trans-unit>
-			<trans-unit id="flashmessage.Post.updated" xml:space="preserve" approved="yes">
+			<trans-unit id="flashmessage.Post.updated" resname="flashmessage.Post.updated">
 				<source>The blog post was updated</source>
 				<target>Der Blog Beitrag wurde aktualisiert</target>
 			</trans-unit>
-			<trans-unit id="flashmessage.Post.deleted.title" xml:space="preserve" approved="yes">
+			<trans-unit id="flashmessage.Post.deleted.title" resname="flashmessage.Post.deleted.title">
 				<source>Post deleted</source>
 				<target>Beitrag gelöscht</target>
 			</trans-unit>
-			<trans-unit id="flashmessage.Post.deleted" xml:space="preserve" approved="yes">
+			<trans-unit id="flashmessage.Post.deleted" resname="flashmessage.Post.deleted">
 				<source>The blog post has been removed</source>
 				<target>Der Blog Beitrag wurde entfernt</target>
 			</trans-unit>
-			<trans-unit id="flashmessage.Comment.created.title" xml:space="preserve" approved="yes">
+			<trans-unit id="flashmessage.Comment.created.title" resname="flashmessage.Comment.created.title">
 				<source>Comment added</source>
 				<target>Kommentar hinzugefügt</target>
 			</trans-unit>
-			<trans-unit id="flashmessage.Comment.created" xml:space="preserve" approved="yes">
+			<trans-unit id="flashmessage.Comment.created" resname="flashmessage.Comment.created">
 				<source>Your comment has been created</source>
 				<target>Ihr Kommentar wurde hinzugefügt</target>
 			</trans-unit>
-			<trans-unit id="flashmessage.Comment.deleted.title" xml:space="preserve" approved="yes">
+			<trans-unit id="flashmessage.Comment.deleted.title" resname="flashmessage.Comment.deleted.title">
 				<source>Comment deleted</source>
 				<target>Kommentar geöscht</target>
 			</trans-unit>
-			<trans-unit id="flashmessage.Comment.deleted" xml:space="preserve" approved="yes">
+			<trans-unit id="flashmessage.Comment.deleted" resname="flashmessage.Comment.deleted">
 				<source>The comment has been removed</source>
 				<target>Der Kommentar wurde entfernt</target>
 			</trans-unit>
-			<trans-unit id="flashmessage.Comment.deletedAll.title" xml:space="preserve" approved="yes">
+			<trans-unit id="flashmessage.Comment.deletedAll.title" resname="flashmessage.Comment.deletedAll.title">
 				<source>Comments deleted</source>
 				<target>Kommentare gelöscht</target>
 			</trans-unit>
-			<trans-unit id="flashmessage.Comment.deletedAll" xml:space="preserve" approved="yes">
+			<trans-unit id="flashmessage.Comment.deletedAll" resname="flashmessage.Comment.deletedAll">
 				<source>All comments of this post have been removed</source>
 				<target>Alle Kommentare des Beitrages wurden gelöscht</target>
 			</trans-unit>
-			<trans-unit id="culture.date.formatLong" xml:space="preserve" approved="yes">
+			<trans-unit id="culture.date.formatLong" resname="culture.date.formatLong">
 				<source>Y-m-d H:i\h</source>
 				<target>d.m.Y H:i\h</target>
 			</trans-unit>
-			<trans-unit id="culture.date.formatShort" xml:space="preserve" approved="yes">
+			<trans-unit id="culture.date.formatShort" resname="culture.date.formatShort">
 				<source>Y-m-d</source>
 				<target>d.m.Y</target>
 			</trans-unit>
-			<trans-unit id="error.errorsOccurred" xml:space="preserve" approved="yes">
+			<trans-unit id="error.errorsOccurred" resname="error.errorsOccurred">
 				<source>Following errors occurred</source>
 				<target>Es sind Fehler aufgetreten</target>
 			</trans-unit>
-			<trans-unit id="error.Blog.updateAction" xml:space="preserve" approved="yes">
+			<trans-unit id="error.Blog.updateAction" resname="error.Blog.updateAction">
 				<source>Could not update blog</source>
 				<target>Der Blog konnte nicht aktualisiert werden</target>
 			</trans-unit>
-			<trans-unit id="error.Blog.createAction" xml:space="preserve" approved="yes">
+			<trans-unit id="error.Blog.createAction" resname="error.Blog.createAction">
 				<source>Could not create blog</source>
 				<target>Der Blog konnte nicht angelegt werden</target>
 			</trans-unit>
-			<trans-unit id="error.Blog.invalidTitle" xml:space="preserve" approved="yes">
+			<trans-unit id="error.Blog.invalidTitle" resname="error.Blog.invalidTitle">
 				<source>&quot;Extbase&quot; can't be used as a blog title</source>
 				<target>&quot;Extbase&quot; darf nicht als Blog Bezeichnung verwendet werden</target>
 			</trans-unit>
-			<trans-unit id="error.Post.updateAction" xml:space="preserve" approved="yes">
+			<trans-unit id="error.Post.updateAction" resname="error.Post.updateAction">
 				<source>Could not update post</source>
 				<target>Der Beitrag konnte nicht aktualisiert werden</target>
 			</trans-unit>
-			<trans-unit id="error.Post.createAction" xml:space="preserve" approved="yes">
+			<trans-unit id="error.Post.createAction" resname="error.Post.createAction">
 				<source>Could not create post</source>
 				<target>Der Beitrag konnte nicht angelegt werden</target>
 			</trans-unit>
-			<trans-unit id="error.Comment.createAction" xml:space="preserve" approved="yes">
+			<trans-unit id="error.Comment.createAction" resname="error.Comment.createAction">
 				<source>Could not create comment</source>
 				<target>Der Kommentar konnte nicht angelegt werden</target>
 			</trans-unit>
-			<trans-unit id="error.code.1238108067" xml:space="preserve" approved="yes">
+			<trans-unit id="error.code.1238108067" resname="error.code.1238108067">
 				<source>The given &lt;strong&gt;%s&lt;/strong&gt; is either too long or too short</source>
 				<target>&lt;strong&gt;%s&lt;/strong&gt; ist entweder zu kurz oder zu lang</target>
 			</trans-unit>
-			<trans-unit id="error.code.1238108068" xml:space="preserve" approved="yes">
+			<trans-unit id="error.code.1238108068" resname="error.code.1238108068">
 				<source>The given &lt;strong&gt;%s&lt;/strong&gt; is too short</source>
 				<target>&lt;strong&gt;%s&lt;/strong&gt; ist zu kurz</target>
 			</trans-unit>
-			<trans-unit id="error.code.1238108069" xml:space="preserve" approved="yes">
+			<trans-unit id="error.code.1238108069" resname="error.code.1238108069">
 				<source>The given &lt;strong&gt;%s&lt;/strong&gt; is too long</source>
 				<target>&lt;strong&gt;%s&lt;/strong&gt; ist zu lang</target>
 			</trans-unit>
-			<trans-unit id="error.code.1221559976" xml:space="preserve" approved="yes">
+			<trans-unit id="error.code.1221559976" resname="error.code.1221559976">
 				<source>The given &lt;strong&gt;%s&lt;/strong&gt; is not a valid email address</source>
 				<target>&lt;strong&gt;%s&lt;/strong&gt; ist keine gültige E-Mail Adresse</target>
 			</trans-unit>
-			<trans-unit id="error.code.1221560718" xml:space="preserve" approved="yes">
+			<trans-unit id="error.code.1221560718" resname="error.code.1221560718">
 				<source>The &lt;strong&gt;%s&lt;/strong&gt; must not be empty</source>
 				<target>&lt;strong&gt;%s&lt;/strong&gt; darf nicht leer sein</target>
 			</trans-unit>
