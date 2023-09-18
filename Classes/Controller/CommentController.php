@@ -41,8 +41,7 @@ class CommentController extends AbstractController
         protected readonly PostRepository $postRepository,
         protected readonly CommentRepository $commentRepository,
         protected readonly HiddenCommentConverter $hiddenCommentConverter,
-    ) {
-    }
+    ) {}
 
     /**
      * Adds a comment to a blog post and redirects to single view

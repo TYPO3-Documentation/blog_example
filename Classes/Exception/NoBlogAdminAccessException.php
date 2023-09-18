@@ -17,6 +17,4 @@ namespace T3docs\BlogExample\Exception;
 
 use TYPO3\CMS\Extbase\Exception;
 
-class NoBlogAdminAccessException extends Exception
-{
-}
+class NoBlogAdminAccessException extends Exception {}
