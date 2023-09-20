@@ -86,7 +86,7 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
     ): ResponseInterface {
         if ($blog == null) {
             return (new ForwardResponse('index'))
-                ->withControllerName(('Blog'))
+                ->withControllerName('Blog')
                 ->withExtensionName('blog_example')
                 ->withArguments(['currentPage' => $currentPage]);
         }
