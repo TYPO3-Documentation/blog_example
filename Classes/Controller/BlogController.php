@@ -43,8 +43,7 @@ class BlogController extends AbstractController
         protected readonly BlogRepository $blogRepository,
         protected readonly BlogFactory $blogFactory,
         protected readonly AdministratorRepository $administratorRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Index action for this controller. Displays a list of blogs.
