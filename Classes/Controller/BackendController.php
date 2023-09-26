@@ -49,8 +49,7 @@ class BackendController extends ActionController
         protected readonly PostRepository $postRepository,
         protected readonly CommentRepository $commentRepository,
         protected readonly ModuleTemplateFactory $moduleTemplateFactory
-    ) {
-    }
+    ) {}
 
     /**
      * Function will be called before every other action
