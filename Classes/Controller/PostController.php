@@ -49,8 +49,7 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
         protected readonly PersonRepository $personRepository,
         protected readonly PostRepository $postRepository,
         protected readonly PropertyMapper $propertyMapper
-    ) {
-    }
+    ) {}
 
     /**
      * This method demonstrates property mapping to an object
@@ -86,7 +85,7 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
     ): ResponseInterface {
         if ($blog == null) {
             return (new ForwardResponse('index'))
-                ->withControllerName(('Blog'))
+                ->withControllerName('Blog')
                 ->withExtensionName('blog_example')
                 ->withArguments(['currentPage' => $currentPage]);
         }
