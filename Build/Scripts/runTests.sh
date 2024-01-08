@@ -37,7 +37,7 @@ a recent docker-compose (tested >=1.21.2) is needed.
 
 Usage: $0 [options] [file]
 
-No arguments: Run all unit tests with PHP 8.1
+No arguments: Run all unit tests with PHP 8.2
 
 Options:
     -s <...>
@@ -48,10 +48,10 @@ Options:
             - composerValidate: "composer validate"
             - lint: PHP linting
 
-    -p <8.1|8.2>
+    -p <8.2|8.3>
         Specifies the PHP minor version to be used
-            - 8.1 (default): use PHP 8.1
-            - 8.2: use PHP 8.2
+            - 8.2 (default): use PHP 8.2
+            - 8.3: use PHP 8.3
 
     -n
         Only with -s cgl and composerNormalize
@@ -70,7 +70,7 @@ Options:
         Show this help.
 
 Examples:
-    # Run unit tests using PHP 8.1
+    # Run unit tests using PHP 8.2
     ./Build/Scripts/runTests.sh
 EOF
 
@@ -96,7 +96,7 @@ else
   ROOT_DIR=`realpath ${PWD}/../../`
 fi
 TEST_SUITE="cgl"
-PHP_VERSION="8.1"
+PHP_VERSION="8.2"
 SCRIPT_VERBOSE=0
 CGLCHECK_DRY_RUN=""
 COMPOSER_NORMALIZE_DRY_RUN=""
@@ -149,7 +149,7 @@ if [ ${#INVALID_OPTIONS[@]} -ne 0 ]; then
     exit 1
 fi
 
-# Move "8.1" to "php81", the latter is the docker container name
+# Move "8.2" to "php82", the latter is the docker container name
 DOCKER_PHP_IMAGE=`echo "php${PHP_VERSION}" | sed -e 's/\.//'`
 
 # Suite execution
