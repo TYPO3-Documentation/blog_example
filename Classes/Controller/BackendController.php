@@ -54,7 +54,7 @@ class BackendController extends ActionController
     /**
      * Function will be called before every other action
      */
-    protected function initializeAction()
+    protected function initializeAction(): void
     {
         $this->pageUid = (int)($this->request->getQueryParams()['id'] ?? 0);
         parent::initializeAction();
