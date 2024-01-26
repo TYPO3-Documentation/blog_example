@@ -11,21 +11,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Changed
 
 ### Fixed
+- Add return type to `ModuleController->initializeAction()`
 
 ### Removed
 
 
 ## 12.0.2
 
-### Added
-
 ### Changed
 - The main branch was renamed from `master` to `main`
 
 ### Fixed
 - Fix `Services.yaml` for type converter example (#41)
-
-### Removed
 
 ## 12.0.1
 
@@ -34,7 +31,3 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 - Changed the vendor to t3docs (#40)
-
-### Fixed
-
-### Removed
