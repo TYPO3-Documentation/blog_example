@@ -11,7 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Changed
 
 ### Fixed
-- Add return type to `ModuleController->initializeAction()`
+- Add return type to `ModuleController->initializeAction()` (#74)
 
 ### Removed
 
