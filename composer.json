@@ -21,7 +21,7 @@
   },
   "require-dev": {
     "ergebnis/composer-normalize": "~2.39.0",
-    "typo3/coding-standards": "^0.7.1"
+    "friendsofphp/php-cs-fixer": "^3.48"
   },
   "replace": {
     "friendsoftypo3/blog-example": "self.version"
