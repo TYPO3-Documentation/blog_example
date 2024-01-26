@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace T3docs\BlogExample\Service;
 
-use DateTime;
 use T3docs\BlogExample\Domain\Model\Administrator;
 use T3docs\BlogExample\Domain\Model\Author;
 use T3docs\BlogExample\Domain\Model\Blog;
@@ -65,14 +64,14 @@ class BlogFactory implements SingletonInterface
 
             // create comments
             $comment = new Comment();
-            $comment->setDate(new DateTime());
+            $comment->setDate(new \DateTime());
             $comment->setAuthor('Peter Pan');
             $comment->setEmail('peter.pan@example.com');
             $comment->setContent('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.');
             $post->addComment($comment);
 
             $comment = new Comment();
-            $comment->setDate(new DateTime('2009-03-19 23:44'));
+            $comment->setDate(new \DateTime('2009-03-19 23:44'));
             $comment->setAuthor('John Smith');
             $comment->setEmail('john@matrix.org');
             $comment->setContent('Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.');
