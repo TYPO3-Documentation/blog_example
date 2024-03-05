@@ -19,7 +19,7 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
     if (
         GeneralUtility::makeInstance(ExtensionConfiguration::class)->get(
             'blog_example',
-            'registerSinglePlugin'
+            'registerSinglePlugin',
         )
     ) {
         ExtensionUtility::configurePlugin(
@@ -36,7 +36,7 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
                 BlogController::class => 'create,delete,deleteAll,update,populate',
                 PostController::class => 'create,delete,update',
                 CommentController::class => 'create,delete',
-            ]
+            ],
         );
     } else {
         // Blog plugins
@@ -46,7 +46,7 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
             // Cache-able Controller-Actions
             [
                 BlogController::class => 'index',
-            ]
+            ],
         );
 
         // Post plugins
@@ -56,7 +56,7 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
             // Cache-able Controller-Actions
             [
                 PostController::class => 'index',
-            ]
+            ],
         );
         ExtensionUtility::configurePlugin(
             'BlogExample',
@@ -69,7 +69,7 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
             // Non-Cache-able Controller-Actions
             [
                 CommentController::class => 'create',
-            ]
+            ],
         );
 
         // RSS Feed
@@ -79,7 +79,7 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
             // Cache-able Controller-Actions
             [
                 PostController::class => 'displayRssList',
-            ]
+            ],
         );
 
         // admin plugins
@@ -97,7 +97,7 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
                 BlogController::class => 'create,delete,deleteAll,update,populate',
                 PostController::class => 'create,delete,update',
                 CommentController::class => 'delete',
-            ]
+            ],
         );
     }
 })('BlogExample');

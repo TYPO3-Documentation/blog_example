@@ -48,7 +48,7 @@ class CommentController extends AbstractController
      */
     public function createAction(
         Post $post,
-        Comment $newComment
+        Comment $newComment,
     ): ResponseInterface {
         $post->addComment($newComment);
         $this->postRepository->update($post);
@@ -62,7 +62,7 @@ class CommentController extends AbstractController
      */
     public function deleteAction(
         Post $post,
-        Comment $comment
+        Comment $comment,
     ): ResponseInterface {
         $this->checkBlogAdminAccess();
         $post->removeComment($comment);
@@ -83,7 +83,7 @@ class CommentController extends AbstractController
 
     public function publishAction(
         Post $post,
-        Comment $comment
+        Comment $comment,
     ): ResponseInterface {
         $this->checkBlogAdminAccess();
         $comment->setHidden(false);
@@ -106,7 +106,7 @@ class CommentController extends AbstractController
             'edit',
             'Post',
             null,
-            ['post' => $post, 'blog' => $post->getBlog()]
+            ['post' => $post, 'blog' => $post->getBlog()],
         );
     }
 }

@@ -36,7 +36,7 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
         $locallangKey = sprintf(
             'error.%s.%s',
             $this->request->getControllerName(),
-            $this->actionMethodName
+            $this->actionMethodName,
         );
         return $this->translate($locallangKey, $defaultFlashMessage);
     }
@@ -62,21 +62,21 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      */
     public function addLocalizedFlashMessage(
         string $action,
-        ContextualFeedbackSeverity $severity = ContextualFeedbackSeverity::OK
+        ContextualFeedbackSeverity $severity = ContextualFeedbackSeverity::OK,
     ): void {
         $messageLocallangKey = sprintf(
             'flashmessage.%s.%s',
             $this->request->getControllerName(),
-            $action
+            $action,
         );
         $localizedMessage = $this->translate(
             $messageLocallangKey,
-            '[' . $messageLocallangKey . ']'
+            '[' . $messageLocallangKey . ']',
         );
         $titleLocallangKey = sprintf('%s.title', $messageLocallangKey);
         $localizedTitle = $this->translate(
             $titleLocallangKey,
-            '[' . $titleLocallangKey . ']'
+            '[' . $titleLocallangKey . ']',
         );
         $this->addFlashMessage($localizedMessage, $localizedTitle, $severity);
     }
@@ -86,7 +86,7 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      */
     protected function translate(
         string $key,
-        string $defaultMessage = ''
+        string $defaultMessage = '',
     ): string {
         $message = LocalizationUtility::translate($key, 'BlogExample');
         if ($message === null) {

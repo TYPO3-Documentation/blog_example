@@ -42,7 +42,7 @@ class PostRepository extends Repository
         $query = $this->createQuery();
         return $query
             ->matching(
-                $query->equals('blog', $blog)
+                $query->equals('blog', $blog),
             )
             ->execute();
     }
@@ -54,15 +54,15 @@ class PostRepository extends Repository
      */
     public function findByTagAndBlog(
         string $tag,
-        Blog $blog
+        Blog $blog,
     ): QueryResultInterface {
         $query = $this->createQuery();
         return $query
             ->matching(
                 $query->logicalAnd(
                     $query->equals('blog', $blog),
-                    $query->equals('tags.name', $tag)
-                )
+                    $query->equals('tags.name', $tag),
+                ),
             )
             ->execute();
     }
@@ -81,9 +81,9 @@ class PostRepository extends Repository
                 $query->logicalAnd(
                     $query->equals('blog', $blog),
                     $query->logicalNot(
-                        $query->equals('uid', $post->getUid())
-                    )
-                )
+                        $query->equals('uid', $post->getUid()),
+                    ),
+                ),
             )
             ->execute();
     }
@@ -98,7 +98,7 @@ class PostRepository extends Repository
         $query = $this->createQuery();
         return $query
             ->matching(
-                $query->lessThan('date', $post->getDate())
+                $query->lessThan('date', $post->getDate()),
             )
             ->execute()
             ->getFirst();
@@ -114,7 +114,7 @@ class PostRepository extends Repository
         $query = $this->createQuery();
         return $query
             ->matching(
-                $query->greaterThan('date', $post->getDate())
+                $query->greaterThan('date', $post->getDate()),
             )
             ->execute()
             ->getFirst();
@@ -128,12 +128,12 @@ class PostRepository extends Repository
      */
     public function findRecentByBlog(
         Blog $blog,
-        int $limit = 5
+        int $limit = 5,
     ): QueryResultInterface {
         $query = $this->createQuery();
         return $query
             ->matching(
-                $query->equals('blog', $blog)
+                $query->equals('blog', $blog),
             )
             ->setLimit((int)$limit)
             ->execute();
@@ -144,7 +144,7 @@ class PostRepository extends Repository
         $query = $this->createQuery();
         return $query
             ->matching(
-                $query->contains('categories', $categoryUid)
+                $query->contains('categories', $categoryUid),
             )
             ->execute();
     }
