@@ -28,7 +28,7 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 final class BlogValidator extends AbstractValidator
 {
     public function __construct(
-        private readonly BlogValidationService $blogValidationService
+        private readonly BlogValidationService $blogValidationService,
     ) {
         parent::__construct();
     }
@@ -49,7 +49,7 @@ final class BlogValidator extends AbstractValidator
         if (!$this->blogValidationService->isBlogCategoryCountValid($value)) {
             $errorString = LocalizationUtility::translate(
                 'error.Blog.tooManyCategories',
-                'BlogExample'
+                'BlogExample',
             );
             // Add the error to the property if it is specific to one property
             $this->addErrorForProperty('categories', $errorString, 1297418976);
@@ -57,7 +57,7 @@ final class BlogValidator extends AbstractValidator
         if (!$this->blogValidationService->isBlogSubtitleValid($value)) {
             $errorString = LocalizationUtility::translate(
                 'error.Blog.invalidSubTitle',
-                'BlogExample'
+                'BlogExample',
             );
             // Add the error directly if it takes several properties into account
             $this->addError($errorString, 1297418974);

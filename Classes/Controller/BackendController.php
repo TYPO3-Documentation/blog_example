@@ -48,7 +48,7 @@ class BackendController extends ActionController
         protected readonly BlogFactory $blogFactory,
         protected readonly PostRepository $postRepository,
         protected readonly CommentRepository $commentRepository,
-        protected readonly ModuleTemplateFactory $moduleTemplateFactory
+        protected readonly ModuleTemplateFactory $moduleTemplateFactory,
     ) {}
 
     /**
@@ -70,7 +70,7 @@ class BackendController extends ActionController
         $paginator = new QueryResultPaginator(
             $allAvailableBlogs,
             $currentPage,
-            3
+            3,
         );
         $pagination = new SimplePagination($paginator);
 
@@ -113,7 +113,7 @@ class BackendController extends ActionController
     public function showBlogAction(
         Blog $blog = null,
         string $tag = '',
-        int $currentPage = 1
+        int $currentPage = 1,
     ): ResponseInterface {
         $view = $this->initializeModuleTemplate($this->request);
         if ($blog == null) {
@@ -174,7 +174,7 @@ class BackendController extends ActionController
      * Generates the action menu
      */
     protected function initializeModuleTemplate(
-        ServerRequestInterface $request
+        ServerRequestInterface $request,
     ): ModuleTemplate {
         $menuItems = [
             'index' => [
@@ -202,7 +202,7 @@ class BackendController extends ActionController
                 ->setHref($this->uriBuilder->reset()->uriFor(
                     $menuItemConfig['action'],
                     [],
-                    $menuItemConfig['controller']
+                    $menuItemConfig['controller'],
                 ))
                 ->setActive($isActive);
             $menu->addMenuItem($menuItem);
@@ -214,13 +214,13 @@ class BackendController extends ActionController
         $view->getDocHeaderComponent()->getMenuRegistry()->addMenu($menu);
         $view->setTitle(
             $GLOBALS['LANG']->sL('LLL:EXT:blog_example/Resources/Private/Language/Module/locallang_mod.xlf:mlang_tabs_tab'),
-            $context
+            $context,
         );
 
         $permissionClause = $GLOBALS['BE_USER']->getPagePermsClause(Permission::PAGE_SHOW);
         $pageRecord = BackendUtility::readPageAccess(
             $this->pageUid,
-            $permissionClause
+            $permissionClause,
         );
         if ($pageRecord) {
             $view->getDocHeaderComponent()->setMetaInformation($pageRecord);

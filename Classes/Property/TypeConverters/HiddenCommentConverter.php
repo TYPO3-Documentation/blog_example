@@ -37,14 +37,14 @@ class HiddenCommentConverter extends PersistentObjectConverter
         } else {
             throw new InvalidSourceException(
                 'The identity property "' . $identity . '" is no UID.',
-                1641904861
+                1641904861,
             );
         }
 
         if ($object === null) {
             throw new TargetNotFoundException(
                 sprintf('Object of type %s with identity "%s" not found.', $targetType, print_r($identity, true)),
-                1641904896
+                1641904896,
             );
         }
 

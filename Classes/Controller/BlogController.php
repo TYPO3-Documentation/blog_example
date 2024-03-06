@@ -42,7 +42,7 @@ class BlogController extends AbstractController
     public function __construct(
         protected readonly BlogRepository $blogRepository,
         protected readonly BlogFactory $blogFactory,
-        protected readonly AdministratorRepository $administratorRepository
+        protected readonly AdministratorRepository $administratorRepository,
     ) {}
 
     /**
@@ -54,7 +54,7 @@ class BlogController extends AbstractController
         $paginator = new QueryResultPaginator(
             $allAvailableBlogs,
             $currentPage,
-            3
+            3,
         );
         $pagination = new SimplePagination($paginator);
         $this->view
@@ -83,7 +83,7 @@ class BlogController extends AbstractController
         $this->view->assign('newBlog', $newBlog);
         $this->view->assign(
             'administrators',
-            $this->administratorRepository->findAll()
+            $this->administratorRepository->findAll(),
         );
         return $this->htmlResponse();
     }
@@ -117,7 +117,7 @@ class BlogController extends AbstractController
         $this->view->assign('blog', $blog);
         $this->view->assign(
             'administrators',
-            $this->administratorRepository->findAll()
+            $this->administratorRepository->findAll(),
         );
         return $this->htmlResponse();
     }

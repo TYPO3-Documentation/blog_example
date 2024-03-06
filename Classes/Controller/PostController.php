@@ -48,7 +48,7 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
         protected readonly BlogRepository $blogRepository,
         protected readonly PersonRepository $personRepository,
         protected readonly PostRepository $postRepository,
-        protected readonly PropertyMapper $propertyMapper
+        protected readonly PropertyMapper $propertyMapper,
     ) {}
 
     /**
@@ -62,7 +62,7 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
         ];
         return $this->propertyMapper->convert(
             $input,
-            Tag::class
+            Tag::class,
         );
     }
 
@@ -81,7 +81,7 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
     public function indexAction(
         ?Blog $blog = null,
         string $tag = '',
-        int $currentPage = 1
+        int $currentPage = 1,
     ): ResponseInterface {
         if ($blog == null) {
             return (new ForwardResponse('index'))
@@ -131,7 +131,7 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
      */
     public function showAction(
         Post $post,
-        ?Comment $newComment = null
+        ?Comment $newComment = null,
     ): ResponseInterface {
         $this->view->assign('post', $post);
         $this->view->assign('newComment', $newComment);
@@ -147,14 +147,14 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
      */
     public function newAction(
         Blog $blog,
-        ?Post $newPost = null
+        ?Post $newPost = null,
     ): ResponseInterface {
         $this->view->assign('authors', $this->personRepository->findAll());
         $this->view->assign('blog', $blog);
         $this->view->assign('newPost', $newPost);
         $this->view->assign(
             'remainingPosts',
-            $this->postRepository->findByBlog($blog)
+            $this->postRepository->findByBlog($blog),
         );
         return $this->htmlResponse();
     }
@@ -165,7 +165,7 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
      */
     public function createAction(
         Blog $blog,
-        Post $newPost
+        Post $newPost,
     ): ResponseInterface {
         $this->checkBlogAdminAccess();
         $blog->addPost($newPost);
@@ -187,7 +187,7 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
         $this->view->assign('post', $post);
         $this->view->assign(
             'remainingPosts',
-            $this->postRepository->findRemaining($post)
+            $this->postRepository->findRemaining($post),
         );
         return $this->htmlResponse();
     }
@@ -201,7 +201,7 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
      */
     public function updateAction(
         Blog $blog,
-        Post $post
+        Post $post,
     ): ResponseInterface {
         $this->checkBlogAdminAccess();
         $this->postRepository->update($post);
@@ -210,7 +210,7 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
             'show',
             null,
             null,
-            ['post' => $post, 'blog' => $blog]
+            ['post' => $post, 'blog' => $blog],
         );
     }
 
@@ -220,7 +220,7 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
      */
     public function deleteAction(
         Blog $blog,
-        Post $post
+        Post $post,
     ): ResponseInterface {
         $this->checkBlogAdminAccess();
         $this->postRepository->remove($post);
