@@ -54,6 +54,18 @@
 			<trans-unit id="tx_blogexample_domain_model_post.related" resname="tx_blogexample_domain_model_post.related">
 				<source>Related posts</source>
 			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_post.second_author" resname="tx_blogexample_domain_model_post.second_author">
+				<source>Second author</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_post.additional_name" resname="tx_blogexample_domain_model_post.additional_name">
+				<source>Additional name</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_post.additional_info" resname="tx_blogexample_domain_model_post.additional_info">
+				<source>Additional info</source>
+			</trans-unit>
+			<trans-unit id="tx_blogexample_domain_model_post.additional_comments" resname="tx_blogexample_domain_model_post.additional_comments">
+				<source>Additional comments</source>
+			</trans-unit>
 			<trans-unit id="tx_blogexample_domain_model_person" resname="tx_blogexample_domain_model_person">
 				<source>Person</source>
 			</trans-unit>
