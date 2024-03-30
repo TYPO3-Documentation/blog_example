@@ -20,8 +20,8 @@
     "typo3/cms-fluid": "dev-main"
   },
   "require-dev": {
-    "ergebnis/composer-normalize": "~2.39.0",
-    "friendsofphp/php-cs-fixer": "^3.48"
+    "ergebnis/composer-normalize": "~2.42.0",
+    "friendsofphp/php-cs-fixer": "^3.52"
   },
   "replace": {
     "friendsoftypo3/blog-example": "self.version"
