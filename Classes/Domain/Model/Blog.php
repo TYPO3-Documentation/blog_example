@@ -54,9 +54,9 @@ class Blog extends AbstractEntity
     public $posts;
 
     /**
-     * @var ObjectStorage<Category>
+     * @var ?ObjectStorage<Category>
      */
-    public $categories;
+    public ?ObjectStorage $categories = null;
 
     /**
      * The blog's administrator
@@ -134,7 +134,7 @@ class Blog extends AbstractEntity
     /**
      * Get categories
      */
-    public function getCategories(): ObjectStorage
+    public function getCategories(): ?ObjectStorage
     {
         return $this->categories;
     }
