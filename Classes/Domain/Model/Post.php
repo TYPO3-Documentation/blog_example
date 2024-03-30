@@ -54,9 +54,9 @@ class Post extends AbstractEntity
     public ObjectStorage $tags;
 
     /**
-     * @var ObjectStorage<Category>
+     * @var ?ObjectStorage<Category>
      */
-    public ObjectStorage $categories;
+    public ?ObjectStorage $categories = null;
 
     /**
      * @var ObjectStorage<Comment>
@@ -157,9 +157,9 @@ class Post extends AbstractEntity
     /**
      * Get categories
      *
-     * @return ObjectStorage<Category>
+     * @return ?ObjectStorage<Category>
      */
-    public function getCategories(): ObjectStorage
+    public function getCategories(): ?ObjectStorage
     {
         return $this->categories;
     }

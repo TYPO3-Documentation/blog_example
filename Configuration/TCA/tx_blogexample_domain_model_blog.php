@@ -194,7 +194,7 @@ return [
         ],
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, hidden, fe_group, title, description, logo, posts, administrator'],
+        '1' => ['showitem' => 'sys_language_uid, hidden, fe_group, title, description, logo, posts, administrator, category'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],
