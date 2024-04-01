@@ -147,7 +147,7 @@ class BlogController extends AbstractController
     {
         $this->checkBlogAdminAccess();
         $this->blogRepository->remove($blog);
-        $this->addFlashMessage('deleted', ContextualFeedbackSeverity::INFO);
+        $this->addFlashMessage('The blog has been deleted.', 'deleted', ContextualFeedbackSeverity::INFO);
         return $this->redirect('index');
     }
 
