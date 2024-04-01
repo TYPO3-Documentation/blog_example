@@ -20,12 +20,10 @@ use TYPO3\CMS\Core\PageTitle\AbstractPageTitleProvider;
  */
 
 /**
- * page title provider class for blog post index and detail view
+ * page title provider for blog post indexAction and showAction
  */
 final class BlogPageTitleProvider extends AbstractPageTitleProvider
 {
-    protected string $title = '';
-
     public function setTitle(string $title): void
     {
         $this->title = $title;
