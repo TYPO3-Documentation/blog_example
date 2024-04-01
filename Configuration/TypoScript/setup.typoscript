@@ -50,7 +50,7 @@ module.tx_blogexample {
 
 lib.blog_example_post_list < tt_content.list.20.blogexample_postlist
 
-# Configure page title provider for page title in post detail view
+# Configure page title provider for blog post indexAction and showAction
 config {
   pageTitleProviders {
     blogExample {
