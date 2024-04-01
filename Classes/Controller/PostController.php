@@ -228,7 +228,7 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
     ): ResponseInterface {
         $this->checkBlogAdminAccess();
         $this->postRepository->remove($post);
-        $this->addFlashMessage('deleted', ContextualFeedbackSeverity::INFO);
+        $this->addFlashMessage('The post has been deleted.', 'Deleted', ContextualFeedbackSeverity::INFO);
         return $this->redirect('index', null, null, ['blog' => $blog]);
     }
 }
