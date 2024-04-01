@@ -17,7 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Fixed
 - Update locallang_db.xlf - missing field names added (#76)
 - Correct the integration of categories (#77)
-- Invoke addFlashMessage() correctly when deleting a post (#83)
+- Invoke addFlashMessage() correctly when deleting a post or a blog (#83, #86)
 
 ## 12.0.4 - 2023-09-16
 
