@@ -6,7 +6,10 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ## Unreleased
 
-## 12.0.5 - 2024-xx-xx
+## 12.1.0 - 2024-xx-xx
+
+### Added
+- Add page title provider for blog post indexAction and showAction (#43)
 
 ### Fixed
 - Update locallang_db.xlf - missing field names added (#76)

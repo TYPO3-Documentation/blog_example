@@ -13,6 +13,7 @@ use T3docs\BlogExample\Domain\Repository\BlogRepository;
 use T3docs\BlogExample\Domain\Repository\PersonRepository;
 use T3docs\BlogExample\Domain\Repository\PostRepository;
 use T3docs\BlogExample\Exception\NoBlogAdminAccessException;
+use T3docs\BlogExample\PageTitle\BlogPageTitleProvider;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
@@ -48,7 +49,8 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
         protected readonly BlogRepository $blogRepository,
         protected readonly PersonRepository $personRepository,
         protected readonly PostRepository $postRepository,
-        protected readonly PropertyMapper $propertyMapper
+        protected readonly PropertyMapper $propertyMapper,
+        protected readonly BlogPageTitleProvider $blogPageTitleProvider,
     ) {}
 
     /**
@@ -89,6 +91,7 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
                 ->withExtensionName('blog_example')
                 ->withArguments(['currentPage' => $currentPage]);
         }
+        $this->blogPageTitleProvider->setTitle($blog->getTitle());
         if (empty($tag)) {
             $posts = $this->postRepository->findByBlog($blog);
         } else {
@@ -133,6 +136,7 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
         Post $post,
         ?Comment $newComment = null
     ): ResponseInterface {
+        $this->blogPageTitleProvider->setTitle($post->getTitle());
         $this->view->assign('post', $post);
         $this->view->assign('newComment', $newComment);
         return $this->htmlResponse();
