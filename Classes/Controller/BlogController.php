@@ -57,11 +57,12 @@ class BlogController extends AbstractController
             3
         );
         $pagination = new SimplePagination($paginator);
-        $this->view
-            ->assign('blogs', $allAvailableBlogs)
-            ->assign('paginator', $paginator)
-            ->assign('pagination', $pagination)
-            ->assign('pages', range(1, $pagination->getLastPageNumber()));
+        $this->view->assignMultiple([
+            'blogs' => $allAvailableBlogs,
+            'paginator' => $paginator,
+            'pagination' => $pagination,
+            'pages' => range(1, $pagination->getLastPageNumber()),
+        ]);
         return $this->htmlResponse();
     }
 
@@ -80,11 +81,10 @@ class BlogController extends AbstractController
      */
     public function newAction(?Blog $newBlog = null): ResponseInterface
     {
-        $this->view->assign('newBlog', $newBlog);
-        $this->view->assign(
-            'administrators',
-            $this->administratorRepository->findAll()
-        );
+        $this->view->assignMultiple([
+            'newBlog' => $newBlog,
+            'administrators' => $this->administratorRepository->findAll(),
+        ]);
         return $this->htmlResponse();
     }
 
@@ -114,11 +114,10 @@ class BlogController extends AbstractController
      */
     public function editAction(Blog $blog): ResponseInterface
     {
-        $this->view->assign('blog', $blog);
-        $this->view->assign(
-            'administrators',
-            $this->administratorRepository->findAll()
-        );
+        $this->view->assignMultiple([
+            'blog' => $blog,
+            'administrators' => $this->administratorRepository->findAll(),
+        ]);
         return $this->htmlResponse();
     }
 

@@ -101,12 +101,13 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
         }
         $paginator = new QueryResultPaginator($posts, $currentPage, 3);
         $pagination = new SimplePagination($paginator);
-        $this->view
-            ->assign('paginator', $paginator)
-            ->assign('pagination', $pagination)
-            ->assign('pages', range(1, $pagination->getLastPageNumber()))
-            ->assign('blog', $blog)
-            ->assign('posts', $posts);
+        $this->view->assignMultiple([
+            'paginator' => $paginator,
+            'pagination', $pagination,
+            'pages' => range(1, $pagination->getLastPageNumber()),
+            'blog' => $blog,
+            'posts' => $posts,
+        ]);
         return $this->htmlResponse();
     }
 
@@ -137,8 +138,10 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
         ?Comment $newComment = null
     ): ResponseInterface {
         $this->blogPageTitleProvider->setTitle($post->getTitle());
-        $this->view->assign('post', $post);
-        $this->view->assign('newComment', $newComment);
+        $this->view->assignMultiple([
+            'post' => $post,
+            'newComment' => $newComment,
+        ]);
         return $this->htmlResponse();
     }
 
@@ -153,13 +156,13 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
         Blog $blog,
         ?Post $newPost = null
     ): ResponseInterface {
-        $this->view->assign('authors', $this->personRepository->findAll());
-        $this->view->assign('blog', $blog);
-        $this->view->assign('newPost', $newPost);
-        $this->view->assign(
-            'remainingPosts',
-            $this->postRepository->findByBlog($blog)
-        );
+        $this->view->assignMultiple([
+            'authors' => $this->personRepository->findAll(),
+            'blog' => $blog,
+            'newPost' => $newPost,
+            'remainingPosts' => $this->postRepository->findByBlog($blog),
+        ]);
+
         return $this->htmlResponse();
     }
 
@@ -186,13 +189,12 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
      */
     public function editAction(Blog $blog, Post $post): ResponseInterface
     {
-        $this->view->assign('authors', $this->personRepository->findAll());
-        $this->view->assign('blog', $blog);
-        $this->view->assign('post', $post);
-        $this->view->assign(
-            'remainingPosts',
-            $this->postRepository->findRemaining($post)
-        );
+        $this->view->assignMultiple([
+            'authors' => $this->personRepository->findAll(),
+            'blog' => $blog,
+            'post' => $post,
+            'remainingPosts' => $this->postRepository->findRemaining($post),
+        ]);
         return $this->htmlResponse();
     }
 
