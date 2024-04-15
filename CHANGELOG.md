@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Fixed
 - Add return type to `ModuleController->initializeAction()` (#74)
 
-## 12.1.0 - 2024-xx-xx
+## 12.1.0 - 2024-04-15
 
 ### Added
 - Add page title provider for blog post indexAction and showAction (#43)
