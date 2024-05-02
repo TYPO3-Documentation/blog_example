@@ -19,6 +19,7 @@ namespace T3docs\BlogExample\Domain\Repository;
 
 use T3docs\BlogExample\Domain\Model\Blog;
 use T3docs\BlogExample\Domain\Model\Post;
+use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
@@ -36,7 +37,7 @@ class PostRepository extends Repository
     /**
      * Finds all posts by the specified blog
      *
-     * @param Blog $blog The blog the post must refer to
+     * @return QueryResultInterface<int, Post>
      */
     public function findAllByBlog(Blog $blog): QueryResultInterface
     {
@@ -52,6 +53,7 @@ class PostRepository extends Repository
      * Finds posts by the specified tag and blog
      *
      * @param Blog $blog The blog the post must refer to
+     * @return QueryResultInterface<int, Post>
      */
     public function findByTagAndBlog(
         string $tag,
@@ -72,6 +74,7 @@ class PostRepository extends Repository
      * Finds all remaining posts of the blog
      *
      * @param Post $post The reference post
+     * @return QueryResultInterface<int, Post>
      */
     public function findRemaining(Post $post): QueryResultInterface
     {
@@ -126,6 +129,7 @@ class PostRepository extends Repository
      *
      * @param Blog $blog The blog the post must refer to
      * @param int $limit The number of posts to return at max
+     * @return QueryResultInterface<int, Post>
      */
     public function findRecentByBlog(
         Blog $blog,
@@ -140,6 +144,10 @@ class PostRepository extends Repository
             ->execute();
     }
 
+    /**
+     * @return QueryResultInterface<int, Post>
+     * @throws InvalidQueryException
+     */
     public function findByCategory(int $categoryUid): QueryResultInterface
     {
         $query = $this->createQuery();
@@ -150,6 +158,11 @@ class PostRepository extends Repository
             ->execute();
     }
 
+    /**
+     * @param int[] $uids
+     * @return QueryResultInterface<int, Post>
+     * @throws InvalidQueryException
+     */
     public function findAllSortedByCategory(array $uids): QueryResultInterface
     {
         $q = $this->createQuery();

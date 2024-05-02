@@ -67,7 +67,7 @@ class CommentController extends AbstractController
         $this->checkBlogAdminAccess();
         $post->removeComment($comment);
         $this->postRepository->update($post);
-        $this->addFlashMessage('deleted','', ContextualFeedbackSeverity::INFO);
+        $this->addFlashMessage('deleted', '', ContextualFeedbackSeverity::INFO);
         return $this->redirect('show', 'Post', null, ['post' => $post]);
     }
 
@@ -88,7 +88,7 @@ class CommentController extends AbstractController
         $this->checkBlogAdminAccess();
         $comment->setHidden(false);
         $this->commentRepository->update($comment);
-        $this->addFlashMessage('published','', ContextualFeedbackSeverity::INFO);
+        $this->addFlashMessage('published', '', ContextualFeedbackSeverity::INFO);
         return $this->redirect('show', 'Post', null, ['post' => $post]);
     }
 
@@ -101,7 +101,7 @@ class CommentController extends AbstractController
         $this->checkBlogAdminAccess();
         $post->removeAllComments();
         $this->postRepository->update($post);
-        $this->addFlashMessage('deletedAll','', ContextualFeedbackSeverity::INFO);
+        $this->addFlashMessage('deletedAll', '', ContextualFeedbackSeverity::INFO);
         return $this->redirect(
             'edit',
             'Post',

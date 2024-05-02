@@ -62,49 +62,31 @@ class Person extends AbstractEntity
         $this->tagsSpecial = new ObjectStorage();
     }
 
-    /**
-     * @return string
-     */
     public function getFirstname(): string
     {
         return $this->firstname;
     }
 
-    /**
-     * @param string $firstname
-     */
     public function setFirstname(string $firstname): void
     {
         $this->firstname = $firstname;
     }
 
-    /**
-     * @return string
-     */
     public function getLastname(): string
     {
         return $this->lastname;
     }
 
-    /**
-     * @param string $lastname
-     */
     public function setLastname(string $lastname): void
     {
         $this->lastname = $lastname;
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @param string $email
-     */
     public function setEmail(string $email): void
     {
         $this->email = $email;
@@ -117,9 +99,9 @@ class Person extends AbstractEntity
     }
 
     /**
-     * @return ObjectStorage|Tag[]
+     * @return ObjectStorage<Tag>
      */
-    public function getTags(): ObjectStorage|array
+    public function getTags(): ObjectStorage
     {
         return $this->tags;
     }
@@ -143,9 +125,9 @@ class Person extends AbstractEntity
     }
 
     /**
-     * @return ObjectStorage|Tag[]
+     * @return ObjectStorage<Tag>
      */
-    public function getTagsSpecial(): ObjectStorage|array
+    public function getTagsSpecial(): ObjectStorage
     {
         return $this->tagsSpecial;
     }

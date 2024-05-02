@@ -50,7 +50,7 @@ abstract class AbstractController extends ActionController
     /**
      * @throws NoBlogAdminAccessException
      */
-    protected function checkBlogAdminAccess()
+    protected function checkBlogAdminAccess(): void
     {
         if (!$this->hasBlogAdminAccess()) {
             throw new NoBlogAdminAccessException();

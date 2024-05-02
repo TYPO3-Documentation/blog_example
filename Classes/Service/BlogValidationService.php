@@ -28,12 +28,12 @@ class BlogValidationService
         $this->maxCategoryCount = $maxCategoryCount;
     }
 
-    public function isBlogCategoryCountValid(Blog $blog)
+    public function isBlogCategoryCountValid(Blog $blog): bool
     {
         return $blog->getCategories()->count() <= $this->maxCategoryCount;
     }
 
-    public function isBlogSubtitleValid(Blog $blog)
+    public function isBlogSubtitleValid(Blog $blog): bool
     {
         return strtolower($blog->getTitle()) !== strtolower($blog->subtitle);
     }
