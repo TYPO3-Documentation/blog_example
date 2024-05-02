@@ -12,26 +12,6 @@ mod.wizards.newContentElement.wizardItems {
         }
       }
 
-      blogexample_postlist {
-        iconIdentifier = blog_example_icon
-        title = PostList
-        description = Display a list of posts in a blog
-        tt_content_defValues {
-          CType = list
-          list_type = blogexample_postlist
-        }
-      }
-
-      blogexample_postsingle {
-        iconIdentifier = blog_example_icon
-        title = PostSingle
-        description = Display a single blog post
-        tt_content_defValues {
-          CType = list
-          list_type = blogexample_postsingle
-        }
-      }
-
       blogexample_blogadmin {
         iconIdentifier = blog_example_icon
         title = BlogAdmin
