@@ -16,8 +16,8 @@ namespace T3docs\BlogExample\Domain\Model;
  *
  * The TYPO3 project - inspiring people to share!
  */
-use T3docs\BlogExample\Domain\Model\Extbase\ORM\Lazy;
 use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Domain\Model\Category;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;

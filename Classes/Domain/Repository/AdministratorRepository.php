@@ -17,9 +17,11 @@ namespace T3docs\BlogExample\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
+use T3docs\BlogExample\Domain\Model\Administrator;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
  * A repository for administrators
+ * @extends Repository<Administrator>
  */
 class AdministratorRepository extends Repository {}

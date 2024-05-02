@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace T3docs\BlogExample\Service;
 
 use T3docs\BlogExample\Domain\Model\Administrator;
-use T3docs\BlogExample\Domain\Model\Author;
 use T3docs\BlogExample\Domain\Model\Blog;
 use T3docs\BlogExample\Domain\Model\Comment;
+use T3docs\BlogExample\Domain\Model\Person;
 use T3docs\BlogExample\Domain\Model\Post;
 use T3docs\BlogExample\Domain\Model\Tag;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -43,16 +43,16 @@ class BlogFactory implements SingletonInterface
         // initialize blog
         $blog = new Blog();
         $blog->setTitle('Blog #' . $blogNumber);
-        $blog->setDescription('A blog about TYPO3 extension development.');
+        $blog->description = 'A blog about TYPO3 extension development.';
 
         // create author
-        $author = new Author('Stephen', 'Smith', 'foo.bar@example.com');
+        $author = new Person('Stephen', 'Smith', 'foo.bar@example.com');
 
         // create administrator
         $administrator = new Administrator();
-        $administrator->setName('John Doe');
-        $administrator->setEmail('john.doe@example.com');
-        $blog->setAdministrator($administrator);
+        $administrator->name = 'John Doe';
+        $administrator->email = 'john.doe@example.com';
+        $blog->administrator = $administrator;
 
         // create sample posts
         for ($postNumber = 1; $postNumber < 6; $postNumber++) {
