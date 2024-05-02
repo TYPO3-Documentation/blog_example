@@ -16,7 +16,6 @@ namespace T3docs\BlogExample\Domain\Model;
  *
  * The TYPO3 project - inspiring people to share!
  */
-
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;

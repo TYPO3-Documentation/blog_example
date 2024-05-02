@@ -16,7 +16,7 @@ namespace T3docs\BlogExample\Domain\Model;
  *
  * The TYPO3 project - inspiring people to share!
  */
-
+use T3docs\BlogExample\Domain\Model\Extbase\ORM\Lazy;
 use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
 use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Domain\Model\Category;
@@ -49,7 +49,7 @@ class Blog extends AbstractEntity
      * The posts of this blog
      * @var ObjectStorage<Post>
      */
-    #[Extbase\ORM\Lazy()]
+    #[Lazy()]
     #[Cascade(['value' => 'remove'])]
     public $posts;
 
@@ -62,7 +62,7 @@ class Blog extends AbstractEntity
      * The blog's administrator
      * @var Administrator
      */
-    #[Extbase\ORM\Lazy()]
+    #[Lazy()]
     public $administrator;
 
     public function __construct()

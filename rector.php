@@ -39,6 +39,7 @@ return RectorConfig::configure()
         Typo3SetList::GENERAL,
         Typo3LevelSetList::UP_TO_TYPO3_13,
     ])
+    ->withImportNames()
     // To have a better analysis from PHPStan, we teach it here some more things
     ->withPHPStanConfigs([
         Typo3Option::PHPSTAN_FOR_RECTOR_PATH,

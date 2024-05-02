@@ -16,11 +16,11 @@ namespace T3docs\BlogExample\Controller;
  *
  * The TYPO3 project - inspiring people to share!
  */
-
 use Psr\Http\Message\ResponseInterface;
 use T3docs\BlogExample\Domain\Model\Blog;
 use T3docs\BlogExample\Domain\Repository\AdministratorRepository;
 use T3docs\BlogExample\Domain\Repository\BlogRepository;
+use T3docs\BlogExample\Domain\Validator\BlogValidator;
 use T3docs\BlogExample\Exception\NoBlogAdminAccessException;
 use T3docs\BlogExample\Service\BlogFactory;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
@@ -93,7 +93,7 @@ class BlogController extends AbstractController
      * $blog is a fresh Blog object which has not yet been added to the
      * repository
      */
-    #[Validate(['param' => 'newBlog', 'validator' => \T3docs\BlogExample\Domain\Validator\BlogValidator::class])]
+    #[Validate(['param' => 'newBlog', 'validator' => BlogValidator::class])]
     public function createAction(Blog $newBlog): ResponseInterface
     {
         $this->checkBlogAdminAccess();
@@ -127,7 +127,7 @@ class BlogController extends AbstractController
      *
      * @throws NoBlogAdminAccessException
      */
-    #[Validate(['param' => 'blog', 'validator' => \T3docs\BlogExample\Domain\Validator\BlogValidator::class])]
+    #[Validate(['param' => 'blog', 'validator' => BlogValidator::class])]
     public function updateAction(Blog $blog): ResponseInterface
     {
         $this->checkBlogAdminAccess();

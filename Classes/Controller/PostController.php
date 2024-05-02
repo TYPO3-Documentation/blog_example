@@ -20,6 +20,7 @@ use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
+use TYPO3\CMS\Extbase\Property\Exception;
 use TYPO3\CMS\Extbase\Property\PropertyMapper;
 
 /*
@@ -38,7 +39,7 @@ use TYPO3\CMS\Extbase\Property\PropertyMapper;
 /**
  * The post controller for the BlogExample extension
  */
-class PostController extends \T3docs\BlogExample\Controller\AbstractController
+class PostController extends AbstractController
 {
     /**
      * PostController constructor.
@@ -55,7 +56,7 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
 
     /**
      * This method demonstrates property mapping to an object
-     * @throws \TYPO3\CMS\Extbase\Property\Exception
+     * @throws Exception
      */
     protected function mapTagFromString(string $tagString = 'some tag'): Tag
     {
@@ -70,7 +71,7 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
 
     /**
      * This method demonstrates property mapping to an integer
-     * @throws \TYPO3\CMS\Extbase\Property\Exception
+     * @throws Exception
      */
     protected function mapIntegerFromString(string $numberString = '42'): int
     {
