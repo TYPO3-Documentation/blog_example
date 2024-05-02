@@ -21,11 +21,12 @@ use T3docs\BlogExample\Domain\Model\Post;
 
 class PostValidationService
 {
+    /** @var string[] */
     private array $forbiddenTitles = [
         '77',
     ];
 
-    public function isTitleValid(Post $post)
+    public function isTitleValid(Post $post): bool
     {
         return !in_array($post->getTitle(), $this->forbiddenTitles);
     }

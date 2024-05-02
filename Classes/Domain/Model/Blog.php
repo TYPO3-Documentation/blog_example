@@ -98,7 +98,7 @@ class Blog extends AbstractEntity
     /**
      * Returns all posts in this blog
      *
-     * @return ObjectStorage
+     * @return ObjectStorage<Post>
      */
     public function getPosts(): ObjectStorage
     {
@@ -124,7 +124,7 @@ class Blog extends AbstractEntity
     }
 
     /**
-     * Set categories
+     * @param ObjectStorage<Category> $categories
      */
     public function setCategories(ObjectStorage $categories): void
     {
@@ -132,7 +132,7 @@ class Blog extends AbstractEntity
     }
 
     /**
-     * Get categories
+     * @return ObjectStorage<Category>|null
      */
     public function getCategories(): ?ObjectStorage
     {
@@ -144,20 +144,14 @@ class Blog extends AbstractEntity
      */
     public function removeCategory(Category $category): void
     {
-        $this->categories->detach($category);
+        $this->categories?->detach($category);
     }
 
-    /**
-     * @return string
-     */
     public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * @param string $title
-     */
     public function setTitle(string $title): void
     {
         $this->title = $title;
