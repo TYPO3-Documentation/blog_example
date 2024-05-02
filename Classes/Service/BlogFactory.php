@@ -36,7 +36,7 @@ class BlogFactory implements SingletonInterface
      *
      * @param int $blogNumber
      *
-     * @return \T3docs\BlogExample\Domain\Model\Blog
+     * @return Blog
      */
     public function createBlog(int $blogNumber = 1): Blog
     {

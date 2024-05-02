@@ -16,7 +16,6 @@ namespace T3docs\BlogExample\Domain\Model;
  *
  * The TYPO3 project - inspiring people to share!
  */
-
 use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 

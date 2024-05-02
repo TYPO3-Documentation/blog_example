@@ -16,15 +16,15 @@ namespace T3docs\BlogExample\Controller;
  *
  * The TYPO3 project - inspiring people to share!
  */
-
 use T3docs\BlogExample\Exception\NoBlogAdminAccessException;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Abstract base controller for the BlogExample extension
  */
-abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+abstract class AbstractController extends ActionController
 {
     /**
      * Override getErrorFlashMessage to present

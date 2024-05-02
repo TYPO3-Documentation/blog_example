@@ -16,7 +16,7 @@ namespace T3docs\BlogExample\Domain\Model;
  *
  * The TYPO3 project - inspiring people to share!
  */
-
+use T3docs\BlogExample\Domain\Model\Extbase\ORM\Lazy;
 use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
 use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Domain\Model\Category;
@@ -61,14 +61,14 @@ class Post extends AbstractEntity
     /**
      * @var ObjectStorage<Comment>
      */
-    #[Extbase\ORM\Lazy()]
+    #[Lazy()]
     #[Cascade(['value' => 'remove'])]
     public ObjectStorage $comments;
 
     /**
      * @var ObjectStorage<Post>
      */
-    #[Extbase\ORM\Lazy()]
+    #[Lazy()]
     public ObjectStorage $relatedPosts;
 
     /**
@@ -87,7 +87,7 @@ class Post extends AbstractEntity
      * 1:n relation stored as CSV value
      * @var ObjectStorage<Comment>
      */
-    #[Extbase\ORM\Lazy()]
+    #[Lazy()]
     public ObjectStorage $additionalComments;
 
     public function __construct()
