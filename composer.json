@@ -15,13 +15,14 @@
     "source": "https://github.com/TYPO3-Documentation/blog_example"
   },
   "require": {
-    "typo3/cms-core": "dev-main",
-    "typo3/cms-extbase": "dev-main",
-    "typo3/cms-fluid": "dev-main"
+    "typo3/cms-core": "^13.1 || dev-main",
+    "typo3/cms-extbase": "^13.1 || dev-main",
+    "typo3/cms-fluid": "^13.1 || dev-main"
   },
   "require-dev": {
     "ergebnis/composer-normalize": "~2.42.0",
-    "friendsofphp/php-cs-fixer": "^3.52"
+    "friendsofphp/php-cs-fixer": "^3.52",
+    "ssch/typo3-rector": "^2.5"
   },
   "replace": {
     "friendsoftypo3/blog-example": "self.version"

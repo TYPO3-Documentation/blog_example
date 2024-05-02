@@ -132,7 +132,7 @@ class BackendController extends ActionController
             ]);
         } else {
             if (empty($tag)) {
-                $posts = $this->postRepository->findByBlog($blog);
+                $posts = $this->postRepository->findBy(['blog' => $blog]);
             } else {
                 $tag = urldecode($tag);
                 $posts = $this->postRepository->findByTagAndBlog($tag, $blog);
