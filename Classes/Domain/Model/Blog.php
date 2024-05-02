@@ -32,7 +32,7 @@ class Blog extends AbstractEntity
     public string $title = '';
 
     #[Validate(['validator' => 'StringLength', 'options' => ['minimum' => 5, 'maximum' => 80]])]
-    public string|null $subtitle;
+    public string|null $subtitle = null;
 
     /**
      * A short description of the blog
@@ -47,11 +47,11 @@ class Blog extends AbstractEntity
 
     /**
      * The posts of this blog
-     * @var ObjectStorage<Post>
+     * @var ObjectStorage<Post>|null
      */
     #[Lazy()]
     #[Cascade(['value' => 'remove'])]
-    public $posts;
+    public ObjectStorage|null $posts;
 
     /**
      * @var ?ObjectStorage<Category>
