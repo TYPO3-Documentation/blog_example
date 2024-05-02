@@ -1,4 +1,5 @@
 [![Latest Stable Version](https://poser.pugx.org/t3docs/blog-example/v/stable.svg)](https://extensions.typo3.org/extension/blog_example/)
+[![TYPO3 12](https://img.shields.io/badge/TYPO3-13-orange.svg?style=flat-square)](https://get.typo3.org/version/13)
 [![TYPO3 12](https://img.shields.io/badge/TYPO3-12-orange.svg?style=flat-square)](https://get.typo3.org/version/12)
 [![Total Downloads](https://poser.pugx.org/t3docs/blog-example/d/total.svg)](https://packagist.org/packages/t3docs/blog-example)
 [![Monthly Downloads](https://poser.pugx.org/t3docs/blog-example/d/monthly)](https://packagist.org/packages/t3docs/blog-example)
