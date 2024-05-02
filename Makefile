@@ -10,3 +10,12 @@ rector: ## Run rector
 .PHONY: fix-cs
 fix-cs: ## Fix PHP coding styles
 	.Build/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php
+
+.PHONY: phpstan
+phpstan: ## Run phpstan tests
+	.Build/bin/phpstan --configuration=Build/phpstan.neon
+
+.PHONY: phpstan-baseline
+phpstan-baseline: ## Update the phpstan baseline
+	.Build/bin/phpstan --configuration=Build/phpstan.neon --generate-baseline=Build/phpstan-baseline.neon -v
+

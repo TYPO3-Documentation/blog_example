@@ -25,6 +25,7 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
  * A repository for blog posts
+ * @extends Repository<Post>
  *
  * @method Post findByUid($uid)
  */

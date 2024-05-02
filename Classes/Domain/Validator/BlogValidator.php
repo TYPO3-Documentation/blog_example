@@ -29,11 +29,6 @@ final class BlogValidator extends AbstractValidator
 {
     public function __construct(private readonly BlogValidationService $blogValidationService) {}
 
-    /**
-     * Checks whether the given blog is valid
-     *
-     * @param Blog $blog The blog
-     */
     protected function isValid(mixed $value): void
     {
         if (!$value instanceof Blog) {

@@ -17,6 +17,7 @@ namespace T3docs\BlogExample\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
+use T3docs\BlogExample\Domain\Model\Comment;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
@@ -25,7 +26,7 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
- * A repository for persons
+ * @extends Repository<Comment>
  */
 class CommentRepository extends Repository
 {

@@ -16,7 +16,6 @@ namespace T3docs\BlogExample\Domain\Model;
  *
  * The TYPO3 project - inspiring people to share!
  */
-use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -36,7 +35,6 @@ class FrontendUser extends AbstractEntity
     public function __construct()
     {
         $this->usergroup = new ObjectStorage();
-        $this->image = new ObjectStorage();
     }
 
     /**
@@ -45,7 +43,6 @@ class FrontendUser extends AbstractEntity
     public function initializeObject(): void
     {
         $this->usergroup = $this->usergroup ?? new ObjectStorage();
-        $this->image = $this->image ?? new ObjectStorage();
     }
 
     /**
@@ -84,25 +81,5 @@ class FrontendUser extends AbstractEntity
     public function getUsergroup(): ObjectStorage
     {
         return $this->usergroup;
-    }
-
-    /**
-     * Sets the image value
-     *
-     * @param ObjectStorage<FileReference> $image
-     */
-    public function setImage(ObjectStorage $image): void
-    {
-        $this->image = $image;
-    }
-
-    /**
-     * Gets the image value
-     *
-     * @return ObjectStorage<FileReference>
-     */
-    public function getImage(): ObjectStorage
-    {
-        return $this->image;
     }
 }

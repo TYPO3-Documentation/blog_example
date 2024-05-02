@@ -15,6 +15,7 @@
     "source": "https://github.com/TYPO3-Documentation/blog_example"
   },
   "require": {
+    "typo3/cms-backend": "^13.1 || dev-main",
     "typo3/cms-core": "^13.1 || dev-main",
     "typo3/cms-extbase": "^13.1 || dev-main",
     "typo3/cms-fluid": "^13.1 || dev-main"
@@ -22,6 +23,7 @@
   "require-dev": {
     "ergebnis/composer-normalize": "~2.42.0",
     "friendsofphp/php-cs-fixer": "^3.52",
+    "phpstan/phpstan": "^1.10",
     "ssch/typo3-rector": "^2.5"
   },
   "minimum-stability": "dev",

@@ -17,11 +17,13 @@ namespace T3docs\BlogExample\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
+use T3docs\BlogExample\Domain\Model\Blog;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
  * A repository for blogs
+ * @extends Repository<Blog>
  */
 class BlogRepository extends Repository
 {
