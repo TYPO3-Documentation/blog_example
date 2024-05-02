@@ -93,7 +93,7 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
         }
         $this->blogPageTitleProvider->setTitle($blog->getTitle());
         if (empty($tag)) {
-            $posts = $this->postRepository->findByBlog($blog);
+            $posts = $this->postRepository->findBy(['blog' => $blog]);
         } else {
             $tag = urldecode($tag);
             $posts = $this->postRepository->findByTagAndBlog($tag, $blog);
@@ -130,9 +130,8 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
 
     /**
      * Displays one single post
-     *
-     * @IgnoreValidation("newComment")
      */
+    #[IgnoreValidation(['value' => 'newComment'])]
     public function showAction(
         Post $post,
         ?Comment $newComment = null,
@@ -149,9 +148,8 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
      * Displays a form for creating a new post
      *
      * $newPost is a fresh post object taken as a basis for the rendering
-     *
-     * @IgnoreValidation("newPost")
      */
+    #[IgnoreValidation(['value' => 'newPost'])]
     public function newAction(
         Blog $blog,
         ?Post $newPost = null,
@@ -160,7 +158,7 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
             'authors' => $this->personRepository->findAll(),
             'blog' => $blog,
             'newPost' => $newPost,
-            'remainingPosts' => $this->postRepository->findByBlog($blog),
+            'remainingPosts' => $this->postRepository->findBy(['blog' => $blog]),
         ]);
 
         return $this->htmlResponse();
@@ -184,9 +182,8 @@ class PostController extends \T3docs\BlogExample\Controller\AbstractController
 
     /**
      * Displays a form to edit an existing post
-     *
-     * @IgnoreValidation("post")
      */
+    #[IgnoreValidation(['value' => 'post'])]
     public function editAction(Blog $blog, Post $post): ResponseInterface
     {
         $this->view->assignMultiple([

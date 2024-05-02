@@ -76,9 +76,8 @@ class BlogController extends AbstractController
 
     /**
      * Displays a form for creating a new blog
-     *
-     * @IgnoreValidation("newBlog")
      */
+    #[IgnoreValidation(['value' => 'newBlog'])]
     public function newAction(?Blog $newBlog = null): ResponseInterface
     {
         $this->view->assignMultiple([
@@ -93,9 +92,8 @@ class BlogController extends AbstractController
      *
      * $blog is a fresh Blog object which has not yet been added to the
      * repository
-     *
-     * @Validate(param="newBlog", validator="T3docs\BlogExample\Domain\Validator\BlogValidator")
      */
+    #[Validate(['param' => 'newBlog', 'validator' => \T3docs\BlogExample\Domain\Validator\BlogValidator::class])]
     public function createAction(Blog $newBlog): ResponseInterface
     {
         $this->checkBlogAdminAccess();
@@ -110,8 +108,8 @@ class BlogController extends AbstractController
      * $blog might also be a clone of the original blog already containing
      * modifications if the edit form has been submitted, contained errors and
      * therefore ended up in this action again.
-     * @IgnoreValidation("blog")
      */
+    #[IgnoreValidation(['value' => 'blog'])]
     public function editAction(Blog $blog): ResponseInterface
     {
         $this->view->assignMultiple([
@@ -127,9 +125,9 @@ class BlogController extends AbstractController
      * $blog is a not yet persisted clone of the original blog containing
      * the modifications
      *
-     * @Validate(param="blog", validator="T3docs\BlogExample\Domain\Validator\BlogValidator")
      * @throws NoBlogAdminAccessException
      */
+    #[Validate(['param' => 'blog', 'validator' => \T3docs\BlogExample\Domain\Validator\BlogValidator::class])]
     public function updateAction(Blog $blog): ResponseInterface
     {
         $this->checkBlogAdminAccess();

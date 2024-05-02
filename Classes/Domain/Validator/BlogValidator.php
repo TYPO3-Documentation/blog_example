@@ -27,11 +27,7 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
  */
 final class BlogValidator extends AbstractValidator
 {
-    public function __construct(
-        private readonly BlogValidationService $blogValidationService,
-    ) {
-        parent::__construct();
-    }
+    public function __construct(private readonly BlogValidationService $blogValidationService) {}
 
     /**
      * Checks whether the given blog is valid

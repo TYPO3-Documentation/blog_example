@@ -74,7 +74,7 @@ class Blog extends AbstractEntity
     /**
      * Adds a post to this blog
      */
-    public function addPost(Post $post)
+    public function addPost(Post $post): void
     {
         $this->posts->attach($post);
     }
@@ -82,7 +82,7 @@ class Blog extends AbstractEntity
     /**
      * Remove a post from this blog
      */
-    public function removePost(Post $postToRemove)
+    public function removePost(Post $postToRemove): void
     {
         $this->posts->detach($postToRemove);
     }
@@ -118,7 +118,7 @@ class Blog extends AbstractEntity
      *
      * @param Category $category
      */
-    public function addCategory(Category $category)
+    public function addCategory(Category $category): void
     {
         $this->categories->attach($category);
     }
@@ -126,7 +126,7 @@ class Blog extends AbstractEntity
     /**
      * Set categories
      */
-    public function setCategories(ObjectStorage $categories)
+    public function setCategories(ObjectStorage $categories): void
     {
         $this->categories = $categories;
     }
@@ -142,7 +142,7 @@ class Blog extends AbstractEntity
     /**
      * Remove category from blog
      */
-    public function removeCategory(Category $category)
+    public function removeCategory(Category $category): void
     {
         $this->categories->detach($category);
     }

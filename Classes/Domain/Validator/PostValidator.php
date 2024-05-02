@@ -29,7 +29,7 @@ class PostValidator extends AbstractValidator
 {
     private PostValidationService $postValidationService;
 
-    public function injectPostValidationService(PostValidationService $postValidationService)
+    public function __construct(\T3docs\BlogExample\Service\PostValidationService $postValidationService)
     {
         $this->postValidationService = $postValidationService;
     }

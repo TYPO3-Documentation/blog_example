@@ -73,4 +73,7 @@ return (new Config())
 
         // We need this for documentation!
         'no_useless_else' => false, // We want to preserve else with comments only
+
+        // Add this rule to convert FQCN to use statements
+        'full_opening_tag' => true,
     ]);

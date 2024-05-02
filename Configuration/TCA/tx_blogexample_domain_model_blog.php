@@ -35,8 +35,8 @@ return [
                 'renderType' => 'selectSingle',
                 'items' => [
                     [
-                        '',
-                        0,
+                        'label' => '',
+                        'value' => 0,
                     ],
                 ],
                 'foreign_table' => 'tx_blogexample_domain_model_blog',
@@ -65,8 +65,7 @@ return [
                 'renderType' => 'checkboxToggle',
                 'items' => [
                     [
-                        0 => '',
-                        1 => '',
+                        'label' => '',
                         'invertStateDisplay' => true,
                     ],
                 ],
@@ -82,16 +81,16 @@ return [
                 'maxitems' => 20,
                 'items' => [
                     [
-                        'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hide_at_login',
-                        -1,
+                        'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hide_at_login',
+                        'value' => -1,
                     ],
                     [
-                        'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.any_login',
-                        -2,
+                        'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.any_login',
+                        'value' => -2,
                     ],
                     [
-                        'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.usergroups',
-                        '--div--',
+                        'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.usergroups',
+                        'value' => '--div--',
                     ],
                 ],
                 'exclusiveKeys' => '-1,-2',
@@ -139,7 +138,7 @@ return [
                 ],
                 'overrideChildTca' => [
                     'types' => [
-                        \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                        \TYPO3\CMS\Core\Resource\FileType::IMAGE->value => [
                             'showitem' => '
                                 --palette--;;imageoverlayPalette,
                                 --palette--;;filePalette',
@@ -171,7 +170,7 @@ return [
                 'foreign_table' => 'fe_users',
                 'foreign_table_where' => "AND fe_users.tx_extbase_type='T3docs\\\\BlogExample\\\\Domain\\\\Model\\\\Administrator'",
                 'items' => [
-                    ['--none--', 0],
+                    ['label' => '--none--', 'value' => 0],
                 ],
                 'default' => 0,
                 'fieldControl' => [

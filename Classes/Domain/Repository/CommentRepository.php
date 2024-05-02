@@ -31,7 +31,7 @@ class CommentRepository extends Repository
 {
     protected $defaultOrderings = ['date' => QueryInterface::ORDER_DESCENDING];
 
-    public function initializeObject()
+    public function initializeObject(): void
     {
         /** @var QuerySettingsInterface $querySettings */
         $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);

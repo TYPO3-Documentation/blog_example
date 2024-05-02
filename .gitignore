@@ -4,3 +4,4 @@
 /composer.lock
 *GENERATED*
 /Build/testing-docker/.env
+/.php-cs-fixer.cache
