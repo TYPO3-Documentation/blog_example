@@ -35,6 +35,6 @@ class BlogValidationService
 
     public function isBlogSubtitleValid(Blog $blog): bool
     {
-        return strtolower($blog->getTitle()) !== strtolower($blog->subtitle);
+        return strtolower($blog->getTitle()) !== strtolower($blog->subtitle ?? '');
     }
 }
