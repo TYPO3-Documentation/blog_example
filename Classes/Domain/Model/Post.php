@@ -285,7 +285,7 @@ class Post extends AbstractEntity
     }
 
     /**
-     * @return ObjectStorage
+     * @return ObjectStorage<Comment>
      */
     public function getAdditionalComments(): ObjectStorage
     {
@@ -293,7 +293,7 @@ class Post extends AbstractEntity
     }
 
     /**
-     * @param ObjectStorage $additionalComments
+     * @param ObjectStorage<Comment> $additionalComments
      */
     public function setAdditionalComments(ObjectStorage $additionalComments): void
     {

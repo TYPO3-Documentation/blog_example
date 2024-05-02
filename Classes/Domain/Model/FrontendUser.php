@@ -25,9 +25,9 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 class FrontendUser extends AbstractEntity
 {
     /**
-     * @var ObjectStorage<FrontendUserGroup>
+     * @var ObjectStorage<FrontendUserGroup>|null
      */
-    protected $usergroup;
+    protected ObjectStorage|null $usergroup;
     public string $name = '';
     public string $email = '';
     public \DateTime|null $lastlogin;
@@ -61,7 +61,7 @@ class FrontendUser extends AbstractEntity
      */
     public function addUsergroup(FrontendUserGroup $usergroup): void
     {
-        $this->usergroup->attach($usergroup);
+        $this->usergroup?->attach($usergroup);
     }
 
     /**
@@ -69,7 +69,7 @@ class FrontendUser extends AbstractEntity
      */
     public function removeUsergroup(FrontendUserGroup $usergroup): void
     {
-        $this->usergroup->detach($usergroup);
+        $this->usergroup?->detach($usergroup);
     }
 
     /**
@@ -80,6 +80,7 @@ class FrontendUser extends AbstractEntity
      */
     public function getUsergroup(): ObjectStorage
     {
+        $this->usergroup = $this->usergroup ?? new ObjectStorage();
         return $this->usergroup;
     }
 }

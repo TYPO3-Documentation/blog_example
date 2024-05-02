@@ -41,7 +41,10 @@ class CommentRepository extends Repository
         $this->setDefaultQuerySettings($querySettings);
     }
 
-    public function findAllIgnoreEnableFields(): QueryResultInterface|array
+    /**
+     * @return QueryResultInterface<int, Comment>
+     */
+    public function findAllIgnoreEnableFields(): QueryResultInterface
     {
         $query = $this->createQuery();
         $query->getQuerySettings()->setIgnoreEnableFields(true);
