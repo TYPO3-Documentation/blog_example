@@ -1,3 +1,0 @@
-
-  # cat=basic; type=boolean; label=Register only one plugin that contains all Blog controllers and actions
-registerSinglePlugin = 1
