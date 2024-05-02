@@ -24,9 +24,6 @@
     "friendsofphp/php-cs-fixer": "^3.52",
     "ssch/typo3-rector": "^2.5"
   },
-  "replace": {
-    "friendsoftypo3/blog-example": "self.version"
-  },
   "minimum-stability": "dev",
   "prefer-stable": true,
   "autoload": {
