@@ -34,7 +34,6 @@ class BlogFactory implements SingletonInterface
      * Returns a sample blog populated with generic data
      * It is also an example how to handle objects and repositories in general
      *
-     * @param int $blogNumber
      *
      * @return Blog
      */

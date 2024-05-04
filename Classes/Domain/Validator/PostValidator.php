@@ -27,11 +27,8 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
  */
 class PostValidator extends AbstractValidator
 {
-    private PostValidationService $postValidationService;
-
-    public function __construct(PostValidationService $postValidationService)
+    public function __construct(private PostValidationService $postValidationService)
     {
-        $this->postValidationService = $postValidationService;
     }
 
     /**

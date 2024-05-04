@@ -22,7 +22,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 /**
  * A blog post comment
  */
-class Comment extends AbstractEntity
+class Comment extends AbstractEntity implements \Stringable
 {
     protected \DateTime $date;
 
@@ -50,9 +50,6 @@ class Comment extends AbstractEntity
         return $this->date;
     }
 
-    /**
-     * @param \DateTime $date
-     */
     public function setDate(\DateTime $date): void
     {
         $this->date = $date;
@@ -66,9 +63,6 @@ class Comment extends AbstractEntity
         return $this->author;
     }
 
-    /**
-     * @param string $author
-     */
     public function setAuthor(string $author): void
     {
         $this->author = $author;
@@ -99,9 +93,6 @@ class Comment extends AbstractEntity
         return $this->content;
     }
 
-    /**
-     * @param string $content
-     */
     public function setContent(string $content): void
     {
         $this->content = $content;

@@ -16,6 +16,7 @@ namespace T3docs\BlogExample\Domain\Model;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use T3docs\BlogExample\Domain\Validator\TitleValidator;
 use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
 use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Annotation\Validate;
@@ -28,7 +29,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Blog extends AbstractEntity
 {
-    #[Validate(['validator' => '\T3docs\BlogExample\Domain\Validator\TitleValidator'])]
+    #[Validate(['validator' => TitleValidator::class])]
     public string $title = '';
 
     #[Validate(['validator' => 'StringLength', 'options' => ['minimum' => 5, 'maximum' => 80]])]

@@ -30,7 +30,7 @@ return RectorConfig::configure()
         __DIR__ . '/../../Configuration',
         __DIR__ . '/../../*.php',
     ])
-    ->withPhpSets()
+    ->withPhpSets(php82: true)
     ->withSets([
         Typo3SetList::CODE_QUALITY,
         Typo3SetList::GENERAL,
