@@ -5,7 +5,10 @@
 *GENERATED*
 /Build/testing-docker/.env
 /.php-cs-fixer.cache
+/composer.json.orig
 /composer.json.testing
 /Build/.Build/
 /Build/rector/composer.lock
+/Build/rector/composer.json.orig
+/Build/rector/composer.json.testing
 /Build/rector/.Build/

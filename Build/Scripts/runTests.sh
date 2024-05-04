@@ -175,7 +175,7 @@ ROOT_DIR="${PWD}"
 
 # Create .cache dir: composer need this.
 mkdir -p .Build/.cache
-mkdir -p .Build/Web/typo3temp/var/tests
+mkdir -p .Build/web/typo3temp/var/tests
 
 IMAGE_PREFIX="docker.io/"
 # Non-CI fetches TYPO3 images (php and nodejs) from ghcr.io
@@ -282,8 +282,7 @@ case ${TEST_SUITE} in
         if [ -f "${ROOT_DIR}/Build/rector/composer.json.testing" ]; then
             cp ${ROOT_DIR}/Build/rector/composer.json ${ROOT_DIR}/Build/rector/composer.json.orig
         fi
-        cd Build/rector
-        COMMAND=(composer require --no-ansi --no-interaction --no-progress)
+        COMMAND=(composer require --working-dir=${ROOT_DIR}/Build/rector --no-ansi --no-interaction --no-progress)
         ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} --name composer-install-${SUFFIX} -e COMPOSER_CACHE_DIR=.Build/.cache/composer -e COMPOSER_ROOT_VERSION=${COMPOSER_ROOT_VERSION} ${IMAGE_PHP} "${COMMAND[@]}"
         SUITE_EXIT_CODE=$?
         cp ${ROOT_DIR}/Build/rector/composer.json ${ROOT_DIR}/Build/rector/composer.json.testing
