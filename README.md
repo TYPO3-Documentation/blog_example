@@ -41,7 +41,9 @@ Example usage:
 
 ```
 Build/Scripts/runTests.sh -s composerUpdate
-Build/Scripts/runTests.sh -s unit
+Build/Scripts/runTests.sh -s rector
+Build/Scripts/runTests.sh -s phpstan
+Build/Scripts/runTests.sh -s cgl
 ```
 
 Running some tests locally can fix errors that are just displayed in actions on github.

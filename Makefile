@@ -5,17 +5,17 @@ help: ## Displays this list of targets with descriptions
 
 .PHONY: rector
 rector: ## Run rector
-	.Build/bin/rector
+	Build/Scripts/runTests.sh -s rector
 
 .PHONY: fix-cs
 fix-cs: ## Fix PHP coding styles
-	.Build/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php
+	Build/Scripts/runTests.sh -s cgl
 
 .PHONY: phpstan
 phpstan: ## Run phpstan tests
-	.Build/bin/phpstan --configuration=Build/phpstan.neon
+	Build/Scripts/runTests.sh -s phpstan
 
 .PHONY: phpstan-baseline
 phpstan-baseline: ## Update the phpstan baseline
-	.Build/bin/phpstan --configuration=Build/phpstan.neon --generate-baseline=Build/phpstan-baseline.neon -v
+	Build/Scripts/runTests.sh -s phpstanBaseline
 

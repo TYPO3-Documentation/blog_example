@@ -7,11 +7,12 @@ parameters:
   treatPhpDocTypesAsCertain: false
 
   paths:
-    - ../
+    - ../../Classes/
+    - ../../Configuration/
 
   tmpDir: ../.Build/.cache/phpstan/
 
   excludePaths:
     - '*/Build/node_modules'
-    - '../ext_emconf.php'
+    - '../../ext_emconf.php'
 
