@@ -30,7 +30,7 @@ class FrontendUser extends AbstractEntity
     protected ObjectStorage|null $usergroup;
     public string $name = '';
     public string $email = '';
-    public \DateTime|null $lastlogin;
+    public \DateTime|null $lastlogin = null;
 
     public function __construct()
     {
@@ -42,7 +42,7 @@ class FrontendUser extends AbstractEntity
      */
     public function initializeObject(): void
     {
-        $this->usergroup = $this->usergroup ?? new ObjectStorage();
+        $this->usergroup ??= new ObjectStorage();
     }
 
     /**
@@ -80,7 +80,7 @@ class FrontendUser extends AbstractEntity
      */
     public function getUsergroup(): ObjectStorage
     {
-        $this->usergroup = $this->usergroup ?? new ObjectStorage();
+        $this->usergroup ??= new ObjectStorage();
         return $this->usergroup;
     }
 }

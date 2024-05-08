@@ -26,7 +26,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /**
  * A blog post
  */
-class Post extends AbstractEntity
+class Post extends AbstractEntity implements \Stringable
 {
     protected Blog $blog;
 
@@ -75,13 +75,13 @@ class Post extends AbstractEntity
      * 1:1 optional relation
      */
     #[Cascade(['value' => 'remove'])]
-    public ?Info $additionalName;
+    public ?Info $additionalName = null;
 
     /**
      * 1:1 optional relation
      */
     #[Cascade(['value' => 'remove'])]
-    protected ?Info $additionalInfo;
+    protected ?Info $additionalInfo = null;
 
     /**
      * 1:n relation stored as CSV value
@@ -300,9 +300,6 @@ class Post extends AbstractEntity
         $this->additionalComments = $additionalComments;
     }
 
-    /**
-     * @param Comment $comment
-     */
     public function addAdditionalComment(Comment $comment): void
     {
         $this->additionalComments->attach($comment);
@@ -330,9 +327,6 @@ class Post extends AbstractEntity
         return $this->blog;
     }
 
-    /**
-     * @param Blog $blog
-     */
     public function setBlog(Blog $blog): void
     {
         $this->blog = $blog;
@@ -346,9 +340,6 @@ class Post extends AbstractEntity
         return $this->title;
     }
 
-    /**
-     * @param string $title
-     */
     public function setTitle(string $title): void
     {
         $this->title = $title;
@@ -362,9 +353,6 @@ class Post extends AbstractEntity
         return $this->date;
     }
 
-    /**
-     * @param \DateTime $date
-     */
     public function setDate(\DateTime $date): void
     {
         $this->date = $date;
@@ -378,9 +366,6 @@ class Post extends AbstractEntity
         return $this->content;
     }
 
-    /**
-     * @param string $content
-     */
     public function setContent(string $content): void
     {
         $this->content = $content;
@@ -394,9 +379,6 @@ class Post extends AbstractEntity
         return $this->additionalName;
     }
 
-    /**
-     * @param Info|null $additionalName
-     */
     public function setAdditionalName(?Info $additionalName): void
     {
         $this->additionalName = $additionalName;

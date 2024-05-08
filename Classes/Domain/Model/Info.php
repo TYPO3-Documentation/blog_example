@@ -22,7 +22,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 /**
  * A post additional info (1:1 inline relation to post)
  */
-class Info extends AbstractEntity
+class Info extends AbstractEntity implements \Stringable
 {
     protected string $name = '';
 
@@ -46,9 +46,6 @@ class Info extends AbstractEntity
         return $this->bodytext;
     }
 
-    /**
-     * @param string $bodytext
-     */
     public function setBodytext(string $bodytext): void
     {
         $this->bodytext = $bodytext;

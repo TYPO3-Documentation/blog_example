@@ -22,15 +22,11 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractValueObject;
 /**
  * A blog post tag
  */
-final class Tag extends AbstractValueObject
+final class Tag extends AbstractValueObject implements \Stringable
 {
-    public string $name = '';
     public int $priority = 0;
 
-    public function __construct(string $name = '')
-    {
-        $this->name = $name;
-    }
+    public function __construct(public string $name = '') {}
 
     /**
      * Returns this tag as a formatted string
