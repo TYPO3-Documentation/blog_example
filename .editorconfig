@@ -13,23 +13,41 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 
 # TS/JS-Files
-[*.{ts, js}]
+[*.{ts,js,mjs}]
 indent_size = 2
 
+# JSON-Files
+[*.json]
+indent_style = tab
+
 # ReST-Files
-[*.rst]
-indent_size = 3
+[*.{rst,rst.txt}]
+indent_size = 4
+max_line_length = 80
+
+# Markdown-Files
+[*.md]
+max_line_length = 80
 
 # YAML-Files
-[*.{yaml, yml}]
+[*.{yaml,yml}]
+indent_size = 2
+
+# NEON-Files
+[*.neon]
+indent_size = 2
+indent_style = tab
+
+# stylelint
+[.stylelintrc]
 indent_size = 2
 
 # package.json
-[*.json]
+[package.json]
 indent_size = 2
 
 # TypoScript
-[*.{typoscript, tsconfig}]
+[*.{typoscript,tsconfig}]
 indent_size = 2
 
 # XLF-Files
@@ -42,8 +60,5 @@ indent_style = tab
 indent_size = 2
 
 # .htaccess
-[{_.htaccess, .htaccess}]
-indent_style = tab
-
-[*.neon]
+[{_.htaccess,.htaccess}]
 indent_style = tab
