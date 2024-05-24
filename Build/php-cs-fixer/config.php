@@ -87,7 +87,6 @@ return (new Config())
         'no_trailing_comma_in_singleline' => true,
         'no_unneeded_control_parentheses' => true,
         'no_unused_imports' => true,
-        'no_useless_else' => true,
         'no_useless_nullsafe_operator' => true,
         'ordered_imports' => ['imports_order' => ['class', 'function', 'const'], 'sort_algorithm' => 'alpha'],
         'php_unit_construct' => ['assertions' => ['assertEquals', 'assertSame', 'assertNotEquals', 'assertNotSame']],
@@ -109,4 +108,8 @@ return (new Config())
         'trailing_comma_in_multiline' => ['elements' => ['arrays']],
         'whitespace_after_comma_in_array' => ['ensure_single_space' => true],
         'yoda_style' => ['equal' => false, 'identical' => false, 'less_and_greater' => false],
+        // We need this for documentation!
+        'no_useless_else' => false, // We want to preserve else with comments only
+        // Add this rule to convert FQCN to use statements
+        'full_opening_tag' => true,
     ]);
