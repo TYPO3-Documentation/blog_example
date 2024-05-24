@@ -7,16 +7,8 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 class PostRepositoryTest extends FunctionalTestCase
 {
     protected array $testExtensionsToLoad = [
-        'blog_example',
+        't3docs/blog-example',
     ];
-
-    protected array $coreExtensionsToLoad = [
-        'install',
-    ];
-    protected function setUp(): void
-    {
-        parent::setUp();
-    }
 
     public function testFindAllRecords(): void
     {
