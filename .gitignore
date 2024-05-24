@@ -5,6 +5,7 @@
 *GENERATED*
 /Build/testing-docker/.env
 /.php-cs-fixer.cache
+/.cache
 /composer.json.orig
 /composer.json.testing
 /Build/.Build/
