@@ -2,13 +2,6 @@
 
 declare(strict_types=1);
 
-namespace T3docs\BlogExample\Domain\Validator;
-
-use T3docs\BlogExample\Domain\Model\Blog;
-use T3docs\BlogExample\Service\BlogValidationService;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
-
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -21,6 +14,13 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
  *
  * The TYPO3 project - inspiring people to share!
  */
+
+namespace T3docs\BlogExample\Domain\Validator;
+
+use T3docs\BlogExample\Domain\Model\Blog;
+use T3docs\BlogExample\Service\BlogValidationService;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 
 /**
  * An exemplary Blog validator

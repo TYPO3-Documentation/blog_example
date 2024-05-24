@@ -2,10 +2,6 @@
 
 declare(strict_types=1);
 
-namespace T3docs\BlogExample\PageTitle;
-
-use TYPO3\CMS\Core\PageTitle\AbstractPageTitleProvider;
-
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -18,6 +14,10 @@ use TYPO3\CMS\Core\PageTitle\AbstractPageTitleProvider;
  *
  * The TYPO3 project - inspiring people to share!
  */
+
+namespace T3docs\BlogExample\PageTitle;
+
+use TYPO3\CMS\Core\PageTitle\AbstractPageTitleProvider;
 
 /**
  * page title provider for blog post indexAction and showAction

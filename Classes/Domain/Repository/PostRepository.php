@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace T3docs\BlogExample\Domain\Repository;
-
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -16,6 +14,8 @@ namespace T3docs\BlogExample\Domain\Repository;
  *
  * The TYPO3 project - inspiring people to share!
  */
+
+namespace T3docs\BlogExample\Domain\Repository;
 
 use T3docs\BlogExample\Domain\Model\Blog;
 use T3docs\BlogExample\Domain\Model\Post;

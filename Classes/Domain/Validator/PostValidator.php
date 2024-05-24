@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-namespace T3docs\BlogExample\Domain\Validator;
-
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -16,6 +14,8 @@ namespace T3docs\BlogExample\Domain\Validator;
  *
  * The TYPO3 project - inspiring people to share!
  */
+
+namespace T3docs\BlogExample\Domain\Validator;
 
 use T3docs\BlogExample\Domain\Model\Post;
 use T3docs\BlogExample\Service\PostValidationService;

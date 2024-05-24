@@ -2,18 +2,6 @@
 
 declare(strict_types=1);
 
-namespace T3docs\BlogExample\Controller;
-
-use Psr\Http\Message\ResponseInterface;
-use T3docs\BlogExample\Domain\Model\Comment;
-use T3docs\BlogExample\Domain\Model\Post;
-use T3docs\BlogExample\Domain\Repository\CommentRepository;
-use T3docs\BlogExample\Domain\Repository\PostRepository;
-use T3docs\BlogExample\Exception\NoBlogAdminAccessException;
-use T3docs\BlogExample\Property\TypeConverters\HiddenCommentConverter;
-use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
-use TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException;
-
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -26,6 +14,18 @@ use TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException;
  *
  * The TYPO3 project - inspiring people to share!
  */
+
+namespace T3docs\BlogExample\Controller;
+
+use Psr\Http\Message\ResponseInterface;
+use T3docs\BlogExample\Domain\Model\Comment;
+use T3docs\BlogExample\Domain\Model\Post;
+use T3docs\BlogExample\Domain\Repository\CommentRepository;
+use T3docs\BlogExample\Domain\Repository\PostRepository;
+use T3docs\BlogExample\Exception\NoBlogAdminAccessException;
+use T3docs\BlogExample\Property\TypeConverters\HiddenCommentConverter;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
+use TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException;
 
 /**
  * The comment controller for the BlogExample extension

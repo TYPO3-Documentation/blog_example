@@ -2,16 +2,6 @@
 
 declare(strict_types=1);
 
-namespace T3docs\BlogExample\Service;
-
-use T3docs\BlogExample\Domain\Model\Administrator;
-use T3docs\BlogExample\Domain\Model\Blog;
-use T3docs\BlogExample\Domain\Model\Comment;
-use T3docs\BlogExample\Domain\Model\Person;
-use T3docs\BlogExample\Domain\Model\Post;
-use T3docs\BlogExample\Domain\Model\Tag;
-use TYPO3\CMS\Core\SingletonInterface;
-
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -24,6 +14,16 @@ use TYPO3\CMS\Core\SingletonInterface;
  *
  * The TYPO3 project - inspiring people to share!
  */
+
+namespace T3docs\BlogExample\Service;
+
+use T3docs\BlogExample\Domain\Model\Administrator;
+use T3docs\BlogExample\Domain\Model\Blog;
+use T3docs\BlogExample\Domain\Model\Comment;
+use T3docs\BlogExample\Domain\Model\Person;
+use T3docs\BlogExample\Domain\Model\Post;
+use T3docs\BlogExample\Domain\Model\Tag;
+use TYPO3\CMS\Core\SingletonInterface;
 
 /**
  * A simple blog factory to create sample data
