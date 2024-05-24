@@ -5,42 +5,52 @@ on:
   pull_request:
 
 jobs:
-  lint:
-    name: Linting
+  CGL:
+    name: Coding Style Check (TYPO3 Community CGL)
+
     runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Composer
+        run: Build/Scripts/runTests.sh -t 12 -p 8.2 -s composerUpdate
+
+      - name: Lint PHP
+        run: Build/Scripts/runTests.sh -t 12 -p 8.2 -s lint
+
+      - name: Validate code against CGL
+        run: Build/Scripts/runTests.sh -t 12 -p 8.2 -s cgl -n
+
+  testsuite:
+    name: Code quality
+
+    needs: CGL
+
+    runs-on: ubuntu-latest
+
     strategy:
       matrix:
         php:
           - '8.2'
           - '8.3'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Lint PHP
-        run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -s lint
-
-  code-quality:
-    name: Code quality
-    runs-on: ubuntu-latest
-    env:
-      php: '8.2'
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Install testing system
-        run: Build/Scripts/runTests.sh -p ${{ env.php }} -s composerUpdate
+        run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -t 12 -s composerUpdate
 
-      - name: Composer validate
-        run: Build/Scripts/runTests.sh -p ${{ env.php }} -s composerValidate
+      - name: Unit tests
+        run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -t 12 -s unit
 
-      - name: Composer normalize
-        run: Build/Scripts/runTests.sh -p ${{ env.php }} -s composerNormalize -n
+      - name: Functional tests with mariadb
+        run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -t 12 -d mariadb -s functional
 
-      - name: CGL
-        run: Build/Scripts/runTests.sh -n -p ${{ env.php }} -s cgl
+      - name: Functional tests with postgres
+        run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -t 12 -d postgres -s functional
 
-      - name: phpstan
-        run: Build/Scripts/runTests.sh -n -p ${{ env.php }} -s phpstan
+      - name: Functional tests with sqlite
+        run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -t 12 -d sqlite -s functional
