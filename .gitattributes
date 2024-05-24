@@ -1,3 +1,5 @@
 /.* export-ignore
-/Build export-ignore
+/.* Makefile
 /.Build export-ignore
+/Build export-ignore
+/Tests export-ignore
