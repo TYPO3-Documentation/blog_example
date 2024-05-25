@@ -35,6 +35,11 @@
 			"T3docs\\BlogExample\\": "Classes/"
 		}
 	},
+	"autoload-dev": {
+		"psr-4": {
+			"T3docs\\BlogExample\\Tests\\": "Tests/"
+		}
+	},
 	"config": {
 		"allow-plugins": {
 			"ergebnis/composer-normalize": true,

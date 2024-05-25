@@ -13,7 +13,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace T3docs\blog_example\Tests\Functional\Domain\Repository;
+namespace T3docs\BlogExample\Tests\Unit\Domain\Model;
 
 use T3docs\BlogExample\Domain\Model\Tag;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
