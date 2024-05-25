@@ -4,6 +4,28 @@
 # EXT:examples test runner based on docker/podman.
 #
 
+trap 'cleanUp;exit 2' SIGINT
+
+waitFor() {
+    local HOST=${1}
+    local PORT=${2}
+    local TESTCOMMAND="
+        COUNT=0;
+        while ! nc -z ${HOST} ${PORT}; do
+            if [ \"\${COUNT}\" -gt 10 ]; then
+              echo \"Can not connect to ${HOST} port ${PORT}. Aborting.\";
+              exit 1;
+            fi;
+            sleep 1;
+            COUNT=\$((COUNT + 1));
+        done;
+    "
+    ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} --name wait-for-${SUFFIX} ${XDEBUG_MODE} -e XDEBUG_CONFIG="${XDEBUG_CONFIG}" ${IMAGE_ALPINE} /bin/sh -c "${TESTCOMMAND}"
+    if [[ $? -gt 0 ]]; then
+        kill -SIGINT -$$
+    fi
+}
+
 cleanUp() {
     ATTACHED_CONTAINERS=$(${CONTAINER_BIN} ps --filter network=${NETWORK} --format='{{.Names}}')
     for ATTACHED_CONTAINER in ${ATTACHED_CONTAINERS}; do
@@ -27,6 +49,79 @@ cleanRenderedDocumentationFiles() {
     echo "done"
 }
 
+handleDbmsOptions() {
+    # -a, -d, -i depend on each other. Validate input combinations and set defaults.
+    case ${DBMS} in
+        mariadb)
+            [ -z "${DATABASE_DRIVER}" ] && DATABASE_DRIVER="mysqli"
+            if [ "${DATABASE_DRIVER}" != "mysqli" ] && [ "${DATABASE_DRIVER}" != "pdo_mysql" ]; then
+                echo "Invalid combination -d ${DBMS} -a ${DATABASE_DRIVER}" >&2
+                echo >&2
+                echo "Use \".Build/Scripts/runTests.sh -h\" to display help and valid options" >&2
+                exit 1
+            fi
+            [ -z "${DBMS_VERSION}" ] && DBMS_VERSION="10.4"
+            if ! [[ ${DBMS_VERSION} =~ ^(10.4|10.5|10.6|10.7|10.8|10.9|10.10|10.11|11.0|11.1)$ ]]; then
+                echo "Invalid combination -d ${DBMS} -i ${DBMS_VERSION}" >&2
+                echo >&2
+                echo "Use \".Build/Scripts/runTests.sh -h\" to display help and valid options" >&2
+                exit 1
+            fi
+            ;;
+        mysql)
+            [ -z "${DATABASE_DRIVER}" ] && DATABASE_DRIVER="mysqli"
+            if [ "${DATABASE_DRIVER}" != "mysqli" ] && [ "${DATABASE_DRIVER}" != "pdo_mysql" ]; then
+                echo "Invalid combination -d ${DBMS} -a ${DATABASE_DRIVER}" >&2
+                echo >&2
+                echo "Use \".Build/Scripts/runTests.sh -h\" to display help and valid options" >&2
+                exit 1
+            fi
+            [ -z "${DBMS_VERSION}" ] && DBMS_VERSION="8.0"
+            if ! [[ ${DBMS_VERSION} =~ ^(8.0|8.1|8.2|8.3)$ ]]; then
+                echo "Invalid combination -d ${DBMS} -i ${DBMS_VERSION}" >&2
+                echo >&2
+                echo "Use \".Build/Scripts/runTests.sh -h\" to display help and valid options" >&2
+                exit 1
+            fi
+            ;;
+        postgres)
+            if [ -n "${DATABASE_DRIVER}" ]; then
+                echo "Invalid combination -d ${DBMS} -a ${DATABASE_DRIVER}" >&2
+                echo >&2
+                echo "Use \".Build/Scripts/runTests.sh -h\" to display help and valid options" >&2
+                exit 1
+            fi
+            [ -z "${DBMS_VERSION}" ] && DBMS_VERSION="10"
+            if ! [[ ${DBMS_VERSION} =~ ^(10|11|12|13|14|15|16)$ ]]; then
+                echo "Invalid combination -d ${DBMS} -i ${DBMS_VERSION}" >&2
+                echo >&2
+                echo "Use \".Build/Scripts/runTests.sh -h\" to display help and valid options" >&2
+                exit 1
+            fi
+            ;;
+        sqlite)
+            if [ -n "${DATABASE_DRIVER}" ]; then
+                echo "Invalid combination -d ${DBMS} -a ${DATABASE_DRIVER}" >&2
+                echo >&2
+                echo "Use \".Build/Scripts/runTests.sh -h\" to display help and valid options" >&2
+                exit 1
+            fi
+            if [ -n "${DBMS_VERSION}" ]; then
+                echo "Invalid combination -d ${DBMS} -i ${DATABASE_DRIVER}" >&2
+                echo >&2
+                echo "Use \".Build/Scripts/runTests.sh -h\" to display help and valid options" >&2
+                exit 1
+            fi
+            ;;
+        *)
+            echo "Invalid option -d ${DBMS}" >&2
+            echo >&2
+            echo "Use \".Build/Scripts/runTests.sh -h\" to display help and valid options" >&2
+            exit 1
+            ;;
+    esac
+}
+
 loadHelp() {
     # Load help text into $HELP
     read -r -d '' HELP <<EOF
@@ -46,9 +141,11 @@ Options:
             - composerUpdate: "composer update", handy if host has no PHP
             - composerUpdateRector: "composer update", for rector subdirectory
             - composerValidate: "composer validate"
+            - functional: PHP functional tests
             - lint: PHP linting
             - phpstan: PHPStan static analysis
             - phpstanBaseline: Generate PHPStan baseline
+            - unit: PHP unit tests
             - rector: Apply Rector rules
             - renderDocumentation
             - testRenderDocumentation
@@ -60,10 +157,66 @@ Options:
 
         If not specified, podman will be used if available. Otherwise, docker is used.
 
+    -a <mysqli|pdo_mysql>
+        Only with -s functional|functionalDeprecated
+        Specifies to use another driver, following combinations are available:
+            - mysql
+                - mysqli (default)
+                - pdo_mysql
+            - mariadb
+                - mysqli (default)
+                - pdo_mysql
+
+    -d <sqlite|mariadb|mysql|postgres>
+        Only with -s functional|functionalDeprecated|acceptance|acceptanceComposer|acceptanceInstall
+        Specifies on which DBMS tests are performed
+            - sqlite: (default): use sqlite
+            - mariadb: use mariadb
+            - mysql: use MySQL
+            - postgres: use postgres
+
+    -i version
+        Specify a specific database version
+        With "-d mariadb":
+            - 10.4   short-term, maintained until 2024-06-18 (default)
+            - 10.5   short-term, maintained until 2025-06-24
+            - 10.6   long-term, maintained until 2026-06
+            - 10.7   short-term, no longer maintained
+            - 10.8   short-term, maintained until 2023-05
+            - 10.9   short-term, maintained until 2023-08
+            - 10.10  short-term, maintained until 2023-11
+            - 10.11  long-term, maintained until 2028-02
+            - 11.0   development series
+            - 11.1   short-term development series
+        With "-d mysql":
+            - 8.0   maintained until 2026-04 (default) LTS
+            - 8.1   unmaintained since 2023-10
+            - 8.2   unmaintained since 2024-01
+            - 8.3   maintained until 2024-04
+        With "-d postgres":
+            - 10    unmaintained since 2022-11-10 (default)
+            - 11    unmaintained since 2023-11-09
+            - 12    maintained until 2024-11-14
+            - 13    maintained until 2025-11-13
+            - 14    maintained until 2026-11-12
+            - 15    maintained until 2027-11-11
+            - 16    maintained until 2028-11-09
+
     -p <8.2|8.3>
         Specifies the PHP minor version to be used
             - 8.2: (default) use PHP 8.2
             - 8.3: use PHP 8.3
+
+    -x
+        Only with -s functional|unit
+        Send information to host instance for test or system under test break points. This is especially
+        useful if a local PhpStorm instance is listening on default xdebug port 9003. A different port
+        can be selected with -y
+
+    -y <port>
+        Send xdebug information to a different port than default 9003 if an IDE like PhpStorm
+        is not listening on default port.
+
     -n
         Only with -s cgl, composerNormalize, rector
         Activate dry-run in CGL check and composer normalize that does not actively change files and only prints broken ones.
@@ -78,7 +231,13 @@ Options:
 
 Examples:
     # Run unit tests using PHP 8.2
-    ./Build/Scripts/runTests.sh
+    ./Build/Scripts/runTests.sh -p 8.2 -s unit
+
+    # Run functional tests using PHP 8.3 and MariaDB 10.6 using pdo_mysql
+    ./Build/Scripts/runTests.sh -p 8.3 -s functional -d mariadb -i 10.6 -a pdo_mysql
+
+    # Run functional tests on postgres with xdebug, php 8.3 and execute a restricted set of tests
+    ./Build/Scripts/runTests.sh -x -p 8.3 -s functional -d postgres -- Tests/Functional/DummyTest.php
 EOF
 }
 
@@ -89,7 +248,11 @@ if ! type "docker" >/dev/null 2>&1 && ! type "podman" >/dev/null 2>&1; then
 fi
 
 # Option defaults
+# @todo Consider to switch from cgl to help as default
 TEST_SUITE="cgl"
+DATABASE_DRIVER=""
+DBMS="sqlite"
+DBMS_VERSION=""
 PHP_VERSION="8.2"
 PHP_XDEBUG_ON=0
 PHP_XDEBUG_PORT=9003
@@ -105,8 +268,11 @@ OPTIND=1
 # Array for invalid options
 INVALID_OPTIONS=()
 # Simple option parsing based on getopts (! not getopt)
-while getopts "b:s:p:xy:nhu" OPT; do
+while getopts "a:b:d:i:s:p:xy:nhu" OPT; do
     case ${OPT} in
+        a)
+            DATABASE_DRIVER=${OPTARG}
+            ;;
         s)
             TEST_SUITE=${OPTARG}
             ;;
@@ -115,6 +281,12 @@ while getopts "b:s:p:xy:nhu" OPT; do
                 INVALID_OPTIONS+=("${OPTARG}")
             fi
             CONTAINER_BIN=${OPTARG}
+            ;;
+        d)
+            DBMS=${OPTARG}
+            ;;
+        i)
+            DBMS_VERSION=${OPTARG}
             ;;
         p)
             PHP_VERSION=${OPTARG}
@@ -159,6 +331,8 @@ if [ ${#INVALID_OPTIONS[@]} -ne 0 ]; then
     exit 1
 fi
 
+handleDbmsOptions
+
 COMPOSER_ROOT_VERSION="13.0.x-dev"
 HOST_UID=$(id -u)
 USERSET=""
@@ -201,6 +375,9 @@ fi
 
 IMAGE_PHP="${TYPO3_IMAGE_PREFIX}core-testing-$(echo "php${PHP_VERSION}" | sed -e 's/\.//'):latest"
 IMAGE_ALPINE="${IMAGE_PREFIX}alpine:3.8"
+IMAGE_MARIADB="docker.io/mariadb:${DBMS_VERSION}"
+IMAGE_MYSQL="docker.io/mysql:${DBMS_VERSION}"
+IMAGE_POSTGRES="docker.io/postgres:${DBMS_VERSION}-alpine"
 IMAGE_DOCS="ghcr.io/typo3-documentation/render-guides:latest"
 
 # Set $1 to first mass argument, this is the optional test file or test directory to execute
@@ -226,7 +403,7 @@ if [ ${PHP_XDEBUG_ON} -eq 0 ]; then
     XDEBUG_CONFIG=" "
 else
     XDEBUG_MODE="-e XDEBUG_MODE=debug -e XDEBUG_TRIGGER=foo"
-    XDEBUG_CONFIG="client_port=${PHP_XDEBUG_PORT} client_host=host.docker.internal"
+    XDEBUG_CONFIG="client_port=${PHP_XDEBUG_PORT} client_host=${CONTAINER_HOST}"
 fi
 
 # Suite execution
@@ -293,6 +470,42 @@ case ${TEST_SUITE} in
         ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} --name composer-command-${SUFFIX} -e COMPOSER_CACHE_DIR=.Build/.cache/composer -e COMPOSER_ROOT_VERSION=${COMPOSER_ROOT_VERSION} ${IMAGE_PHP} "${COMMAND[@]}"
         SUITE_EXIT_CODE=$?
         ;;
+    functional)
+        CONTAINER_PARAMS=""
+        COMMAND=(.Build/bin/phpunit -c Build/phpunit/FunctionalTests.xml --exclude-group not-${DBMS} ${EXTRA_TEST_OPTIONS} "$@")
+        case ${DBMS} in
+            mariadb)
+                echo "Using driver: ${DATABASE_DRIVER}"
+                ${CONTAINER_BIN} run --rm ${CI_PARAMS} --name mariadb-func-${SUFFIX} --network ${NETWORK} -d -e MYSQL_ROOT_PASSWORD=funcp --tmpfs /var/lib/mysql/:rw,noexec,nosuid ${IMAGE_MARIADB} >/dev/null
+                waitFor mariadb-func-${SUFFIX} 3306
+                CONTAINERPARAMS="-e typo3DatabaseDriver=${DATABASE_DRIVER} -e typo3DatabaseName=func_test -e typo3DatabaseUsername=root -e typo3DatabaseHost=mariadb-func-${SUFFIX} -e typo3DatabasePassword=funcp"
+                ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} --name functional-${SUFFIX} ${XDEBUG_MODE} -e XDEBUG_CONFIG="${XDEBUG_CONFIG}" ${CONTAINERPARAMS} ${IMAGE_PHP} "${COMMAND[@]}"
+                SUITE_EXIT_CODE=$?
+                ;;
+            mysql)
+                echo "Using driver: ${DATABASE_DRIVER}"
+                ${CONTAINER_BIN} run --rm ${CI_PARAMS} --name mysql-func-${SUFFIX} --network ${NETWORK} -d -e MYSQL_ROOT_PASSWORD=funcp --tmpfs /var/lib/mysql/:rw,noexec,nosuid ${IMAGE_MYSQL} >/dev/null
+                waitFor mysql-func-${SUFFIX} 3306
+                CONTAINERPARAMS="-e typo3DatabaseDriver=${DATABASE_DRIVER} -e typo3DatabaseName=func_test -e typo3DatabaseUsername=root -e typo3DatabaseHost=mysql-func-${SUFFIX} -e typo3DatabasePassword=funcp"
+                ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} --name functional-${SUFFIX} ${XDEBUG_MODE} -e XDEBUG_CONFIG="${XDEBUG_CONFIG}" ${CONTAINERPARAMS} ${IMAGE_PHP} "${COMMAND[@]}"
+                SUITE_EXIT_CODE=$?
+                ;;
+            postgres)
+                ${CONTAINER_BIN} run --rm ${CI_PARAMS} --name postgres-func-${SUFFIX} --network ${NETWORK} -d -e POSTGRES_PASSWORD=funcp -e POSTGRES_USER=funcu --tmpfs /var/lib/postgresql/data:rw,noexec,nosuid ${IMAGE_POSTGRES} >/dev/null
+                waitFor postgres-func-${SUFFIX} 5432
+                CONTAINERPARAMS="-e typo3DatabaseDriver=pdo_pgsql -e typo3DatabaseName=bamboo -e typo3DatabaseUsername=funcu -e typo3DatabaseHost=postgres-func-${SUFFIX} -e typo3DatabasePassword=funcp"
+                ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} --name functional-${SUFFIX} ${XDEBUG_MODE} -e XDEBUG_CONFIG="${XDEBUG_CONFIG}" ${CONTAINERPARAMS} ${IMAGE_PHP} "${COMMAND[@]}"
+                SUITE_EXIT_CODE=$?
+                ;;
+            sqlite)
+                # create sqlite tmpfs mount typo3temp/var/tests/functional-sqlite-dbs/ to avoid permission issues
+                mkdir -p "${ROOT_DIR}/.Build/web/typo3temp/var/tests/functional-sqlite-dbs/"
+                CONTAINERPARAMS="-e typo3DatabaseDriver=pdo_sqlite --tmpfs ${ROOT_DIR}/.Build/web/typo3temp/var/tests/functional-sqlite-dbs/:rw,noexec,nosuid"
+                ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} --name functional-${SUFFIX} ${XDEBUG_MODE} -e XDEBUG_CONFIG="${XDEBUG_CONFIG}" ${CONTAINERPARAMS} ${IMAGE_PHP} "${COMMAND[@]}"
+                SUITE_EXIT_CODE=$?
+                ;;
+        esac
+        ;;
     lint)
         COMMAND="find . -name \\*.php ! -path "./.Build/\\*" -print0 | xargs -0 -n1 -P4 php -dxdebug.mode=off -l >/dev/null"
         ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} --name composer-command-${SUFFIX} -e COMPOSER_CACHE_DIR=.Build/.cache/composer -e COMPOSER_ROOT_VERSION=${COMPOSER_ROOT_VERSION} ${IMAGE_PHP} /bin/sh -c "${COMMAND}"
@@ -329,6 +542,11 @@ case ${TEST_SUITE} in
         ${CONTAINER_BIN} run ${CONTAINER_INTERACTIVE} ${CONTAINER_DOCS_PARAMS} --name render-documentation-test-${SUFFIX} ${IMAGE_DOCS} "${COMMAND[@]}"
         SUITE_EXIT_CODE=$?
         ;;
+    unit)
+        COMMAND=(.Build/bin/phpunit -c Build/phpunit/UnitTests.xml ${EXTRA_TEST_OPTIONS} "$@")
+        ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} --name unit-${SUFFIX} ${XDEBUG_MODE} -e XDEBUG_CONFIG="${XDEBUG_CONFIG}" ${IMAGE_PHP} "${COMMAND[@]}"
+        SUITE_EXIT_CODE=$?
+        ;;
     update)
         # pull typo3/core-testing-* versions of those ones that exist locally
         echo "> pull ${TYPO3_IMAGE_PREFIX}core-testing-* versions of those ones that exist locally"
@@ -362,6 +580,19 @@ else
 fi
 echo "PHP: ${PHP_VERSION}" >&2
 echo "TYPO3: ${CORE_VERSION}" >&2
+if [[ ${TEST_SUITE} =~ ^functional$ ]]; then
+    case "${DBMS}" in
+        mariadb|mysql)
+            echo "DBMS: ${DBMS}  version ${DBMS_VERSION}  driver ${DATABASE_DRIVER}" >&2
+            ;;
+        postgres)
+            echo "DBMS: ${DBMS}  version ${DBMS_VERSION}  driver pdo_pgsql" >&2
+            ;;
+        sqlite)
+            echo "DBMS: ${DBMS}  driver pdo_sqlite" >&2
+            ;;
+    esac
+fi
 if [[ ${SUITE_EXIT_CODE} -eq 0 ]]; then
     echo "SUCCESS" >&2
 else
