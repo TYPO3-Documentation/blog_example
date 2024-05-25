@@ -24,7 +24,9 @@
     "ergebnis/composer-normalize": "~2.42.0",
     "friendsofphp/php-cs-fixer": "^3.52",
     "phpstan/phpstan": "^1.10",
-    "typo3/cms-install": "^13.1 || dev-main"
+    "phpunit/phpunit": "^11.0.3",
+    "typo3/cms-install": "^13.1 || dev-main",
+    "typo3/testing-framework": "dev-main"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
