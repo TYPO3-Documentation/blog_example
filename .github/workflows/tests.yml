@@ -3,6 +3,10 @@ name: tests
 on:
   push:
   pull_request:
+  schedule:
+      # @todo Refactor workflow execution and introduce a generic workflow dispatching
+      # scheduled workflow, so nighlies can be ensured over branches (for the future).
+      - cron: "15 6 * * *"
 
 jobs:
   lint:
@@ -23,24 +27,66 @@ jobs:
   code-quality:
     name: Code quality
     runs-on: ubuntu-latest
-    env:
-      php: '8.2'
-
+    strategy:
+        matrix:
+            php:
+                - '8.2'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Install testing system
-        run: Build/Scripts/runTests.sh -p ${{ env.php }} -s composerUpdate
+        run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -s composerUpdate
 
       - name: Composer validate
-        run: Build/Scripts/runTests.sh -p ${{ env.php }} -s composerValidate
+        run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -s composerValidate
 
       - name: Composer normalize
-        run: Build/Scripts/runTests.sh -p ${{ env.php }} -s composerNormalize -n
+        run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -s composerNormalize -n
 
       - name: CGL
-        run: Build/Scripts/runTests.sh -n -p ${{ env.php }} -s cgl
+        run: Build/Scripts/runTests.sh -n -p ${{ matrix.php }} -s cgl
 
       - name: phpstan
-        run: Build/Scripts/runTests.sh -n -p ${{ env.php }} -s phpstan
+        run: Build/Scripts/runTests.sh -n -p ${{ matrix.php }} -s phpstan
+
+  unit-tests:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    strategy:
+        matrix:
+            php:
+                - '8.2'
+                - '8.3'
+    steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+
+        - name: Install testing system
+          run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -s composerUpdate
+
+        - name: Execute unit tests
+          run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -s unit
+
+  functional-tests:
+      name: Functional tests
+      runs-on: ubuntu-latest
+      strategy:
+          matrix:
+              php:
+                  - '8.2'
+                  - '8.3'
+              vendor:
+                  - sqlite
+                  - mysql
+                  - mariadb
+                  - postgres
+      steps:
+          - name: Checkout
+            uses: actions/checkout@v4
+
+          - name: Install testing system
+            run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -s composerUpdate
+
+          - name: Execute functional tests
+            run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -d ${{ matrix.vendor }} -s functional
