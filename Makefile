@@ -11,6 +11,9 @@ rector: ## Run rector
 fix-cs: ## Fix PHP coding styles
 	Build/Scripts/runTests.sh -s cgl
 
+.PHONY: fix
+fix: rector fix-cs## Run rector and cgl fixes
+
 .PHONY: phpstan
 phpstan: ## Run phpstan tests
 	Build/Scripts/runTests.sh -s phpstan
@@ -18,4 +21,15 @@ phpstan: ## Run phpstan tests
 .PHONY: phpstan-baseline
 phpstan-baseline: ## Update the phpstan baseline
 	Build/Scripts/runTests.sh -s phpstanBaseline
+
+.PHONY: test
+test: fix-cs phpstan test-unit test-functional## Run all tests
+
+.PHONY: test-unit
+test-unit: ## Run unit tests
+	Build/Scripts/runTests.sh -s unit
+
+.PHONY: test-functional
+test-functional: ## Run functional tests
+	Build/Scripts/runTests.sh -s functional -d mysql
 
