@@ -19,7 +19,7 @@ class ExtensionConfigurationProvider extends AbstractProvider
             $this->expressionLanguageVariables = [
                 'blogConfiguration' => $configuration->get('blog_example'),
             ];
-        } catch (ExtensionConfigurationExtensionNotConfiguredException | ExtensionConfigurationPathDoesNotExistException $e) {
+        } catch (ExtensionConfigurationExtensionNotConfiguredException | ExtensionConfigurationPathDoesNotExistException) {
         }
     }
 }
