@@ -25,6 +25,7 @@ use T3docs\BlogExample\Domain\Repository\BlogRepository;
 use T3docs\BlogExample\Domain\Repository\CommentRepository;
 use T3docs\BlogExample\Domain\Repository\PostRepository;
 use T3docs\BlogExample\Service\BlogFactory;
+use TYPO3\CMS\Backend\Template\Components\Menu\Menu;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -176,40 +177,18 @@ class BackendController extends ActionController
     protected function initializeModuleTemplate(
         ServerRequestInterface $request,
     ): ModuleTemplate {
-        $menuItems = [
-            'index' => [
-                'controller' => 'Backend',
-                'action' => 'index',
-                'label' => $GLOBALS['LANG']->sL('LLL:EXT:blog_example/Resources/Private/Language/locallang.xlf:administration.menu.index'),
-            ],
-            'showAllComents' => [
-                'controller' => 'Backend',
-                'action' => 'showAllComments',
-                'label' => $GLOBALS['LANG']->sL('LLL:EXT:blog_example/Resources/Private/Language/locallang.xlf:administration.menu.comments'),
-            ],
-        ];
-
         $view = $this->moduleTemplateFactory->create($request);
 
-        $menu = $view->getDocHeaderComponent()->getMenuRegistry()->makeMenu();
-        $menu->setIdentifier('BlogExampleModuleMenu');
+        $this->modifyDocHeaderComponent($view);
+        $view->setFlashMessageQueue($this->getFlashMessageQueue());
 
+        return $view;
+    }
+
+    private function modifyDocHeaderComponent(ModuleTemplate $view): void
+    {
         $context = '';
-        foreach ($menuItems as $menuItemConfig) {
-            $isActive = $this->request->getControllerActionName() === $menuItemConfig['action'];
-            $menuItem = $menu->makeMenuItem()
-                ->setTitle($menuItemConfig['label'])
-                ->setHref($this->uriBuilder->reset()->uriFor(
-                    $menuItemConfig['action'],
-                    [],
-                    $menuItemConfig['controller'],
-                ))
-                ->setActive($isActive);
-            $menu->addMenuItem($menuItem);
-            if ($isActive) {
-                $context = $menuItemConfig['label'];
-            }
-        }
+        $menu = $this->buildMenu($view, $context);
 
         $view->getDocHeaderComponent()->getMenuRegistry()->addMenu($menu);
         $view->setTitle(
@@ -225,8 +204,41 @@ class BackendController extends ActionController
         if ($pageRecord) {
             $view->getDocHeaderComponent()->setMetaInformation($pageRecord);
         }
-        $view->setFlashMessageQueue($this->getFlashMessageQueue());
+    }
 
-        return $view;
+    private function buildMenu(ModuleTemplate $view, String &$context): Menu
+    {
+        $menuItems = [
+            'index' => [
+                'controller' => 'Backend',
+                'action' => 'index',
+                'label' => $GLOBALS['LANG']->sL('LLL:EXT:blog_example/Resources/Private/Language/locallang.xlf:administration.menu.index'),
+            ],
+            'showAllComents' => [
+                'controller' => 'Backend',
+                'action' => 'showAllComments',
+                'label' => $GLOBALS['LANG']->sL('LLL:EXT:blog_example/Resources/Private/Language/locallang.xlf:administration.menu.comments'),
+            ],
+        ];
+
+        $menu = $view->getDocHeaderComponent()->getMenuRegistry()->makeMenu();
+        $menu->setIdentifier('BlogExampleModuleMenu');
+
+        foreach ($menuItems as $menuItemConfig) {
+            $isActive = $this->request->getControllerActionName() === $menuItemConfig['action'];
+            $menuItem = $menu->makeMenuItem()
+                ->setTitle($menuItemConfig['label'])
+                ->setHref($this->uriBuilder->reset()->uriFor(
+                    $menuItemConfig['action'],
+                    [],
+                    $menuItemConfig['controller'],
+                ))
+                ->setActive($isActive);
+            $menu->addMenuItem($menuItem);
+            if ($isActive) {
+                $context = $menuItemConfig['label'];
+            }
+        }
+        return $menu;
     }
 }
