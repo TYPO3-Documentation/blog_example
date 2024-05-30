@@ -40,14 +40,14 @@ class Person extends AbstractEntity
     protected string $email = '';
 
     /**
-     * @var ObjectStorage<Tag>
+     * @var ?ObjectStorage<Tag>
      */
-    protected ObjectStorage $tags;
+    protected ?ObjectStorage $tags = null;
 
     /**
-     * @var ObjectStorage<Tag>
+     * @var ?ObjectStorage<Tag>
      */
-    protected ObjectStorage $tagsSpecial;
+    protected ?ObjectStorage $tagsSpecial = null;
 
     /**
      * Constructs a new Person
@@ -58,8 +58,16 @@ class Person extends AbstractEntity
         $this->setLastname($lastname);
         $this->setEmail($email);
 
-        $this->tags = new ObjectStorage();
-        $this->tagsSpecial = new ObjectStorage();
+        $this->initializeObject();
+    }
+
+    /**
+     * Initializes all ObjectStorage properties when model is reconstructed from DB (where __construct is not called)
+     */
+    public function initializeObject(): void
+    {
+        $this->tags ??= new ObjectStorage();
+        $this->tagsSpecial ??= new ObjectStorage();
     }
 
     public function getFirstname(): string

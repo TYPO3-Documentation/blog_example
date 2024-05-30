@@ -47,29 +47,31 @@ class Blog extends AbstractEntity
     public string $logo = '';
 
     /**
-     * The posts of this blog
-     * @var ObjectStorage<Post>|null
+     * @var ?ObjectStorage<Post>
      */
     #[Lazy()]
     #[Cascade(['value' => 'remove'])]
-    public ObjectStorage|null $posts;
+    public ?ObjectStorage $posts = null;
 
     /**
      * @var ?ObjectStorage<Category>
      */
     public ?ObjectStorage $categories = null;
 
-    /**
-     * The blog's administrator
-     * @var Administrator
-     */
-    #[Lazy()]
-    public $administrator;
+    public ?Administrator $administrator = null;
 
     public function __construct()
     {
-        $this->posts = new ObjectStorage();
-        $this->categories = new ObjectStorage();
+        $this->initializeObject();
+    }
+
+    /**
+     * Initializes all ObjectStorage properties when model is reconstructed from DB (where __construct is not called)
+     */
+    public function initializeObject(): void
+    {
+        $this->posts ??= new ObjectStorage();
+        $this->categories ??= new ObjectStorage();
     }
 
     /**
@@ -77,7 +79,7 @@ class Blog extends AbstractEntity
      */
     public function addPost(Post $post): void
     {
-        $this->posts->attach($post);
+        $this->posts?->attach($post);
     }
 
     /**
@@ -85,7 +87,7 @@ class Blog extends AbstractEntity
      */
     public function removePost(Post $postToRemove): void
     {
-        $this->posts->detach($postToRemove);
+        $this->posts?->detach($postToRemove);
     }
 
     /**
@@ -121,7 +123,7 @@ class Blog extends AbstractEntity
      */
     public function addCategory(Category $category): void
     {
-        $this->categories->attach($category);
+        $this->categories?->attach($category);
     }
 
     /**

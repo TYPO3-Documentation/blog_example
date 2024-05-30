@@ -30,9 +30,9 @@ class FrontendUserGroup extends AbstractEntity
     protected string $description = '';
 
     /**
-     * @var ObjectStorage<FrontendUserGroup>
+     * @var ?ObjectStorage<FrontendUserGroup>
      */
-    protected ObjectStorage $subgroup;
+    protected ?ObjectStorage $subgroup = null;
 
     /**
      * Constructs a new Frontend User Group
@@ -40,12 +40,17 @@ class FrontendUserGroup extends AbstractEntity
     public function __construct(string $title = '')
     {
         $this->setTitle($title);
-        $this->subgroup = new ObjectStorage();
+        $this->initializeObject();
     }
 
     /**
-     * @return string
+     * Initializes all ObjectStorage properties when model is reconstructed from DB (where __construct is not called)
      */
+    public function initializeObject(): void
+    {
+        $this->subgroup ??= new ObjectStorage();
+    }
+
     public function getTitle(): string
     {
         return $this->title;
@@ -56,9 +61,6 @@ class FrontendUserGroup extends AbstractEntity
         $this->title = $title;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
@@ -85,7 +87,7 @@ class FrontendUserGroup extends AbstractEntity
      */
     public function addSubgroup(FrontendUserGroup $subgroup): void
     {
-        $this->subgroup->attach($subgroup);
+        $this->subgroup?->attach($subgroup);
     }
 
     /**
@@ -93,16 +95,16 @@ class FrontendUserGroup extends AbstractEntity
      */
     public function removeSubgroup(FrontendUserGroup $subgroup): void
     {
-        $this->subgroup->detach($subgroup);
+        $this->subgroup?->detach($subgroup);
     }
 
     /**
      * Returns the subgroups. Keep in mind that the property is called "subgroup"
      * although it can hold several subgroups.
      *
-     * @return ObjectStorage<FrontendUserGroup>
+     * @return ?ObjectStorage<FrontendUserGroup>
      */
-    public function getSubgroup(): ObjectStorage
+    public function getSubgroup(): ?ObjectStorage
     {
         return $this->subgroup;
     }
