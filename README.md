@@ -32,36 +32,11 @@ adjusted over time to reflect current development in the TYPO3 project.
 
 # Running tests
 
-The blog-example comes with a simple demo set of tests. It relies
-on the runTests.sh script which is a simplified version of a similar script from the TYPO3 core.
-Find detailed usage examples by executing `Build/Scripts/runTests.sh -h` and have a look at
-`.github/workflows/tests.yml` to see how this is used in CI.
-
-Example usage:
-
-```
-Build/Scripts/runTests.sh -s composerUpdate
-Build/Scripts/runTests.sh -s rector
-Build/Scripts/runTests.sh -s phpstan
-Build/Scripts/runTests.sh -s cgl
-```
-
-Running some tests locally can fix errors that are just displayed in actions on github.
-The following command can fix things like linebreaks or indentations:
-
-```
-Build/Scripts/runTests.sh -s cgl
-```
-
-# Normalize composer.json
-
-```
-Build/Scripts/runTests.sh -s composerNormalize -n
-```
+Please see [CONTRIBUTING.md](CONTRIBUTING.md)
 
 
 # Tagging and releasing
 
-[packagist.org](https://packagist.org/packages/t3docs/blog-example) is enabled via the casual github hook.
-TER releases are created by the "publish.yml" github workflow when tagging versions.
+[packagist.org](https://packagist.org/packages/t3docs/blog-example) is enabled via the casual GitHub hook.
+TER releases are created by the "publish.yml" GitHub workflow when tagging versions.
 The commit message of the tagged commit is used as TER upload comment.
