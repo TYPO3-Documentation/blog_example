@@ -1,5 +1,7 @@
 # Contribute to this extension
 
+For help about contributing to the documentation in general, see https://docs.typo3.org/typo3cms/HowToDocument/
+
 You are welcome to contribute to this example extension. Please note that the code is used in different manuals
 to demonstrate certain features of TYPO3 and Extbase.
 
