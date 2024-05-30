@@ -46,6 +46,11 @@ indent_size = 2
 [package.json]
 indent_size = 2
 
+# composer.json composer normalize uses 2 indents as well
+[composer.json]
+indent_style = space
+indent_size = 2
+
 # TypoScript
 [*.{typoscript,tsconfig}]
 indent_size = 2
@@ -61,4 +66,8 @@ indent_size = 2
 
 # .htaccess
 [{_.htaccess,.htaccess}]
+indent_style = tab
+
+# Use tabs for indentation (Makefiles require tabs)
+[Makefile]
 indent_style = tab
