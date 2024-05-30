@@ -10,7 +10,7 @@ parameters:
     - ../../Classes/
     - ../../Configuration/
 
-  tmpDir: ../.Build/.cache/phpstan/
+  tmpDir: ../../.Build/.cache/phpstan/
 
   excludePaths:
     - '*/Build/node_modules'
