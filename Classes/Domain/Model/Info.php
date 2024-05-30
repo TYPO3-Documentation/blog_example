@@ -38,9 +38,6 @@ class Info extends AbstractEntity implements \Stringable
         $this->name = $name;
     }
 
-    /**
-     * @return string
-     */
     public function getBodytext(): string
     {
         return $this->bodytext;
@@ -56,9 +53,6 @@ class Info extends AbstractEntity implements \Stringable
         return $this->name . ': ' . $this->bodytext;
     }
 
-    /**
-     * Returns this info as a formatted string
-     */
     public function __toString(): string
     {
         return $this->name;

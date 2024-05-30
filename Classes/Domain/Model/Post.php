@@ -28,7 +28,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Post extends AbstractEntity implements \Stringable
 {
-    protected Blog $blog;
+    protected ?Blog $blog = null;
 
     #[Validate(['validator' => 'StringLength', 'options' => ['minimum' => 3, 'maximum' => 50]])]
     protected string $title = '';
@@ -36,7 +36,7 @@ class Post extends AbstractEntity implements \Stringable
     /**
      * @var \DateTime
      */
-    protected \DateTime $date;
+    protected ?\DateTime $date = null;
 
     /**
      * @var Person
@@ -49,9 +49,9 @@ class Post extends AbstractEntity implements \Stringable
     protected string $content = '';
 
     /**
-     * @var ObjectStorage<Tag>
+     * @var ?ObjectStorage<Tag>
      */
-    public ObjectStorage $tags;
+    public ?ObjectStorage $tags = null;
 
     /**
      * @var ?ObjectStorage<Category>
@@ -59,17 +59,17 @@ class Post extends AbstractEntity implements \Stringable
     public ?ObjectStorage $categories = null;
 
     /**
-     * @var ObjectStorage<Comment>
+     * @var ?ObjectStorage<Comment>
      */
     #[Lazy()]
     #[Cascade(['value' => 'remove'])]
-    public ObjectStorage $comments;
+    public ?ObjectStorage $comments = null;
 
     /**
-     * @var ObjectStorage<Post>
+     * @var ?ObjectStorage<Post>
      */
     #[Lazy()]
-    public ObjectStorage $relatedPosts;
+    public ?ObjectStorage $relatedPosts = null;
 
     /**
      * 1:1 optional relation
@@ -85,19 +85,26 @@ class Post extends AbstractEntity implements \Stringable
 
     /**
      * 1:n relation stored as CSV value
-     * @var ObjectStorage<Comment>
+     * @var ?ObjectStorage<Comment>
      */
     #[Lazy()]
-    public ObjectStorage $additionalComments;
+    public ?ObjectStorage $additionalComments = null;
 
     public function __construct()
     {
-        $this->tags = new ObjectStorage();
-        $this->categories = new ObjectStorage();
-        $this->comments = new ObjectStorage();
-        $this->relatedPosts = new ObjectStorage();
-        $this->date = new \DateTime();
-        $this->additionalComments = new ObjectStorage();
+        $this->initializeObject();
+    }
+
+    /**
+     * Initializes all ObjectStorage properties when model is reconstructed from DB (where __construct is not called)
+     */
+    public function initializeObject(): void
+    {
+        $this->tags ??= new ObjectStorage();
+        $this->categories ??= new ObjectStorage();
+        $this->comments ??= new ObjectStorage();
+        $this->relatedPosts ??= new ObjectStorage();
+        $this->additionalComments ??= new ObjectStorage();
     }
 
     /**
@@ -112,12 +119,12 @@ class Post extends AbstractEntity implements \Stringable
 
     public function addTag(Tag $tag): void
     {
-        $this->tags->attach($tag);
+        $this->tags?->attach($tag);
     }
 
     public function removeTag(Tag $tag): void
     {
-        $this->tags->detach($tag);
+        $this->tags?->detach($tag);
     }
 
     public function removeAllTags(): void
@@ -131,7 +138,7 @@ class Post extends AbstractEntity implements \Stringable
      *
      * @return ObjectStorage<Tag>
      */
-    public function getTags(): ObjectStorage
+    public function getTags(): ?ObjectStorage
     {
         return clone $this->tags;
     }
@@ -141,7 +148,7 @@ class Post extends AbstractEntity implements \Stringable
      */
     public function addCategory(Category $category): void
     {
-        $this->categories->attach($category);
+        $this->categories?->attach($category);
     }
 
     /**
@@ -169,7 +176,7 @@ class Post extends AbstractEntity implements \Stringable
      */
     public function removeCategory(Category $category): void
     {
-        $this->categories->detach($category);
+        $this->categories?->detach($category);
     }
 
     /**
@@ -223,7 +230,7 @@ class Post extends AbstractEntity implements \Stringable
      */
     public function addComment(Comment $commentToAdd): void
     {
-        $this->comments->attach($commentToAdd);
+        $this->comments?->attach($commentToAdd);
     }
 
     /**
@@ -231,7 +238,7 @@ class Post extends AbstractEntity implements \Stringable
      */
     public function removeComment(Comment $commentToDelete): void
     {
-        $this->comments->detach($commentToDelete);
+        $this->comments?->detach($commentToDelete);
     }
 
     /**
@@ -248,7 +255,7 @@ class Post extends AbstractEntity implements \Stringable
      *
      * @return ObjectStorage<Comment>
      */
-    public function getComments(): ObjectStorage
+    public function getComments(): ?ObjectStorage
     {
         return $this->comments;
     }
@@ -265,7 +272,7 @@ class Post extends AbstractEntity implements \Stringable
 
     public function addRelatedPost(Post $post): void
     {
-        $this->relatedPosts->attach($post);
+        $this->relatedPosts?->attach($post);
     }
 
     public function removeAllRelatedPosts(): void
@@ -279,7 +286,7 @@ class Post extends AbstractEntity implements \Stringable
      *
      * @return ObjectStorage<Post>
      */
-    public function getRelatedPosts(): ObjectStorage
+    public function getRelatedPosts(): ?ObjectStorage
     {
         return $this->relatedPosts;
     }
@@ -287,7 +294,7 @@ class Post extends AbstractEntity implements \Stringable
     /**
      * @return ObjectStorage<Comment>
      */
-    public function getAdditionalComments(): ObjectStorage
+    public function getAdditionalComments(): ?ObjectStorage
     {
         return $this->additionalComments;
     }
@@ -302,7 +309,7 @@ class Post extends AbstractEntity implements \Stringable
 
     public function addAdditionalComment(Comment $comment): void
     {
-        $this->additionalComments->attach($comment);
+        $this->additionalComments?->attach($comment);
     }
 
     /**
@@ -316,7 +323,7 @@ class Post extends AbstractEntity implements \Stringable
 
     public function removeAdditionalComment(Comment $comment): void
     {
-        $this->additionalComments->detach($comment);
+        $this->additionalComments?->detach($comment);
     }
 
     /**

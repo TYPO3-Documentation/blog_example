@@ -27,18 +27,18 @@ class FrontendUser extends AbstractEntity
     /**
      * @var ObjectStorage<FrontendUserGroup>|null
      */
-    protected ObjectStorage|null $usergroup;
+    protected ObjectStorage|null $usergroup = null;
     public string $name = '';
     public string $email = '';
     public \DateTime|null $lastlogin = null;
 
     public function __construct()
     {
-        $this->usergroup = new ObjectStorage();
+        $this->initializeObject();
     }
 
     /**
-     * Called again with initialize object, as fetching an entity from the DB does not use the constructor
+     * Initializes all ObjectStorage properties when model is reconstructed from DB (where __construct is not called)
      */
     public function initializeObject(): void
     {
