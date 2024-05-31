@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace T3docs\BlogExample\ViewHelpers;
 
+use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
@@ -61,7 +62,8 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
             $uriParts[] = 'd=' . urlencode($this->arguments['defaultImageUri']);
         }
         if ($this->arguments['size'] !== null) {
-            $uriParts[] = 's=' . $this->arguments['size'];
+            $size = MathUtility::forceIntegerInRange((int)$this->arguments['size'], 1, 2048);
+            $uriParts[] = 's=' . $size;
         }
         if (count($uriParts) > 0) {
             $gravatarUri .= '?' . implode('&', $uriParts);
