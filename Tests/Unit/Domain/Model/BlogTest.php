@@ -169,7 +169,7 @@ class BlogTest extends UnitTestCase
 
         self::assertInstanceOf(
             ObjectStorage::class,
-            $posts
+            $posts,
         );
 
         self::assertCount(
