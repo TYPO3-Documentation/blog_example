@@ -24,7 +24,7 @@
                         <td class="col-icon nowrap align-top">
                             <f:link.action action="showBlog" controller="Backend" arguments="{blog: blog}" title="Show this Blog">
                                 {blog.title}
-                            </f:link.action> (<f:count subject="{blog.posts}" />)
+                            </f:link.action> ({blog.posts -> f:count()})
                         </td>
                         <td class="col-icon align-top">
                             <f:format.nl2br>{blog.description}</f:format.nl2br>
@@ -35,7 +35,7 @@
                                     <core:icon identifier="actions-list-alternative" />
                                 </f:link.action>
 
-                                <a href="{be:uri.editRecord(uid: blog.uid, table:'tx_blogexample_domain_model_blog')}" class="btn btn-default"  title="Edit this Blog">
+                                <a href="{be:uri.editRecord(uid: blog.uid, table: 'tx_blogexample_domain_model_blog')}" class="btn btn-default"  title="Edit this Blog">
                                     <core:icon identifier="actions-open" />
                                 </a>
                                 <button
@@ -45,8 +45,8 @@
                                     title="{f:translate(key:'LLL:EXT:backend/Resources/Private/Language/locallang_siteconfiguration.xlf:overview.deleteSiteConfiguration')}"
                                     data-severity="error"
                                     data-title="Delete this Blog"
-                                    data-button-close-text="{f:translate(key:'LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:cancel')}"
-                                    data-button-ok-text="{f:translate(key:'LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:delete')}"
+                                    data-button-close-text="{f:translate(key: 'LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:cancel')}"
+                                    data-button-ok-text="{f:translate(key: 'LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:delete')}"
                                 >
                                     <core:icon identifier="actions-delete" />
                                 </button>
