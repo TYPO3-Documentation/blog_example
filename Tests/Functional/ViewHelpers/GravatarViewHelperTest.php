@@ -52,7 +52,7 @@ class GravatarViewHelperTest extends FunctionalTestCase
         // @ToDo: In future we should allow just secure connections
         self::assertMatchesRegularExpression(
             '/(http|https):\/\/(www\.)?gravatar\.com/',
-            $content
+            $content,
         );
     }
 
@@ -64,14 +64,14 @@ class GravatarViewHelperTest extends FunctionalTestCase
         $view = GeneralUtility::makeInstance(StandaloneView::class);
         $view->setTemplateSource(sprintf(
             $this->getFluidTemplateSource(),
-            '<blog:gravatar emailAddress="' . $email . '" />'
+            '<blog:gravatar emailAddress="' . $email . '" />',
         ));
 
         $content = $view->render();
 
         self::assertStringContainsString(
             md5($email),
-            $content
+            $content,
         );
     }
 
@@ -81,14 +81,14 @@ class GravatarViewHelperTest extends FunctionalTestCase
         $view = GeneralUtility::makeInstance(StandaloneView::class);
         $view->setTemplateSource(sprintf(
             $this->getFluidTemplateSource(),
-            '<blog:gravatar emailAddress="foo@example.com" defaultImageUri="https://typo3.org?test=123&foo=bar" />'
+            '<blog:gravatar emailAddress="foo@example.com" defaultImageUri="https://typo3.org?test=123&foo=bar" />',
         ));
 
         $content = $view->render();
 
         self::assertMatchesRegularExpression(
             '/d=https%3A%2F%2Ftypo3.org%3Ftest%3D123%26foo%3Dbar/',
-            $content
+            $content,
         );
     }
 
@@ -98,7 +98,7 @@ class GravatarViewHelperTest extends FunctionalTestCase
         $view = GeneralUtility::makeInstance(StandaloneView::class);
         $view->setTemplateSource(sprintf(
             $this->getFluidTemplateSource(),
-            '<blog:gravatar emailAddress="foo@example.com" size="XXL" />'
+            '<blog:gravatar emailAddress="foo@example.com" size="XXL" />',
         ));
 
         $content = $view->render();
@@ -106,7 +106,7 @@ class GravatarViewHelperTest extends FunctionalTestCase
         // ToDo: Gravatar allows just int 1-2048 for size. We should update argument in ViewHelper
         self::assertMatchesRegularExpression(
             '/s=XXL/',
-            $content
+            $content,
         );
     }
 
