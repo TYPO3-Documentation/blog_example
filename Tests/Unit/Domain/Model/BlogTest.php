@@ -38,7 +38,7 @@ class BlogTest extends UnitTestCase
     {
         self::assertSame(
             '',
-            $this->subject->getTitle()
+            $this->subject->getTitle(),
         );
     }
 
@@ -48,14 +48,14 @@ class BlogTest extends UnitTestCase
 
         self::assertSame(
             'TYPO3',
-            $this->subject->getTitle()
+            $this->subject->getTitle(),
         );
     }
 
     public function testSubtitleWillInitiallyReturnNull(): void
     {
         self::assertNull(
-            $this->subject->subtitle
+            $this->subject->subtitle,
         );
     }
 
@@ -63,7 +63,7 @@ class BlogTest extends UnitTestCase
     {
         self::assertSame(
             '',
-            $this->subject->description
+            $this->subject->description,
         );
     }
 
@@ -71,7 +71,7 @@ class BlogTest extends UnitTestCase
     {
         self::assertSame(
             '',
-            $this->subject->logo
+            $this->subject->logo,
         );
     }
 
@@ -81,12 +81,12 @@ class BlogTest extends UnitTestCase
 
         self::assertInstanceOf(
             ObjectStorage::class,
-            $posts
+            $posts,
         );
 
         self::assertCount(
             0,
-            $this->subject->getPosts()
+            $this->subject->getPosts(),
         );
     }
 
@@ -99,7 +99,7 @@ class BlogTest extends UnitTestCase
 
         self::assertSame(
             $posts,
-            $this->subject->getPosts()
+            $this->subject->getPosts(),
         );
     }
 
@@ -110,7 +110,7 @@ class BlogTest extends UnitTestCase
 
         self::assertCount(
             1,
-            $this->subject->getPosts()
+            $this->subject->getPosts(),
         );
     }
 
@@ -123,7 +123,7 @@ class BlogTest extends UnitTestCase
 
         self::assertSame(
             $posts,
-            $this->subject->getPosts()
+            $this->subject->getPosts(),
         );
     }
 
@@ -141,7 +141,7 @@ class BlogTest extends UnitTestCase
 
         self::assertCount(
             1,
-            $this->subject->getPosts()
+            $this->subject->getPosts(),
         );
     }
 
@@ -159,7 +159,7 @@ class BlogTest extends UnitTestCase
 
         self::assertCount(
             0,
-            $this->subject->getPosts()
+            $this->subject->getPosts(),
         );
     }
 
@@ -174,7 +174,7 @@ class BlogTest extends UnitTestCase
 
         self::assertCount(
             0,
-            $this->subject->getCategories()
+            $this->subject->getCategories(),
         );
     }
 
@@ -187,7 +187,7 @@ class BlogTest extends UnitTestCase
 
         self::assertSame(
             $categories,
-            $this->subject->getCategories()
+            $this->subject->getCategories(),
         );
     }
 
@@ -198,7 +198,7 @@ class BlogTest extends UnitTestCase
 
         self::assertCount(
             1,
-            $this->subject->getCategories()
+            $this->subject->getCategories(),
         );
     }
 
@@ -211,7 +211,7 @@ class BlogTest extends UnitTestCase
 
         self::assertSame(
             $categories,
-            $this->subject->getCategories()
+            $this->subject->getCategories(),
         );
     }
 
@@ -229,14 +229,14 @@ class BlogTest extends UnitTestCase
 
         self::assertCount(
             1,
-            $this->subject->getCategories()
+            $this->subject->getCategories(),
         );
     }
 
     public function testAdministratorWillInitiallyReturnNull(): void
     {
         self::assertNull(
-            $this->subject->administrator
+            $this->subject->administrator,
         );
     }
 }
