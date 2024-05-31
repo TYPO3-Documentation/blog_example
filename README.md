@@ -3,6 +3,7 @@
 [![TYPO3 12](https://img.shields.io/badge/TYPO3-12-orange.svg?style=flat-square)](https://get.typo3.org/version/12)
 [![Total Downloads](https://poser.pugx.org/t3docs/blog-example/d/total.svg)](https://packagist.org/packages/t3docs/blog-example)
 [![Monthly Downloads](https://poser.pugx.org/t3docs/blog-example/d/monthly)](https://packagist.org/packages/t3docs/blog-example)
+![Build Status](https://github.com/TYPO3-Documentation/blog_example/actions/workflows/tests.yml/badge.svg)
 
 # TYPO3 extension ``blog_example``
 
