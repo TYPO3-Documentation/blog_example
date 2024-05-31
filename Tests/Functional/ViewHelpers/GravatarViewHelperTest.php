@@ -44,7 +44,7 @@ class GravatarViewHelperTest extends FunctionalTestCase
         $view = GeneralUtility::makeInstance(StandaloneView::class);
         $view->setTemplateSource(sprintf(
             $this->getFluidTemplateSource(),
-            '<blog:gravatar emailAddress="test" />'
+            '<blog:gravatar emailAddress="test" />',
         ));
 
         $content = $view->render();
