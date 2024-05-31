@@ -352,10 +352,7 @@ class Post extends AbstractEntity implements \Stringable
         $this->title = $title;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getDate(): \DateTime
+    public function getDate(): ?\DateTime
     {
         return $this->date;
     }
