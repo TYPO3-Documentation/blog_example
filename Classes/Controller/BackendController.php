@@ -35,6 +35,7 @@ use TYPO3\CMS\Core\Imaging\IconSize;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Type\Bitmask\Permission;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 
@@ -56,6 +57,16 @@ class BackendController extends ActionController
         protected readonly ModuleTemplateFactory $moduleTemplateFactory,
         private readonly IconFactory $iconFactory,
     ) {}
+
+    public function addPopulateButton(ButtonBar $buttonBar): void
+    {
+        $populateButton = $buttonBar->makeLinkButton()
+            ->setHref($this->uriBuilder->reset()->uriFor('populate'))
+            ->setTitle('Create example data')
+            ->setShowLabelText(true)
+            ->setIcon($this->iconFactory->getIcon('actions-plus-badge', IconSize::SMALL));
+        $buttonBar->addButton($populateButton);
+    }
 
     /**
      * Function will be called before every other action
@@ -103,6 +114,7 @@ class BackendController extends ActionController
     public function deleteBlogAction(Blog $blog): ResponseInterface
     {
         $this->blogRepository->remove($blog);
+        $this->addFlashMessage(sprintf('Blog "%s" was deleted. ', $blog->title), 'Blog was deleted');
         return $this->redirect('index');
     }
 
@@ -129,39 +141,27 @@ class BackendController extends ActionController
         int $currentPage = 1,
     ): ResponseInterface {
         $view = $this->initializeModuleTemplate($this->request);
-        if ($blog == null) {
-            $defaultBlog = $this->settings['defaultBlog'] ?? 0;
-            if ($defaultBlog > 0) {
-                $blog = $this->blogRepository->findByUid((int)$defaultBlog);
-            } else {
-                $blog = $this->blogRepository->findAll()->getFirst();
-            }
+        if ($blog === null) {
+            $this->addFlashMessage('Blog was not found', 'Warning', ContextualFeedbackSeverity::WARNING);
+            return $this->redirect('index');
         }
-        if ($blog == null) {
-            $view->assign('blog', 0);
-
-            $view->assignMultiple([
-                'blog' => 0,
-            ]);
+        if ($tag === '') {
+            $posts = $this->postRepository->findBy(['blog' => $blog]);
         } else {
-            if (empty($tag)) {
-                $posts = $this->postRepository->findBy(['blog' => $blog]);
-            } else {
-                $tag = urldecode($tag);
-                $posts = $this->postRepository->findByTagAndBlog($tag, $blog);
-                $view->assign('tag', $tag);
-            }
-            $paginator = new QueryResultPaginator($posts, $currentPage, 3);
-            $pagination = new SimplePagination($paginator);
-
-            $view->assignMultiple([
-                'blog' => $blog,
-                'posts' => $posts,
-                'paginator' => $paginator,
-                'pagination' => $pagination,
-                'pages' => range(1, $pagination->getLastPageNumber()),
-            ]);
+            $tag = urldecode($tag);
+            $posts = $this->postRepository->findByTagAndBlog(urldecode($tag), $blog);
         }
+        $paginator = new QueryResultPaginator($posts, $currentPage, 3);
+        $pagination = new SimplePagination($paginator);
+
+        $view->assignMultiple([
+            'blog' => $blog,
+            'posts' => $posts,
+            'paginator' => $paginator,
+            'pagination' => $pagination,
+            'pages' => range(1, $pagination->getLastPageNumber()),
+            'tag' => $tag,
+        ]);
         return $view->renderResponse('showBlog');
     }
 
@@ -203,12 +203,7 @@ class BackendController extends ActionController
         $menu = $this->buildMenu($view, $context);
 
         $buttonBar = $view->getDocHeaderComponent()->getButtonBar();
-        $populateButton = $buttonBar->makeLinkButton()
-            ->setHref($this->uriBuilder->reset()->uriFor('populate'))
-            ->setTitle('Create example data')
-            ->setShowLabelText(true)
-            ->setIcon($this->iconFactory->getIcon('actions-plus-badge', IconSize::SMALL));
-        $buttonBar->addButton($populateButton);
+        $this->addPopulateButton($buttonBar);
         $this->addShortCutButton($buttonBar);
         $this->addReloadButton($buttonBar);
 
