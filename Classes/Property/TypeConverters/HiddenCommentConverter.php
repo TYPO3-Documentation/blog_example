@@ -32,7 +32,11 @@ class HiddenCommentConverter extends PersistentObjectConverter
     {
         if (ctype_digit((string)$identity)) {
             $query = $this->persistenceManager->createQueryForType($targetType);
-            $query->getQuerySettings()->setIgnoreEnableFields(true);
+            $query
+                ->getQuerySettings()
+                ->setRespectStoragePage(false)
+                ->setIgnoreEnableFields(true)
+                ->setEnableFieldsToBeIgnored(['disabled']);
             $object = $query->matching($query->equals('uid', $identity))->execute()->getFirst();
         } else {
             throw new InvalidSourceException(
