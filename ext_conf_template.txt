@@ -1,0 +1,2 @@
+# cat=basic; type=string; label=Example entry: This is just an example for ExtensionConfigurationProvider to check, if this value is available in Expression Language
+foo = bar
