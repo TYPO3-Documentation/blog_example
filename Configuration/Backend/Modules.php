@@ -18,6 +18,7 @@ return [
             BackendController::class => [
                 'index',
                 'deleteAll',
+                'deleteBlog',
                 'populate',
                 'showBlog',
                 'showPost',

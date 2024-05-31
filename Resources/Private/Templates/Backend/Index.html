@@ -9,30 +9,67 @@
     <f:if condition="{blogs}">
         <f:then>
             <p class="bodytext">Here is a list of blogs:</p>
-            <ul>
+            <div class="table-fit">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th class="nowrap align-top">Blog</th>
+                    <th class="align-top">Description</th>
+                    <th class="align-top">&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
                 <f:for each="{blogs}" as="blog">
-                    <li>
-                        <h3>
-                            <f:link.action action="showBlog" controller="Backend" arguments="{blog: blog}" title="Edit this Blog">
-                                <core:icon identifier="actions-document-edit" />
-                                {blog.title} (
-                                <f:count subject="{blog.posts}" />
-                                )
-                            </f:link.action>
-                        </h3>
-                        <p>
+                    <tr>
+                        <td class="col-icon nowrap align-top">
+                            <f:link.action action="showBlog" controller="Backend" arguments="{blog: blog}" title="Show this Blog">
+                                {blog.title}
+                            </f:link.action> (<f:count subject="{blog.posts}" />)
+                        </td>
+                        <td class="col-icon align-top">
                             <f:format.nl2br>{blog.description}</f:format.nl2br>
-                        </p>
-                    </li>
+                        </td>
+                        <td class="align-top nowrap col-control">
+                            <div class="btn-group">
+                                <f:link.action class="btn btn-default" action="showBlog" controller="Backend" arguments="{blog: blog}" title="Show posts in this Blog">
+                                    <core:icon identifier="actions-list-alternative" />
+                                </f:link.action>
+
+                                <a href="{be:uri.editRecord(uid: blog.uid, table:'tx_blogexample_domain_model_blog')}" class="btn btn-default"  title="Edit this Blog">
+                                    <core:icon identifier="actions-open" />
+                                </a>
+                                <button
+                                    type="submit"
+                                    class="btn btn-default t3js-modal-trigger"
+                                    data-target-form="blog_delete_{blog.uid}"
+                                    title="{f:translate(key:'LLL:EXT:backend/Resources/Private/Language/locallang_siteconfiguration.xlf:overview.deleteSiteConfiguration')}"
+                                    data-severity="error"
+                                    data-title="Delete this Blog"
+                                    data-button-close-text="{f:translate(key:'LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:cancel')}"
+                                    data-button-ok-text="{f:translate(key:'LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:delete')}"
+                                >
+                                    <core:icon identifier="actions-delete" />
+                                </button>
+                                <f:form action="deleteBlog" name="blog_delete_{blog.uid}" controller="Backend" id="blog_delete_{blog.uid}" method="post">
+                                    <f:form.hidden name="blog" value="{blog}"></f:form.hidden>
+                                </f:form>
+                            </div>
+                        </td>
+                    </tr>
                 </f:for>
-            </ul>
+
+                </tbody>
+            </table>
+            </div>
             <p>
-                <f:link.action action="deleteAll">Delete all Blogs [!!!]</f:link.action>
+                <f:link.action action="deleteAll" class="btn btn-warning">
+                    <core:icon identifier="actions-delete" /> Delete all Blogs [!!!]
+                </f:link.action>
             </p>
         </f:then>
         <f:else>
             <p>
-                <f:link.action action="populate">Create example data</f:link.action>
+                <f:link.action action="populate" class="btn btn-primary">Create example data</f:link.action>
             </p>
         </f:else>
     </f:if>

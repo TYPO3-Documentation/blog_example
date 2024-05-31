@@ -25,10 +25,14 @@ use T3docs\BlogExample\Domain\Repository\BlogRepository;
 use T3docs\BlogExample\Domain\Repository\CommentRepository;
 use T3docs\BlogExample\Domain\Repository\PostRepository;
 use T3docs\BlogExample\Service\BlogFactory;
+use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Template\Components\Menu\Menu;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Imaging\IconFactory;
+use TYPO3\CMS\Core\Imaging\IconSize;
+use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Type\Bitmask\Permission;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -50,6 +54,7 @@ class BackendController extends ActionController
         protected readonly PostRepository $postRepository,
         protected readonly CommentRepository $commentRepository,
         protected readonly ModuleTemplateFactory $moduleTemplateFactory,
+        private readonly IconFactory $iconFactory,
     ) {}
 
     /**
@@ -58,7 +63,6 @@ class BackendController extends ActionController
     protected function initializeAction(): void
     {
         $this->pageUid = (int)($this->request->getQueryParams()['id'] ?? 0);
-        parent::initializeAction();
     }
 
     /**
@@ -91,6 +95,14 @@ class BackendController extends ActionController
     public function deleteAllAction(): ResponseInterface
     {
         $this->blogRepository->removeAll();
+        return $this->redirect('index');
+    }
+    /**
+     * Deletes a blog
+     */
+    public function deleteBlogAction(Blog $blog): ResponseInterface
+    {
+        $this->blogRepository->remove($blog);
         return $this->redirect('index');
     }
 
@@ -190,9 +202,19 @@ class BackendController extends ActionController
         $context = '';
         $menu = $this->buildMenu($view, $context);
 
+        $buttonBar = $view->getDocHeaderComponent()->getButtonBar();
+        $populateButton = $buttonBar->makeLinkButton()
+            ->setHref($this->uriBuilder->reset()->uriFor('populate'))
+            ->setTitle('Create example data')
+            ->setShowLabelText(true)
+            ->setIcon($this->iconFactory->getIcon('actions-plus-badge', IconSize::SMALL));
+        $buttonBar->addButton($populateButton);
+        $this->addShortCutButton($buttonBar);
+        $this->addReloadButton($buttonBar);
+
         $view->getDocHeaderComponent()->getMenuRegistry()->addMenu($menu);
         $view->setTitle(
-            $GLOBALS['LANG']->sL('LLL:EXT:blog_example/Resources/Private/Language/Module/locallang_mod.xlf:mlang_tabs_tab'),
+            $this->getLanguageService()->sL('LLL:EXT:blog_example/Resources/Private/Language/Module/locallang_mod.xlf:mlang_tabs_tab'),
             $context,
         );
 
@@ -206,18 +228,40 @@ class BackendController extends ActionController
         }
     }
 
+    private function addReloadButton(ButtonBar $buttonBar): void
+    {
+        $reloadButton = $buttonBar->makeLinkButton()
+            ->setHref($this->request->getAttribute('normalizedParams')->getRequestUri())
+            ->setTitle($this->getLanguageService()->sL('LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.reload'))
+            ->setIcon($this->iconFactory->getIcon('actions-refresh', IconSize::SMALL));
+        $buttonBar->addButton($reloadButton, ButtonBar::BUTTON_POSITION_RIGHT);
+    }
+
+    private function addShortCutButton(ButtonBar $buttonBar): void
+    {
+        $shortcutButton = $buttonBar->makeShortcutButton()
+            ->setRouteIdentifier('blog_example')
+            ->setDisplayName($this->getLanguageService()->sL('LLL:EXT:blog_example/Resources/Private/Language/locallang.xlf:administration.menu.index'));
+        $buttonBar->addButton($shortcutButton, ButtonBar::BUTTON_POSITION_RIGHT);
+    }
+
+    protected function getLanguageService(): LanguageService
+    {
+        return $GLOBALS['LANG'];
+    }
+
     private function buildMenu(ModuleTemplate $view, String &$context): Menu
     {
         $menuItems = [
             'index' => [
                 'controller' => 'Backend',
                 'action' => 'index',
-                'label' => $GLOBALS['LANG']->sL('LLL:EXT:blog_example/Resources/Private/Language/locallang.xlf:administration.menu.index'),
+                'label' => $this->getLanguageService()->sL('LLL:EXT:blog_example/Resources/Private/Language/locallang.xlf:administration.menu.index'),
             ],
             'showAllComents' => [
                 'controller' => 'Backend',
                 'action' => 'showAllComments',
-                'label' => $GLOBALS['LANG']->sL('LLL:EXT:blog_example/Resources/Private/Language/locallang.xlf:administration.menu.comments'),
+                'label' => $this->getLanguageService()->sL('LLL:EXT:blog_example/Resources/Private/Language/locallang.xlf:administration.menu.comments'),
             ],
         ];
 
