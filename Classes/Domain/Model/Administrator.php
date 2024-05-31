@@ -22,5 +22,5 @@ namespace T3docs\BlogExample\Domain\Model;
  */
 class Administrator extends FrontendUser
 {
-    public String $administratorName = '';
+    public string $administratorName = '';
 }
