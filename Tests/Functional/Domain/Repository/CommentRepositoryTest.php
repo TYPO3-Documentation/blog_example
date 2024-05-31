@@ -45,7 +45,7 @@ final class CommentRepositoryTest extends FunctionalTestCase
     {
         self::assertCount(
             2,
-            $this->subject->findAllIgnoreEnableFields()
+            $this->subject->findAllIgnoreEnableFields(),
         );
     }
 }
