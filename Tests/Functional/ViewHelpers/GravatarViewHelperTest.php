@@ -49,9 +49,8 @@ class GravatarViewHelperTest extends FunctionalTestCase
 
         $content = $view->render();
 
-        // @ToDo: In future we should allow just secure connections
         self::assertMatchesRegularExpression(
-            '/(http|https):\/\/(www\.)?gravatar\.com/',
+            '/https:\/\/gravatar\.com/',
             $content,
         );
     }
@@ -103,9 +102,8 @@ class GravatarViewHelperTest extends FunctionalTestCase
 
         $content = $view->render();
 
-        // ToDo: Gravatar allows just int 1-2048 for size. We should update argument in ViewHelper
         self::assertMatchesRegularExpression(
-            '/s=XXL/',
+            '/s=1/',
             $content,
         );
     }
