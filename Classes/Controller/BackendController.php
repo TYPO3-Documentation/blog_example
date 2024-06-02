@@ -68,6 +68,25 @@ class BackendController extends ActionController
         $buttonBar->addButton($populateButton);
     }
 
+    public function addButtons(ButtonBar $buttonBar): void
+    {
+        $this->addPopulateButton($buttonBar);
+        $this->addShortCutButton($buttonBar);
+        $this->addReloadButton($buttonBar);
+    }
+
+    /**
+     * @return array<string,scalar>|false
+     */
+    public function getMetaInformation(): array|false
+    {
+        $permissionClause = $GLOBALS['BE_USER']->getPagePermsClause(Permission::PAGE_SHOW);
+        return BackendUtility::readPageAccess(
+            $this->pageUid,
+            $permissionClause,
+        );
+    }
+
     /**
      * Function will be called before every other action
      */
@@ -191,35 +210,28 @@ class BackendController extends ActionController
     ): ModuleTemplate {
         $view = $this->moduleTemplateFactory->create($request);
 
-        $this->modifyDocHeaderComponent($view);
-        $view->setFlashMessageQueue($this->getFlashMessageQueue());
-
-        return $view;
-    }
-
-    private function modifyDocHeaderComponent(ModuleTemplate $view): void
-    {
         $context = '';
-        $menu = $this->buildMenu($view, $context);
-
-        $buttonBar = $view->getDocHeaderComponent()->getButtonBar();
-        $this->addPopulateButton($buttonBar);
-        $this->addShortCutButton($buttonBar);
-        $this->addReloadButton($buttonBar);
-
-        $view->getDocHeaderComponent()->getMenuRegistry()->addMenu($menu);
+        $this->modifyDocHeaderComponent($view, $context);
+        $view->setFlashMessageQueue($this->getFlashMessageQueue());
         $view->setTitle(
             $this->getLanguageService()->sL('LLL:EXT:blog_example/Resources/Private/Language/Module/locallang_mod.xlf:mlang_tabs_tab'),
             $context,
         );
 
-        $permissionClause = $GLOBALS['BE_USER']->getPagePermsClause(Permission::PAGE_SHOW);
-        $pageRecord = BackendUtility::readPageAccess(
-            $this->pageUid,
-            $permissionClause,
-        );
-        if ($pageRecord) {
-            $view->getDocHeaderComponent()->setMetaInformation($pageRecord);
+        return $view;
+    }
+
+    private function modifyDocHeaderComponent(ModuleTemplate $view, string &$context): void
+    {
+        $menu = $this->buildMenu($view, $context);
+        $view->getDocHeaderComponent()->getMenuRegistry()->addMenu($menu);
+
+        $buttonBar = $view->getDocHeaderComponent()->getButtonBar();
+        $this->addButtons($buttonBar);
+
+        $metaInformation = $this->getMetaInformation();
+        if (is_array($metaInformation)) {
+            $view->getDocHeaderComponent()->setMetaInformation($metaInformation);
         }
     }
 
