@@ -112,10 +112,7 @@ return [
             'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_post.date',
             'config' => [
                 'type' => 'datetime',
-                'size' => 12,
                 'eval' => 'datetime',
-                'required' => true,
-                'default' => time(),
             ],
         ],
         'author' => [
