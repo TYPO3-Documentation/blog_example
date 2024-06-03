@@ -10,7 +10,7 @@
     </f:link.action>
     <h1>{post.title}</h1>
     <p>
-        <f:format.nl2br>{post.content}</f:format.nl2br>
+        <f:format.html>{post.content}</f:format.html>
     </p>
     <f:render partial="PostMetaData" arguments="{post: post}" />
     <f:render partial="PostTags" arguments="{post: post}" />
