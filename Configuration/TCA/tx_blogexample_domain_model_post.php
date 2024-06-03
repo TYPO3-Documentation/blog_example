@@ -182,8 +182,7 @@ return [
             'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_post.content',
             'config' => [
                 'type' => 'text',
-                'rows' => 30,
-                'cols' => 80,
+                'enableRichtext' => true,
             ],
         ],
         'tags' => [
