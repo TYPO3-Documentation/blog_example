@@ -217,6 +217,7 @@ return [
             --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:categories,
                     category,
             --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
+                --palette--;;language,
                 administrator,
                 --palette--;;visibility,
                 --palette--;;access,
@@ -232,6 +233,9 @@ return [
                 starttime, endtime,
                 --linebreak--,
                 fe_group',
+        ],
+        'language' => [
+            'showitem' => 'sys_language_uid, l10n_parent,',
         ],
     ],
 ];
