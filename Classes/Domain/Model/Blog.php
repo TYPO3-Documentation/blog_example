@@ -21,6 +21,7 @@ use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
 use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\Domain\Model\Category;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -42,9 +43,9 @@ class Blog extends AbstractEntity
     public string $description = '';
 
     /**
-     * A relative path to a logo image
+     * @var ?ObjectStorage<FileReference>
      */
-    public string $logo = '';
+    public ?ObjectStorage $logo = null;
 
     /**
      * @var ?ObjectStorage<Post>
