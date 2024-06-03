@@ -67,10 +67,9 @@ class BlogTest extends UnitTestCase
         );
     }
 
-    public function testLogoWillInitiallyReturnEmptyString(): void
+    public function testLogoWillInitiallyReturnNull(): void
     {
-        self::assertSame(
-            '',
+        self::assertNull(
             $this->subject->logo,
         );
     }
