@@ -21,7 +21,7 @@
 			<trans-unit id="tx_blogexample_domain_model_blog.administrator" resname="tx_blogexample_domain_model_blog.administrator">
 				<source>Administrator</source>
 			</trans-unit>
-			<trans-unit id="tx_blogexample_domain_model_blog.administrator" resname="tx_blogexample_domain_model_blog.administrator.description">
+			<trans-unit id="tx_blogexample_domain_model_blog.administrator.description" resname="tx_blogexample_domain_model_blog.administrator.description">
 				<source>This frontend user may edit the blog and all its posts. </source>
 			</trans-unit>
 			<trans-unit id="tx_blogexample_domain_model_post" resname="tx_blogexample_domain_model_post">
