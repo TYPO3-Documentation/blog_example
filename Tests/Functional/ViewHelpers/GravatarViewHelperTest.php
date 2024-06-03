@@ -92,7 +92,7 @@ class GravatarViewHelperTest extends FunctionalTestCase
     }
 
     #[Test]
-    public function renderWillAddSizeToGravatarUri(): void
+    public function renderWithStringForSizeWillCastValueToIntAndForceValueTo1(): void
     {
         $view = GeneralUtility::makeInstance(StandaloneView::class);
         $view->setTemplateSource(sprintf(
@@ -104,6 +104,57 @@ class GravatarViewHelperTest extends FunctionalTestCase
 
         self::assertMatchesRegularExpression(
             '/s=1/',
+            $content,
+        );
+    }
+
+    #[Test]
+    public function renderWithTooSmallIntForSizeWillBeForcedTo1(): void
+    {
+        $view = GeneralUtility::makeInstance(StandaloneView::class);
+        $view->setTemplateSource(sprintf(
+            $this->getFluidTemplateSource(),
+            '<blog:gravatar emailAddress="foo@example.com" size="-12" />',
+        ));
+
+        $content = $view->render();
+
+        self::assertMatchesRegularExpression(
+            '/s=1/',
+            $content,
+        );
+    }
+
+    #[Test]
+    public function renderWithIntForSizeWillStayTheSame(): void
+    {
+        $view = GeneralUtility::makeInstance(StandaloneView::class);
+        $view->setTemplateSource(sprintf(
+            $this->getFluidTemplateSource(),
+            '<blog:gravatar emailAddress="foo@example.com" size="120" />',
+        ));
+
+        $content = $view->render();
+
+        self::assertMatchesRegularExpression(
+            '/s=120/',
+            $content,
+        );
+    }
+
+    #[Test]
+    public function renderWithTooHighSizeWillForceValueTo2048(): void
+    {
+        $view = GeneralUtility::makeInstance(StandaloneView::class);
+        $view->setTemplateSource(sprintf(
+            $this->getFluidTemplateSource(),
+            '<blog:gravatar emailAddress="foo@example.com" size="217348" />',
+        ));
+
+        $content = $view->render();
+
+        self::assertMatchesRegularExpression(
+            '/s=2048/',
             $content,
         );
     }
