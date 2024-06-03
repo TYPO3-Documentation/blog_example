@@ -235,7 +235,7 @@ return [
                 fe_group',
         ],
         'language' => [
-            'showitem' => 'sys_language_uid, l10n_parent,',
+            'showitem' => 'sys_language_uid, l10n_parent',
         ],
     ],
 ];
