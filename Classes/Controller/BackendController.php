@@ -245,7 +245,7 @@ class BackendController extends ActionController
         return $GLOBALS['LANG'];
     }
 
-    private function buildMenu(ModuleTemplate $view, String &$context): Menu
+    private function buildMenu(ModuleTemplate $view, string &$context): Menu
     {
         $menuItems = [
             'index' => [
