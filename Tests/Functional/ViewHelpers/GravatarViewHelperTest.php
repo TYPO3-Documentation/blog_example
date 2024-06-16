@@ -17,11 +17,14 @@ namespace T3docs\BlogExample\Tests\Functional\ViewHelpers;
  * The TYPO3 project - inspiring people to share!
  */
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use T3docs\BlogExample\ViewHelpers\GravatarViewHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextFactory;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
+use TYPO3Fluid\Fluid\View\TemplateView;
 
 class GravatarViewHelperTest extends FunctionalTestCase
 {
@@ -38,124 +41,57 @@ class GravatarViewHelperTest extends FunctionalTestCase
         $this->subject = new GravatarViewHelper();
     }
 
-    #[Test]
-    public function renderWillBuildImgTagWithGravatarUri(): void
+    public static function renderDataProvider(): array
     {
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplateSource(sprintf(
-            $this->getFluidTemplateSource(),
-            '<blog:gravatar emailAddress="test" />',
-        ));
-
-        $content = $view->render();
-
-        self::assertMatchesRegularExpression(
-            '/https:\/\/gravatar\.com/',
-            $content,
-        );
+        return [
+            'renderWillHashEmailAndAddItToImgTag' => [
+                '<blog:gravatar emailAddress="foo@example.org" />',
+                '<img src="https://gravatar.com/avatar/64f677e30cd713a9467794a26711e42d" />',
+            ],
+            'renderWillEncodeDefaultImageUriToImgTag' => [
+                '<blog:gravatar emailAddress="foo@example.org" defaultImageUri="https://typo3.org?test=123&foo=bar" />',
+                '<img src="https://gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?d=https%253A%252F%252Ftypo3.org%253Ftest%253D123%2526foo%253Dbar" />',
+            ],
+            'renderWithCombinedSizeAndDefaultImageUri' => [
+                '<blog:gravatar emailAddress="foo@example.org" size="256" defaultImageUri="https://typo3.org" />',
+                '<img src="https://gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?d=https%253A%252F%252Ftypo3.org&amp;s=256" />',
+            ],
+            'renderWithCombinedSizeAndEmptyDefaultImageUriWillOnlyAddSizeArgument' => [
+                '<blog:gravatar emailAddress="foo@example.org" size="512" defaultImageUri="" />',
+                '<img src="https://gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?s=512" />',
+            ],
+            'renderWithStringForSizeWillCastValueToIntAndForceValueTo1' => [
+                '<blog:gravatar emailAddress="foo@example.org" size="XXL" />',
+                '<img src="https://gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?s=1" />',
+            ],
+            'renderWithTooSmallIntForSizeWillBeForcedTo1' => [
+                '<blog:gravatar emailAddress="foo@example.org" size="-12" />',
+                '<img src="https://gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?s=1" />',
+            ],
+            'renderWithIntForSizeWillStayTheSame' => [
+                '<blog:gravatar emailAddress="foo@example.org" size="120" />',
+                '<img src="https://gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?s=120" />',
+            ],
+            'renderWithTooHighSizeWillForceValueTo2048' => [
+                '<blog:gravatar emailAddress="foo@example.org" size="217348" />',
+                '<img src="https://gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?s=2048" />',
+            ],
+        ];
     }
 
+    #[DataProvider('renderDataProvider')]
     #[Test]
-    public function renderWillHashEmailAndAddItToImgTag(): void
-    {
-        $email = 'foo@example.com';
-
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplateSource(sprintf(
-            $this->getFluidTemplateSource(),
-            '<blog:gravatar emailAddress="' . $email . '" />',
-        ));
-
-        $content = $view->render();
-
-        self::assertStringContainsString(
-            md5($email),
-            $content,
-        );
-    }
-
-    #[Test]
-    public function renderWillEncodeDefaultImageUriToImgTag(): void
+    public function render(string $templateSource, string $expected): void
     {
         $view = GeneralUtility::makeInstance(StandaloneView::class);
         $view->setTemplateSource(sprintf(
             $this->getFluidTemplateSource(),
-            '<blog:gravatar emailAddress="foo@example.com" defaultImageUri="https://typo3.org?test=123&foo=bar" />',
+            $templateSource,
         ));
 
-        $content = $view->render();
-
-        self::assertMatchesRegularExpression(
-            '/d=https%3A%2F%2Ftypo3.org%3Ftest%3D123%26foo%3Dbar/',
-            $content,
-        );
-    }
-
-    #[Test]
-    public function renderWithStringForSizeWillCastValueToIntAndForceValueTo1(): void
-    {
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplateSource(sprintf(
-            $this->getFluidTemplateSource(),
-            '<blog:gravatar emailAddress="foo@example.com" size="XXL" />',
-        ));
-
-        $content = $view->render();
-
-        self::assertMatchesRegularExpression(
-            '/s=1/',
-            $content,
-        );
-    }
-
-    #[Test]
-    public function renderWithTooSmallIntForSizeWillBeForcedTo1(): void
-    {
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplateSource(sprintf(
-            $this->getFluidTemplateSource(),
-            '<blog:gravatar emailAddress="foo@example.com" size="-12" />',
-        ));
-
-        $content = $view->render();
-
-        self::assertMatchesRegularExpression(
-            '/s=1/',
-            $content,
-        );
-    }
-
-    #[Test]
-    public function renderWithIntForSizeWillStayTheSame(): void
-    {
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplateSource(sprintf(
-            $this->getFluidTemplateSource(),
-            '<blog:gravatar emailAddress="foo@example.com" size="120" />',
-        ));
-
-        $content = $view->render();
-
-        self::assertMatchesRegularExpression(
-            '/s=120/',
-            $content,
-        );
-    }
-
-    #[Test]
-    public function renderWithTooHighSizeWillForceValueTo2048(): void
-    {
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplateSource(sprintf(
-            $this->getFluidTemplateSource(),
-            '<blog:gravatar emailAddress="foo@example.com" size="217348" />',
-        ));
-
-        $content = $view->render();
-
-        self::assertMatchesRegularExpression(
-            '/s=2048/',
-            $content,
+        self::assertSame(
+            $expected,
+            $view->render(),
         );
     }
 
