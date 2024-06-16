@@ -21,10 +21,8 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use T3docs\BlogExample\ViewHelpers\GravatarViewHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextFactory;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
-use TYPO3Fluid\Fluid\View\TemplateView;
 
 class GravatarViewHelperTest extends FunctionalTestCase
 {
