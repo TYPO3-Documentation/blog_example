@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace T3docs\BlogExample\ViewHelpers;
 
-use TYPO3\CMS\Core\Http\Uri;
 use TYPO3\CMS\Core\Http\UriFactory;
 use TYPO3\CMS\Core\Utility\HttpUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
