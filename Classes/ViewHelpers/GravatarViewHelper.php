@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace T3docs\BlogExample\ViewHelpers;
 
+use TYPO3\CMS\Core\Http\Uri;
+use TYPO3\CMS\Core\Http\UriFactory;
+use TYPO3\CMS\Core\Utility\HttpUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
@@ -41,6 +44,13 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
      */
     protected $tagName = 'img';
 
+    protected UriFactory $uriFactory;
+
+    public function injectUriFactory(UriFactory $uriFactory): void
+    {
+        $this->uriFactory = $uriFactory;
+    }
+
     /**
      * Initialize arguments
      */
@@ -56,20 +66,24 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
 
     public function render(): string
     {
-        $gravatarUri = 'https://gravatar.com/avatar/' . md5($this->arguments['emailAddress']);
-        $uriParts = [];
+        $gravatarUri = $this->uriFactory->createUri(
+            'https://gravatar.com/avatar/' . md5($this->arguments['emailAddress'])
+        );
+
+        $queryArguments = [];
         if ($this->arguments['defaultImageUri'] !== null) {
-            $uriParts[] = 'd=' . urlencode($this->arguments['defaultImageUri']);
-        }
-        if ($this->arguments['size'] !== null) {
-            $size = MathUtility::forceIntegerInRange((int)$this->arguments['size'], 1, 2048);
-            $uriParts[] = 's=' . $size;
-        }
-        if (count($uriParts) > 0) {
-            $gravatarUri .= '?' . implode('&', $uriParts);
+            $queryArguments['d'] = urlencode($this->arguments['defaultImageUri']);
         }
 
-        $this->tag->addAttribute('src', $gravatarUri);
+        if ($this->arguments['size'] !== null) {
+            $queryArguments['s'] = MathUtility::forceIntegerInRange((int)$this->arguments['size'], 1, 2048);
+        }
+
+        $this->tag->addAttribute(
+            'src',
+            (string)$gravatarUri->withQuery(HttpUtility::buildQueryString($queryArguments, '', true))
+        );
+
         return $this->tag->render();
     }
 }
