@@ -6,6 +6,9 @@ parameters:
   inferPrivatePropertyTypeFromConstructor: true
   treatPhpDocTypesAsCertain: false
 
+  bootstrapFiles:
+    - phpstan-typo3-constants.php
+
   paths:
     - ../../Classes/
     - ../../Configuration/
