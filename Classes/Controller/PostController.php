@@ -103,7 +103,7 @@ class PostController extends AbstractController
         $paginator = new QueryResultPaginator(
             $posts,
             $currentPage,
-            (int)($this->settings['itemsPerPage'] ?? 3)
+            (int)($this->settings['itemsPerPage'] ?? 3),
         );
         $pagination = new SimplePagination($paginator);
         $this->view->assignMultiple([
