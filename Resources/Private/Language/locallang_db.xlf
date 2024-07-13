@@ -3,6 +3,10 @@
 	<file source-language="en" datatype="plaintext" original="EXT:blog_example/Resources/Private/Language/locallang_db.xlf" date="2020-11-16T10:33:06Z" product-name="blog_example">
 		<header/>
 		<body>
+			<trans-unit id="group.blog" resname="group.blog">
+				<source>Blog</source>
+			</trans-unit>
+
 			<trans-unit id="tx_blogexample_domain_model_blog" resname="tx_blogexample_domain_model_blog">
 				<source>Blog</source>
 			</trans-unit>
