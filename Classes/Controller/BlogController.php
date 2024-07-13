@@ -54,7 +54,7 @@ class BlogController extends AbstractController
         $paginator = new QueryResultPaginator(
             $allAvailableBlogs,
             $currentPage,
-            3,
+            (int)($this->settings['itemsPerPage'] ?? 3),
         );
         $pagination = new SimplePagination($paginator);
         $this->view->assignMultiple([
