@@ -22,7 +22,5 @@ mod.wizards.newContentElement.wizardItems {
         }
       }
     }
-
-    show := addToList(blogexample_postlist,blogexample_postsingle,blogexample_blogadmin)
   }
 }
