@@ -33,6 +33,7 @@ use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Imaging\IconSize;
 use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Type\Bitmask\Permission;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
@@ -56,6 +57,7 @@ class BackendController extends ActionController
         protected readonly CommentRepository $commentRepository,
         protected readonly ModuleTemplateFactory $moduleTemplateFactory,
         private readonly IconFactory $iconFactory,
+        private readonly LanguageServiceFactory $languageServiceFactory,
     ) {}
 
     public function addPopulateButton(ButtonBar $buttonBar): void
@@ -254,7 +256,7 @@ class BackendController extends ActionController
 
     protected function getLanguageService(): LanguageService
     {
-        return $GLOBALS['LANG'];
+        return $this->languageServiceFactory->createFromUserPreferences($GLOBALS['BE_USER']);
     }
 
     private function buildMenu(ModuleTemplate $view, string &$context): Menu
