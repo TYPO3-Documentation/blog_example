@@ -3,6 +3,10 @@ help: ## Displays this list of targets with descriptions
     @echo "The following commands are available:\n"
     @grep -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}'
 
+.PHONY: install
+install: ## Run rector
+	Build/Scripts/runTests.sh -s composerUpdate
+
 .PHONY: rector
 rector: ## Run rector
 	Build/Scripts/runTests.sh -s rector
