@@ -42,12 +42,9 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
      * @var string
      */
     protected $tagName = 'img';
-
-    protected UriFactory $uriFactory;
-
-    public function injectUriFactory(UriFactory $uriFactory): void
+    public function __construct(private readonly UriFactory $uriFactory)
     {
-        $this->uriFactory = $uriFactory;
+        parent::__construct();
     }
 
     /**
@@ -55,8 +52,6 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
      */
     public function initializeArguments(): void
     {
-        parent::initializeArguments();
-
         $this->registerUniversalTagAttributes();
         $this->registerArgument('emailAddress', 'string', '', true)
              ->registerArgument('defaultImageUri', 'string', '', false)
