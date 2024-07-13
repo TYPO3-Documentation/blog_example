@@ -20,6 +20,7 @@ namespace T3docs\BlogExample\Tests\Functional\ViewHelpers;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use T3docs\BlogExample\ViewHelpers\GravatarViewHelper;
+use TYPO3\CMS\Core\Http\UriFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -36,7 +37,7 @@ class GravatarViewHelperTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $this->subject = new GravatarViewHelper();
+        $this->subject = new GravatarViewHelper(GeneralUtility::makeInstance(UriFactory::class));
     }
 
     public static function renderDataProvider(): array
