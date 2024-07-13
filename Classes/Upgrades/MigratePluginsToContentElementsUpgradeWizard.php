@@ -34,7 +34,7 @@ final class MigratePluginsToContentElementsUpgradeWizard implements UpgradeWizar
         foreach (self::PLUGINS as $pluginName) {
             $queryBuilder = $this->getQueryBuilder();
 
-            return (bool)$queryBuilder
+            $queryBuilder
                 ->update('tt_content')
                 ->set('CType', $pluginName)
                 ->set('list_type', '')
