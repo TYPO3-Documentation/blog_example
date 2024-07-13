@@ -41,11 +41,11 @@ final class MigratePluginsToContentElementsUpgradeWizard implements UpgradeWizar
                 ->where(
                     $queryBuilder->expr()->eq(
                         'CType',
-                        $queryBuilder->createNamedParameter('list')
+                        $queryBuilder->createNamedParameter('list'),
                     ),
                     $queryBuilder->expr()->eq(
                         'list_type',
-                        $queryBuilder->createNamedParameter($pluginName)
+                        $queryBuilder->createNamedParameter($pluginName),
                     ),
                 )
                 ->executeStatement();
@@ -62,7 +62,7 @@ final class MigratePluginsToContentElementsUpgradeWizard implements UpgradeWizar
         foreach (self::PLUGINS as $pluginName) {
             $orConstraints[] = $queryBuilder->expr()->eq(
                 'list_type',
-                $queryBuilder->createNamedParameter($pluginName)
+                $queryBuilder->createNamedParameter($pluginName),
             );
         }
 
@@ -72,9 +72,9 @@ final class MigratePluginsToContentElementsUpgradeWizard implements UpgradeWizar
             ->where(
                 $queryBuilder->expr()->eq(
                     'CType',
-                    $queryBuilder->createNamedParameter('list')
+                    $queryBuilder->createNamedParameter('list'),
                 ),
-                $queryBuilder->expr()->or(...$orConstraints)
+                $queryBuilder->expr()->or(...$orConstraints),
             )
             ->executeQuery()
             ->fetchOne();
