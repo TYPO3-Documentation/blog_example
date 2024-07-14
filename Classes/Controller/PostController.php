@@ -100,7 +100,11 @@ class PostController extends AbstractController
             $posts = $this->postRepository->findByTagAndBlog($tag, $blog);
             $this->view->assign('tag', $tag);
         }
-        $paginator = new QueryResultPaginator($posts, $currentPage, 3);
+        $paginator = new QueryResultPaginator(
+            $posts,
+            $currentPage,
+            (int)($this->settings['itemsPerPage'] ?? 3),
+        );
         $pagination = new SimplePagination($paginator);
         $this->view->assignMultiple([
             'paginator' => $paginator,
