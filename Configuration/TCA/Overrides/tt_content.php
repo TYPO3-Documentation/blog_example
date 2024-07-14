@@ -9,6 +9,9 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 defined('TYPO3') or die();
 
+$GLOBALS['TCA']['tt_content']['columns']['CType']['config']['itemGroups']['blog']
+    = 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:group.blog';
+
 /**
  * Registers a Plugin to be listed in the Backend.
  */
