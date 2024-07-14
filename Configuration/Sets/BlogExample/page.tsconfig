@@ -23,4 +23,22 @@ mod.wizards.newContentElement.wizardItems {
       }
     }
   }
+  lists {
+    after = default
+  }
+  menu {
+    after = lists
+  }
+  forms {
+    after = menu
+  }
+  special {
+    after = forms
+  }
+  plugins {
+    after = special
+  }
+  blog {
+    after = plugins
+  }
 }
