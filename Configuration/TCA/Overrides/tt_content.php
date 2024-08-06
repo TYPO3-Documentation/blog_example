@@ -29,11 +29,15 @@ ExtensionUtility::registerPlugin(
     'blog_example_icon',
 );
 
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['blogexample_bloglist']
-    = 'select_key';
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['blogexample_bloglist']
-    = 'pi_flexform,recursive';
-ExtensionManagementUtility::addPiFlexFormValue(
+ExtensionManagementUtility::addToAllTCAtypes(
+    'tt_content',
+    '--div--;Configuration,pi_flexform',
     'blogexample_bloglist',
+    'after:subheader',
+);
+
+ExtensionManagementUtility::addPiFlexFormValue(
+    '*',
     'FILE:EXT:blog_example/Configuration/FlexForms/PluginSettings.xml',
+    'blogexample_bloglist',
 );
