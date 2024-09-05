@@ -22,8 +22,9 @@ use PHPUnit\Framework\Attributes\Test;
 use T3docs\BlogExample\ViewHelpers\GravatarViewHelper;
 use TYPO3\CMS\Core\Http\UriFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\View\StandaloneView;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextFactory;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
+use TYPO3Fluid\Fluid\View\TemplateView;
 
 class GravatarViewHelperTest extends FunctionalTestCase
 {
@@ -82,15 +83,15 @@ class GravatarViewHelperTest extends FunctionalTestCase
     #[Test]
     public function render(string $templateSource, string $expected): void
     {
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplateSource(sprintf(
+        $context = $this->get(RenderingContextFactory::class)->create();
+        $context->getTemplatePaths()->setTemplateSource(sprintf(
             $this->getFluidTemplateSource(),
             $templateSource,
         ));
 
         self::assertSame(
             $expected,
-            $view->render(),
+            (new TemplateView($context))->render(),
         );
     }
 

@@ -19,7 +19,10 @@ namespace T3docs\BlogExample\Tests\Functional\Domain\Repository;
 
 use PHPUnit\Framework\Attributes\Test;
 use T3docs\BlogExample\Domain\Repository\CommentRepository;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 final class CommentRepositoryTest extends FunctionalTestCase
@@ -35,6 +38,11 @@ final class CommentRepositoryTest extends FunctionalTestCase
         parent::setUp();
 
         $this->importCSVDataSet(__DIR__ . '/../../Fixtures/tx_blogexample_domain_model_comment.csv');
+
+        // Init ConfigurationManagerInterface stateful singleton, usually done by extbase bootstrap
+        $this->get(ConfigurationManagerInterface::class)->setRequest(
+            (new ServerRequest())->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE),
+        );
 
         // Must be called with "makeInstance", else "initializeObject" will not be called
         $this->subject = GeneralUtility::makeInstance(CommentRepository::class);
