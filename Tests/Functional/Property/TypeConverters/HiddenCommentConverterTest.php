@@ -42,7 +42,7 @@ class HiddenCommentConverterTest extends FunctionalTestCase
 
         // Init ConfigurationManagerInterface stateful singleton, usually done by extbase bootstrap
         $this->get(ConfigurationManagerInterface::class)->setRequest(
-            (new ServerRequest())->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE)
+            (new ServerRequest())->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE),
         );
 
         // Must be called with "makeInstance", else the "inject" methods will not be called
