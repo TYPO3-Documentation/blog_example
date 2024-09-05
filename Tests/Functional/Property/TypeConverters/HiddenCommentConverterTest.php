@@ -20,7 +20,10 @@ namespace T3docs\BlogExample\Tests\Functional\Property\TypeConverters;
 use PHPUnit\Framework\Attributes\Test;
 use T3docs\BlogExample\Domain\Model\Comment;
 use T3docs\BlogExample\Property\TypeConverters\HiddenCommentConverter;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class HiddenCommentConverterTest extends FunctionalTestCase
@@ -36,6 +39,11 @@ class HiddenCommentConverterTest extends FunctionalTestCase
         parent::setUp();
 
         $this->importCSVDataSet(__DIR__ . '/../../Fixtures/tx_blogexample_domain_model_comment.csv');
+
+        // Init ConfigurationManagerInterface stateful singleton, usually done by extbase bootstrap
+        $this->get(ConfigurationManagerInterface::class)->setRequest(
+            (new ServerRequest())->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE)
+        );
 
         // Must be called with "makeInstance", else the "inject" methods will not be called
         $this->subject = GeneralUtility::makeInstance(HiddenCommentConverter::class);
