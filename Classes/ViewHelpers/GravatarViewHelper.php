@@ -27,10 +27,11 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
  * See http://www.gravatar.com
  * = Examples =
  * <code>
- * <blog:gravatar emailAddress="foo@bar.com" size="40"
- *      defaultImageUri="someDefaultImage"
- *      alt="Gravator icon of {comment.author}"
- *      data-name="{comment.author}"  />
+ * <blog:gravatar emailAddress="foo@bar.com"
+ *     size="40"
+ *     defaultImageUri="someDefaultImage"
+ *     alt="Gravator icon of {comment.author}"
+ *     data-name="{comment.author}"  />
  * </code>
  * <output>
  * <img src="http://www.gravatar.com/avatar/4a28b782cade3dbcd6e306fa4757849d?d=someDefaultImage&s=40" />
