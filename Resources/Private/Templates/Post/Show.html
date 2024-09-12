@@ -48,7 +48,14 @@
             <ol>
                 <f:for each="{post.comments}" as="comment">
                     <li>
-                        <blog:gravatar emailAddress="{comment.email}" defaultImageUri="{f:uri.resource(path: 'Icons/default_gravatar.gif', absolute: 1)}" size="40" class="tx-blogexample-gravatar" />
+                        <blog:gravatar
+                            emailAddress="{comment.email}"
+                            defaultImageUri="{f:uri.resource(path: 'EXT:blog_example/Resources/Public/Icons/default_gravatar.gif', absolute: 1)}"
+                            size="40"
+                            class="tx-blogexample-gravatar"
+                            alt="Gravator icon of {comment.author}"
+                            data-name="{comment.author}"
+                        />
                         <f:link.email email="{comment.author}">{comment.author}</f:link.email>
                         <span class="tx-blogexample-metadata"><f:translate key="postedOn" default="[posted on]" /> {post.date -> f:format.date(format: '{f:translate(key: \'culture.date.formatLong\')}')}</span>
                         <p>

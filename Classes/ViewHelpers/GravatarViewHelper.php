@@ -8,7 +8,6 @@ use TYPO3\CMS\Core\Http\UriFactory;
 use TYPO3\CMS\Core\Utility\HttpUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -28,7 +27,11 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  * See http://www.gravatar.com
  * = Examples =
  * <code>
- * <blog:gravatar emailAddress="foo@bar.com" size="40" defaultImageUri="someDefaultImage" />
+ * <blog:gravatar emailAddress="foo@bar.com"
+ *     size="40"
+ *     defaultImageUri="someDefaultImage"
+ *     alt="Gravator icon of {comment.author}"
+ *     data-name="{comment.author}"  />
  * </code>
  * <output>
  * <img src="http://www.gravatar.com/avatar/4a28b782cade3dbcd6e306fa4757849d?d=someDefaultImage&s=40" />
@@ -36,8 +39,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  */
 class GravatarViewHelper extends AbstractTagBasedViewHelper
 {
-    use CompileWithRenderStatic;
-
     /**
      * @var string
      */
@@ -47,15 +48,11 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
         parent::__construct();
     }
 
-    /**
-     * Initialize arguments
-     */
     public function initializeArguments(): void
     {
-        $this->registerUniversalTagAttributes();
-        $this->registerArgument('emailAddress', 'string', '', true)
-             ->registerArgument('defaultImageUri', 'string', '', false)
-             ->registerArgument('size', 'int', '', false);
+        $this->registerArgument('emailAddress', 'string', '', true);
+        $this->registerArgument('defaultImageUri', 'string', '');
+        $this->registerArgument('size', 'int', '');
     }
 
     public function render(): string
