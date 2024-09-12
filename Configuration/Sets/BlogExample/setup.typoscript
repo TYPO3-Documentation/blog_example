@@ -1,28 +1,19 @@
 # Plugin configuration
 plugin.tx_blogexample {
   settings {
-    # maximum number of posts to display per page
-    postsPerPage = 3
-    # Editor FE Usergroup uid
-    editorUsergroupUid = {$plugin.tx_blogexample.settings.editorUsergroupUid}
-    # Plaintext page type number
-    plaintextPageType = {$plugin.tx_blogexample.settings.plaintextPageType}
-    rss {
-      channel {
-        typeNum = {$plugin.tx_blogexample.settings.rssPageType}
-        title = The RSS feed
-      }
-    }
+    postsPerPage = {$blogExample.postsPerPage}
+    editorUsergroupUid = {$blogExample.editorUsergroupUid}
+    defaultGravator = {$blogExample.defaultGravator}
   }
 
   persistence {
-    storagePid = {$plugin.tx_blogexample.persistence.storagePid}
+    storagePid = {$blogExample.storagePid}
   }
 
   view {
-    templateRootPaths.10 = {$plugin.tx_blogexample.view.templateRootPath}
-    partialRootPaths.10 = {$plugin.tx_blogexample.view.partialRootPath}
-    layoutRootPaths.10 = {$plugin.tx_blogexample.view.layoutRootPath}
+    templateRootPaths.10 = {$blogExample.templateRootPath}
+    partialRootPaths.10 = {$blogExample.partialRootPath}
+    layoutRootPaths.10 = {$blogExample.layoutRootPath}
     defaultPid = auto
   }
 
@@ -31,18 +22,6 @@ plugin.tx_blogexample {
     default {
       someUnusedKey = foo
     }
-  }
-}
-
-# Module configuration
-module.tx_blogexample {
-  settings < plugin.tx_blogexample.settings
-  persistence < plugin.tx_blogexample.persistence
-  view < plugin.tx_blogexample.view
-  view {
-    templateRootPaths.10 = {$module.tx_blogexample.view.templateRootPath}
-    partialRootPaths.10 = {$module.tx_blogexample.view.partialRootPath}
-    layoutRootPaths.10 = {$module.tx_blogexample.view.layoutRootPath}
   }
 }
 

@@ -1,0 +1,18 @@
+categories:
+  BlogExample.rss:
+    label: 'RSS feed'
+    parent: BlogExample
+
+settings:
+  blogExampleRss.page_type:
+    label: 'RSS page type'
+    category: BlogExample.rss
+    description: 'If the default RSS page type number (778) conflicts with your setup, you can override this setting here. '
+    type: int
+    default: 778
+  blogExampleRss.title:
+    label: 'Title of the RSS feed'
+    category: BlogExample.rss
+    description: 'Path to template root'
+    type: string
+    default: 'The RSS feed'

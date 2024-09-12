@@ -1,0 +1,59 @@
+categories:
+  BlogExample:
+    label: 'Blog Example'
+  BlogExample.templates:
+    label: 'Templates'
+    parent: BlogExample
+  BlogExample.pages:
+    label: 'Pages'
+    parent: BlogExample
+  BlogExample.layout:
+    label: 'Layout'
+    parent: BlogExample
+  BlogExample.settings:
+    label: 'Settings'
+    parent: BlogExample
+
+settings:
+  blogExample.templateRootPath:
+    label: 'Templates'
+    category: BlogExample.templates
+    description: 'Path to template root'
+    type: string
+    default: 'EXT:blog_example/Resources/Private/Templates/'
+  blogExample.partialRootPath:
+    label: 'Partials'
+    category: BlogExample.templates
+    description: 'Path to partial root'
+    type: string
+    default: 'EXT:blog_example/Resources/Private/Partials/'
+  blogExample.layoutRootPath:
+    label: 'Layouts'
+    category: BlogExample.templates
+    description: 'Path to layout root'
+    type: string
+    default: 'EXT:blog_example/Resources/Private/Layouts/'
+  blogExample.storagePid:
+    label: 'Default storage PID'
+    category: BlogExample.pages
+    description: 'Folder that stores all blogs, blog-posts and comments'
+    type: int
+    default: 0
+  blogExample.editorUsergroupUid:
+    label: 'Frontend admin user group UID'
+    category: BlogExample.settings
+    description: 'Enter the uid of the front end user group that should be allowed to edit blogs and post in the frontend in the admin plugin. '
+    type: int
+    default: 0
+  blogExample.postsPerPage:
+    label: 'Posts per page'
+    category: BlogExample.settings
+    description: 'How many posts should be displayed per page of pagination?'
+    type: int
+    default: 3
+  blogExample.defaultGravator:
+    label: 'Default gravator icon'
+    category: BlogExample.layout
+    description: 'This icon is displayed for a comment if the email address of the commentary is not registered. '
+    type: string
+    default: 'EXT:blog_example/Resources/Public/Icons/default_gravatar.gif'
