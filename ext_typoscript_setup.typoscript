@@ -1,0 +1,12 @@
+
+# Module configuration
+module.tx_blogexample {
+  settings < plugin.tx_blogexample.settings
+  persistence < plugin.tx_blogexample.persistence
+  view < plugin.tx_blogexample.view
+  view {
+    templateRootPaths.10 = {$module.tx_blogexample.view.templateRootPath}
+    partialRootPaths.10 = {$module.tx_blogexample.view.partialRootPath}
+    layoutRootPaths.10 = {$module.tx_blogexample.view.layoutRootPath}
+  }
+}
