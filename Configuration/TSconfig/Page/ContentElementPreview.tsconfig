@@ -1,0 +1,5 @@
+record.preview.tt_content.paths {
+  1726287995 = EXT:blog_example/Resources/Private/Templates/Backend/Preview/Content/
+}
+
+mod.web_layout.tt_content.preview.header = EXT:blog_example/Resources/Private/Templates/Backend/Preview/Content/Header.html
