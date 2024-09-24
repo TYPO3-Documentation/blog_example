@@ -157,7 +157,7 @@ class BackendController extends ActionController
      * Displays a list of posts. If $tag is set only posts matching this tag are shown
      */
     public function showBlogAction(
-        Blog $blog = null,
+        ?Blog $blog = null,
         string $tag = '',
         int $currentPage = 1,
     ): ResponseInterface {
