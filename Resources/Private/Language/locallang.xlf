@@ -3,262 +3,262 @@
 	<file source-language="en" datatype="plaintext" original="EXT:blog_example/Resources/Private/Language/locallang.xlf" date="2020-11-16T10:32:58Z" product-name="blog_example">
 		<header/>
 		<body>
-			<trans-unit id="administration.menu.index" resname="administration.menu.index">
+			<trans-unit id="administration.menu.index">
 				<source>Blog list</source>
 			</trans-unit>
-			<trans-unit id="administration.menu.comments" resname="administration.menu.comments">
+			<trans-unit id="administration.menu.comments">
 				<source>All comments</source>
 			</trans-unit>
-			<trans-unit id="back" resname="back">
+			<trans-unit id="back">
 				<source>back</source>
 			</trans-unit>
-			<trans-unit id="cancel" resname="cancel">
+			<trans-unit id="cancel">
 				<source>cancel</source>
 			</trans-unit>
-			<trans-unit id="submit" resname="submit">
+			<trans-unit id="submit">
 				<source>submit</source>
 			</trans-unit>
-			<trans-unit id="logInToCreateBlogs" resname="logInToCreateBlogs">
+			<trans-unit id="logInToCreateBlogs">
 				<source>Log in with a FE user that belongs to group #%d (configurable by settings.editorUsergroupUid) in order to add/modify blogs and posts in FE mode!</source>
 			</trans-unit>
-			<trans-unit id="publishedOn" resname="publishedOn">
+			<trans-unit id="publishedOn">
 				<source>published on</source>
 			</trans-unit>
-			<trans-unit id="by" resname="by">
+			<trans-unit id="by">
 				<source>by</source>
 			</trans-unit>
-			<trans-unit id="postedOn" resname="postedOn">
+			<trans-unit id="postedOn">
 				<source>posted on</source>
 			</trans-unit>
-			<trans-unit id="blog.header" resname="blog.header">
+			<trans-unit id="blog.header">
 				<source>Welcome to the Blog Example!</source>
 			</trans-unit>
-			<trans-unit id="blog.introduction" resname="blog.introduction">
+			<trans-unit id="blog.introduction">
 				<source>This extension serves as a demonstration for basic development techniques used in Extbase applications.</source>
 			</trans-unit>
-			<trans-unit id="blog.list" resname="blog.list">
+			<trans-unit id="blog.list">
 				<source>Here is a list of %d blogs</source>
 			</trans-unit>
-			<trans-unit id="blog.numberOfPosts" resname="blog.numberOfPosts">
+			<trans-unit id="blog.numberOfPosts">
 				<source>%d posts</source>
 			</trans-unit>
-			<trans-unit id="blog.noEntries" resname="blog.noEntries">
+			<trans-unit id="blog.noEntries">
 				<source>There are currently no blogs</source>
 			</trans-unit>
-			<trans-unit id="blog.edit" resname="blog.edit">
+			<trans-unit id="blog.edit">
 				<source>Edit this blog</source>
 			</trans-unit>
-			<trans-unit id="blog.delete" resname="blog.delete">
+			<trans-unit id="blog.delete">
 				<source>Delete this blog</source>
 			</trans-unit>
-			<trans-unit id="blog.createFirst" resname="blog.createFirst">
+			<trans-unit id="blog.createFirst">
 				<source>Create your first blog</source>
 			</trans-unit>
-			<trans-unit id="blog.createAnother" resname="blog.createAnother">
+			<trans-unit id="blog.createAnother">
 				<source>Create another blog</source>
 			</trans-unit>
-			<trans-unit id="blog.createExampleData" resname="blog.createExampleData">
+			<trans-unit id="blog.createExampleData">
 				<source>Create sample data</source>
 			</trans-unit>
-			<trans-unit id="blog.deleteAll" resname="blog.deleteAll">
+			<trans-unit id="blog.deleteAll">
 				<source>Delete all blogs</source>
 			</trans-unit>
-			<trans-unit id="blog.deleteAllConfirmation" resname="blog.deleteAllConfirmation">
+			<trans-unit id="blog.deleteAllConfirmation">
 				<source>Are you sure that you want to delete all blogs?</source>
 			</trans-unit>
-			<trans-unit id="blog.editHeader" resname="blog.editHeader">
+			<trans-unit id="blog.editHeader">
 				<source>Edit blog &quot;%s&quot;</source>
 			</trans-unit>
-			<trans-unit id="blog.editIntroduction" resname="blog.editIntroduction">
+			<trans-unit id="blog.editIntroduction">
 				<source>Edit the information about your blog below</source>
 			</trans-unit>
-			<trans-unit id="blog.createHeader" resname="blog.createHeader">
+			<trans-unit id="blog.createHeader">
 				<source>Create new blog</source>
 			</trans-unit>
-			<trans-unit id="blog.createIntroduction" resname="blog.createIntroduction">
+			<trans-unit id="blog.createIntroduction">
 				<source>Edit the information about the new blog below</source>
 			</trans-unit>
-			<trans-unit id="post.header" resname="post.header">
+			<trans-unit id="post.header">
 				<source>Welcome to the Blog &quot;%s&quot;</source>
 			</trans-unit>
-			<trans-unit id="post.introductionAdministrator" resname="post.introductionAdministrator">
+			<trans-unit id="post.introductionAdministrator">
 				<source>If you have any questions, feel free to contact the administrator %s.</source>
 			</trans-unit>
-			<trans-unit id="post.introductionNoAdministrator" resname="post.introductionNoAdministrator">
+			<trans-unit id="post.introductionNoAdministrator">
 				<source>There is currently no administrator assigned to this Blog</source>
 			</trans-unit>
-			<trans-unit id="post.list" resname="post.list">
+			<trans-unit id="post.list">
 				<source>This blog contains %d posts</source>
 			</trans-unit>
-			<trans-unit id="post.listTag" resname="post.listTag">
+			<trans-unit id="post.listTag">
 				<source>This blog contains %d posts tagged with &quot;%s&quot;</source>
 			</trans-unit>
-			<trans-unit id="post.noEntries" resname="post.noEntries">
+			<trans-unit id="post.noEntries">
 				<source>There are currently no posts in this blog</source>
 			</trans-unit>
-			<trans-unit id="post.createFirst" resname="post.createFirst">
+			<trans-unit id="post.createFirst">
 				<source>Create your first post</source>
 			</trans-unit>
-			<trans-unit id="post.createAnother" resname="post.createAnother">
+			<trans-unit id="post.createAnother">
 				<source>Create another post</source>
 			</trans-unit>
-			<trans-unit id="post.showAll" resname="post.showAll">
+			<trans-unit id="post.showAll">
 				<source>Show all posts of this blog</source>
 			</trans-unit>
-			<trans-unit id="post.edit" resname="post.edit">
+			<trans-unit id="post.edit">
 				<source>Edit this post</source>
 			</trans-unit>
-			<trans-unit id="post.delete" resname="post.delete">
+			<trans-unit id="post.delete">
 				<source>Delete this post</source>
 			</trans-unit>
-			<trans-unit id="post.readMore" resname="post.readMore">
+			<trans-unit id="post.readMore">
 				<source>read more</source>
 			</trans-unit>
-			<trans-unit id="post.related" resname="post.related">
+			<trans-unit id="post.related">
 				<source>related posts</source>
 			</trans-unit>
-			<trans-unit id="post.comments" resname="post.comments">
+			<trans-unit id="post.comments">
 				<source>Comments</source>
 			</trans-unit>
-			<trans-unit id="post.addComment" resname="post.addComment">
+			<trans-unit id="post.addComment">
 				<source>Add your own</source>
 			</trans-unit>
-			<trans-unit id="post.editHeader" resname="post.editHeader">
+			<trans-unit id="post.editHeader">
 				<source>Edit post &quot;%s&quot;</source>
 			</trans-unit>
-			<trans-unit id="post.createHeader" resname="post.createHeader">
+			<trans-unit id="post.createHeader">
 				<source>Create new post</source>
 			</trans-unit>
-			<trans-unit id="post.listPlaintext" resname="post.listPlaintext">
+			<trans-unit id="post.listPlaintext">
 				<source>Show posts as plaintext</source>
 			</trans-unit>
-			<trans-unit id="comment.delete" resname="comment.delete">
+			<trans-unit id="comment.delete">
 				<source>Delete this comment</source>
 			</trans-unit>
-			<trans-unit id="property.title" resname="property.title">
+			<trans-unit id="property.title">
 				<source>title</source>
 			</trans-unit>
-			<trans-unit id="property.description" resname="property.description">
+			<trans-unit id="property.description">
 				<source>description</source>
 			</trans-unit>
-			<trans-unit id="property.administrator" resname="property.administrator">
+			<trans-unit id="property.administrator">
 				<source>administrator</source>
 			</trans-unit>
-			<trans-unit id="property.content" resname="property.content">
+			<trans-unit id="property.content">
 				<source>content</source>
 			</trans-unit>
-			<trans-unit id="property.author" resname="property.author">
+			<trans-unit id="property.author">
 				<source>author</source>
 			</trans-unit>
-			<trans-unit id="property.email" resname="property.email">
+			<trans-unit id="property.email">
 				<source>email</source>
 			</trans-unit>
-			<trans-unit id="property.message" resname="property.message">
+			<trans-unit id="property.message">
 				<source>message</source>
 			</trans-unit>
-			<trans-unit id="property.relatedPosts" resname="property.relatedPosts">
+			<trans-unit id="property.relatedPosts">
 				<source>related posts</source>
 			</trans-unit>
-			<trans-unit id="flashmessage.Blog.created.title" resname="flashmessage.Blog.created.title">
+			<trans-unit id="flashmessage.Blog.created.title">
 				<source>Blog added</source>
 			</trans-unit>
-			<trans-unit id="flashmessage.Blog.created" resname="flashmessage.Blog.created">
+			<trans-unit id="flashmessage.Blog.created">
 				<source>A new blog was created</source>
 			</trans-unit>
-			<trans-unit id="flashmessage.Blog.updated.title" resname="flashmessage.Blog.updated.title">
+			<trans-unit id="flashmessage.Blog.updated.title">
 				<source>Blog updated</source>
 			</trans-unit>
-			<trans-unit id="flashmessage.Blog.updated" resname="flashmessage.Blog.updated">
+			<trans-unit id="flashmessage.Blog.updated">
 				<source>The blog was updated</source>
 			</trans-unit>
-			<trans-unit id="flashmessage.Blog.deleted.title" resname="flashmessage.Blog.deleted.title">
+			<trans-unit id="flashmessage.Blog.deleted.title">
 				<source>Blog deleted</source>
 			</trans-unit>
-			<trans-unit id="flashmessage.Blog.deleted" resname="flashmessage.Blog.deleted">
+			<trans-unit id="flashmessage.Blog.deleted">
 				<source>The blog has been removed</source>
 			</trans-unit>
-			<trans-unit id="flashmessage.Blog.populated.title" resname="flashmessage.Blog.populated.title">
+			<trans-unit id="flashmessage.Blog.populated.title">
 				<source>Sample data created</source>
 			</trans-unit>
-			<trans-unit id="flashmessage.Blog.populated" resname="flashmessage.Blog.populated">
+			<trans-unit id="flashmessage.Blog.populated">
 				<source>Some exemplary blogs and posts have been created</source>
 			</trans-unit>
-			<trans-unit id="flashmessage.Post.created.title" resname="flashmessage.Post.created.title">
+			<trans-unit id="flashmessage.Post.created.title">
 				<source>Post added</source>
 			</trans-unit>
-			<trans-unit id="flashmessage.Post.created" resname="flashmessage.Post.created">
+			<trans-unit id="flashmessage.Post.created">
 				<source>A new post was created</source>
 			</trans-unit>
-			<trans-unit id="flashmessage.Post.updated.title" resname="flashmessage.Post.updated.title">
+			<trans-unit id="flashmessage.Post.updated.title">
 				<source>Post updated</source>
 			</trans-unit>
-			<trans-unit id="flashmessage.Post.updated" resname="flashmessage.Post.updated">
+			<trans-unit id="flashmessage.Post.updated">
 				<source>The blog post was updated</source>
 			</trans-unit>
-			<trans-unit id="flashmessage.Post.deleted.title" resname="flashmessage.Post.deleted.title">
+			<trans-unit id="flashmessage.Post.deleted.title">
 				<source>Post deleted</source>
 			</trans-unit>
-			<trans-unit id="flashmessage.Post.deleted" resname="flashmessage.Post.deleted">
+			<trans-unit id="flashmessage.Post.deleted">
 				<source>The blog post has been removed</source>
 			</trans-unit>
-			<trans-unit id="flashmessage.Comment.created.title" resname="flashmessage.Comment.created.title">
+			<trans-unit id="flashmessage.Comment.created.title">
 				<source>Comment added</source>
 			</trans-unit>
-			<trans-unit id="flashmessage.Comment.created" resname="flashmessage.Comment.created">
+			<trans-unit id="flashmessage.Comment.created">
 				<source>Your comment has been created</source>
 			</trans-unit>
-			<trans-unit id="flashmessage.Comment.deleted.title" resname="flashmessage.Comment.deleted.title">
+			<trans-unit id="flashmessage.Comment.deleted.title">
 				<source>Comment deleted</source>
 			</trans-unit>
-			<trans-unit id="flashmessage.Comment.deleted" resname="flashmessage.Comment.deleted">
+			<trans-unit id="flashmessage.Comment.deleted">
 				<source>The comment has been removed</source>
 			</trans-unit>
-			<trans-unit id="flashmessage.Comment.deletedAll.title" resname="flashmessage.Comment.deletedAll.title">
+			<trans-unit id="flashmessage.Comment.deletedAll.title">
 				<source>Comments deleted</source>
 			</trans-unit>
-			<trans-unit id="flashmessage.Comment.deletedAll" resname="flashmessage.Comment.deletedAll">
+			<trans-unit id="flashmessage.Comment.deletedAll">
 				<source>All comments of this post have been removed</source>
 			</trans-unit>
-			<trans-unit id="culture.date.formatLong" resname="culture.date.formatLong">
+			<trans-unit id="culture.date.formatLong">
 				<source>Y-m-d H:i\h</source>
 			</trans-unit>
-			<trans-unit id="culture.date.formatShort" resname="culture.date.formatShort">
+			<trans-unit id="culture.date.formatShort">
 				<source>Y-m-d</source>
 			</trans-unit>
-			<trans-unit id="error.errorsOccurred" resname="error.errorsOccurred">
+			<trans-unit id="error.errorsOccurred">
 				<source>Following errors occurred</source>
 			</trans-unit>
-			<trans-unit id="error.Blog.updateAction" resname="error.Blog.updateAction">
+			<trans-unit id="error.Blog.updateAction">
 				<source>Could not update blog</source>
 			</trans-unit>
-			<trans-unit id="error.Blog.createAction" resname="error.Blog.createAction">
+			<trans-unit id="error.Blog.createAction">
 				<source>Could not create blog</source>
 			</trans-unit>
-			<trans-unit id="error.Blog.invalidTitle" resname="error.Blog.invalidTitle">
+			<trans-unit id="error.Blog.invalidTitle">
 				<source>&quot;Extbase&quot; can't be used as a blog title</source>
 			</trans-unit>
-			<trans-unit id="error.Post.updateAction" resname="error.Post.updateAction">
+			<trans-unit id="error.Post.updateAction">
 				<source>Could not update post</source>
 			</trans-unit>
-			<trans-unit id="error.Post.createAction" resname="error.Post.createAction">
+			<trans-unit id="error.Post.createAction">
 				<source>Could not create post</source>
 			</trans-unit>
-			<trans-unit id="error.Comment.createAction" resname="error.Comment.createAction">
+			<trans-unit id="error.Comment.createAction">
 				<source>Could not create comment</source>
 			</trans-unit>
-			<trans-unit id="error.code.1238108067" resname="error.code.1238108067">
+			<trans-unit id="error.code.1238108067">
 				<source>The given &lt;strong&gt;%s&lt;/strong&gt; is either too long or too short</source>
 			</trans-unit>
-			<trans-unit id="error.code.1238108068" resname="error.code.1238108068">
+			<trans-unit id="error.code.1238108068">
 				<source>The given &lt;strong&gt;%s&lt;/strong&gt; is too short</source>
 			</trans-unit>
-			<trans-unit id="error.code.1238108069" resname="error.code.1238108069">
+			<trans-unit id="error.code.1238108069">
 				<source>The given &lt;strong&gt;%s&lt;/strong&gt; is too long</source>
 			</trans-unit>
-			<trans-unit id="error.code.1221559976" resname="error.code.1221559976">
+			<trans-unit id="error.code.1221559976">
 				<source>The given &lt;strong&gt;%s&lt;/strong&gt; is not a valid email address</source>
 			</trans-unit>
-			<trans-unit id="error.code.1221560718" resname="error.code.1221560718">
+			<trans-unit id="error.code.1221560718">
 				<source>The &lt;strong&gt;%s&lt;/strong&gt; must not be empty</source>
 			</trans-unit>
 		</body>
