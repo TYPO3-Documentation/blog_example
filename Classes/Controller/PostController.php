@@ -108,7 +108,7 @@ class PostController extends AbstractController
         $pagination = new SimplePagination($paginator);
         $this->view->assignMultiple([
             'paginator' => $paginator,
-            'pagination', $pagination,
+            'pagination' => $pagination,
             'pages' => range(1, $pagination->getLastPageNumber()),
             'blog' => $blog,
             'posts' => $posts,
