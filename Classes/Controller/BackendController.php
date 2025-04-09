@@ -118,7 +118,7 @@ class BackendController extends ActionController
             'pages' => range(1, $pagination->getLastPageNumber()),
         ]);
 
-        return $view->renderResponse('Index');
+        return $view->renderResponse('Backend/Index');
     }
 
     /**
@@ -183,7 +183,7 @@ class BackendController extends ActionController
             'pages' => range(1, $pagination->getLastPageNumber()),
             'tag' => $tag,
         ]);
-        return $view->renderResponse('showBlog');
+        return $view->renderResponse('Backend/showBlog');
     }
 
     /**
@@ -193,7 +193,7 @@ class BackendController extends ActionController
     {
         $view = $this->initializeModuleTemplate($this->request);
         $view->assign('post', $post);
-        return $view->renderResponse('ShowPost');
+        return $view->renderResponse('Backend/ShowPost');
     }
 
     public function showAllCommentsAction(): ResponseInterface
@@ -201,7 +201,7 @@ class BackendController extends ActionController
         $view = $this->initializeModuleTemplate($this->request);
         $comments = $this->commentRepository->findAll();
         $view->assign('comments', $comments);
-        return $view->renderResponse('showAllComments');
+        return $view->renderResponse('Backend/showAllComments');
     }
 
     /**
