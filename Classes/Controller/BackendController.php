@@ -183,7 +183,7 @@ class BackendController extends ActionController
             'pages' => range(1, $pagination->getLastPageNumber()),
             'tag' => $tag,
         ]);
-        return $view->renderResponse('Backend/showBlog');
+        return $view->renderResponse('Backend/ShowBlog');
     }
 
     /**
@@ -201,7 +201,7 @@ class BackendController extends ActionController
         $view = $this->initializeModuleTemplate($this->request);
         $comments = $this->commentRepository->findAll();
         $view->assign('comments', $comments);
-        return $view->renderResponse('Backend/showAllComments');
+        return $view->renderResponse('Backend/ShowAllComments');
     }
 
     /**
