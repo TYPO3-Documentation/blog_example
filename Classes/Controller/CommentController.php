@@ -74,7 +74,7 @@ class CommentController extends AbstractController
     /**
      * @throws NoSuchArgumentException
      */
-    public function initializeUnhideAction(): void
+    public function initializePublishAction(): void
     {
         $this->arguments->getArgument('comment')
             ->getPropertyMappingConfiguration()
