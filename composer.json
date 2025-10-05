@@ -15,9 +15,9 @@
     "source": "https://github.com/TYPO3-Documentation/blog_example"
   },
   "require": {
-    "typo3/cms-backend": "^13.3 || dev-main",
-    "typo3/cms-core": "^13.3 || dev-main",
-    "typo3/cms-extbase": "^13.3 || dev-main",
+    "typo3/cms-backend": "^13.4",
+    "typo3/cms-core": "^13.4",
+    "typo3/cms-extbase": "^13.4",
     "typo3/cms-fluid": "^13.3 || dev-main"
   },
   "require-dev": {
@@ -25,8 +25,8 @@
     "friendsofphp/php-cs-fixer": "^3.52",
     "phpstan/phpstan": "^1.10",
     "phpunit/phpunit": "^11.0.3",
-    "typo3/cms-install": "^13.3 || dev-main",
-    "typo3/testing-framework": "dev-main"
+    "typo3/cms-install": "^13.4",
+    "typo3/testing-framework": "^8.2"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
