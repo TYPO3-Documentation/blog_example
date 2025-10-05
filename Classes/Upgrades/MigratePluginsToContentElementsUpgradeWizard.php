@@ -10,13 +10,14 @@ use TYPO3\CMS\Install\Attribute\UpgradeWizard;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 #[UpgradeWizard('blogExample_migratePluginsToContentElementsUpgradeWizard')]
-final class MigratePluginsToContentElementsUpgradeWizard implements UpgradeWizardInterface
+final readonly class MigratePluginsToContentElementsUpgradeWizard implements UpgradeWizardInterface
 {
     private const PLUGINS = [
         'blogexample_bloglist',
         'blogexample_blogadmin',
         'blogexample_postlistrss',
     ];
+    public function __construct(private ConnectionPool $connectionPool) {}
 
     public function getTitle(): string
     {
@@ -82,7 +83,7 @@ final class MigratePluginsToContentElementsUpgradeWizard implements UpgradeWizar
 
     private function getQueryBuilder(): QueryBuilder
     {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+        $queryBuilder = $this->connectionPool
             ->getQueryBuilderForTable('tt_content');
 
         $queryBuilder

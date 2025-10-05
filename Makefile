@@ -7,6 +7,10 @@ help: ## Displays this list of targets with descriptions
 install: ## Run rector
 	Build/Scripts/runTests.sh -s composerUpdate
 
+.PHONY: install-rector
+install-rector: ## Run rector
+	Build/Scripts/runTests.sh -s composerUpdateRector
+
 .PHONY: rector
 rector: ## Run rector
 	Build/Scripts/runTests.sh -s rector
@@ -36,4 +40,3 @@ test-unit: ## Run unit tests
 .PHONY: test-functional
 test-functional: ## Run functional tests
 	Build/Scripts/runTests.sh -s functional -d mysql
-

@@ -22,7 +22,6 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
         [
             CommentController::class => 'create',
         ],
-        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
     );
 
     // RSS Feed
@@ -34,7 +33,6 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
             PostController::class => 'displayRssList',
         ],
         [],
-        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
     );
 
     // admin plugins
@@ -53,6 +51,5 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
             PostController::class => 'create,delete,update',
             CommentController::class => 'delete',
         ],
-        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
     );
 })('BlogExample');

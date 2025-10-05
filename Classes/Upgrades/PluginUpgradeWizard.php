@@ -7,12 +7,12 @@ use TYPO3\CMS\Install\Attribute\UpgradeWizard;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 #[UpgradeWizard('blogExample_pluginUpgradeWizard')]
-final class PluginUpgradeWizard implements UpgradeWizardInterface
+final readonly class PluginUpgradeWizard implements UpgradeWizardInterface
 {
     private const OLD_LIST_TYPE = 'blogexample_pi1';
     private const NEW_LIST_TYPE = 'blogexample_bloglist';
     public function __construct(
-        private readonly ConnectionPool $connectionPool,
+        private ConnectionPool $connectionPool,
     ) {}
 
     public function getTitle(): string

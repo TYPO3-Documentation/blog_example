@@ -58,7 +58,7 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
     public function render(): string
     {
         $gravatarUri = $this->uriFactory->createUri(
-            'https://gravatar.com/avatar/' . md5($this->arguments['emailAddress']),
+            'https://gravatar.com/avatar/' . md5((string)$this->arguments['emailAddress']),
         );
 
         $queryArguments = [];
