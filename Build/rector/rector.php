@@ -19,7 +19,6 @@ use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\StaticCall\RemoveParentCallWithoutParentRector;
 use Rector\Php74\Rector\LNumber\AddLiteralSeparatorToNumberRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRector;
-use Ssch\TYPO3Rector\CodeQuality\General\ConvertImplicitVariablesToExplicitGlobalsRector;
 use Ssch\TYPO3Rector\CodeQuality\General\ExtEmConfRector;
 use Ssch\TYPO3Rector\Configuration\Typo3Option;
 use Ssch\TYPO3Rector\Set\Typo3LevelSetList;
@@ -51,8 +50,6 @@ return RectorConfig::configure()
     ])
     // If you use importNames(), you should consider excluding some TYPO3 files.
     ->withSkip([
-        // AddLiteralSeparatorToNumberRector would make the exception codes more readable.
-        // But as they are just timestamps this is not needed/wanted.
         RemoveParentCallWithoutParentRector::class,
     ])
 ;
