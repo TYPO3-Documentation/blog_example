@@ -18,15 +18,18 @@ namespace T3docs\BlogExample\Domain\Model;
  */
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractValueObject;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * A blog post tag
  */
 final class Tag extends AbstractValueObject implements \Stringable
 {
-    public int $priority = 0;
+    #[Assert\NotBlank(message: 'Tag name must not be empty.')]
+    public string $name = '';
 
-    public function __construct(public string $name = '') {}
+    #[Assert\GreaterThan(value: 0, message: 'Priority must be greater than zero.')]
+    public int $priority = 0;
 
     /**
      * Returns this tag as a formatted string
