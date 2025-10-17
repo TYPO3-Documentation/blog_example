@@ -16,9 +16,9 @@ namespace T3docs\BlogExample\Domain\Model;
  *
  * The TYPO3 project - inspiring people to share!
  */
-use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
-use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
-use TYPO3\CMS\Extbase\Annotation\Validate;
+use TYPO3\CMS\Extbase\Attribute\ORM\Cascade;
+use TYPO3\CMS\Extbase\Attribute\ORM\Lazy;
+use TYPO3\CMS\Extbase\Attribute\Validate;
 use TYPO3\CMS\Extbase\Domain\Model\Category;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -234,7 +234,7 @@ class Post extends AbstractEntity implements \Stringable
     }
 
     /**
-     * Removes Comment from this post and deletes it due to annotation `@Cascade("remove")`
+     * Removes Comment from this post and deletes it due to attribute `Cascade("remove")`
      */
     public function removeComment(Comment $commentToDelete): void
     {

@@ -25,8 +25,8 @@ use T3docs\BlogExample\Exception\NoBlogAdminAccessException;
 use T3docs\BlogExample\Service\BlogFactory;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
-use TYPO3\CMS\Extbase\Annotation\IgnoreValidation;
-use TYPO3\CMS\Extbase\Annotation\Validate;
+use TYPO3\CMS\Extbase\Attribute\IgnoreValidation;
+use TYPO3\CMS\Extbase\Attribute\Validate;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 
 /**

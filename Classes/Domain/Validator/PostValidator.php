@@ -27,7 +27,7 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
  */
 class PostValidator extends AbstractValidator
 {
-    public function __construct(private PostValidationService $postValidationService) {}
+    public function __construct(private readonly PostValidationService $postValidationService) {}
 
     /**
      * Check if $value is valid. If it's not valid, it needs to add an error

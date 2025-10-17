@@ -17,27 +17,16 @@ ExtensionUtility::registerPlugin(
     'BlogList',
     'List of Blogs (BlogExample)',
     'blog_example_icon',
-    'plugins',
+    'blog_example',
     'Display a list of blogs',
+    'FILE:EXT:blog_example/Configuration/FlexForms/PluginSettings.xml'
 );
 ExtensionUtility::registerPlugin(
     'blog_example',
     'BlogAdmin',
     'Admin Plugin (BlogExample)',
     'blog_example_icon',
-    'plugins',
+    'blog_example',
     'Administrate the blog',
-);
-
-ExtensionManagementUtility::addToAllTCAtypes(
-    'tt_content',
-    '--div--;Configuration,pi_flexform',
-    'blogexample_bloglist',
-    'after:subheader',
-);
-
-ExtensionManagementUtility::addPiFlexFormValue(
-    '*',
-    'FILE:EXT:blog_example/Configuration/FlexForms/PluginSettings.xml',
-    'blogexample_bloglist',
+    'FILE:EXT:blog_example/Configuration/FlexForms/PluginSettings.xml'
 );
