@@ -2,7 +2,7 @@
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_comment',
+        'title' => 'LLL:blog_example.db:tx_blogexample_domain_model_comment',
         'label' => 'date',
         'label_alt' => 'author',
         'label_alt_force' => true,
@@ -18,7 +18,7 @@ return [
     'columns' => [
         'date' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_comment.date',
+            'label' => 'LLL:blog_example.db:tx_blogexample_domain_model_comment.date',
             'config' => [
                 'type' => 'datetime',
                 'dbType' => 'datetime',
@@ -29,7 +29,7 @@ return [
             ],
         ],
         'author' => [
-            'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_comment.author',
+            'label' => 'LLL:blog_example.db:tx_blogexample_domain_model_comment.author',
             'config' => [
                 'type' => 'input',
                 'size' => 20,
@@ -39,7 +39,7 @@ return [
             ],
         ],
         'email' => [
-            'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_comment.email',
+            'label' => 'LLL:blog_example.db:tx_blogexample_domain_model_comment.email',
             'config' => [
                 'type' => 'input',
                 'size' => 20,
@@ -50,7 +50,7 @@ return [
         ],
         'content' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_comment.content',
+            'label' => 'LLL:blog_example.db:tx_blogexample_domain_model_comment.content',
             'config' => [
                 'type' => 'text',
                 'rows' => 30,

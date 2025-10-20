@@ -2,7 +2,7 @@
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_blog',
+        'title' => 'LLL:blog_example.db:tx_blogexample_domain_model_blog',
         'label' => 'title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -23,7 +23,7 @@ return [
     ],
     'columns' => [
         'title' => [
-            'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_blog.title',
+            'label' => 'LLL:blog_example.db:tx_blogexample_domain_model_blog.title',
             'config' => [
                 'type' => 'input',
                 'size' => 20,
@@ -33,7 +33,7 @@ return [
             ],
         ],
         'subtitle' => [
-            'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_blog.subtitle',
+            'label' => 'LLL:blog_example.db:tx_blogexample_domain_model_blog.subtitle',
             'config' => [
                 'type' => 'input',
                 'size' => 20,
@@ -43,7 +43,7 @@ return [
         ],
         'description' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_blog.description',
+            'label' => 'LLL:blog_example.db:tx_blogexample_domain_model_blog.description',
             'config' => [
                 'type' => 'text',
                 'enableRichtext' => true,
@@ -52,18 +52,18 @@ return [
         ],
         'logo' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_blog.logo',
+            'label' => 'LLL:blog_example.db:tx_blogexample_domain_model_blog.logo',
             'config' => [
                 'type' => 'file',
                 'allowed' => 'common-image-types',
                 'appearance' => [
-                    'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference',
+                    'createNewRelationLinkTitle' => 'LLL:frontend:ttc:images.addFileReference',
                 ],
             ],
         ],
         'posts' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_blog.posts',
+            'label' => 'LLL:blog_example.db:tx_blogexample_domain_model_blog.posts',
             'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_blogexample_domain_model_post',
@@ -77,8 +77,8 @@ return [
         ],
         'administrator' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_blog.administrator',
-            'description' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_blog.administrator.description',
+            'label' => 'LLL:blog_example.db:tx_blogexample_domain_model_blog.administrator',
+            'description' => 'LLL:blog_example.db:tx_blogexample_domain_model_blog.administrator.description',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -109,19 +109,19 @@ return [
     ],
     'types' => [
         '1' => ['showitem' => '
-            --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
+            --div--;LLL:core.form.tabs:general,
                 title, description, logo,
-            --div--;LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_blog.posts,
+            --div--;LLL:blog_example.db:tx_blogexample_domain_model_blog.posts,
                 posts,
-            --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:categories,
+            --div--;LLL:core.form.tabs:categories,
                     category,
-            --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
+            --div--;LLL:core.form.tabs:access,
                 administrator,
                 --palette--;;paletteHidden,
                 --palette--;;paletteAccess,
-            --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
+            --div--;LLL:core.form.tabs:language,
                 --palette--;;paletteLanguage,
-            --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:extended,
+            --div--;LLL:core.form.tabs:extended,
         '],
     ],
     'palettes' => [

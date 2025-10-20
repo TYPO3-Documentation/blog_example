@@ -42,11 +42,10 @@
                                     type="submit"
                                     class="btn btn-default t3js-modal-trigger"
                                     data-target-form="blog_delete_{blog.uid}"
-                                    title="{f:translate(key:'LLL:EXT:backend/Resources/Private/Language/locallang_siteconfiguration.xlf:overview.deleteSiteConfiguration')}"
                                     data-severity="error"
-                                    data-title="Delete this Blog"
-                                    data-button-close-text="{f:translate(key: 'LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:cancel')}"
-                                    data-button-ok-text="{f:translate(key: 'LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:delete')}"
+                                    data-title="{f:translate(key: 'LLL:blog_example.module.mod:delete_blog')}"
+                                    data-button-close-text="{f:translate(key: 'LLL:core.common:cancel')}"
+                                    data-button-ok-text="{f:translate(key: 'LLL:core.common:delete')}"
                                 >
                                     <core:icon identifier="actions-delete" />
                                 </button>
@@ -63,13 +62,15 @@
             </div>
             <p>
                 <f:link.action action="deleteAll" class="btn btn-warning">
-                    <core:icon identifier="actions-delete" /> Delete all Blogs [!!!]
+                    <core:icon identifier="actions-delete" /> {f:translate(key: 'LLL:blog_example.module.mod:delete_all_blogs')}
                 </f:link.action>
             </p>
         </f:then>
         <f:else>
             <p>
-                <f:link.action action="populate" class="btn btn-primary">Create example data</f:link.action>
+                <f:link.action action="populate" class="btn btn-primary">
+                    {f:translate(key: 'LLL:blog_example.module.mod:create_example_data')}
+                </f:link.action>
             </p>
         </f:else>
     </f:if>

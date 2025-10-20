@@ -2,7 +2,7 @@
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_info',
+        'title' => 'LLL:blog_example.db:tx_blogexample_domain_model_info',
         'label' => 'name',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -21,7 +21,7 @@ return [
     ],
     'columns' => [
         'name' => [
-            'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_info.name',
+            'label' => 'LLL:blog_example.db:tx_blogexample_domain_model_info.name',
             'config' => [
                 'type' => 'input',
                 'size' => 20,
@@ -31,7 +31,7 @@ return [
             ],
         ],
         'bodytext' => [
-            'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_info.bodytext',
+            'label' => 'LLL:blog_example.db:tx_blogexample_domain_model_info.bodytext',
             'config' => [
                 'type' => 'text',
                 'enableRichtext' => true,
@@ -45,13 +45,13 @@ return [
     ],
     'types' => [
         0 => ['showitem' => '
-                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
+                --div--;LLL:core.form.tabs:general,
                     name, bodytext,
-                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
+                --div--;LLL:core.form.tabs:access,
                     hidden,
-                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
+                --div--;LLL:core.form.tabs:language,
                     --palette--;;paletteLanguage,
-                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:extended,
+                --div--;LLL:core.form.tabs:extended,
         '],
     ],
     'palettes' => [

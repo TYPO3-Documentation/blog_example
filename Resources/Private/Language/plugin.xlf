@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en">
+	<file id="f1">
+		<unit id="options">
+			<segment>
+				<source>Options</source>
+			</segment>
+		</unit>
+		<unit id="itemsPerPage">
+			<segment>
+				<source>Max. number of items to display per page</source>
+			</segment>
+		</unit>
+		<unit id="blog_list.title">
+			<segment>
+				<source>List of Blogs (BlogExample)</source>
+			</segment>
+		</unit>
+		<unit id="blog_list.description">
+			<segment>
+				<source>Display a list of blogs</source>
+			</segment>
+		</unit>
+		<unit id="blog_admin.title">
+			<segment>
+				<source>Admin Plugin (BlogExample)</source>
+			</segment>
+		</unit>
+		<unit id="blog_admin.description">
+			<segment>
+				<source>Administrate the blog</source>
+			</segment>
+		</unit>
+	</file>
+</xliff>

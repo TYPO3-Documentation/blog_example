@@ -12,6 +12,15 @@
 			<trans-unit id="mlang_tabs_tab">
 				<source>Blogs</source>
 			</trans-unit>
+			<trans-unit id="delete_blog">
+				<source>Delete blog %s</source>
+			</trans-unit>
+			<trans-unit id="delete_all_blogs">
+				<source>Delete all Blogs</source>
+			</trans-unit>
+			<trans-unit id="create_example_data">
+				<source>Create example data</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

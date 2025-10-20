@@ -216,7 +216,7 @@ class BackendController extends ActionController
         $this->modifyDocHeaderComponent($view, $context);
         $view->setFlashMessageQueue($this->getFlashMessageQueue());
         $view->setTitle(
-            $this->getLanguageService()->sL('LLL:EXT:blog_example/Resources/Private/Language/Module/locallang_mod.xlf:mlang_tabs_tab'),
+            $this->getLanguageService()->sL('blog_example.module.mod:mlang_tabs_tab'),
             $context,
         );
 
@@ -241,7 +241,7 @@ class BackendController extends ActionController
     {
         $reloadButton = $buttonBar->makeLinkButton()
             ->setHref($this->request->getAttribute('normalizedParams')->getRequestUri())
-            ->setTitle($this->getLanguageService()->sL('LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.reload'))
+            ->setTitle($this->getLanguageService()->sL('core.core:labels.reload'))
             ->setIcon($this->iconFactory->getIcon('actions-refresh', IconSize::SMALL));
         $buttonBar->addButton($reloadButton, ButtonBar::BUTTON_POSITION_RIGHT);
     }
@@ -250,7 +250,7 @@ class BackendController extends ActionController
     {
         $shortcutButton = $buttonBar->makeShortcutButton()
             ->setRouteIdentifier('blog_example')
-            ->setDisplayName($this->getLanguageService()->sL('LLL:EXT:blog_example/Resources/Private/Language/locallang.xlf:administration.menu.index'));
+            ->setDisplayName($this->getLanguageService()->sL('blog_example.messages:administration.menu.index'));
         $buttonBar->addButton($shortcutButton, ButtonBar::BUTTON_POSITION_RIGHT);
     }
 
@@ -265,12 +265,12 @@ class BackendController extends ActionController
             'index' => [
                 'controller' => 'Backend',
                 'action' => 'index',
-                'label' => $this->getLanguageService()->sL('LLL:EXT:blog_example/Resources/Private/Language/locallang.xlf:administration.menu.index'),
+                'label' => $this->getLanguageService()->sL('blog_example.messages:administration.menu.index'),
             ],
             'showAllComents' => [
                 'controller' => 'Backend',
                 'action' => 'showAllComments',
-                'label' => $this->getLanguageService()->sL('LLL:EXT:blog_example/Resources/Private/Language/locallang.xlf:administration.menu.comments'),
+                'label' => $this->getLanguageService()->sL('blog_example.messages:administration.menu.comments'),
             ],
         ];
 
