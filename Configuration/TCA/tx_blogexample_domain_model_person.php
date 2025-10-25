@@ -2,7 +2,7 @@
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_person',
+        'title' => 'LLL:blog_example.db:tx_blogexample_domain_model_person',
         'label' => 'lastname',
         'label_alt' => 'firstname',
         'label_alt_force' => true,
@@ -14,7 +14,7 @@ return [
         'languageField' => 'sys_language_uid',
         'translationSource' => 'l10n_source',
         'origUid' => 't3_origuid',
-        'prependAtCopy' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.prependAtCopy',
+        'prependAtCopy' => 'LLL:core.general.xlf:LGL.prependAtCopy',
         'delete' => 'deleted',
         'enablecolumns' => [
             'disabled' => 'hidden',
@@ -23,7 +23,7 @@ return [
     ],
     'columns' => [
         'firstname' => [
-            'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_person.firstname',
+            'label' => 'LLL:blog_example.db:tx_blogexample_domain_model_person.firstname',
             'config' => [
                 'type' => 'input',
                 'size' => 20,
@@ -33,7 +33,7 @@ return [
             ],
         ],
         'lastname' => [
-            'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_person.lastname',
+            'label' => 'LLL:blog_example.db:tx_blogexample_domain_model_person.lastname',
             'config' => [
                 'type' => 'input',
                 'size' => 20,
@@ -43,7 +43,7 @@ return [
             ],
         ],
         'email' => [
-            'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_person.email',
+            'label' => 'LLL:blog_example.db:tx_blogexample_domain_model_person.email',
             'config' => [
                 'type' => 'input',
                 'size' => 20,
@@ -53,7 +53,7 @@ return [
             ],
         ],
         'tags' => [
-            'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_person.tags',
+            'label' => 'LLL:blog_example.db:tx_blogexample_domain_model_person.tags',
             'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_blogexample_domain_model_tag', // needed by Extbase
@@ -71,7 +71,7 @@ return [
         ],
         'tags_special' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:blog_example/Resources/Private/Language/locallang_db.xlf:tx_blogexample_domain_model_person.tags_special',
+            'label' => 'LLL:blog_example.db:tx_blogexample_domain_model_person.tags_special',
             'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_blogexample_domain_model_tag', // needed by Extbase
@@ -90,13 +90,13 @@ return [
     ],
     'types' => [
         '1' => ['showitem' => '
-                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
+                --div--;LLL:core.form.tabs:general,
                     firstname, lastname, email, avatar, tags, tags_special,
-                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
+                --div--;LLL:core.form.tabs:access,
                     hidden,
-                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
+                --div--;LLL:core.form.tabs:language,
                     --palette--;;paletteLanguage,
-                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:extended,
+                --div--;LLL:core.form.tabs:extended,
         '],
     ],
     'palettes' => [
