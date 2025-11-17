@@ -51,6 +51,7 @@ class Post extends AbstractEntity implements \Stringable
     /**
      * @var ?ObjectStorage<Tag>
      */
+    #[Cascade(['value' => 'remove'])]
     public ?ObjectStorage $tags = null;
 
     /**

@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 defined('TYPO3') or die();
@@ -19,7 +18,7 @@ ExtensionUtility::registerPlugin(
     'blog_example_icon',
     'blog_example',
     'LLL:blog_example.plugin:blog_list.description',
-    'FILE:EXT:blog_example/Configuration/FlexForms/PluginSettings.xml'
+    'FILE:EXT:blog_example/Configuration/FlexForms/PluginSettings.xml',
 );
 ExtensionUtility::registerPlugin(
     'blog_example',
@@ -28,5 +27,5 @@ ExtensionUtility::registerPlugin(
     'blog_example_icon',
     'blog_example',
     'LLL:blog_example.plugin:blog_admin.description',
-    'FILE:EXT:blog_example/Configuration/FlexForms/PluginSettings.xml'
+    'FILE:EXT:blog_example/Configuration/FlexForms/PluginSettings.xml',
 );

@@ -17,8 +17,8 @@ namespace T3docs\BlogExample\Domain\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
-use TYPO3\CMS\Extbase\DomainObject\AbstractValueObject;
 use Symfony\Component\Validator\Constraints as Assert;
+use TYPO3\CMS\Extbase\DomainObject\AbstractValueObject;
 
 /**
  * A blog post tag
