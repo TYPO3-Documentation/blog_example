@@ -26,6 +26,7 @@ use T3docs\BlogExample\Domain\Repository\CommentRepository;
 use T3docs\BlogExample\Domain\Repository\PostRepository;
 use T3docs\BlogExample\Service\BlogFactory;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
+use TYPO3\CMS\Backend\Template\Components\ComponentFactory;
 use TYPO3\CMS\Backend\Template\Components\Menu\Menu;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
@@ -58,6 +59,7 @@ class BackendController extends ActionController
         protected readonly ModuleTemplateFactory $moduleTemplateFactory,
         private readonly IconFactory $iconFactory,
         private readonly LanguageServiceFactory $languageServiceFactory,
+        protected readonly ComponentFactory $componentFactory,
     ) {}
 
     public function addPopulateButton(ButtonBar $buttonBar): void
@@ -265,17 +267,21 @@ class BackendController extends ActionController
             'index' => [
                 'controller' => 'Backend',
                 'action' => 'index',
-                'label' => $this->getLanguageService()->sL('blog_example.messages:administration.menu.index'),
+                'label' => $this->getLanguageService()->translate('administration.menu.index', 'blog_example.messages') ?? 'abc',
             ],
             'showAllComents' => [
                 'controller' => 'Backend',
                 'action' => 'showAllComments',
-                'label' => $this->getLanguageService()->sL('blog_example.messages:administration.menu.comments'),
+                'label' => $this->getLanguageService()->translate('administration.menu.comments', 'blog_example.messages') ?? 'abc',
             ],
         ];
 
+        $menuRegistry = $view->getDocHeaderComponent()->getMenuRegistry();
+        //$menu = $this->componentFactory->createMenu();
+        //$menu->setIdentifier('viewSelector')->setLabel('View');
+
         $menu = $view->getDocHeaderComponent()->getMenuRegistry()->makeMenu();
-        $menu->setIdentifier('BlogExampleModuleMenu');
+        $menu->setIdentifier('BlogExampleModuleMenu')->setLabel('View');
 
         foreach ($menuItems as $menuItemConfig) {
             $isActive = $this->request->getControllerActionName() === $menuItemConfig['action'];

@@ -9,7 +9,6 @@ use T3docs\BlogExample\Domain\Model\Blog;
 use T3docs\BlogExample\Domain\Model\Comment;
 use T3docs\BlogExample\Domain\Model\Person;
 use T3docs\BlogExample\Domain\Model\Post;
-use T3docs\BlogExample\Domain\Model\Tag;
 use TYPO3\CMS\Core\SingletonInterface;
 
 /*
@@ -76,19 +75,6 @@ class BlogFactory implements SingletonInterface
             $comment->setContent('Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.');
             $post->addComment($comment);
 
-            // create some random tags
-            if (random_int(0, 1) > 0) {
-                $tag = new Tag('MVC');
-                $post->addTag($tag);
-            }
-            if (random_int(0, 1) > 0) {
-                $tag = new Tag('Domain Driven Design');
-                $post->addTag($tag);
-            }
-            if (random_int(0, 1) > 0) {
-                $tag = new Tag('TYPO3');
-                $post->addTag($tag);
-            }
             // add the post to the current blog
             $blog->addPost($post);
             $post->setBlog($blog);
