@@ -1,0 +1,10 @@
+config.recordLinks.blogExample {
+  // Do not force link generation when the record is hidden
+  forceLink = 0
+
+  typolink {
+    parameter = {$blogExample.singlePid}
+    additionalParams.data = field:uid
+    additionalParams.wrap = &tx_blogexample_bloglist[action]=show&tx_blogexample_bloglist[controller]=Post&tx_blogexample_bloglist[post]=|
+  }
+}

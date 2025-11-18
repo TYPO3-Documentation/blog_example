@@ -1,0 +1,12 @@
+TCEMAIN.linkHandler {
+  blogExample {
+    handler = TYPO3\CMS\Backend\LinkHandler\RecordLinkHandler
+    label = LLL:blog_example.module.mod:linkbrowser
+    configuration {
+      table = tx_blogexample_domain_model_post
+      pageTreeMountPoints = {$blogExample.storagePid}
+    }
+    displayAfter = url
+    scanBefore = page
+  }
+}

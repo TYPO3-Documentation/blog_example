@@ -1,0 +1,4 @@
+name: t3docs/blog-example-links
+label: Link browser for blog posts
+dependencies:
+  - t3docs/blog-example
