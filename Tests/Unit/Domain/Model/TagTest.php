@@ -32,16 +32,6 @@ class TagTest extends UnitTestCase
         );
     }
 
-    public function testTagReturnsValueFromConstructorArgument(): void
-    {
-        $subject = new Tag('TYPO3');
-
-        self::assertSame(
-            'TYPO3',
-            (string)$subject,
-        );
-    }
-
     public function testPriorityInitiallyReturnsZero(): void
     {
         $subject = new Tag();

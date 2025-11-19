@@ -23,10 +23,6 @@ return [
             'default' => 'blogexample_post',
         ],
     ],
-    'interface' => [
-        'maxDBListItems' => 100,
-        'maxSingleDBListItems' => 500,
-    ],
     'columns' => [
         'blog' => [
             'exclude' => true,
@@ -143,18 +139,17 @@ return [
         ],
         'comments' => [
             'exclude' => true,
-            'label' => 'LLL:blog_example.db:tx_blogexample_domain_model_post.comments',
+            'label' => 'Comments',
             'config' => [
-                'type' => 'inline',
+                'type' => 'group',
+                'allowed' => 'tx_blogexample_domain_model_comment',
                 'foreign_table' => 'tx_blogexample_domain_model_comment',
                 'foreign_field' => 'post',
+                'foreign_table_where' => 'ORDER BY tx_blogexample_domain_model_comment.uid',
                 'size' => 10,
-                'autoSizeMax' => 30,
-                'multiple' => 0,
-                'appearance' => [
-                    'collapseAll' => 1,
-                    'expandSingle' => 1,
-                ],
+                'maxitems' => 9999,
+                'minitems' => 0,
+                'default' => '',
             ],
         ],
         'related_posts' => [
@@ -194,16 +189,6 @@ return [
                 'maxitems' => 1,
             ],
         ],
-        'additional_comments' => [
-            'exclude' => true,
-            'label' => 'LLL:blog_example.db:tx_blogexample_domain_model_post.additional_comments',
-            'config' => [
-                'type' => 'inline', // this will store the comments uids in the additional_comments field (CSV)
-                'foreign_table' => 'tx_blogexample_domain_model_comment',
-                'minitems' => 0,
-                'maxitems' => 200,
-            ],
-        ],
         'category' => [
             'config' => [
                 'type' => 'category',
@@ -213,7 +198,7 @@ return [
     'types' => [
         '1' => ['showitem' => '
                 --div--;LLL:core.form.tabs:general,
-                    blog, title, date, author, second_author, content, tags, comments, related_posts, additional_name, additional_info, additional_comments,
+                    blog, title, date, author, second_author, content, tags, comments, related_posts, additional_name, additional_info,
                 --div--;LLL:core.form.tabs:categories,
                     category,
                 --div--;LLL:core.form.tabs:access,
