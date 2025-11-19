@@ -17,7 +17,9 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:blog_example/Resources/Public/Icons/icon_tx_blogexample_domain_model_tag.gif',
+        'typeicon_classes' => [
+            'default' => 'module-info',
+        ],
     ],
     'columns' => [
         'name' => [
