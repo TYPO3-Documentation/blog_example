@@ -13,7 +13,9 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:blog_example/Resources/Public/Icons/icon_tx_blogexample_domain_model_comment.gif',
+        'typeicon_classes' => [
+            'default' => 'blogexample_comment',
+        ],
     ],
     'columns' => [
         'date' => [

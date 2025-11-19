@@ -19,7 +19,9 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:blog_example/Resources/Public/Icons/icon_tx_blogexample_domain_model_post.gif',
+        'typeicon_classes' => [
+            'default' => 'blogexample_post',
+        ],
     ],
     'interface' => [
         'maxDBListItems' => 100,
