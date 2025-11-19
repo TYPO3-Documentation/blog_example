@@ -20,6 +20,9 @@ return [
             'disabled' => 'hidden',
         ],
         'iconfile' => 'EXT:blog_example/Resources/Public/Icons/icon_tx_blogexample_domain_model_person.gif',
+        'typeicon_classes' => [
+            'default' => 'blogexample_person',
+        ],
     ],
     'columns' => [
         'firstname' => [
