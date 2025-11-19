@@ -33,11 +33,17 @@ settings:
     description: 'Path to layout root'
     type: string
     default: 'EXT:blog_example/Resources/Private/Layouts/'
+  blogExample.singlePid:
+    label: 'Single view for blog posts'
+    category: BlogExample.pages
+    description: 'Page to display single blog entries'
+    type: page
+    default: 0
   blogExample.storagePid:
     label: 'Default storage PID'
     category: BlogExample.pages
     description: 'Folder that stores all blogs, blog-posts and comments'
-    type: int
+    type: page
     default: 0
   blogExample.editorUsergroupUid:
     label: 'Frontend admin user group UID'

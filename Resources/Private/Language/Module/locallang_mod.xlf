@@ -21,6 +21,9 @@
 			<trans-unit id="create_example_data">
 				<source>Create example data</source>
 			</trans-unit>
+			<trans-unit id="linkbrowser">
+				<source>Blog Post</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
