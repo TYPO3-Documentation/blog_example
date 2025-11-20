@@ -12,7 +12,9 @@ use T3docs\BlogExample\Domain\Repository\PostRepository;
 use T3docs\BlogExample\Exception\NoBlogAdminAccessException;
 use T3docs\BlogExample\Property\TypeConverters\HiddenCommentConverter;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -30,7 +32,7 @@ use TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException;
 /**
  * The comment controller for the BlogExample extension
  */
-class CommentController extends AbstractController
+class CommentController extends ActionController
 {
     /**
      * CommentController constructor.
@@ -108,5 +110,35 @@ class CommentController extends AbstractController
             null,
             ['post' => $post, 'blog' => $post->getBlog()],
         );
+    }
+    /**
+     * Override getErrorFlashMessage to present
+     * nice flash error messages.
+     */
+    protected function getErrorFlashMessage(): string
+    {
+        $defaultFlashMessage = parent::getErrorFlashMessage();
+        $locallangKey = sprintf(
+            'error.%s.%s',
+            $this->request->getControllerName(),
+            $this->actionMethodName,
+        );
+        return LocalizationUtility::translate($locallangKey, 'BlogExample') ?? $defaultFlashMessage;
+    }
+
+    protected function hasBlogAdminAccess(): bool
+    {
+        // TODO access protection
+        return true;
+    }
+
+    /**
+     * @throws NoBlogAdminAccessException
+     */
+    protected function checkBlogAdminAccess(): void
+    {
+        if (!$this->hasBlogAdminAccess()) {
+            throw new NoBlogAdminAccessException();
+        }
     }
 }
