@@ -27,12 +27,14 @@ use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Attribute\IgnoreValidation;
 use TYPO3\CMS\Extbase\Attribute\Validate;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * The blog controller for the BlogExample extension
  */
-class BlogController extends AbstractController
+class BlogController extends ActionController
 {
     /**
      * BlogController constructor.
@@ -179,5 +181,35 @@ class BlogController extends AbstractController
     {
         $jsonOutput = json_encode($blog);
         return $this->jsonResponse($jsonOutput);
+    }
+    /**
+     * Override getErrorFlashMessage to present
+     * nice flash error messages.
+     */
+    protected function getErrorFlashMessage(): string
+    {
+        $defaultFlashMessage = parent::getErrorFlashMessage();
+        $locallangKey = sprintf(
+            'error.%s.%s',
+            $this->request->getControllerName(),
+            $this->actionMethodName,
+        );
+        return LocalizationUtility::translate($locallangKey, 'BlogExample') ?? $defaultFlashMessage;
+    }
+
+    protected function hasBlogAdminAccess(): bool
+    {
+        // TODO access protection
+        return true;
+    }
+
+    /**
+     * @throws NoBlogAdminAccessException
+     */
+    protected function checkBlogAdminAccess(): void
+    {
+        if (!$this->hasBlogAdminAccess()) {
+            throw new NoBlogAdminAccessException();
+        }
     }
 }
