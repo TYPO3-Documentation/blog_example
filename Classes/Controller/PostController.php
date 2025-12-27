@@ -138,9 +138,9 @@ class PostController extends ActionController
     /**
      * Displays one single post
      */
-    #[IgnoreValidation(['value' => 'newComment'])]
     public function showAction(
         Post $post,
+        #[IgnoreValidation]
         ?Comment $newComment = null,
     ): ResponseInterface {
         $this->blogPageTitleProvider->setTitle($post->getTitle());
@@ -156,9 +156,9 @@ class PostController extends ActionController
      *
      * $newPost is a fresh post object taken as a basis for the rendering
      */
-    #[IgnoreValidation(['value' => 'newPost'])]
     public function newAction(
         Blog $blog,
+        #[IgnoreValidation]
         ?Post $newPost = null,
     ): ResponseInterface {
         $this->view->assignMultiple([
@@ -167,7 +167,6 @@ class PostController extends ActionController
             'newPost' => $newPost,
             'remainingPosts' => $this->postRepository->findBy(['blog' => $blog]),
         ]);
-
         return $this->htmlResponse();
     }
 
@@ -190,9 +189,11 @@ class PostController extends ActionController
     /**
      * Displays a form to edit an existing post
      */
-    #[IgnoreValidation(['value' => 'post'])]
-    public function editAction(Blog $blog, Post $post): ResponseInterface
-    {
+    public function editAction(
+        Blog $blog,
+        #[IgnoreValidation]
+        Post $post,
+    ): ResponseInterface {
         $this->view->assignMultiple([
             'authors' => $this->personRepository->findAll(),
             'blog' => $blog,

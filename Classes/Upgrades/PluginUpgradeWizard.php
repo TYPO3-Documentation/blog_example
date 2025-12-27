@@ -2,9 +2,9 @@
 
 namespace T3docs\BlogExample\Upgrades;
 
+use TYPO3\CMS\Core\Attribute\UpgradeWizard;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Install\Attribute\UpgradeWizard;
-use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
+use TYPO3\CMS\Core\Upgrades\UpgradeWizardInterface;
 
 #[UpgradeWizard('blogExample_pluginUpgradeWizard')]
 final readonly class PluginUpgradeWizard implements UpgradeWizardInterface

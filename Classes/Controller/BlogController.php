@@ -79,9 +79,10 @@ class BlogController extends ActionController
     /**
      * Displays a form for creating a new blog
      */
-    #[IgnoreValidation(['value' => 'newBlog'])]
-    public function newAction(?Blog $newBlog = null): ResponseInterface
-    {
+    public function newAction(
+        #[IgnoreValidation]
+        ?Blog $newBlog = null,
+    ): ResponseInterface {
         $this->view->assignMultiple([
             'newBlog' => $newBlog,
             'administrators' => $this->administratorRepository->findAll(),
@@ -95,9 +96,10 @@ class BlogController extends ActionController
      * $blog is a fresh Blog object which has not yet been added to the
      * repository
      */
-    #[Validate(['param' => 'newBlog', 'validator' => BlogValidator::class])]
-    public function createAction(Blog $newBlog): ResponseInterface
-    {
+    public function createAction(
+        #[Validate(validator: BlogValidator::class)]
+        Blog $newBlog,
+    ): ResponseInterface {
         $this->checkBlogAdminAccess();
         $this->blogRepository->add($newBlog);
         $this->addFlashMessage('created');
@@ -111,9 +113,10 @@ class BlogController extends ActionController
      * modifications if the edit form has been submitted, contained errors and
      * therefore ended up in this action again.
      */
-    #[IgnoreValidation(['value' => 'blog'])]
-    public function editAction(Blog $blog): ResponseInterface
-    {
+    public function editAction(
+        #[IgnoreValidation]
+        Blog $blog,
+    ): ResponseInterface {
         $this->view->assignMultiple([
             'blog' => $blog,
             'administrators' => $this->administratorRepository->findAll(),
@@ -129,9 +132,10 @@ class BlogController extends ActionController
      *
      * @throws NoBlogAdminAccessException
      */
-    #[Validate(['param' => 'blog', 'validator' => BlogValidator::class])]
-    public function updateAction(Blog $blog): ResponseInterface
-    {
+    public function updateAction(
+        #[Validate(validator: BlogValidator::class)]
+        Blog $blog,
+    ): ResponseInterface {
         $this->checkBlogAdminAccess();
         $this->blogRepository->update($blog);
         $this->addFlashMessage('updated');
