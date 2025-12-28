@@ -18,10 +18,12 @@ use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Attribute\IgnoreValidation;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Property\Exception;
 use TYPO3\CMS\Extbase\Property\PropertyMapper;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -39,7 +41,7 @@ use TYPO3\CMS\Extbase\Property\PropertyMapper;
 /**
  * The post controller for the BlogExample extension
  */
-class PostController extends AbstractController
+class PostController extends ActionController
 {
     /**
      * PostController constructor.
@@ -136,9 +138,9 @@ class PostController extends AbstractController
     /**
      * Displays one single post
      */
-    #[IgnoreValidation(['value' => 'newComment'])]
     public function showAction(
         Post $post,
+        #[IgnoreValidation]
         ?Comment $newComment = null,
     ): ResponseInterface {
         $this->recordTitleProvider->setTitle($post->getTitle());
@@ -154,9 +156,9 @@ class PostController extends AbstractController
      *
      * $newPost is a fresh post object taken as a basis for the rendering
      */
-    #[IgnoreValidation(['value' => 'newPost'])]
     public function newAction(
         Blog $blog,
+        #[IgnoreValidation]
         ?Post $newPost = null,
     ): ResponseInterface {
         $this->view->assignMultiple([
@@ -165,7 +167,6 @@ class PostController extends AbstractController
             'newPost' => $newPost,
             'remainingPosts' => $this->postRepository->findBy(['blog' => $blog]),
         ]);
-
         return $this->htmlResponse();
     }
 
@@ -188,9 +189,11 @@ class PostController extends AbstractController
     /**
      * Displays a form to edit an existing post
      */
-    #[IgnoreValidation(['value' => 'post'])]
-    public function editAction(Blog $blog, Post $post): ResponseInterface
-    {
+    public function editAction(
+        Blog $blog,
+        #[IgnoreValidation]
+        Post $post,
+    ): ResponseInterface {
         $this->view->assignMultiple([
             'authors' => $this->personRepository->findAll(),
             'blog' => $blog,
@@ -234,5 +237,35 @@ class PostController extends AbstractController
         $this->postRepository->remove($post);
         $this->addFlashMessage('The post has been deleted.', 'Deleted', ContextualFeedbackSeverity::INFO);
         return $this->redirect('index', null, null, ['blog' => $blog]);
+    }
+    /**
+     * Override getErrorFlashMessage to present
+     * nice flash error messages.
+     */
+    protected function getErrorFlashMessage(): string
+    {
+        $defaultFlashMessage = parent::getErrorFlashMessage();
+        $locallangKey = sprintf(
+            'error.%s.%s',
+            $this->request->getControllerName(),
+            $this->actionMethodName,
+        );
+        return LocalizationUtility::translate($locallangKey, 'BlogExample') ?? $defaultFlashMessage;
+    }
+
+    protected function hasBlogAdminAccess(): bool
+    {
+        // TODO access protection
+        return true;
+    }
+
+    /**
+     * @throws NoBlogAdminAccessException
+     */
+    protected function checkBlogAdminAccess(): void
+    {
+        if (!$this->hasBlogAdminAccess()) {
+            throw new NoBlogAdminAccessException();
+        }
     }
 }

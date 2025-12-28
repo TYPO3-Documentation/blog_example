@@ -30,16 +30,16 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Blog extends AbstractEntity
 {
-    #[Validate(['validator' => TitleValidator::class])]
+    #[Validate(validator: TitleValidator::class)]
     public string $title = '';
 
-    #[Validate(['validator' => 'StringLength', 'options' => ['minimum' => 5, 'maximum' => 80]])]
+    #[Validate(validator: 'StringLength', options: ['minimum' => 5, 'maximum' => 80])]
     public string|null $subtitle = null;
 
     /**
      * A short description of the blog
      */
-    #[Validate(['validator' => 'StringLength', 'options' => ['maximum' => 150]])]
+    #[Validate(validator: 'StringLength', options: ['maximum' => 150])]
     public string $description = '';
 
     /**
@@ -51,7 +51,7 @@ class Blog extends AbstractEntity
      * @var ?ObjectStorage<Post>
      */
     #[Lazy()]
-    #[Cascade(['value' => 'remove'])]
+    #[Cascade('remove')]
     public ?ObjectStorage $posts = null;
 
     /**

@@ -30,7 +30,7 @@ class Post extends AbstractEntity implements \Stringable
 {
     protected ?Blog $blog = null;
 
-    #[Validate(['validator' => 'StringLength', 'options' => ['minimum' => 3, 'maximum' => 50]])]
+    #[Validate(validator: 'StringLength', options: ['minimum' => 3, 'maximum' => 50])]
     protected string $title = '';
 
     /**
@@ -45,13 +45,13 @@ class Post extends AbstractEntity implements \Stringable
     protected ?Person $secondAuthor = null;
     protected ?Person $reviewer = null;
 
-    #[Validate(['validator' => 'StringLength', 'options' => ['minimum' => 3]])]
+    #[Validate(validator: 'StringLength', options: ['minimum' => 3])]
     protected string $content = '';
 
     /**
      * @var ?ObjectStorage<Tag>
      */
-    #[Cascade(['value' => 'remove'])]
+    #[Cascade('remove')]
     public ?ObjectStorage $tags = null;
 
     /**
@@ -63,7 +63,7 @@ class Post extends AbstractEntity implements \Stringable
      * @var ?ObjectStorage<Comment>
      */
     #[Lazy()]
-    #[Cascade(['value' => 'remove'])]
+    #[Cascade('remove')]
     public ?ObjectStorage $comments = null;
 
     /**
@@ -75,13 +75,13 @@ class Post extends AbstractEntity implements \Stringable
     /**
      * 1:1 optional relation
      */
-    #[Cascade(['value' => 'remove'])]
+    #[Cascade('remove')]
     public ?Info $additionalName = null;
 
     /**
      * 1:1 optional relation
      */
-    #[Cascade(['value' => 'remove'])]
+    #[Cascade('remove')]
     protected ?Info $additionalInfo = null;
 
     /**

@@ -27,12 +27,14 @@ use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Attribute\IgnoreValidation;
 use TYPO3\CMS\Extbase\Attribute\Validate;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * The blog controller for the BlogExample extension
  */
-class BlogController extends AbstractController
+class BlogController extends ActionController
 {
     /**
      * BlogController constructor.
@@ -77,9 +79,10 @@ class BlogController extends AbstractController
     /**
      * Displays a form for creating a new blog
      */
-    #[IgnoreValidation(['value' => 'newBlog'])]
-    public function newAction(?Blog $newBlog = null): ResponseInterface
-    {
+    public function newAction(
+        #[IgnoreValidation]
+        ?Blog $newBlog = null,
+    ): ResponseInterface {
         $this->view->assignMultiple([
             'newBlog' => $newBlog,
             'administrators' => $this->administratorRepository->findAll(),
@@ -93,9 +96,10 @@ class BlogController extends AbstractController
      * $blog is a fresh Blog object which has not yet been added to the
      * repository
      */
-    #[Validate(['param' => 'newBlog', 'validator' => BlogValidator::class])]
-    public function createAction(Blog $newBlog): ResponseInterface
-    {
+    public function createAction(
+        #[Validate(validator: BlogValidator::class)]
+        Blog $newBlog,
+    ): ResponseInterface {
         $this->checkBlogAdminAccess();
         $this->blogRepository->add($newBlog);
         $this->addFlashMessage('created');
@@ -109,9 +113,10 @@ class BlogController extends AbstractController
      * modifications if the edit form has been submitted, contained errors and
      * therefore ended up in this action again.
      */
-    #[IgnoreValidation(['value' => 'blog'])]
-    public function editAction(Blog $blog): ResponseInterface
-    {
+    public function editAction(
+        #[IgnoreValidation]
+        Blog $blog,
+    ): ResponseInterface {
         $this->view->assignMultiple([
             'blog' => $blog,
             'administrators' => $this->administratorRepository->findAll(),
@@ -127,9 +132,10 @@ class BlogController extends AbstractController
      *
      * @throws NoBlogAdminAccessException
      */
-    #[Validate(['param' => 'blog', 'validator' => BlogValidator::class])]
-    public function updateAction(Blog $blog): ResponseInterface
-    {
+    public function updateAction(
+        #[Validate(validator: BlogValidator::class)]
+        Blog $blog,
+    ): ResponseInterface {
         $this->checkBlogAdminAccess();
         $this->blogRepository->update($blog);
         $this->addFlashMessage('updated');
@@ -179,5 +185,35 @@ class BlogController extends AbstractController
     {
         $jsonOutput = json_encode($blog);
         return $this->jsonResponse($jsonOutput);
+    }
+    /**
+     * Override getErrorFlashMessage to present
+     * nice flash error messages.
+     */
+    protected function getErrorFlashMessage(): string
+    {
+        $defaultFlashMessage = parent::getErrorFlashMessage();
+        $locallangKey = sprintf(
+            'error.%s.%s',
+            $this->request->getControllerName(),
+            $this->actionMethodName,
+        );
+        return LocalizationUtility::translate($locallangKey, 'BlogExample') ?? $defaultFlashMessage;
+    }
+
+    protected function hasBlogAdminAccess(): bool
+    {
+        // TODO access protection
+        return true;
+    }
+
+    /**
+     * @throws NoBlogAdminAccessException
+     */
+    protected function checkBlogAdminAccess(): void
+    {
+        if (!$this->hasBlogAdminAccess()) {
+            throw new NoBlogAdminAccessException();
+        }
     }
 }
