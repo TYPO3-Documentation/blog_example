@@ -64,7 +64,7 @@ class BackendController extends ActionController
 
     public function addPopulateButton(ButtonBar $buttonBar): void
     {
-        $populateButton = $buttonBar->makeLinkButton()
+        $populateButton = $this->componentFactory->createLinkButton()
             ->setHref($this->uriBuilder->reset()->uriFor('populate'))
             ->setTitle('Create example data')
             ->setShowLabelText(true)
@@ -235,13 +235,13 @@ class BackendController extends ActionController
 
         $metaInformation = $this->getMetaInformation();
         if (is_array($metaInformation)) {
-            $view->getDocHeaderComponent()->setMetaInformation($metaInformation);
+            $view->getDocHeaderComponent()->setPageBreadcrumb($metaInformation);
         }
     }
 
     private function addReloadButton(ButtonBar $buttonBar): void
     {
-        $reloadButton = $buttonBar->makeLinkButton()
+        $reloadButton = $this->componentFactory->createLinkButton()
             ->setHref($this->request->getAttribute('normalizedParams')->getRequestUri())
             ->setTitle($this->getLanguageService()->sL('core.core:labels.reload'))
             ->setIcon($this->iconFactory->getIcon('actions-refresh', IconSize::SMALL));
@@ -250,7 +250,7 @@ class BackendController extends ActionController
 
     private function addShortCutButton(ButtonBar $buttonBar): void
     {
-        $shortcutButton = $buttonBar->makeShortcutButton()
+        $shortcutButton = $this->componentFactory->createShortcutButton()
             ->setRouteIdentifier('blog_example')
             ->setDisplayName($this->getLanguageService()->sL('blog_example.messages:administration.menu.index'));
         $buttonBar->addButton($shortcutButton, ButtonBar::BUTTON_POSITION_RIGHT);
@@ -280,12 +280,12 @@ class BackendController extends ActionController
         //$menu = $this->componentFactory->createMenu();
         //$menu->setIdentifier('viewSelector')->setLabel('View');
 
-        $menu = $view->getDocHeaderComponent()->getMenuRegistry()->makeMenu();
+        $menu = $this->componentFactory->createMenu();
         $menu->setIdentifier('BlogExampleModuleMenu')->setLabel('View');
 
         foreach ($menuItems as $menuItemConfig) {
             $isActive = $this->request->getControllerActionName() === $menuItemConfig['action'];
-            $menuItem = $menu->makeMenuItem()
+            $menuItem = $this->componentFactory->createMenuItem()
                 ->setTitle($menuItemConfig['label'])
                 ->setHref($this->uriBuilder->reset()->uriFor(
                     $menuItemConfig['action'],
