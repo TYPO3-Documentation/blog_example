@@ -13,7 +13,7 @@ use T3docs\BlogExample\Domain\Repository\BlogRepository;
 use T3docs\BlogExample\Domain\Repository\PersonRepository;
 use T3docs\BlogExample\Domain\Repository\PostRepository;
 use T3docs\BlogExample\Exception\NoBlogAdminAccessException;
-use T3docs\BlogExample\PageTitle\BlogPageTitleProvider;
+use TYPO3\CMS\Core\PageTitle\RecordTitleProvider;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Extbase\Attribute\IgnoreValidation;
@@ -53,7 +53,7 @@ class PostController extends ActionController
         protected readonly PersonRepository $personRepository,
         protected readonly PostRepository $postRepository,
         protected readonly PropertyMapper $propertyMapper,
-        protected readonly BlogPageTitleProvider $blogPageTitleProvider,
+        protected readonly RecordTitleProvider $recordTitleProvider,
     ) {}
 
     /**
@@ -94,7 +94,7 @@ class PostController extends ActionController
                 ->withExtensionName('blog_example')
                 ->withArguments(['currentPage' => $currentPage]);
         }
-        $this->blogPageTitleProvider->setTitle($blog->getTitle());
+        $this->recordTitleProvider->setTitle($blog->getTitle());
         if (empty($tag)) {
             $posts = $this->postRepository->findBy(['blog' => $blog]);
         } else {
@@ -143,7 +143,7 @@ class PostController extends ActionController
         #[IgnoreValidation]
         ?Comment $newComment = null,
     ): ResponseInterface {
-        $this->blogPageTitleProvider->setTitle($post->getTitle());
+        $this->recordTitleProvider->setTitle($post->getTitle());
         $this->view->assignMultiple([
             'post' => $post,
             'newComment' => $newComment,
