@@ -50,13 +50,13 @@
                     <li>
                         <blog:gravatar
                             emailAddress="{comment.email}"
-                            defaultImageUri="{f:uri.resource(path: '{settings.defaultGravator}', absolute: 1)}"
+                            defaultImage="{settings.gravatarDefault}"
                             size="40"
                             class="tx-blogexample-gravatar"
-                            alt="Gravator icon of {comment.author}"
+                            alt="Gravatar icon of {comment.author}"
                             data-name="{comment.author}"
                         />
-                        <f:link.email email="{comment.author}">{comment.author}</f:link.email>
+                        <f:link.email email="{comment.email}">{comment.author}</f:link.email>
                         <span class="tx-blogexample-metadata"><f:translate key="postedOn" default="[posted on]" /> {post.date -> f:format.date(format: '{f:translate(key: \'culture.date.formatLong\')}')}</span>
                         <p>
                             <f:format.nl2br>{comment.content}</f:format.nl2br>

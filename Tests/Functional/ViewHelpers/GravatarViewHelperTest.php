@@ -44,37 +44,41 @@ class GravatarViewHelperTest extends FunctionalTestCase
     public static function renderDataProvider(): array
     {
         return [
-            'renderWillHashEmailAndAddItToImgTag' => [
+            'renderWillHashEmailAndAddDefaultArgumentsToImgTag' => [
                 '<blog:gravatar emailAddress="foo@example.org" />',
-                '<img src="https://gravatar.com/avatar/64f677e30cd713a9467794a26711e42d" />',
+                '<img src="https://www.gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?d=mp&amp;s=40" />',
             ],
-            'renderWillEncodeDefaultImageUriToImgTag' => [
-                '<blog:gravatar emailAddress="foo@example.org" defaultImageUri="https://typo3.org?test=123&foo=bar" />',
-                '<img src="https://gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?d=https%253A%252F%252Ftypo3.org%253Ftest%253D123%2526foo%253Dbar" />',
+            'renderWillUseDefaultImageKeyword' => [
+                '<blog:gravatar emailAddress="foo@example.org" defaultImage="identicon" />',
+                '<img src="https://www.gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?d=identicon&amp;s=40" />',
             ],
-            'renderWithCombinedSizeAndDefaultImageUri' => [
-                '<blog:gravatar emailAddress="foo@example.org" size="256" defaultImageUri="https://typo3.org" />',
-                '<img src="https://gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?d=https%253A%252F%252Ftypo3.org&amp;s=256" />',
+            'renderWillFallbackToMpForInvalidDefaultImageKeyword' => [
+                '<blog:gravatar emailAddress="foo@example.org" defaultImage="https://typo3.org?test=123&amp;foo=bar" />',
+                '<img src="https://www.gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?d=mp&amp;s=40" />',
             ],
-            'renderWithCombinedSizeAndEmptyDefaultImageUriWillOnlyAddSizeArgument' => [
-                '<blog:gravatar emailAddress="foo@example.org" size="512" defaultImageUri="" />',
-                '<img src="https://gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?s=512" />',
+            'renderWithCombinedSizeAndDefaultImage' => [
+                '<blog:gravatar emailAddress="foo@example.org" size="256" defaultImage="monsterid" />',
+                '<img src="https://www.gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?d=monsterid&amp;s=256" />',
+            ],
+            'renderWithEmptyDefaultImageWillFallbackToMp' => [
+                '<blog:gravatar emailAddress="foo@example.org" size="512" defaultImage="" />',
+                '<img src="https://www.gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?d=mp&amp;s=512" />',
             ],
             'renderWithStringForSizeWillCastValueToIntAndForceValueTo1' => [
                 '<blog:gravatar emailAddress="foo@example.org" size="XXL" />',
-                '<img src="https://gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?s=1" />',
+                '<img src="https://www.gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?d=mp&amp;s=1" />',
             ],
             'renderWithTooSmallIntForSizeWillBeForcedTo1' => [
                 '<blog:gravatar emailAddress="foo@example.org" size="-12" />',
-                '<img src="https://gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?s=1" />',
+                '<img src="https://www.gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?d=mp&amp;s=1" />',
             ],
             'renderWithIntForSizeWillStayTheSame' => [
                 '<blog:gravatar emailAddress="foo@example.org" size="120" />',
-                '<img src="https://gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?s=120" />',
+                '<img src="https://www.gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?d=mp&amp;s=120" />',
             ],
             'renderWithTooHighSizeWillForceValueTo2048' => [
                 '<blog:gravatar emailAddress="foo@example.org" size="217348" />',
-                '<img src="https://gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?s=2048" />',
+                '<img src="https://www.gravatar.com/avatar/64f677e30cd713a9467794a26711e42d?d=mp&amp;s=2048" />',
             ],
         ];
     }
