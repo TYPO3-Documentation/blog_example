@@ -3,7 +3,7 @@ plugin.tx_blogexample {
   settings {
     postsPerPage = {$blogExample.postsPerPage}
     editorUsergroupUid = {$blogExample.editorUsergroupUid}
-    defaultGravator = {$blogExample.defaultGravator}
+    gravatarDefault = {$blogExample.gravatarDefault}
   }
 
   persistence {

@@ -29,52 +29,106 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
  * <code>
  * <blog:gravatar emailAddress="foo@bar.com"
  *     size="40"
- *     defaultImageUri="someDefaultImage"
+ *     defaultImage="retro"
  *     alt="Gravator icon of {comment.author}"
  *     data-name="{comment.author}"  />
  * </code>
  * <output>
- * <img src="http://www.gravatar.com/avatar/4a28b782cade3dbcd6e306fa4757849d?d=someDefaultImage&s=40" />
+ * <img src="http://www.gravatar.com/avatar/4a28b782cade3dbcd6e306fa4757849d?d=retro&s=40" />
  * </output>
  */
-class GravatarViewHelper extends AbstractTagBasedViewHelper
+final class GravatarViewHelper extends AbstractTagBasedViewHelper
 {
-    /**
-     * @var string
-     */
     protected $tagName = 'img';
-    public function __construct(private readonly UriFactory $uriFactory)
-    {
+
+    public function __construct(
+        private readonly UriFactory $uriFactory,
+    ) {
         parent::__construct();
     }
 
     public function initializeArguments(): void
     {
-        $this->registerArgument('emailAddress', 'string', '', true);
-        $this->registerArgument('defaultImageUri', 'string', '');
-        $this->registerArgument('size', 'int', '');
+        $this->registerArgument(
+            'emailAddress',
+            'string',
+            'Email address used to generate the Gravatar hash',
+            true,
+        );
+
+        $this->registerArgument(
+            'defaultImage',
+            'string',
+            'Gravatar default image (mp, identicon, retro, monsterid, wavatar, robohash, blank)',
+            false,
+            'mp',
+        );
+
+        $this->registerArgument(
+            'size',
+            'int',
+            'Size of the avatar in pixels',
+            false,
+            40,
+        );
     }
 
     public function render(): string
     {
-        $gravatarUri = $this->uriFactory->createUri(
-            'https://gravatar.com/avatar/' . md5((string)$this->arguments['emailAddress']),
+        $emailHash = $this->normalizeEmailToHash(
+            (string)$this->arguments['emailAddress'],
         );
 
-        $queryArguments = [];
-        if ($this->arguments['defaultImageUri'] !== null) {
-            $queryArguments['d'] = urlencode($this->arguments['defaultImageUri']);
-        }
+        $defaultImage = $this->normalizeDefaultImage(
+            (string)$this->arguments['defaultImage'],
+        );
 
-        if ($this->arguments['size'] !== null) {
-            $queryArguments['s'] = MathUtility::forceIntegerInRange((int)$this->arguments['size'], 1, 2048);
-        }
+        $size = $this->normalizeSize(
+            (int)$this->arguments['size'],
+        );
 
         $this->tag->addAttribute(
             'src',
-            (string)$gravatarUri->withQuery(HttpUtility::buildQueryString($queryArguments, '', true)),
+            $this->buildGravatarUri($emailHash, $defaultImage, $size),
         );
 
         return $this->tag->render();
+    }
+
+    private function normalizeEmailToHash(string $email): string
+    {
+        return md5(strtolower(trim($email)));
+    }
+
+    private function normalizeDefaultImage(string $default): string
+    {
+        $allowed = [
+            'mp',
+            'identicon',
+            'retro',
+            'monsterid',
+            'wavatar',
+            'robohash',
+            'blank',
+        ];
+
+        return in_array($default, $allowed, true) ? $default : 'mp';
+    }
+
+    private function normalizeSize(int $size): int
+    {
+        return MathUtility::forceIntegerInRange($size, 1, 2048);
+    }
+
+    private function buildGravatarUri(string $hash, string $default, int $size): string
+    {
+        return (string)$this->uriFactory
+            ->createUri('https://www.gravatar.com/avatar/' . $hash)
+            ->withQuery(
+                HttpUtility::buildQueryString([
+                    'd' => $default,
+                    's' => $size,
+                ]),
+            );
     }
 }

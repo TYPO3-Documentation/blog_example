@@ -57,9 +57,17 @@ settings:
     description: 'How many posts should be displayed per page of pagination?'
     type: int
     default: 3
-  blogExample.defaultGravator:
-    label: 'Default gravator icon'
+  blogExample.gravatarDefault:
+    label: 'Gravatar default image'
     category: BlogExample.layout
-    description: 'This icon is displayed for a comment if the email address of the commentary is not registered. '
+    description: 'Fallback image used by Gravatar when an email has no avatar.'
     type: string
-    default: 'EXT:blog_example/Resources/Public/Icons/default_gravatar.gif'
+    default: 'mp'
+    enum:
+      mp: 'Mystery Person (mp)'
+      identicon: 'Identicon'
+      retro: 'Retro'
+      monsterid: 'MonsterID'
+      wavatar: 'Wavatar'
+      robohash: 'Robohash'
+      blank: 'Blank'

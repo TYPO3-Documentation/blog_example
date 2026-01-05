@@ -37,7 +37,15 @@
             <div class="tx-blogexample-comment">
                 <div class="tx-blogexample-comment-info">
                     <span class="tx-blogexample-comment-author">
-                        <blog:gravatar emailAddress="{comment.email}" size="40" class="tx-blogexample-gravatar" />
+
+                        <blog:gravatar
+                            emailAddress="{comment.email}"
+                            defaultImage="{settings.gravatarDefault}"
+                            size="40"
+                            class="tx-blogexample-gravatar"
+                            alt="Gravatar icon of {comment.author}"
+                            data-name="{comment.author}"
+                        />
                         <a href="mailto:{comment.email}">{comment.author}</a> posted on
                         <span class="tx-blogexample-date"><f:format.date>{comment.date}</f:format.date></span>
                     </span>
