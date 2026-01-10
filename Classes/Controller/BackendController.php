@@ -19,10 +19,13 @@ namespace T3docs\BlogExample\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use T3docs\BlogExample\Domain\Model\Administrator;
 use T3docs\BlogExample\Domain\Model\Blog;
 use T3docs\BlogExample\Domain\Model\Post;
+use T3docs\BlogExample\Domain\Repository\AdministratorRepository;
 use T3docs\BlogExample\Domain\Repository\BlogRepository;
 use T3docs\BlogExample\Domain\Repository\CommentRepository;
+use T3docs\BlogExample\Domain\Repository\PersonRepository;
 use T3docs\BlogExample\Domain\Repository\PostRepository;
 use T3docs\BlogExample\Service\BlogFactory;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
@@ -31,6 +34,7 @@ use TYPO3\CMS\Backend\Template\Components\Menu\Menu;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Imaging\IconSize;
 use TYPO3\CMS\Core\Localization\LanguageService;
@@ -56,11 +60,21 @@ class BackendController extends ActionController
         protected readonly BlogFactory $blogFactory,
         protected readonly PostRepository $postRepository,
         protected readonly CommentRepository $commentRepository,
+        protected readonly PersonRepository $personRepository,
+        protected readonly AdministratorRepository $administratorRepository,
         protected readonly ModuleTemplateFactory $moduleTemplateFactory,
         private readonly IconFactory $iconFactory,
         private readonly LanguageServiceFactory $languageServiceFactory,
         protected readonly ComponentFactory $componentFactory,
     ) {}
+
+    /**
+     * Function will be called before every other action
+     */
+    protected function initializeAction(): void
+    {
+        $this->pageUid = (int)($this->request->getQueryParams()['id'] ?? 0);
+    }
 
     public function addPopulateButton(ButtonBar $buttonBar): void
     {
@@ -92,19 +106,18 @@ class BackendController extends ActionController
     }
 
     /**
-     * Function will be called before every other action
-     */
-    protected function initializeAction(): void
-    {
-        $this->pageUid = (int)($this->request->getQueryParams()['id'] ?? 0);
-    }
-
-    /**
      * Index action for this controller. Displays a list of blogs.
      */
     public function indexAction(int $currentPage = 1): ResponseInterface
     {
         $view = $this->initializeModuleTemplate($this->request);
+        if (!$this->isCurrentPageSysfolder()) {
+
+            $view->assignMultiple([
+                'error' => true,
+            ]);
+            return $view->renderResponse('Index');
+        }
         $allAvailableBlogs = $this->blogRepository->findAll();
         $paginator = new QueryResultPaginator(
             $allAvailableBlogs,
@@ -124,18 +137,29 @@ class BackendController extends ActionController
     }
 
     /**
-     * Deletes all blogs
+     * Deletes all blog data from the current backend page
      */
     public function deleteAllAction(): ResponseInterface
     {
+        if (!$this->isCurrentPageSysfolder()) {
+            return $this->redirect('index');
+        }
+        // Deleting a blog deletes the posts and comments by cascade delete
         $this->blogRepository->removeAll();
+        // Persons and administrators must be deleted explicitly
+        $this->personRepository->removeAll();
+        $this->administratorRepository->removeAll();
         return $this->redirect('index');
     }
+
     /**
      * Deletes a blog
      */
     public function deleteBlogAction(Blog $blog): ResponseInterface
     {
+        if (!$this->isCurrentPageSysfolder()) {
+            return $this->redirect('index');
+        }
         $this->blogRepository->remove($blog);
         $this->addFlashMessage(sprintf('Blog "%s" was deleted. ', $blog->title), 'Blog was deleted');
         return $this->redirect('index');
@@ -146,9 +170,22 @@ class BackendController extends ActionController
      */
     public function populateAction(): ResponseInterface
     {
+        if (!$this->isCurrentPageSysfolder()) {
+            return $this->redirect('index');
+        }
         $numberOfExistingBlogs = $this->blogRepository->countAll();
+
+        // fetch administrator if they exist
+        $administrator = $this->administratorRepository->findOneBy(['email' => 'john.doe@example.com']);
+        if ($administrator === null) {
+            // create administrator
+            $administrator = new Administrator();
+            $administrator->name = 'John Doe';
+            $administrator->email = 'john.doe@example.com';
+            $this->administratorRepository->add($administrator);
+        }
         for ($blogNumber = $numberOfExistingBlogs + 1; $blogNumber < ($numberOfExistingBlogs + 5); $blogNumber++) {
-            $blog = $this->blogFactory->createBlog($blogNumber);
+            $blog = $this->blogFactory->createBlog($administrator, $blogNumber, new \DateTimeImmutable());
             $this->blogRepository->add($blog);
         }
         $this->addFlashMessage('populated');
@@ -163,6 +200,9 @@ class BackendController extends ActionController
         string $tag = '',
         int $currentPage = 1,
     ): ResponseInterface {
+        if (!$this->isCurrentPageSysfolder()) {
+            return $this->redirect('index');
+        }
         $view = $this->initializeModuleTemplate($this->request);
         if ($blog === null) {
             $this->addFlashMessage('Blog was not found', 'Warning', ContextualFeedbackSeverity::WARNING);
@@ -193,6 +233,9 @@ class BackendController extends ActionController
      */
     public function showPostAction(Post $post): ResponseInterface
     {
+        if (!$this->isCurrentPageSysfolder()) {
+            return $this->redirect('index');
+        }
         $view = $this->initializeModuleTemplate($this->request);
         $view->assign('post', $post);
         return $view->renderResponse('ShowPost');
@@ -200,6 +243,9 @@ class BackendController extends ActionController
 
     public function showAllCommentsAction(): ResponseInterface
     {
+        if (!$this->isCurrentPageSysfolder()) {
+            return $this->redirect('index');
+        }
         $view = $this->initializeModuleTemplate($this->request);
         $comments = $this->commentRepository->findAll();
         $view->assign('comments', $comments);
@@ -299,5 +345,30 @@ class BackendController extends ActionController
             }
         }
         return $menu;
+    }
+
+    protected function isCurrentPageSysfolder(): bool
+    {
+        if ($this->pageUid <= 0) {
+            $this->addFlashMessage(
+                'Please open the module on a storage folder (sysfolder).',
+                'Missing page context',
+                ContextualFeedbackSeverity::ERROR,
+            );
+            return false;
+        }
+
+        $page = BackendUtility::readPageAccess($this->pageUid, $GLOBALS['BE_USER']->getPagePermsClause(1));
+
+        // sysfolder check
+        if (!is_array($page) || (int)$page['doktype'] !== PageRepository::DOKTYPE_SYSFOLDER) {
+            $this->addFlashMessage(
+                'This module must be used on a storage folder (sysfolder). Please select a folder in the page tree.',
+                'Wrong page type',
+                ContextualFeedbackSeverity::ERROR,
+            );
+            return false;
+        }
+        return true;
     }
 }

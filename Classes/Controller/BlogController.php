@@ -174,7 +174,7 @@ class BlogController extends ActionController
         $this->checkBlogAdminAccess();
         $numberOfExistingBlogs = $this->blogRepository->countAll();
         for ($blogNumber = $numberOfExistingBlogs + 1; $blogNumber < ($numberOfExistingBlogs + 5); $blogNumber++) {
-            $blog = $this->blogFactory->createBlog($blogNumber);
+            $blog = $this->blogFactory->createBlog(null, $blogNumber, new \DateTimeImmutable());
             $this->blogRepository->add($blog);
         }
         $this->addFlashMessage('populated');
